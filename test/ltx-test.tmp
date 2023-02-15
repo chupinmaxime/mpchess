@@ -1,0 +1,10 @@
+verbatimtex
+%&latex
+\documentclass{article}
+\begin{document}
+etex
+picture latexmp_picture[];
+latexmp_picture[1]:= btex Eliott etex ;
+latexmp_picture[2]:= btex \tiny Roxane {\bf Spillane Chupin} etex ;
+latexmp_picture[3]:= btex Eliott etex ;
+latexmp_picture[4]:= btex \tiny Roxane {\bf Spillane Chupin} etex ;
