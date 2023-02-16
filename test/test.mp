@@ -1,5 +1,12 @@
 input mpchess;
 
+beginfig(0);
+    string in;
+    in := "   1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5";
+    _parse_pgn(in);
+    _build_chess_moves_table(in);
+    _show_chess_moves_table;
+endfig;
 
 beginfig(1);
     init_chessboard;

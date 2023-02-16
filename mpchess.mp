@@ -16,6 +16,7 @@ input format;
 input hatching;
 input cburnett; % piece of lichess cburnett
 input mpchess-chessboard;
+input mpchess-pgn
 input latexmp;
 if not known mplib: input latexmp fi;
 
