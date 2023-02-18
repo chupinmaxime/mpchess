@@ -76,3 +76,55 @@ def _draw_step_chessboard(expr k) =
         endfor;
     endfor;
 enddef; 
+
+def _build_chessboard_from_pgn(expr s)=
+
+enddef;
+
+vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
+    % i int from letter, column
+    % j int for line
+    % return true if (istart,jstart) to (iend,jend)
+    % is a possible mvt
+    % wb is "white" or "black"
+    save output;
+    boolean output;
+    output = false;
+    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+    if(wb="white"):
+        if(jend=4): % on the line that allow 2 square move
+            if(((jstart=3) or (jstart=2)) and (iend=istart)):
+                output:=true;
+            fi
+            if((jstart=3) and ((istart=iend+1) or (istart=iend-1))): %capture
+                output:=true;
+            fi
+        else:
+            if((jstart=jend-1) and (istart=iend)): % straight move
+                output:=true;
+            fi
+            if((jstart=jend-1) and ((istart=iend+1) or (istart=iend-1))): % capture
+                output:=true;
+            fi
+        fi
+    else:
+        if(jend=5): % on the line that allow 2 square move
+            if(((jstart=6) or (jstart=7)) and (iend=istart)):
+                output:=true;
+            fi
+            if((jstart=6) and ((istart=iend+1) or (istart=iend-1))): %capture
+                output:=true;
+            fi
+        else:
+            if((jstart=jend+1) and (istart=iend)): % straight move
+                output:=true;
+            fi
+            if((jstart=jend+1) and ((istart=iend+1) or (istart=iend-1))): % capture
+                output:=true;
+            fi
+        fi
+    fi
+    fi
+    output
+enddef;
+
