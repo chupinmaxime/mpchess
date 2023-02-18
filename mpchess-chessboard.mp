@@ -128,3 +128,91 @@ vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
     output
 enddef;
 
+vardef _bishop_candidate(expr istart, jstart,iend,jend,wb)=
+    % i int from letter, column
+    % j int for line
+    % return true if (istart,jstart) to (iend,jend)
+    % is a possible mvt
+    % wb is "white" or "black"
+    save output;
+    boolean output;
+    output = false;
+    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+        if(abs(iend-istart)=abs(jend-jstart)):
+            output:=true;
+        fi
+    fi
+    output
+enddef;
+
+vardef _rook_candidate(expr istart, jstart,iend,jend,wb)=
+    % i int from letter, column
+    % j int for line
+    % return true if (istart,jstart) to (iend,jend)
+    % is a possible mvt
+    % wb is "white" or "black"
+    save output;
+    boolean output;
+    output = false;
+    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+        if((iend=istart) or (jend=jstart)):
+            output:=true;
+        fi
+    fi
+    output
+enddef;
+
+
+vardef _queen_candidate(expr istart, jstart,iend,jend,wb)=
+    % i int from letter, column
+    % j int for line
+    % return true if (istart,jstart) to (iend,jend)
+    % is a possible mvt
+    % wb is "white" or "black"
+    save output;
+    boolean output;
+    output = false;
+    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+        if((iend=istart) or (jend=jstart) or (abs(iend-istart)=abs(jend-jstart))):
+            output:=true;
+        fi
+    fi
+    output
+enddef;
+
+vardef _king_candidate(expr istart, jstart,iend,jend,wb)=
+    % i int from letter, column
+    % j int for line
+    % return true if (istart,jstart) to (iend,jend)
+    % is a possible mvt
+    % wb is "white" or "black"
+    save output;
+    boolean output;
+    output = false;
+    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+        if((abs(iend=istart)<=1) and (abs(jend=jstart)<=1)):
+            output:=true;
+        fi
+    fi
+    output
+enddef;
+
+vardef _knight_candidate(expr istart, jstart,iend,jend,wb)=
+    % i int from letter, column
+    % j int for line
+    % return true if (istart,jstart) to (iend,jend)
+    % is a possible mvt
+    % wb is "white" or "black"
+    save output;
+    boolean output;
+    output = false;
+    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+        if(((abs(iend=istart)=2) and (abs(jend=jstart)=1)) or ((abs(iend=istart)=1) and (abs(jend=jstart)=2))):
+            output:=true;
+        fi
+    fi
+    output
+enddef;
+
+
+
