@@ -429,7 +429,7 @@ backboard:=image(
                         _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
                         _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
                         fi
-                        draw _letter_img scaled (0.25*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_width),(i-1)*_chessSquareU-0.5*_chessSquareU) withcolor black;
+                        draw _letter_img scaled (0.2*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_width),(i-1)*_chessSquareU-0.3*_chessSquareU) withcolor black;
                     fi
                     if(j=1):
                         _letter_img:=image(
@@ -443,7 +443,7 @@ backboard:=image(
                         _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
                         _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
                         fi
-                        draw _letter_img scaled (0.25*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU-0.5*_chessSquareU,(i-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_height)) withcolor black;
+                        draw _letter_img scaled (0.2*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU-0.3*_chessSquareU,(i-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_height)) withcolor black;
                     fi
                 fi
             fi
