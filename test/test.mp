@@ -11,7 +11,7 @@ beginfig(0);
 endfig;
 
 beginfig(1);
-    init_chessboard;
+    init_chessboard;%set_coords_outside;
     show _intBKing;
     show chessboard[0][1][1];
     set_backboardWidth(8cm);
@@ -26,6 +26,7 @@ endfig;
 beginfig(4);
     init_chessboard;
     usetheme("Classical");
+    set_coords_outside;
     show _intBKing;
     show chessboard[0][1][1];
     set_backboardWidth(8cm);

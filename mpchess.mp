@@ -62,9 +62,9 @@ def set_white_view=
 enddef;
 
 % boolean to choose if we print coordinates
-boolean _chess_print_coords;
+boolean _chess_print_coords,_chess_coords_inout;
 _chess_print_coords:=true;
-
+_chess_coords_inout:=true; %true for inside
 def set_no_coords=
     _chess_print_coords:=false;
 enddef;
@@ -72,6 +72,15 @@ enddef;
 def set_coords=
     _chess_print_coords:=true;
 enddef;
+
+def set_coords_inside=
+    _chess_coords_inout:=true;
+enddef;
+
+def set_coords_outside=
+    _chess_coords_inout:=false;
+enddef;
+
 
 % integer correspondance :
 _intWPawn:=1;
@@ -342,35 +351,65 @@ backboard:=image(
                 draw _blackSquarePic shifted ((j-1)*_chessSquareU,(i-1)*_chessSquareU) ;
             fi
             if(_chess_print_coords and (_chessSize=8)):
-                if(i=1): % lettre on first line
-                    _letter_img:=image(
-                        if(_chess_view_wb):
-                            draw _int_to_letter_w(j) infont _coords_font;
-                        else:
-                            draw _int_to_letter_b(j) infont _coords_font;
+                if(_chess_coords_inout):
+                    if(i=1): % lettre on first line
+                        _letter_img:=image(
+                            if(_chess_view_wb):
+                                draw _int_to_letter_w(j) infont _coords_font;
+                            else:
+                                draw _int_to_letter_b(j) infont _coords_font;
+                            fi
+                        );
+                        if(j=1):
+                        _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
+                        _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
                         fi
-                    );
+                        draw _letter_img scaled (0.1*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.8*_chessSquareU,(i-1)*_chessSquareU+0.05*_chessSquareU) withcolor ((j mod 2)*_whiteColorSquare+(1-(j mod 2))*_blackColorSquare);
+                    fi
                     if(j=1):
-                    _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
-                    _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
-                    fi
-                    draw _letter_img scaled (0.1*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.8*_chessSquareU,(i-1)*_chessSquareU+0.05*_chessSquareU) withcolor ((j mod 2)*_whiteColorSquare+(1-(j mod 2))*_blackColorSquare);
-                fi
-                if(j=1):
-                    _letter_img:=image(
-                        if(_chess_view_wb):
-                            draw _int_to_str_w(i) infont _coords_font;
-                        else:
-                            draw _int_to_str_b(i) infont _coords_font;
+                        _letter_img:=image(
+                            if(_chess_view_wb):
+                                draw _int_to_str_w(i) infont _coords_font;
+                            else:
+                                draw _int_to_str_b(i) infont _coords_font;
+                            fi
+                        );
+                        if(i=1):
+                        _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
+                        _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
                         fi
-                    );
-                    if(i=1):
-                    _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
-                    _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
+                        draw _letter_img scaled (0.1*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.05*_chessSquareU,(i-1)*_chessSquareU+0.8*_chessSquareU) withcolor ((i mod 2)*_whiteColorSquare+(1-(i mod 2))*_blackColorSquare);
                     fi
-                    draw _letter_img scaled (0.1*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.05*_chessSquareU,(i-1)*_chessSquareU+0.8*_chessSquareU) withcolor ((i mod 2)*_whiteColorSquare+(1-(i mod 2))*_blackColorSquare);
+                else:
+                    if(i=1): % lettre on first line
+                        _letter_img:=image(
+                            if(_chess_view_wb):
+                                draw _int_to_letter_w(j) infont _coords_font;
+                            else:
+                                draw _int_to_letter_b(j) infont _coords_font;
+                            fi
+                        );
+                        if(j=1):
+                        _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
+                        _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
+                        fi
+                        draw _letter_img scaled (0.25*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_width),(i-1)*_chessSquareU-0.5*_chessSquareU) withcolor black;
+                    fi
+                    if(j=1):
+                        _letter_img:=image(
+                            if(_chess_view_wb):
+                                draw _int_to_str_w(i) infont _coords_font;
+                            else:
+                                draw _int_to_str_b(i) infont _coords_font;
+                            fi
+                        );
+                        if(i=1):
+                        _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
+                        _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
+                        fi
+                        draw _letter_img scaled (0.25*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU-0.5*_chessSquareU,(i-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_height)) withcolor black;
+                    fi
                 fi
-                
             fi
         endfor;
     endfor;
