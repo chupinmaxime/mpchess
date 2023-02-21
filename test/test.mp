@@ -2,13 +2,12 @@ input mpchess;
 
 beginfig(0);
     string in;
-    in := "   1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5";
-    _parse_pgn(in);
+    in := "   1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. Bb5";
     _build_chess_moves_tables(in);
-    %_show_chess_moves_table;
-    %_show_chess_moves_table_numeric;
-    show _pawn_candidate(3,2,3,4,"white");
-    show _pawn_candidate(3,2,3,4,"black");
+    _show_chess_moves_table;
+    _show_chess_moves_table_numeric;
+    %show _pawn_candidate(3,2,3,4,"white");
+    %sshow _pawn_candidate(3,2,3,4,"black");
 endfig;
 
 beginfig(1);

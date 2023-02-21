@@ -1,9 +1,5 @@
-def _parse_pgn(expr s)=
-    string _str;
-    _str := s;
-    _total_length:= length s;
-    show _str;
-enddef;
+
+% some intern macros to deal with blocks of a PNG line
 
 vardef _delete_first_spaces(expr s)=
     save output;
@@ -30,10 +26,10 @@ vardef _get_first_block(expr s)=
     for j = 0 upto _total_length :
         if substring (j,j+1) of output <> " " :  
             _size := _size+1 ; 
-        else : 
+        else: 
             exitif(true) ; 
         fi 
-    endfor  
+    endfor
     output :=  substring (0,_size) of output;
     output
 enddef;
@@ -63,9 +59,19 @@ string _chess_moves_table[][];
 numeric _chess_moves_table_numeric[][];
 numeric _chess_pgn_step;
 numeric _chess_step_numtable;
-_chess_step_numtable:=0;
-_chess_pgn_step:=0;
+_chess_step_numtable:=0; % total number of moves (white+black) halfmove
+_chess_pgn_step:=0; % total numbre of "couple" moves (should be uncomplete without black move) 
 
+def get_halfmove_number=
+    _chess_step_numtable
+enddef;
+
+def get_totalmove_number=
+    _chess_pgn_step
+enddef;
+
+% macro to deal the block (or half block) between to numbers of PNG step
+% s = 3. Nf6 c6 4. [...]   
 vardef _get_move(expr s)=
     save output,_step;
     string output;
@@ -73,18 +79,22 @@ vardef _get_move(expr s)=
     output:=s;
     % drop the step
     _step := scantokens(_get_first_block(output));
-    output:=_drop_first_block(output);
-    _chess_pgn_step:=_chess_pgn_step+1;
+    output:=_drop_first_block(output); % get rid of i. 
+    
     % get the white move and drop it
-    _chess_moves_table[_chess_pgn_step][0]:=_get_first_block(output);
-    _extract_move(_chess_step_numtable,_get_first_block(output),"white");
+    _chess_moves_table[_chess_pgn_step][0]:=_get_first_block(output); %get the white move
+    _extract_move(_chess_step_numtable,_get_first_block(output),"white"); % build the numeric table
     _chess_step_numtable:=_chess_step_numtable+1;
-    output:=_drop_first_block(output);
+    output:=_drop_first_block(output); % rid of the treated block
+    output:=_delete_first_spaces(output); 
     % get the black move and drop it
-    _chess_moves_table[_chess_pgn_step][1]:=_get_first_block(output);
-    _extract_move(_chess_step_numtable,_get_first_block(output),"black");
-    _chess_step_numtable:=_chess_step_numtable+1;
-    output:=_drop_first_block(output);
+    if((output)<>""): 
+        _chess_moves_table[_chess_pgn_step][1]:=_get_first_block(output);
+        _extract_move(_chess_step_numtable,_get_first_block(output),"black");
+        _chess_step_numtable:=_chess_step_numtable+1;
+        output:=_drop_first_block(output);
+    fi
+    _chess_pgn_step:=_chess_pgn_step+1;
     output
 enddef;
 
@@ -99,23 +109,20 @@ def _build_chess_moves_tables(expr s)=
     endfor
 enddef;
 
+% intern debug macro
 def _show_chess_moves_table=
-    i:=1;
-    forever:
-    if known _chess_moves_table[i][0]:
+    for i:=0 upto _chess_pgn_step-1:
         show "move";
         show _chess_moves_table[i][0];
-        show _chess_moves_table[i][1];
-        i:=i+1;
-    fi
-    exitif unknown _chess_moves_table[i][0];
+        if(2*i<_chess_step_numtable-1): % if the is no black move
+            show _chess_moves_table[i][1];
+        fi
     endfor 
 enddef;
 
+% intern debug macro
 def _show_chess_moves_table_numeric=
-    i:=1;
-    forever:
-    if known _chess_moves_table_numeric[i][0]:
+    for i:=0 upto _chess_step_numtable-1:
         show "move";
         show _chess_moves_table_numeric[i][0];
         show _chess_moves_table_numeric[i][1];
@@ -123,14 +130,11 @@ def _show_chess_moves_table_numeric=
         show _chess_moves_table_numeric[i][3];
         show _chess_moves_table_numeric[i][4];
         show _chess_moves_table_numeric[i][5];
-        i:=i+1;
-    fi
-    exitif unknown _chess_moves_table_numeric[i][0];
+        show _chess_moves_table_numeric[i][6];
     endfor 
 enddef;
 
 vardef _is_cap(expr c)=
-show c;
     if((c="B") or (c="K") or (c="N") or (c="Q") or (c="R")):
         true
     else:
@@ -216,6 +220,7 @@ def _str_to_int(expr i)=
     fi
 enddef;
 
+% macro to get thi ith char of a string
 vardef _get_char(expr s,i)=
     save output;
     string output;
@@ -225,18 +230,20 @@ enddef;
 
 vardef _extract_move(expr _step,s,wb)=
     % function to convert a PGN move (ie Nc6)
-    % to a array of numerics (type, wb,letter, nbr, capture,promotion)
+    % to a array of numerics (type, wb,letter, nbr, capture,promotion,ambiguity)
     % no castle moves !!!
     % s is the string of PGN move
     % wb is a string equal to "white" or "black" 
-    % s=Nc6,wb="white" -> (_intBKnigh,+-1,3,6,0,0)
+    % s=Nc6,wb="white" -> (_intBKnigh,+-1,3,6,0,0,0)
     % capture is boolean
-    % promotion give the
-    save _str,output,_piecetype,_letter,_nbr,_capture;
-    numeric _pm,_capture,_promotion;
+    % promotion gives the int corresponding to the piece
+    % ambiguity gives the column if ambiguity 
+    save _str,output,_piecetype,_letter,_nbr,_capture,_ambiguity;
+    numeric _pm,_capture,_promotion,_ambiguity;
     _promotion:=0;
     _pm:=1;
     _capture:=0;
+    _ambiguity:=0;
     if(wb="black"):
         _pm:=-1;
     fi
@@ -262,16 +269,25 @@ vardef _extract_move(expr _step,s,wb)=
             if((_get_char(_str,3)="+") or (_get_char(_str,3)="#")): % type Nf4#
                 _letter:=_lettre_to_int(_get_char(_str,1));
                 _nbr:=_str_to_int(_get_char(_str,2));
-            else: % capture Nxf4
+            elseif(_get_char(_str,1)="x"): % capture Nxf4
                 _capture:=1;
                 _letter:=_lettre_to_int(_get_char(_str,2));
                 _nbr:=_str_to_int(_get_char(_str,3));
+            else: % ambiguity Rfe2
+                _letter:=_lettre_to_int(_get_char(_str,2));
+                _nbr:=_str_to_int(_get_char(_str,3));
+                _ambiguity:=_lettre_to_int(_get_char(_str,1));
             fi
-        elseif(length(_str)=5): % type Nxf6+
-            _capture:=1;
-            _letter:=_lettre_to_int(_get_char(_str,2));
-            _nbr:=_str_to_int(_get_char(_str,3));
-            
+        elseif(length(_str)=5): 
+            if(_get_char(_str,1)="x"): % capture type Nxf6+
+                _capture:=1;
+                _letter:=_lettre_to_int(_get_char(_str,2));
+                _nbr:=_str_to_int(_get_char(_str,3));
+            else: % ambiguity Rfe2(+|#)
+                _letter:=_lettre_to_int(_get_char(_str,2));
+                _nbr:=_str_to_int(_get_char(_str,3));
+                _ambiguity:=_lettre_to_int(_get_char(_str,1));
+            fi
         fi
     else:
         _piecetype:=_pm;
@@ -286,6 +302,7 @@ vardef _extract_move(expr _step,s,wb)=
                 _capture:=1;
                 _letter:=_lettre_to_int(_get_char(_str,2));
                 _nbr:=_str_to_int(_get_char(_str,3));
+                _ambiguity:=_lettre_to_int(_get_char(_str,0));
             else: % capture e8=Q
                 _promotion:=_lettre_to_int(_get_char(_str,3));
                 _letter:=_lettre_to_int(_get_char(_str,0));
@@ -299,5 +316,6 @@ vardef _extract_move(expr _step,s,wb)=
     _chess_moves_table_numeric[_step][3]:=_nbr;
     _chess_moves_table_numeric[_step][4]:=_capture;
     _chess_moves_table_numeric[_step][5]:=_promotion;
+    _chess_moves_table_numeric[_step][6]:=_ambiguity;
 enddef;
 

@@ -1,3 +1,4 @@
+% size of the chessboard
 numeric _chessSize;
 _chessSize:=8;
 
@@ -6,12 +7,17 @@ def set_chessboardSize(expr w)=
 enddef;
 
 
+def get_chessboardSize=
+    _chessSize
+enddef;
+
 
 
 % the chessboard
 % chessboard[step][1-8][1-8] corresponding to step/A-H/1-8
 % array 8x8 for each step of the game
 numeric chessboard[][][];  
+numeric chessboard_number;
 
 % set the starting board
 def init_chessboard =
@@ -36,6 +42,7 @@ def init_chessboard =
     chessboard[0][5][1]:=_intWKing;
     chessboard[0][5][8]:=_intBKing;
     fi
+    chessboard_number:=1;
 enddef;
 
 def _int_to_piece(expr i)=
@@ -69,7 +76,7 @@ enddef;
 def _draw_step_chessboard(expr k) = 
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
-            show chessboard[k][i][j];
+            %show chessboard[k][i][j];
             if(chessboard[k][i][j] <> 0):
                 draw ( _int_to_piece(chessboard[k][i][j]) shifted ((i-1)*_chessSquareU,(j-1)*_chessSquareU));
             fi
@@ -77,9 +84,6 @@ def _draw_step_chessboard(expr k) =
     endfor;
 enddef; 
 
-def _build_chessboard_from_pgn(expr s)=
-
-enddef;
 
 vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
     % i int from letter, column
@@ -90,40 +94,40 @@ vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
     save output;
     boolean output;
     output = false;
-    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
-    if(wb="white"):
-        if(jend=4): % on the line that allow 2 square move
-            if(((jstart=3) or (jstart=2)) and (iend=istart)):
-                output:=true;
-            fi
-            if((jstart=3) and ((istart=iend+1) or (istart=iend-1))): %capture
-                output:=true;
-            fi
-        else:
-            if((jstart=jend-1) and (istart=iend)): % straight move
-                output:=true;
-            fi
-            if((jstart=jend-1) and ((istart=iend+1) or (istart=iend-1))): % capture
-                output:=true;
-            fi
-        fi
-    else:
-        if(jend=5): % on the line that allow 2 square move
-            if(((jstart=6) or (jstart=7)) and (iend=istart)):
-                output:=true;
-            fi
-            if((jstart=6) and ((istart=iend+1) or (istart=iend-1))): %capture
-                output:=true;
+    if(((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1))):
+        if(wb="white"):        
+            if(jend=4): % on the line that allow 2 square move
+                if(((jstart=3) or (jstart=2)) and (iend=istart)):
+                    output:=true;
+                fi
+                if((jstart=3) and ((istart=iend+1) or (istart=iend-1))): %capture
+                    output:=true;
+                fi
+            else:
+                if((jstart=jend-1) and (istart=iend)): % straight move
+                    output:=true;
+                fi
+                if((jstart=jend-1) and ((istart=iend+1) or (istart=iend-1))): % capture
+                    output:=true;
+                fi
             fi
         else:
-            if((jstart=jend+1) and (istart=iend)): % straight move
-                output:=true;
-            fi
-            if((jstart=jend+1) and ((istart=iend+1) or (istart=iend-1))): % capture
-                output:=true;
+            if(jend=5): % on the line that allow 2 square move
+                if(((jstart=6) or (jstart=7)) and (iend=istart)):
+                    output:=true;
+                fi
+                if((jstart=6) and ((istart=iend+1) or (istart=iend-1))): %capture
+                    output:=true;
+                fi
+            else:
+                if((jstart=jend+1) and (istart=iend)): % straight move
+                    output:=true;
+                fi
+                if((jstart=jend+1) and ((istart=iend+1) or (istart=iend-1))): % capture
+                    output:=true;
+                fi
             fi
         fi
-    fi
     fi
     output
 enddef;
@@ -137,7 +141,7 @@ vardef _bishop_candidate(expr istart, jstart,iend,jend,wb)=
     save output;
     boolean output;
     output = false;
-    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+    if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
         if(abs(iend-istart)=abs(jend-jstart)):
             output:=true;
         fi
@@ -154,7 +158,7 @@ vardef _rook_candidate(expr istart, jstart,iend,jend,wb)=
     save output;
     boolean output;
     output = false;
-    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
+    if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
         if((iend=istart) or (jend=jstart)):
             output:=true;
         fi
@@ -172,8 +176,8 @@ vardef _queen_candidate(expr istart, jstart,iend,jend,wb)=
     save output;
     boolean output;
     output = false;
-    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
-        if((iend=istart) or (jend=jstart) or (abs(iend-istart)=abs(jend-jstart))):
+    if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
+        if((iend-istart) or (jend-jstart) or (abs(iend-istart)=abs(jend-jstart))):
             output:=true;
         fi
     fi
@@ -189,8 +193,8 @@ vardef _king_candidate(expr istart, jstart,iend,jend,wb)=
     save output;
     boolean output;
     output = false;
-    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
-        if((abs(iend=istart)<=1) and (abs(jend=jstart)<=1)):
+    if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
+        if((abs(iend-istart)<=1) and (abs(jend-jstart)<=1)):
             output:=true;
         fi
     fi
@@ -206,13 +210,119 @@ vardef _knight_candidate(expr istart, jstart,iend,jend,wb)=
     save output;
     boolean output;
     output = false;
-    if((iend<=_chessSize) and (iend>=0) and (iend<=_chessSize) and (iend>=0)):
-        if(((abs(iend=istart)=2) and (abs(jend=jstart)=1)) or ((abs(iend=istart)=1) and (abs(jend=jstart)=2))):
+    if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
+        if(((abs(iend-istart)=2) and (abs(jend-jstart)=1)) or ((abs(iend-istart)=1) and (abs(jend-jstart)=2))):
             output:=true;
         fi
     fi
     output
 enddef;
 
+vardef _chess_candidate(expr type, istart, jstart, iend, jend,wb)=
+    numeric _pm;
+    _pm:=1;
+    if(wb="black"):
+        _pm:=-1;
+    fi
+    if(type=(_pm*_intWPawn)):
+         _pawn_candidate(istart,jstart,iend,jend,wb)
+    elseif(type=_pm*_intWBishop):
+        _bishop_candidate(istart,jstart,iend,jend,wb)
+    elseif(type=_pm*_intWKing):
+        _king_candidate(istart,jstart,iend,jend,wb)
+    elseif(type=_pm*_intWKnight):
+        _knight_candidate(istart,jstart,iend,jend,wb)
+    elseif(type=_pm*_intWQueen):
+        _queen_candidate(istart,jstart,iend,jend,wb)
+    elseif(type=_pm*_intWRook):
+        _rook_candidate(istart,jstart,iend,jend,wb)
+    fi
+enddef;
 
+def _chess_copy_chessboard(expr step)=
+    save i,j;
+    for i:=1 upto _chessSize:
+        for j:=1 upto _chessSize:
+            chessboard[step][i][j]:=chessboard[step-1][i][j];
+        endfor;
+    endfor;
+enddef;
 
+def _chess_copy_captures(expr step)=
+    save i,j;
+    %show _chess_wcaptures_nbr[step-1];
+    if(_chess_wcaptures_nbr[step-1]>0):
+    for i:=0 upto _chess_wcaptures_nbr[step-1]-1:
+        _chess_white_captures[step][i]:=_chess_white_captures[step-1][i];
+    endfor;
+    fi
+    %show _chess_bcaptures_nbr[step-1];
+    if(_chess_bcaptures_nbr[step-1]>0):
+    for i:=0 upto _chess_bcaptures_nbr[step-1]-1:
+        _chess_black_captures[step][i]:=_chess_black_captures[step-1][i];
+    endfor;
+    fi
+enddef;
+
+numeric _chess_white_captures[][],_chess_black_captures[][];
+numeric _chess_wcaptures_nbr[], _chess_bcaptures_nbr[];
+_chess_wcaptures_nbr[0]:=0;
+_chess_bcaptures_nbr[0]:=0;
+
+def _build_all_chessboards=
+    save _wb;
+    string _wb;
+    init_chessboard; % k=0
+    for k:=1 upto (_chess_step_numtable-1):
+        _chess_copy_chessboard(k);
+        _chess_copy_captures(k);
+        _piecetype:=_chess_moves_table_numeric[k-1][0];
+        _pm:=_chess_moves_table_numeric[k-1][1];
+        _iend:=_chess_moves_table_numeric[k-1][2];
+        _jend:=_chess_moves_table_numeric[k-1][3];
+        _capture:=_chess_moves_table_numeric[k-1][4];
+        _promotion:=_chess_moves_table_numeric[k-1][5];
+        _ambiguity:=_chess_moves_table_numeric[k-1][6];
+        if(_pm=1):
+            _wb:="white";
+        else:
+            _wb:="black";
+        fi        
+        for i:=1 upto _chessSize:
+            for j:=1 upto _chessSize:   
+                if(chessboard[k][i][j]=_piecetype): 
+                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,_wb)=true):  
+                        %show "candidate";
+                        if(_capture<>0):
+                            if(_pm=1):
+                                _chess_white_captures[k][_chess_wcaptures_nbr[k-1]]:=chessboard[k][i][j];
+                                _chess_wcaptures_nbr[k]:=_chess_wcaptures_nbr[k-1]+1;
+                                _chess_bcaptures_nbr[k]:=_chess_bcaptures_nbr[k-1];
+                            else:
+                                _chess_black_captures[k][_chess_bcaptures_nbr[k-1]]:=chessboard[k][i][j];
+                                _chess_bcaptures_nbr[k]:=_chess_bcaptures_nbr[k-1]+1;
+                                _chess_wcaptures_nbr[k]:=_chess_wcaptures_nbr[k-1];
+                            fi
+                        else:
+                            _chess_wcaptures_nbr[k]:=_chess_wcaptures_nbr[k-1];
+                            _chess_bcaptures_nbr[k]:=_chess_bcaptures_nbr[k-1];
+                        fi
+                        
+                        chessboard[k][i][j]:=0; %erase piece
+                        if(_promotion<>0):
+                            chessboard[k][_iend][_jend]:=_promotion;
+                        else:
+                            chessboard[k][_iend][_jend]:=_piecetype;
+                        fi
+                    fi
+                fi
+            endfor;
+        endfor;
+    endfor;
+    chessboard_number:=_chess_step_numtable;
+enddef;
+
+def build_chessboards_from_pgn(expr s)=
+    _build_chess_moves_tables(s);
+    _build_all_chessboards;
+enddef;

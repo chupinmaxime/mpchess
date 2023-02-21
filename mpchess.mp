@@ -30,6 +30,7 @@ picture _chess_wB, _chess_wK, _chess_wN,_chess_wP, _chess_wQ, _chess_wR;
 string _coords_font;
 _coords_font:=defaultfont;
 
+% chose the font to write coordinates on board
 def set_coords_font(expr f)=
     _coords_font:=f ;
 enddef;
