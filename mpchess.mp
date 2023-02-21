@@ -61,6 +61,12 @@ def set_white_view=
     _chess_view_wb := true;
 enddef;
 
+boolean _chess_players_side;
+_chess_players_side:=false;
+def set_players_side=
+    _chess_player_side:=true;
+enddef;
+
 % boolean to choose if we print coordinates
 boolean _chess_print_coords,_chess_coords_inout;
 _chess_print_coords:=true;
@@ -330,6 +336,34 @@ def _int_to_str_b(expr i)=
     fi
 enddef;
 
+
+vardef _chess_get_img_w(expr im)=
+    save width;
+    numeric width;
+    width:=abs(ulcorner im-urcorner im);
+    width 
+enddef;
+
+vardef _chess_get_img_h(expr im)=
+    save height;
+    numeric height;
+    height:=abs(ulcorner im-llcorner im) ;
+    height 
+enddef;
+
+vardef _chess_build_playername(expr str)=
+    save _player_img,output;
+    picture _player_img,output;
+    _player_img:=image(draw textext(str));
+    output:=image(
+    _tmp:=_chess_get_img_h(_player_img);
+    fill (0,0)--(_chessSquareU*_chessSize,0)--(_chessSquareU*_chessSize,1.8*_tmp)--(0,1.8*_tmp)--cycle withcolor black;
+    draw (0,0)--(_chessSquareU*_chessSize,0)--(_chessSquareU*_chessSize,1.8*_tmp)--(0,1.8*_tmp)--cycle withcolor black;
+    draw _player_img shifted (0.15*_chessSquareU,0.4*_tmp) withcolor white;
+    );
+    output
+enddef;
+
 picture backboard;
 
 def init_backboard =
@@ -341,6 +375,8 @@ else: % colored themes
     _buildColoredSquare(_chessSquareU,_blackColorSquare,_whiteColorSquare);
 fi
 picture _letter_img;
+picture _wplayer_img,_bplayer_img;
+
 backboard:=image(
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
@@ -416,17 +452,33 @@ backboard:=image(
     draw (0,0)--(_chessSize,0)*_chessSquareU--(_chessSize,_chessSize)*_chessSquareU--(0,_chessSize)*_chessSquareU--cycle;
     if(_chess_view_wb):
         if(_chess_white_player<>""):
-            label.urt(textext(_chess_white_player),(_chessSize*_chessSquareU,0));
+            if((not _chess_coords_inout) or _chess_players_side):
+                label.urt(textext(_chess_white_player),(_chessSize*_chessSquareU,0));
+            else:
+                draw _chess_build_playername(_chess_white_player) shifted (0,-_chess_get_img_h(_chess_build_playername(_chess_white_player)));
+            fi
         fi
         if(_chess_black_player<>""):
-            label.lrt(textext(_chess_black_player),(_chessSize*_chessSquareU,_chessSize*_chessSquareU));
+            if((not _chess_coords_inout) or _chess_players_side):
+                label.lrt(textext(_chess_black_player),(_chessSize*_chessSquareU,_chessSize*_chessSquareU));
+            else:
+                draw _chess_build_playername(_chess_black_player) shifted (0,_chessSquareU*_chessSize);
+            fi
         fi
-    else:
+    else: % black view
         if(_chess_black_player<>""):
-            label.urt(textext(_chess_black_player),(_chessSize*_chessSquareU,0));
+            if((not _chess_coords_inout) or _chess_players_side):
+                label.urt(textext(_chess_black_player),(_chessSize*_chessSquareU,0));
+            else:
+                draw _chess_build_playername(_chess_black_player) shifted (0,-_chess_get_img_h(_chess_build_playername(_chess_black_player)));
+            fi
         fi
         if(_chess_white_player<>""):
-            label.lrt(textext(_chess_white_player),(_chessSize*_chessSquareU,_chessSize*_chessSquareU));
+            if((not _chess_coords_inout) or _chess_players_side):
+                label.lrt(textext(_chess_white_player),(_chessSize*_chessSquareU,_chessSize*_chessSquareU));
+            else:
+                draw _chess_build_playername(_chess_white_player) shifted (0,_chessSquareU*_chessSize);
+            fi
         fi
     fi
 );
