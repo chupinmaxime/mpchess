@@ -22,6 +22,21 @@ beginfig(1);
     draw backboard;
     _draw_step_chessboard(0);
 endfig;
+
+beginfig(4);
+    init_chessboard;
+    usetheme("Classical");
+    show _intBKing;
+    show chessboard[0][1][1];
+    set_backboardWidth(8cm);
+    set_black_view;
+    set_white_player("\tiny Roxane {\bf Spillane Chupin}");
+    set_black_player("Eliott");
+    init_backboard;
+    draw backboard;
+    _draw_step_chessboard(0);
+endfig;
+
 beginfig(2);
     draw _chess_wQ;
     draw bbox _chess_wQ;
