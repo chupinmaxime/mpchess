@@ -87,6 +87,9 @@ def set_coords_outside=
     _chess_coords_inout:=false;
 enddef;
 
+% boolean for white or black to move
+boolean _white_to_move;
+_white_to_move:=true;
 
 % integer correspondance :
 _intWPawn:=1;
@@ -101,6 +104,15 @@ _intWQueen:=5;
 _intBQueen:=-5;
 _intWKing:=6;
 _intBKing:=-6;
+
+
+% macro to get thi ith char of a string
+vardef _get_char(expr s,i)=
+    save output;
+    string output;
+    output:=substring(i,i+1) of s;
+    output
+enddef;
 
 % unit default
 numeric _chessWidth,_chessSquareU;
@@ -130,6 +142,10 @@ def reset_backboard=
     _chessTheme := "BlueLichess";
     _blackColorSquare:=(0.549,0.6353,0.6784);
     _whiteColorSquare:=(0.8706,0.8912,0.902);
+    _chess_print_coords:=true;
+    _chess_coords_inout:=true;
+    _chess_view_wb := true; % true for white
+    _chess_players_side:=false;
 enddef;
 
 
@@ -512,8 +528,12 @@ def _int_to_piece(expr i)=
     fi
 enddef;
 
-def _draw_step_chessboard(expr k) =
+vardef chessboard_step(expr k) =
+    save shiftPiece;
+    save chessboard_pic;
+    picture chessboard_pic;
     pair shiftPiece;
+    chessboard_pic:= image(
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
             if(chessboard[k][i][j] <> 0):
@@ -526,4 +546,6 @@ def _draw_step_chessboard(expr k) =
             fi
         endfor;
     endfor;
+    );
+    chessboard_pic
 enddef; 

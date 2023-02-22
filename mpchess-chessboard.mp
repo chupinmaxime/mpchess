@@ -21,6 +21,10 @@ numeric chessboard_number;
 
 % set the starting board
 def init_chessboard =
+    for i:=0 upto 500:
+        _chess_wcaptures_nbr[i]:=0;
+        _chess_bcaptures_nbr[i]:=0;
+    endfor
     if(_chessSize=8):
     for i:=1 upto 8:
         for j:=1 upto 8:
@@ -44,6 +48,8 @@ def init_chessboard =
     fi
     chessboard_number:=1;
 enddef;
+
+
 
 def _int_to_piece(expr i)=
     if(i=_intWPawn):
@@ -325,4 +331,64 @@ enddef;
 def build_chessboards_from_pgn(expr s)=
     _build_chess_moves_tables(s);
     _build_all_chessboards;
+enddef;
+
+
+% set the starting empty board
+def set_empty_chessboard =
+    for i:=0 upto 500:
+        _chess_wcaptures_nbr[i]:=0;
+        _chess_bcaptures_nbr[i]:=0;
+    endfor
+    for i:=1 upto _chessSize:
+        for j:=1 upto _chessSize:
+         chessboard[0][i][j]:=0;
+        endfor;
+    endfor;
+    chessboard_number:=1;
+enddef;
+
+
+def add_white_pieces(text plists) =
+    save _str,_piecetype, _letter, _nbr,wb;
+    string wb;
+    wb:="white";
+    for _str = plists:
+        if(_is_cap(_get_char(_str,0))): % if the first char is a cap
+            _piecetype:=_cap_to_int(_get_char(_str,0),wb);
+            if(length(_str)=3): % type Nf6
+                _letter:=_lettre_to_int(_get_char(_str,1));
+                _nbr:=_str_to_int(_get_char(_str,2));
+            fi
+        else:
+            _piecetype:=_intWPawn;
+            if(length(_str)=2): % type f6
+                _letter:=_lettre_to_int(_get_char(_str,0));
+                _nbr:=_str_to_int(_get_char(_str,1)); 
+            fi
+        fi
+        chessboard[0][_letter][_nbr]:=_piecetype;
+    endfor
+enddef;
+
+def add_black_pieces(text plists) =
+    save _str,_piecetype, _letter, _nbr,wb;
+    string wb;
+    wb:="black";
+    for _str = plists:
+        if(_is_cap(_get_char(_str,0))): % if the first char is a cap
+            _piecetype:=_cap_to_int(_get_char(_str,0),wb);
+            if(length(_str)=3): % type Nf6
+                _letter:=_lettre_to_int(_get_char(_str,1));
+                _nbr:=_str_to_int(_get_char(_str,2));
+            fi
+        else:
+            _piecetype:=_intBPawn;
+            if(length(_str)=2): % type f6
+                _letter:=_lettre_to_int(_get_char(_str,0));
+                _nbr:=_str_to_int(_get_char(_str,1)); 
+            fi
+        fi
+        chessboard[0][_letter][_nbr]:=_piecetype;
+    endfor
 enddef;

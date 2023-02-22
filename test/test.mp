@@ -20,7 +20,7 @@ beginfig(1);
     set_black_player("Eliott");
     init_backboard;
     draw backboard;
-    _draw_step_chessboard(0);
+    draw chessboard_step(0);
 endfig;
 
 beginfig(4);
@@ -35,7 +35,7 @@ beginfig(4);
     set_black_player("Eliott");
     init_backboard;
     draw backboard;
-    _draw_step_chessboard(0);
+    draw chessboard_step(0);
 endfig;
 
 beginfig(2);
@@ -65,6 +65,14 @@ beginfig(3);
     dotlabel(btex $x$ etex,(0,0));
 endfig;
 
-
+reset_backboard;
+beginfig(5);
+    init_backboard;
+    set_empty_chessboard;
+    add_white_pieces("e1","e3","Kb2");
+    add_black_pieces("e7","f6","Kb8");
+    draw backboard;
+    draw chessboard_step(0);
+endfig;
 
 end.
