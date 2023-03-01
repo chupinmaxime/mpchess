@@ -12,12 +12,15 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-input format;
+%input format;
 input hatching;
 input cburnett; % piece of lichess cburnett
 input mpchess-chessboard;
-input mpchess-pgn
+input mpchess-pgn;
+input mpchess-fen;
+%input mp-tool;
 input latexmp;
+
 if not known mplib: input latexmp fi;
 
 warningcheck:=0;
@@ -90,6 +93,20 @@ enddef;
 % boolean for white or black to move
 boolean _white_to_move;
 _white_to_move:=true;
+
+def set_black_to_move=
+    _white_to_move:=false;
+enddef;    
+
+def set_white_to_move=
+    _white_to_move:=true;
+enddef;    
+
+% boolean to show a mark to indicate whos to move
+boolean show_whos_to_move;
+show_whos_to_move:=true;
+
+
 
 % integer correspondance :
 _intWPawn:=1;
@@ -528,24 +545,124 @@ def _int_to_piece(expr i)=
     fi
 enddef;
 
+def _triangle(expr s)=
+    ((0,0)--(1,0)--(0.5,0.5)--cycle) scaled (s*_chessSquareU)
+enddef;
+
+boolean _show_last_move;
+color _chess_last_move_color;
+
+_chess_last_move_color:=(0.6078,0.7803,0);
+
+_show_last_move:=false;
+
+def show_last_move=
+    _show_last_move:=true;
+enddef;
+
+def set_color_last_move(expr c)=
+    _chess_last_move_color:=c;
+enddef;
+
+def _draw_last_move(expr k)=
+    if(k>0):
+     for i:=1 upto _chessSize:
+        for j:=1 upto _chessSize:
+            if(chessboard_table[k][i][j]<>chessboard_table[k-1][i][j]):
+                _chess_color_square(_chess_last_move_color,i,j);
+            fi
+        endfor
+    endfor
+    fi
+enddef;
+
 vardef chessboard_step(expr k) =
     save shiftPiece;
     save chessboard_pic;
     picture chessboard_pic;
     pair shiftPiece;
+    if((k mod 2)=0):
+        set_white_to_move;
+    else:
+        set_black_to_move;
+    fi
     chessboard_pic:= image(
+    draw backboard;
+    if(_show_last_move):
+        _draw_last_move(k);
+    fi
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
-            if(chessboard[k][i][j] <> 0):
+            if(chessboard_table[k][i][j] <> 0):
                 if(_chess_view_wb):
                     shiftPiece:=((i-1)*_chessSquareU,(j-1)*_chessSquareU);
                 else:
                     shiftPiece:=((_chessSize-i)*_chessSquareU,(_chessSize-j)*_chessSquareU);
                 fi
-                draw ( _int_to_piece(chessboard[k][i][j]) shifted shiftPiece);
+                draw ( _int_to_piece(chessboard_table[k][i][j]) shifted shiftPiece);
             fi
         endfor;
     endfor;
+    if(show_whos_to_move):
+        if(_chess_view_wb): %white side 
+            if(not _white_to_move):
+                fill _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
+            else:
+                draw _triangle(0.35)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+            fi
+        else: % black side
+            if(_white_to_move):
+                draw _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
+            else:
+                fill _triangle(0.35)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+            fi
+        fi
+    fi
+
     );
     chessboard_pic
 enddef; 
+
+
+%%% colored square
+
+vardef color_square(expr c,s)=
+    % c: color
+    % s: algebraic notation for a square (ex: e5)
+    save _i,_j;
+    _i:=_lettre_to_int(_get_char(s,0));
+    _j:=_str_to_int(_get_char(s,1));
+    path ss;
+    ss:=(unitsquare scaled _chessSquareU) shifted ((_i-1)*_chessSquareU,(_j-1)*_chessSquareU);
+    transparence(ss,c,0.41);
+enddef;
+
+vardef _chess_color_square(expr c,i,j)=
+    % c: color
+    % s: algebraic notation for a square (ex: e5)
+    path ss;
+    ss:=(unitsquare scaled _chessSquareU) shifted ((i-1)*_chessSquareU,(j-1)*_chessSquareU);
+    transparence(ss,c,0.41);
+enddef;
+
+%% "inspired" by Thruston’s code:
+% https://github.com/thruston/Drawing-with-Metapost
+def transparence(expr p,c,a)=
+    show "test";
+    save shape,alpha,filler,bg,fg;
+    path shape; 
+    shape := p;
+    alpha := a; % alpha: 0=invisible, 1=opaque
+    color filler; 
+    filler = c;
+    picture fg, bg;
+    bg = currentpicture; % capture the current drawing
+    fg = image(
+        for e within bg: % redraw everything in blended color
+            draw e withcolor alpha[colorpart e, filler];
+        endfor % and add some decorations
+    );
+    clip fg to shape; % now clip the fg drawing to the shape
+    fill shape withcolor filler; % fill the shape
+    draw fg; % and put the fg drawing on top
+enddef;

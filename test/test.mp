@@ -20,7 +20,11 @@ beginfig(1);
     set_black_player("Eliott");
     init_backboard;
     draw backboard;
-    draw chessboard_step(0);
+    color_square(red,"b5");
+    color_square(red,"c5");
+    
+    
+     draw chessboard_step(0);
 endfig;
 
 beginfig(4);

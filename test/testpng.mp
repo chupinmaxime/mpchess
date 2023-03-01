@@ -8,7 +8,9 @@ build_chessboards_from_pgn(in);
 for i:=0 upto get_halfmove_number-1:
 beginfig(i);
 init_backboard;
-    draw backboard;
+%set_black_view;
+    %draw backboard;
+    show_last_move;
     draw chessboard_step(i);
     for  j:=0 upto _chess_wcaptures_nbr[i]-1:
         show _chess_white_captures[i][j];

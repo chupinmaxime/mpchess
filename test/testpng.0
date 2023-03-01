@@ -1,8 +1,8 @@
 %!PS
-%%BoundingBox: -1 -1 142 142 
-%%HiResBoundingBox: -0.25 -0.25 141.9823 141.9823 
+%%BoundingBox: -1 -6 154 142 
+%%HiResBoundingBox: -0.25 -5.56502 153.49821 141.9823 
 %%Creator: MetaPost 2.02
-%%CreationDate: 2023.02.22:2209
+%%CreationDate: 2023.02.28:2237
 %%Pages: 1
 %*Font: cmr10 3.54353 9.96265 31:ff0000000000ff
 %%BeginProlog
@@ -2152,5 +2152,10 @@ newpath 129.7449 135.23225 moveto
 136.00317 135.23225 lineto stroke
 newpath 128.6405 136.15259 moveto
 137.10757 136.15259 lineto stroke
+ 0 0 0 setrgbcolor 0 0.5 dtransform truncate idtransform setlinewidth pop
+newpath 147.04732 -5.31502 moveto
+153.24821 -5.31502 lineto
+150.14777 -2.21457 lineto
+ closepath stroke
 showpage
 %%EOF

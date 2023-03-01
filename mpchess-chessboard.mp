@@ -14,9 +14,9 @@ enddef;
 
 
 % the chessboard
-% chessboard[step][1-8][1-8] corresponding to step/A-H/1-8
+% chessboard_table[step][1-8][1-8] corresponding to step/A-H/1-8
 % array 8x8 for each step of the game
-numeric chessboard[][][];  
+numeric chessboard_table[][][];  
 numeric chessboard_number;
 
 % set the starting board
@@ -28,23 +28,23 @@ def init_chessboard =
     if(_chessSize=8):
     for i:=1 upto 8:
         for j:=1 upto 8:
-         chessboard[0][i][j]:=0;
+         chessboard_table[0][i][j]:=0;
         endfor;
     endfor;
     for i:=1 upto 8:
-        chessboard[0][i][2]:=_intWPawn;
-        chessboard[0][i][7]:=_intBPawn;
+        chessboard_table[0][i][2]:=_intWPawn;
+        chessboard_table[0][i][7]:=_intBPawn;
     endfor;
-    chessboard[0][1][1]:=_intWRook;chessboard[0][8][1]:=_intWRook;
-    chessboard[0][1][8]:=_intBRook;chessboard[0][8][8]:=_intBRook; 
-    chessboard[0][2][1]:=_intWKnight;chessboard[0][7][1]:=_intWKnight;
-    chessboard[0][2][8]:=_intBKnight;chessboard[0][7][8]:=_intBKnight; 
-    chessboard[0][3][1]:=_intWBishop;chessboard[0][6][1]:=_intWBishop;
-    chessboard[0][3][8]:=_intBBishop;chessboard[0][6][8]:=_intBBishop;
-    chessboard[0][4][1]:=_intWQueen;
-    chessboard[0][4][8]:=_intBQueen;
-    chessboard[0][5][1]:=_intWKing;
-    chessboard[0][5][8]:=_intBKing;
+    chessboard_table[0][1][1]:=_intWRook;chessboard_table[0][8][1]:=_intWRook;
+    chessboard_table[0][1][8]:=_intBRook;chessboard_table[0][8][8]:=_intBRook; 
+    chessboard_table[0][2][1]:=_intWKnight;chessboard_table[0][7][1]:=_intWKnight;
+    chessboard_table[0][2][8]:=_intBKnight;chessboard_table[0][7][8]:=_intBKnight; 
+    chessboard_table[0][3][1]:=_intWBishop;chessboard_table[0][6][1]:=_intWBishop;
+    chessboard_table[0][3][8]:=_intBBishop;chessboard_table[0][6][8]:=_intBBishop;
+    chessboard_table[0][4][1]:=_intWQueen;
+    chessboard_table[0][4][8]:=_intBQueen;
+    chessboard_table[0][5][1]:=_intWKing;
+    chessboard_table[0][5][8]:=_intBKing;
     fi
     chessboard_number:=1;
 enddef;
@@ -82,9 +82,9 @@ enddef;
 def _draw_step_chessboard(expr k) = 
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
-            %show chessboard[k][i][j];
-            if(chessboard[k][i][j] <> 0):
-                draw ( _int_to_piece(chessboard[k][i][j]) shifted ((i-1)*_chessSquareU,(j-1)*_chessSquareU));
+            %show chessboard_table[k][i][j];
+            if(chessboard_table[k][i][j] <> 0):
+                draw ( _int_to_piece(chessboard_table[k][i][j]) shifted ((i-1)*_chessSquareU,(j-1)*_chessSquareU));
             fi
         endfor;
     endfor;
@@ -249,7 +249,7 @@ def _chess_copy_chessboard(expr step)=
     save i,j;
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
-            chessboard[step][i][j]:=chessboard[step-1][i][j];
+            chessboard_table[step][i][j]:=chessboard_table[step-1][i][j];
         endfor;
     endfor;
 enddef;
@@ -296,16 +296,16 @@ def _build_all_chessboards=
         fi        
         for i:=1 upto _chessSize:
             for j:=1 upto _chessSize:   
-                if(chessboard[k][i][j]=_piecetype): 
+                if(chessboard_table[k][i][j]=_piecetype): 
                     if(_chess_candidate(_piecetype, i, j, _iend, _jend,_wb)=true):  
                         %show "candidate";
                         if(_capture<>0):
                             if(_pm=1):
-                                _chess_white_captures[k][_chess_wcaptures_nbr[k-1]]:=chessboard[k][i][j];
+                                _chess_white_captures[k][_chess_wcaptures_nbr[k-1]]:=chessboard_table[k][i][j];
                                 _chess_wcaptures_nbr[k]:=_chess_wcaptures_nbr[k-1]+1;
                                 _chess_bcaptures_nbr[k]:=_chess_bcaptures_nbr[k-1];
                             else:
-                                _chess_black_captures[k][_chess_bcaptures_nbr[k-1]]:=chessboard[k][i][j];
+                                _chess_black_captures[k][_chess_bcaptures_nbr[k-1]]:=chessboard_table[k][i][j];
                                 _chess_bcaptures_nbr[k]:=_chess_bcaptures_nbr[k-1]+1;
                                 _chess_wcaptures_nbr[k]:=_chess_wcaptures_nbr[k-1];
                             fi
@@ -314,11 +314,11 @@ def _build_all_chessboards=
                             _chess_bcaptures_nbr[k]:=_chess_bcaptures_nbr[k-1];
                         fi
                         
-                        chessboard[k][i][j]:=0; %erase piece
+                        chessboard_table[k][i][j]:=0; %erase piece
                         if(_promotion<>0):
-                            chessboard[k][_iend][_jend]:=_promotion;
+                            chessboard_table[k][_iend][_jend]:=_promotion;
                         else:
-                            chessboard[k][_iend][_jend]:=_piecetype;
+                            chessboard_table[k][_iend][_jend]:=_piecetype;
                         fi
                     fi
                 fi
@@ -342,7 +342,7 @@ def set_empty_chessboard =
     endfor
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
-         chessboard[0][i][j]:=0;
+         chessboard_table[0][i][j]:=0;
         endfor;
     endfor;
     chessboard_number:=1;
@@ -367,7 +367,7 @@ def add_white_pieces(text plists) =
                 _nbr:=_str_to_int(_get_char(_str,1)); 
             fi
         fi
-        chessboard[0][_letter][_nbr]:=_piecetype;
+        chessboard_table[0][_letter][_nbr]:=_piecetype;
     endfor
 enddef;
 
@@ -389,6 +389,6 @@ def add_black_pieces(text plists) =
                 _nbr:=_str_to_int(_get_char(_str,1)); 
             fi
         fi
-        chessboard[0][_letter][_nbr]:=_piecetype;
+        chessboard_table[0][_letter][_nbr]:=_piecetype;
     endfor
 enddef;

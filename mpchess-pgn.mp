@@ -1,4 +1,4 @@
-
+boolean _chess_input_pgn;
 % some intern macros to deal with blocks of a PNG line
 
 vardef _delete_first_spaces(expr s)=
@@ -220,13 +220,7 @@ def _str_to_int(expr i)=
     fi
 enddef;
 
-% macro to get thi ith char of a string
-vardef _get_char(expr s,i)=
-    save output;
-    string output;
-    output:=substring(i,i+1) of s;
-    output
-enddef;
+
 
 vardef _extract_move(expr _step,s,wb)=
     % function to convert a PGN move (ie Nc6)
