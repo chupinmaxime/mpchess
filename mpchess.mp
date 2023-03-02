@@ -576,16 +576,12 @@ def _draw_last_move(expr k)=
     fi
 enddef;
 
-vardef chessboard_step(expr k) =
-    save shiftPiece;
+
+vardef _chess_build_chessboard_pic(expr k)=
     save chessboard_pic;
-    picture chessboard_pic;
+    save shiftPiece;
     pair shiftPiece;
-    if((k mod 2)=0):
-        set_white_to_move;
-    else:
-        set_black_to_move;
-    fi
+    picture chessboard_pic;
     chessboard_pic:= image(
     draw backboard;
     if(_show_last_move):
@@ -605,6 +601,8 @@ vardef chessboard_step(expr k) =
     endfor;
     if(show_whos_to_move):
         if(_chess_view_wb): %white side 
+        show "coucou";
+        show _white_to_move;
             if(not _white_to_move):
                 fill _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
             else:
@@ -620,6 +618,25 @@ vardef chessboard_step(expr k) =
     fi
 
     );
+    chessboard_pic
+enddef;
+
+vardef chessboard_step(expr k) =
+    save chessboard_pic;
+    picture chessboard_pic;
+    if((k mod 2)=0):
+        set_white_to_move;
+    else:
+        set_black_to_move;
+    fi
+    chessboard_pic:=_chess_build_chessboard_pic(k);    
+    chessboard_pic
+enddef; 
+
+vardef chessboard =
+    save chessboard_pic;
+    picture chessboard_pic;
+    chessboard_pic:=_chess_build_chessboard_pic(0);    
     chessboard_pic
 enddef; 
 

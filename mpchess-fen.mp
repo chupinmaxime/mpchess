@@ -53,8 +53,8 @@ def _chess_extract_position(expr fen)=
     _exit_for:=false;
     string _str,_current_char;
     _str:=fen;
-    i:=8;
-    j:=1;
+    i:=1;
+    j:=8;
     _len:=length(_str);
     forever:exitunless(not _exit_for);
         _len:=length(_str);
@@ -66,16 +66,17 @@ def _chess_extract_position(expr fen)=
             show "number";
             _zero_nbr:=_str_to_int(_current_char);
             for k:=0 upto _zero_nbr-1:
-                chessboard_table[0][i][j+k]:=0;
+                chessboard_table[0][i+k][j]:=0;
             endfor
-            j:=j+_zero_nbr;
+            i:=i+_zero_nbr;
         elseif(_chess_is_slash(_current_char)): % if char /
-            i:=i-1; % change line
-            j:=1; % reset column
+            j:=j-1; % change line
+            i:=1; % reset column
         elseif(_current_char=" "):
             % if " "
             show "END";
             _exit_for:=true;
+            show _get_char(_str,0);
             if(_get_char(_str,0)="w"):
                 _white_to_move:=true;
             else:
@@ -84,7 +85,7 @@ def _chess_extract_position(expr fen)=
         else: % a letter
             show "letter";
             chessboard_table[0][i][j]:=_chess_fen_letter_to_int(_current_char);
-            j:=j+1;
+            i:=i+1;
         fi
         show "END2";
         show _exit_for;
