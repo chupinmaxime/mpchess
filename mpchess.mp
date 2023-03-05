@@ -411,6 +411,8 @@ picture _letter_img;
 picture _wplayer_img,_bplayer_img;
 
 backboard:=image(
+    _eps_cadre := 0.05;
+    draw (0-_eps_cadre,0-_eps_cadre)*_chessSquareU--(_chessSize+_eps_cadre,0-_eps_cadre)*_chessSquareU--(_chessSize+_eps_cadre,_chessSize+_eps_cadre)*_chessSquareU--(0-_eps_cadre,_chessSize+_eps_cadre)*_chessSquareU--cycle withpen pencircle scaled (0.1*_chessSquareU);
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
             if(odd((i-1)*_chessSize+j+i)):
@@ -482,7 +484,6 @@ backboard:=image(
             fi
         endfor;
     endfor;
-    draw (0,0)--(_chessSize,0)*_chessSquareU--(_chessSize,_chessSize)*_chessSquareU--(0,_chessSize)*_chessSquareU--cycle;
     if(_chess_view_wb):
         if(_chess_white_player<>""):
             if((not _chess_coords_inout) or _chess_players_side):
@@ -549,22 +550,16 @@ def _triangle(expr s)=
     ((0,0)--(1,0)--(0.5,0.5)--cycle) scaled (s*_chessSquareU)
 enddef;
 
-boolean _show_last_move;
 color _chess_last_move_color;
 
 _chess_last_move_color:=(0.6078,0.7803,0);
 
-_show_last_move:=false;
-
-def show_last_move=
-    _show_last_move:=true;
-enddef;
 
 def set_color_last_move(expr c)=
     _chess_last_move_color:=c;
 enddef;
 
-def _draw_last_move(expr k)=
+def show_last_move(expr k)=
     if(k>0):
      for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
@@ -583,10 +578,7 @@ vardef _chess_build_chessboard_pic(expr k)=
     pair shiftPiece;
     picture chessboard_pic;
     chessboard_pic:= image(
-    draw backboard;
-    if(_show_last_move):
-        _draw_last_move(k);
-    fi
+    %draw backboard;
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
             if(chessboard_table[k][i][j] <> 0):
@@ -601,8 +593,6 @@ vardef _chess_build_chessboard_pic(expr k)=
     endfor;
     if(show_whos_to_move):
         if(_chess_view_wb): %white side 
-        show "coucou";
-        show _white_to_move;
             if(not _white_to_move):
                 fill _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
             else:
@@ -616,7 +606,6 @@ vardef _chess_build_chessboard_pic(expr k)=
             fi
         fi
     fi
-
     );
     chessboard_pic
 enddef;
@@ -642,16 +631,18 @@ enddef;
 
 
 %%% colored square
-
-vardef color_square(expr c,s)=
+picture _chess_colored_squared;
+vardef color_square(expr c)(text slist)=
     % c: color
-    % s: algebraic notation for a square (ex: e5)
-    save _i,_j;
-    _i:=_lettre_to_int(_get_char(s,0));
-    _j:=_str_to_int(_get_char(s,1));
-    path ss;
-    ss:=(unitsquare scaled _chessSquareU) shifted ((_i-1)*_chessSquareU,(_j-1)*_chessSquareU);
-    transparence(ss,c,0.41);
+    % s: list of algebraic notation for a square (ex: "e5","f6",etc.)
+    save _i,_j,_str;
+    for _str = slist:
+        _i:=_lettre_to_int(_get_char(_str,0));
+        _j:=_str_to_int(_get_char(_str,1));
+        path ss;
+        ss:=(unitsquare scaled _chessSquareU) shifted ((_i-1)*_chessSquareU,(_j-1)*_chessSquareU);
+        transparence(ss,c,0.41);
+    endfor
 enddef;
 
 vardef _chess_color_square(expr c,i,j)=
