@@ -49,7 +49,52 @@ def init_chessboard =
     chessboard_number:=1;
 enddef;
 
+% function to clear an area specified with a arg of type "a1-b6","g1-f2", etc
+def clear_areas(text plist)=
+    save _first_letter,_firt_nbr, _second_letter,_second_nbr,_fl,_fn,_sl,_sn,_str;
+    string _first_letter,_first_nbr, _second_letter,_second_nbr,_str;
+    for _str = plist:
+    _first_letter:=substring (0,1) of _str;
+    _first_nbr:=substring (1,2) of _str;
+    _second_letter:=substring (3,4) of _str;
+    _second_nbr:=substring (4,5) of _str;
+    _fl:=_lettre_to_int(_first_letter);
+    _fn:=_str_to_int(_first_nbr);
+    _sl:=_lettre_to_int(_second_letter);
+    _sn:=_str_to_int(_second_nbr);
+    for i:=_fl upto _sl:
+        for j:=_fn upto _sn:
+            chessboard_table[0][i][j]:=0;
+        endfor
+    endfor
+    endfor
+enddef;
 
+% function to clear an area specified with a arg of type "a","c",etc
+def clear_files(text plist)=
+    save _letter,_l,_str;
+    string _letter,_str;
+    for _str = plist:
+    _letter:= _str;
+    _l:=_lettre_to_int(_letter);
+    for j:=1 upto _chessSize:
+            chessboard_table[0][_l][j]:=0;
+    endfor
+    endfor
+enddef;
+
+% function to clear an area specified with a arg of type "1","5",etc
+def clear_ranks(text plist)=
+    save _nbr,_n,_str;
+    string _nbr,_str;
+    for _str = plist:
+    _nbr:= _str;
+    _n:=_str_to_int(_nbr);
+    for i:=1 upto _chessSize:
+            chessboard_table[0][i][_n]:=0;
+    endfor
+    endfor
+enddef;
 
 def _int_to_piece(expr i)=
     if(i=_intWPawn):

@@ -13,7 +13,6 @@ endfig;
 beginfig(1);
     init_chessboard;%set_coords_outside;
     show _intBKing;
-    show chessboard[0][1][1];
     set_backboardWidth(8cm);set_coords_outside;
     %set_black_view;
     set_white_player("Roxane \textbf{Spillane Chupin}");
@@ -22,17 +21,19 @@ beginfig(1);
     draw backboard;
     color_square(red,"b5");
     color_square(red,"c5");
-    
+    clear_areas("a1-b7","f1-g2");
+    clear_files("c","e");
+    clear_ranks("1","7");
     
      draw chessboard_step(0);
 endfig;
+
 
 beginfig(4);
     init_chessboard;
     usetheme("Classical");
     set_coords_outside;
     show _intBKing;
-    show chessboard[0][1][1];
     set_backboardWidth(8cm);
     set_black_view;
     set_white_player("Roxane {\bf Spillane Chupin}");
@@ -73,7 +74,7 @@ reset_backboard;
 beginfig(5);
     init_backboard;
     set_empty_chessboard;
-    add_white_pieces("e1","e3","Kb2");
+    add_white_pieces("e1");
     add_black_pieces("e7","f6","Kb8");
     draw backboard;
     draw chessboard_step(0);
