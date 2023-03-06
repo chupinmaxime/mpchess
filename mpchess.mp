@@ -780,4 +780,13 @@ vardef _chess_unit_vec(expr p)=
     _out
 enddef;
 
-%def _chess_arrow_path=
+
+def _draw_circles(text slist)(expr c)=
+    save _str;
+    save _i,_j;
+    for _str = slist:
+        _i:=_lettre_to_int(_get_char(_str,0));
+        _j:=_str_to_int(_get_char(_str,1));
+        draw (fullcircle scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.05*_chessSquareU) withcolor c;
+    endfor;
+enddef;

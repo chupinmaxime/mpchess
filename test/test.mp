@@ -34,6 +34,7 @@ beginfig(1);
     draw_arrows("f7-|d6")(red);
     %draw_arrows("g1|-h3")(red);
     draw_arrows("g1-|h3")(red);
+    _draw_circles("e6")(red);
 endfig;
 
 
