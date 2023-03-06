@@ -674,24 +674,6 @@ def transparence(expr p,c,a)=
     draw fg; % and put the fg drawing on top
 enddef;
 
-def transparence_pic(expr p,c,a)=
-    save shape,alpha,filler,bg,fg;
-    picture shape; 
-    shape := p;
-    alpha := a; % alpha: 0=invisible, 1=opaque
-    color filler; 
-    filler = c;
-    picture fg, bg;
-    bg = currentpicture; % capture the current drawing
-    fg = image(
-        for e within bg: % redraw everything in blended color
-            draw e withcolor alpha[colorpart e, filler];
-        endfor % and add some decorations
-    );
-    clip fg to shape; % now clip the fg drawing to the shape
-    fill shape withcolor filler; % fill the shape
-    draw fg; % and put the fg drawing on top
-enddef;
 
 % draw arrow on the board between two algebraic notation
 % depending on the syntax, strat line or rectangular one
@@ -699,6 +681,11 @@ enddef;
 % allow a list of string 
 _chess_arrow_width:=0.2*_chessSquareU;
 _chess_arrow_head:=0.6*_chessSquareU;
+
+def set_arrow_width(expr c)=
+    _chess_arrow_width:=c*_chessSquareU;    
+enddef;
+
 def draw_arrows(text slist)(expr c)=
     save _chess_arrow,_str;
     save _i,_j,_k,_l,_vec,_ortho_vec,_unit_vec,_init,_end;

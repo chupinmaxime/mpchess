@@ -30,6 +30,7 @@ beginfig(1);
     draw_arrows("g1-|f3")(red);
     %draw_arrows("e4--g7")(red);
     %draw_arrows("f7|-d6")(red);
+    set_arrow_width(0.4);
     draw_arrows("f7-|d6")(red);
     %draw_arrows("g1|-h3")(red);
     draw_arrows("g1-|h3")(red);
