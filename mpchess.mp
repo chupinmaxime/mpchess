@@ -656,7 +656,6 @@ enddef;
 %% "inspired" by Thruston’s code:
 % https://github.com/thruston/Drawing-with-Metapost
 def transparence(expr p,c,a)=
-    show "test";
     save shape,alpha,filler,bg,fg;
     path shape; 
     shape := p;
@@ -674,3 +673,124 @@ def transparence(expr p,c,a)=
     fill shape withcolor filler; % fill the shape
     draw fg; % and put the fg drawing on top
 enddef;
+
+def transparence_pic(expr p,c,a)=
+    save shape,alpha,filler,bg,fg;
+    picture shape; 
+    shape := p;
+    alpha := a; % alpha: 0=invisible, 1=opaque
+    color filler; 
+    filler = c;
+    picture fg, bg;
+    bg = currentpicture; % capture the current drawing
+    fg = image(
+        for e within bg: % redraw everything in blended color
+            draw e withcolor alpha[colorpart e, filler];
+        endfor % and add some decorations
+    );
+    clip fg to shape; % now clip the fg drawing to the shape
+    fill shape withcolor filler; % fill the shape
+    draw fg; % and put the fg drawing on top
+enddef;
+
+% draw arrow on the board between two algebraic notation
+% depending on the syntax, strat line or rectangular one
+% s="a2--a4" or s="b1|-c3" or s="b1-|c3"
+% allow a list of string 
+_chess_arrow_width:=0.2*_chessSquareU;
+_chess_arrow_head:=0.6*_chessSquareU;
+def draw_arrows(text slist)(expr c)=
+    save _chess_arrow,_str;
+    save _i,_j,_k,_l,_vec,_ortho_vec,_unit_vec,_init,_end;
+    pair _vec,_unit_vec,_ortho_vec,_init,_end;
+    path _chess_arrow;
+    for _str = slist:
+        _i:=_lettre_to_int(_get_char(_str,0));
+        _j:=_str_to_int(_get_char(_str,1));
+        _k:=_lettre_to_int(_get_char(_str,4));
+        _l:=_str_to_int(_get_char(_str,5));
+        _end:=(_k,_l)*_chessSquareU-(0.5,0.5)*_chessSquareU;
+        _init:=(_i,_j)*_chessSquareU-(0.5,0.5)*_chessSquareU;
+        if((substring (2,4) of _str)="--"):
+            _vec:= _end-_init;
+            _unit_vec:=_chess_unit_vec(_vec);
+            _init:=_init+0.2*_chessSquareU*_unit_vec;
+            _end:=_end-0.2*_chessSquareU*_unit_vec;
+            _vec:= _end-_init;
+            _unit_vec:=_chess_unit_vec(_vec);
+            _ortho_vec:=_chess_unit_ortho_vec(_vec);
+            _vec_norm:=abs(_vec);
+            _chess_arrow:=_init--(_init+(_chess_arrow_width*_ortho_vec))--
+            (_init+(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec))--
+            (_init+(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec)+(_chess_arrow_width*_ortho_vec))-- 
+            _end -- 
+            (_init-(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec)-(_chess_arrow_width*_ortho_vec))--
+            (_init-(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec))--
+            (_init-(_chess_arrow_width*_ortho_vec))--cycle;
+        elseif((substring (2,4) of _str)="|-"):
+            if(_k>_i): % to the right
+                _pm_rl:=+1;
+            else:
+                _pm_rl:=-1;
+            fi
+            if(_l>_j): % to the to
+                _pm_ul:=+1;
+            else:
+                _pm_ul:=-1;
+            fi
+            _init:=(xpart _init, ypart _init+0.2*(_pm_ul*_chessSquareU));
+            _end:=(xpart _end-0.2*(_pm_rl*_chessSquareU),ypart _end);
+            _chess_arrow:=(_init-_pm_rl*(_chess_arrow_width,0))--
+                        (xpart _init -_pm_rl*_chess_arrow_width, ypart _end + _pm_ul*_chess_arrow_width)--
+                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end + _pm_ul*_chess_arrow_width)--
+                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end + 2*_pm_ul*_chess_arrow_width)--
+                        _end--
+                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end - 2*_pm_ul*_chess_arrow_width)--
+                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end - _pm_ul*_chess_arrow_width)--
+                        (xpart _init +_pm_rl*_chess_arrow_width, ypart _end - _pm_ul*_chess_arrow_width) --
+                         (_init+_pm_rl*(_chess_arrow_width,0))--cycle;
+        elseif((substring (2,4) of _str)="-|"):
+            if(_k>_i): % to the right
+                _pm_rl:=+1;
+            else:
+                _pm_rl:=-1;
+            fi
+            if(_l>_j): % to the to
+                _pm_ul:=+1;
+            else:
+                _pm_ul:=-1;
+            fi
+            _init:=(xpart _init +0.2*(_pm_rl*_chessSquareU), ypart _init);
+            _end:=(xpart _end,ypart _end-0.2*(_pm_ul*_chessSquareU));
+            _chess_arrow:=(_init+_pm_ul*(0,_chess_arrow_width))--
+                        (xpart _end -_pm_rl*_chess_arrow_width, ypart _init + _pm_ul*_chess_arrow_width)--
+                        (xpart _end -_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
+                        (xpart _end -2*_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
+                        _end--
+                        (xpart _end +2*_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
+                        (xpart _end +_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
+                        (xpart _end +_pm_rl*_chess_arrow_width, ypart _init - _pm_ul*_chess_arrow_width)--
+                        (_init-_pm_ul*(0,_chess_arrow_width))--cycle;
+        
+        fi
+        %draw _chess_arrow;
+        transparence(_chess_arrow,c,0.41);
+    endfor
+enddef;
+
+vardef _chess_unit_ortho_vec(expr p)=
+    save _out;
+    pair _out;
+    _out := p rotated 90 scaled (1/abs(p));
+    _out
+enddef;
+
+
+vardef _chess_unit_vec(expr p)=
+    save _out;
+    pair _out;
+    _out := p  scaled (1/abs(p));
+    _out
+enddef;
+
+%def _chess_arrow_path=

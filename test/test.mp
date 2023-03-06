@@ -24,8 +24,15 @@ beginfig(1);
     clear_areas("a1-b7","f1-g2");
     clear_files("c","e");
     clear_ranks("1","7");
-    
-     draw chessboard_step(0);
+    draw chessboard_step(0);
+    show _chess_unit_ortho_vec((1,1));
+    draw_arrows("a4-|c2")(red);
+    draw_arrows("g1-|f3")(red);
+    %draw_arrows("e4--g7")(red);
+    %draw_arrows("f7|-d6")(red);
+    draw_arrows("f7-|d6")(red);
+    %draw_arrows("g1|-h3")(red);
+    draw_arrows("g1-|h3")(red);
 endfig;
 
 

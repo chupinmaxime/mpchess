@@ -49,6 +49,17 @@ def init_chessboard =
     chessboard_number:=1;
 enddef;
 
+% clear the chessboard 
+def clear_chessboard =
+    for k:=0 upto 500:
+        for i:=0 upto 20:
+            for j:=0 upto 20:
+                chessboard_table[k][i][j]:=0;
+            endfor
+        endfor
+    endfor
+enddef;
+
 % function to clear an area specified with a arg of type "a1-b6","g1-f2", etc
 def clear_areas(text plist)=
     save _first_letter,_firt_nbr, _second_letter,_second_nbr,_fl,_fn,_sl,_sn,_str;
