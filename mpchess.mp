@@ -787,6 +787,22 @@ def draw_circles(expr c)(text slist)=
 enddef;
 
 
+% clip current chessboard to the area of type "a2-f7"
+def clip_chessboard(expr s)=
+    save _first_letter,_firt_nbr, _second_letter,_second_nbr,_fl,_fn,_sl,_sn,_str;
+    string _first_letter,_first_nbr, _second_letter,_second_nbr,_str;
+    _str:=s;
+    _first_letter:=substring (0,1) of _str;
+    _first_nbr:=substring (1,2) of _str;
+    _second_letter:=substring (3,4) of _str;
+    _second_nbr:=substring (4,5) of _str;
+    _fl:=_lettre_to_int(_first_letter);
+    _fn:=_str_to_int(_first_nbr);
+    _sl:=_lettre_to_int(_second_letter);
+    _sn:=_str_to_int(_second_nbr);
+    clip currentpicture to (_fl,_fn)*_chessSquareU--(_fl,_sn)*_chessSquareU--(_sl,_sn)*_chessSquareU--(_sl,_fn)*_chessSquareU--cycle;
+enddef;
+
 % reset backboard
 def reset_mpchess=
     _chessWidth:=5cm;

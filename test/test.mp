@@ -50,6 +50,7 @@ beginfig(4);
     init_backboard;
     draw backboard;
     draw chessboard_step(0);
+    clip_chessboard("b2-h8");
 endfig;
 
 beginfig(2);
