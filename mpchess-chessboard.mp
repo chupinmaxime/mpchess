@@ -147,12 +147,13 @@ def _draw_step_chessboard(expr k) =
 enddef; 
 
 
-vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
+vardef _pawn_candidate(expr istart, jstart,iend,jend,wb,capture)=
     % i int from letter, column
     % j int for line
     % return true if (istart,jstart) to (iend,jend)
     % is a possible mvt
     % wb is "white" or "black"
+    % capture equal 1 if there is a capture
     save output;
     boolean output;
     output = false;
@@ -162,14 +163,14 @@ vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
                 if(((jstart=3) or (jstart=2)) and (iend=istart)):
                     output:=true;
                 fi
-                if((jstart=3) and ((istart=iend+1) or (istart=iend-1))): %capture
+                if(((jstart=3) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): %capture
                     output:=true;
                 fi
             else:
                 if((jstart=jend-1) and (istart=iend)): % straight move
                     output:=true;
                 fi
-                if((jstart=jend-1) and ((istart=iend+1) or (istart=iend-1))): % capture
+                if(((jstart=jend-1) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): % capture
                     output:=true;
                 fi
             fi
@@ -178,14 +179,14 @@ vardef _pawn_candidate(expr istart, jstart,iend,jend,wb)=
                 if(((jstart=6) or (jstart=7)) and (iend=istart)):
                     output:=true;
                 fi
-                if((jstart=6) and ((istart=iend+1) or (istart=iend-1))): %capture
+                if(((jstart=6) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): %capture
                     output:=true;
                 fi
             else:
                 if((jstart=jend+1) and (istart=iend)): % straight move
                     output:=true;
                 fi
-                if((jstart=jend+1) and ((istart=iend+1) or (istart=iend-1))): % capture
+                if(((jstart=jend+1) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): % capture
                     output:=true;
                 fi
             fi
@@ -280,14 +281,14 @@ vardef _knight_candidate(expr istart, jstart,iend,jend,wb)=
     output
 enddef;
 
-vardef _chess_candidate(expr type, istart, jstart, iend, jend,wb)=
+vardef _chess_candidate(expr type, istart, jstart, iend, jend,wb,capture)=
     numeric _pm;
     _pm:=1;
     if(wb="black"):
         _pm:=-1;
     fi
     if(type=(_pm*_intWPawn)):
-         _pawn_candidate(istart,jstart,iend,jend,wb)
+         _pawn_candidate(istart,jstart,iend,jend,wb,capture)
     elseif(type=_pm*_intWBishop):
         _bishop_candidate(istart,jstart,iend,jend,wb)
     elseif(type=_pm*_intWKing):
@@ -335,7 +336,7 @@ def _build_all_chessboards=
     save _wb;
     string _wb;
     init_chessboard; % k=0
-    for k:=1 upto (_chess_step_numtable-1):
+    for k:=1 upto (_chess_step_numtable):
         _chess_copy_chessboard(k);
         _chess_copy_captures(k);
         _piecetype:=_chess_moves_table_numeric[k-1][0];
@@ -353,8 +354,7 @@ def _build_all_chessboards=
         for i:=1 upto _chessSize:
             for j:=1 upto _chessSize:   
                 if(chessboard_table[k][i][j]=_piecetype): 
-                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,_wb)=true):  
-                        %show "candidate";
+                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,_wb,_capture)=true):  
                         if(_capture<>0):
                             if(_pm=1):
                                 _chess_white_captures[k][_chess_wcaptures_nbr[k-1]]:=chessboard_table[k][i][j];
