@@ -14,12 +14,10 @@
 
 %input format;
 input hatching;
-input cburnett; % piece of lichess cburnett
+input mpchess-cburnett; % piece of lichess cburnett
 input mpchess-chessboard;
 input mpchess-pgn;
 input mpchess-fen;
-%input mp-tool;
-input latexmp;
 
 if not known mplib: input latexmp fi;
 
