@@ -25,6 +25,8 @@ if not known mplib: input latexmp fi;
 
 warningcheck:=0;
 
+
+
 % pieces
 picture _chess_bB, _chess_bK, _chess_bN,_chess_bP, _chess_bQ, _chess_bR;
 picture _chess_wB, _chess_wK, _chess_wN,_chess_wP, _chess_wQ, _chess_wR;
@@ -136,8 +138,18 @@ numeric _chessWidth,_chessSquareU;
 _chessWidth:=5cm;
 _chessSquareU:=_chessWidth/_chessSize;
 
-def set_backboardWidth(expr w)=
+
+def set_backboard_width(expr w)=
     _chessWidth:=w;
+enddef;
+
+
+def get_square_dim=
+    _chessSquareU
+enddef;
+
+def get_backboard_dim=
+    _chessWidth
 enddef;
 
 % theme 
@@ -193,11 +205,11 @@ def usetheme(expr t)=
     fi
 enddef;
 
-def set_whiteColor(expr c)=
+def set_white_color(expr c)=
     _whiteColorSquare:=c;
 enddef;
 
-def set_blackColor(expr c)=
+def set_black_color(expr c)=
     _blackColorSquare:=c;
 enddef;
 

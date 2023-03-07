@@ -2,12 +2,12 @@
 numeric _chessSize;
 _chessSize:=8;
 
-def set_chessboardSize(expr w)=
+def set_chessboard_size(expr w)=
     _chessSize:=w;
 enddef;
 
 
-def get_chessboardSize=
+def get_chessboard_size=
     _chessSize
 enddef;
 

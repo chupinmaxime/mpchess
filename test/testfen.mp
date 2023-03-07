@@ -10,9 +10,7 @@ beginfig(0);
 init_backboard;
 %set_black_view;
     %draw backboard;
-show "test";
-show _white_to_move;
-    draw chessboard;
+draw chessboard;
 endfig;
 
 end.

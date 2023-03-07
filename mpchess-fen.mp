@@ -58,12 +58,9 @@ def _chess_extract_position(expr fen)=
     _len:=length(_str);
     forever:exitunless(not _exit_for);
         _len:=length(_str);
-        show _len;
         _current_char:=_get_char(_str,0);
-        show _current_char;
         _str:=substring (1,_len) of _str;
         if(_chess_fen_is_number(_current_char)): % if a number
-            show "number";
             _zero_nbr:=_str_to_int(_current_char);
             for k:=0 upto _zero_nbr-1:
                 chessboard_table[0][i+k][j]:=0;
@@ -74,21 +71,15 @@ def _chess_extract_position(expr fen)=
             i:=1; % reset column
         elseif(_current_char=" "):
             % if " "
-            show "END";
             _exit_for:=true;
-            show _get_char(_str,0);
             if(_get_char(_str,0)="w"):
                 _white_to_move:=true;
             else:
                 _white_to_move:=false;
             fi
         else: % a letter
-            show "letter";
             chessboard_table[0][i][j]:=_chess_fen_letter_to_int(_current_char);
             i:=i+1;
         fi
-        show "END2";
-        show _exit_for;
-        show "END3";
     endfor
 enddef;
