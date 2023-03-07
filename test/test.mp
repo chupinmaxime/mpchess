@@ -26,15 +26,15 @@ beginfig(1);
     clear_ranks("1","7");
     draw chessboard_step(0);
     show _chess_unit_ortho_vec((1,1));
-    draw_arrows("a4-|c2")(red);
-    draw_arrows("g1-|f3")(red);
+    draw_arrows(red)("a4-|c2","g1-|f3");
+
     %draw_arrows("e4--g7")(red);
     %draw_arrows("f7|-d6")(red);
     set_arrow_width(0.4);
-    draw_arrows("f7-|d6")(red);
+    draw_arrows(red)("f7-|d6");
     %draw_arrows("g1|-h3")(red);
-    draw_arrows("g1-|h3")(red);
-    _draw_circles("e6")(red);
+    draw_arrows(red)("g1--h3");
+    draw_circles(red)("e6","a5");
 endfig;
 
 
@@ -57,7 +57,7 @@ beginfig(2);
     draw bbox _chess_wQ;
 endfig;
 
-reset_backboard;
+reset_mpchess;
 beginfig(3);
     set_backboardWidth(8cm);
     usetheme("Colored");
@@ -79,7 +79,7 @@ beginfig(3);
     dotlabel(btex $x$ etex,(0,0));
 endfig;
 
-reset_backboard;
+reset_mpchess;
 beginfig(5);
     init_backboard;
     set_empty_chessboard;

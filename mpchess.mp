@@ -151,19 +151,7 @@ color _blackColorSquare,_whiteColorSquare;
 _blackColorSquare:=(0.549,0.6353,0.6784);
 _whiteColorSquare:=(0.8706,0.8912,0.902);
 
-% reset backboard
-def reset_backboard=
-    _chessWidth:=5cm;
-    _chessSize:=8;
-    _chessSquareU:=_chessWidth/_chessSize;
-    _chessTheme := "BlueLichess";
-    _blackColorSquare:=(0.549,0.6353,0.6784);
-    _whiteColorSquare:=(0.8706,0.8912,0.902);
-    _chess_print_coords:=true;
-    _chess_coords_inout:=true;
-    _chess_view_wb := true; % true for white
-    _chess_players_side:=false;
-enddef;
+
 
 
 
@@ -384,14 +372,21 @@ vardef _chess_get_img_h(expr im)=
     height 
 enddef;
 
+_chess_eps_cadre := 0.05;
+
+def set_border_width(expr c)=
+    _chess_eps_cadre := c;    
+enddef;
+
+
 vardef _chess_build_playername(expr str)=
     save _player_img,output;
     picture _player_img,output;
     _player_img:=image(draw textext(str));
     output:=image(
     _tmp:=_chess_get_img_h(_player_img);
-    fill (0,0)--(_chessSquareU*_chessSize,0)--(_chessSquareU*_chessSize,1.8*_tmp)--(0,1.8*_tmp)--cycle withcolor black;
-    draw (0,0)--(_chessSquareU*_chessSize,0)--(_chessSquareU*_chessSize,1.8*_tmp)--(0,1.8*_tmp)--cycle withcolor black;
+    fill (0-_chess_eps_cadre,0)*_chessSquareU--(_chessSize+_chess_eps_cadre,0)*_chessSquareU--((_chessSize+_chess_eps_cadre)*_chessSquareU,1.8*_tmp)--(0-_chess_eps_cadre*_chessSquareU,1.8*_tmp)--cycle withcolor black;
+    draw (0-_chess_eps_cadre,0)*_chessSquareU--(_chessSize+_chess_eps_cadre,0)*_chessSquareU--((_chessSize+_chess_eps_cadre)*_chessSquareU,1.8*_tmp)--(0-_chess_eps_cadre*_chessSquareU,1.8*_tmp)--cycle withcolor black withpen pencircle scaled (0.1*_chessSquareU);
     draw _player_img shifted (0.15*_chessSquareU,0.4*_tmp) withcolor white;
     );
     output
@@ -411,8 +406,8 @@ picture _letter_img;
 picture _wplayer_img,_bplayer_img;
 
 backboard:=image(
-    _eps_cadre := 0.05;
-    draw (0-_eps_cadre,0-_eps_cadre)*_chessSquareU--(_chessSize+_eps_cadre,0-_eps_cadre)*_chessSquareU--(_chessSize+_eps_cadre,_chessSize+_eps_cadre)*_chessSquareU--(0-_eps_cadre,_chessSize+_eps_cadre)*_chessSquareU--cycle withpen pencircle scaled (0.1*_chessSquareU);
+    
+    draw (0-_chess_eps_cadre,0-_chess_eps_cadre)*_chessSquareU--(_chessSize+_chess_eps_cadre,0-_chess_eps_cadre)*_chessSquareU--(_chessSize+_chess_eps_cadre,_chessSize+_chess_eps_cadre)*_chessSquareU--(0-_chess_eps_cadre,_chessSize+_chess_eps_cadre)*_chessSquareU--cycle withpen pencircle scaled (0.1*_chessSquareU);
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
             if(odd((i-1)*_chessSize+j+i)):
@@ -422,7 +417,7 @@ backboard:=image(
                 draw _blackSquarePic shifted ((j-1)*_chessSquareU,(i-1)*_chessSquareU) ;
             fi
             if(_chess_print_coords and (_chessSize=8)):
-                if(_chess_coords_inout):
+                if(_chess_coords_inout): % coords inside the backboard
                     if(i=1): % lettre on first line
                         _letter_img:=image(
                             if(_chess_view_wb):
@@ -451,7 +446,7 @@ backboard:=image(
                         fi
                         draw _letter_img scaled (0.1*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.05*_chessSquareU,(i-1)*_chessSquareU+0.8*_chessSquareU) withcolor ((i mod 2)*_whiteColorSquare+(1-(i mod 2))*_blackColorSquare);
                     fi
-                else:
+                else: % coords outside the backboard
                     if(i=1): % lettre on first line
                         _letter_img:=image(
                             if(_chess_view_wb):
@@ -464,7 +459,7 @@ backboard:=image(
                         _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
                         _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
                         fi
-                        draw _letter_img scaled (0.2*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_width),(i-1)*_chessSquareU-0.3*_chessSquareU) withcolor black;
+                        draw _letter_img scaled (0.2*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_width),(i-1)*_chessSquareU-0.5*_chessSquareU) withcolor black;
                     fi
                     if(j=1):
                         _letter_img:=image(
@@ -478,7 +473,7 @@ backboard:=image(
                         _lettre_width:=abs(urcorner _letter_img-ulcorner _letter_img);
                         _lettre_height:=abs(urcorner _letter_img-lrcorner _letter_img);
                         fi
-                        draw _letter_img scaled (0.2*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU-0.3*_chessSquareU,(i-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_height)) withcolor black;
+                        draw _letter_img scaled (0.2*_chessSquareU/_lettre_width) shifted  ((j-1)*_chessSquareU-0.5*_chessSquareU,(i-1)*_chessSquareU+0.5*(_chessSquareU-_lettre_height)) withcolor black;
                     fi
                 fi
             fi
@@ -686,7 +681,7 @@ def set_arrow_width(expr c)=
     _chess_arrow_width:=c*_chessSquareU;    
 enddef;
 
-def draw_arrows(text slist)(expr c)=
+def draw_arrows(expr c)(text slist)=
     save _chess_arrow,_str;
     save _i,_j,_k,_l,_vec,_ortho_vec,_unit_vec,_init,_end;
     pair _vec,_unit_vec,_ortho_vec,_init,_end;
@@ -781,7 +776,7 @@ vardef _chess_unit_vec(expr p)=
 enddef;
 
 
-def _draw_circles(text slist)(expr c)=
+def draw_circles(expr c)(text slist)=
     save _str;
     save _i,_j;
     for _str = slist:
@@ -789,4 +784,26 @@ def _draw_circles(text slist)(expr c)=
         _j:=_str_to_int(_get_char(_str,1));
         draw (fullcircle scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.05*_chessSquareU) withcolor c;
     endfor;
+enddef;
+
+
+% reset backboard
+def reset_mpchess=
+    _chessWidth:=5cm;
+    _chessSize:=8;
+    _chessSquareU:=_chessWidth/_chessSize;
+    _chessTheme := "BlueLichess";
+    _blackColorSquare:=(0.549,0.6353,0.6784);
+    _whiteColorSquare:=(0.8706,0.8912,0.902);
+    _chess_print_coords:=true;
+    _chess_coords_inout:=true;
+    _chess_view_wb := true; % true for white
+    _chess_players_side:=false;
+    _chess_eps_cadre := 0.05;
+    _chess_last_move_color:=(0.6078,0.7803,0);
+    _chess_arrow_width:=0.2*_chessSquareU;
+    _chess_arrow_head:=0.6*_chessSquareU;
+    clear_chessboard;
+    _chess_wcaptures_nbr[0]:=0;
+    _chess_bcaptures_nbr[0]:=0;
 enddef;
