@@ -684,8 +684,8 @@ enddef;
 % depending on the syntax, strat line or rectangular one
 % s="a2--a4" or s="b1|-c3" or s="b1-|c3"
 % allow a list of string 
-_chess_arrow_width:=0.2*_chessSquareU;
-_chess_arrow_head:=0.6*_chessSquareU;
+_chess_arrow_width:=0.08*_chessSquareU;
+_chess_arrow_head:=0.4*_chessSquareU;
 
 def set_arrow_width(expr c)=
     _chess_arrow_width:=c*_chessSquareU;    
@@ -714,9 +714,9 @@ def draw_arrows(expr c)(text slist)=
             _vec_norm:=abs(_vec);
             _chess_arrow:=_init--(_init+(_chess_arrow_width*_ortho_vec))--
             (_init+(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec))--
-            (_init+(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec)+(_chess_arrow_width*_ortho_vec))-- 
+            (_init+(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec)+(2*_chess_arrow_width*_ortho_vec))-- 
             _end -- 
-            (_init-(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec)-(_chess_arrow_width*_ortho_vec))--
+            (_init-(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec)-(2*_chess_arrow_width*_ortho_vec))--
             (_init-(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec))--
             (_init-(_chess_arrow_width*_ortho_vec))--cycle;
         elseif((substring (2,4) of _str)="|-"):
@@ -735,9 +735,9 @@ def draw_arrows(expr c)(text slist)=
             _chess_arrow:=(_init-_pm_rl*(_chess_arrow_width,0))--
                         (xpart _init -_pm_rl*_chess_arrow_width, ypart _end + _pm_ul*_chess_arrow_width)--
                         (xpart _end-_pm_rl*_chess_arrow_head, ypart _end + _pm_ul*_chess_arrow_width)--
-                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end + 2*_pm_ul*_chess_arrow_width)--
+                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end + 3*_pm_ul*_chess_arrow_width)--
                         _end--
-                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end - 2*_pm_ul*_chess_arrow_width)--
+                        (xpart _end-_pm_rl*_chess_arrow_head, ypart _end - 3*_pm_ul*_chess_arrow_width)--
                         (xpart _end-_pm_rl*_chess_arrow_head, ypart _end - _pm_ul*_chess_arrow_width)--
                         (xpart _init +_pm_rl*_chess_arrow_width, ypart _end - _pm_ul*_chess_arrow_width) --
                          (_init+_pm_rl*(_chess_arrow_width,0))--cycle;
@@ -757,16 +757,16 @@ def draw_arrows(expr c)(text slist)=
             _chess_arrow:=(_init+_pm_ul*(0,_chess_arrow_width))--
                         (xpart _end -_pm_rl*_chess_arrow_width, ypart _init + _pm_ul*_chess_arrow_width)--
                         (xpart _end -_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
-                        (xpart _end -2*_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
+                        (xpart _end -3*_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
                         _end--
-                        (xpart _end +2*_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
+                        (xpart _end +3*_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
                         (xpart _end +_pm_rl*_chess_arrow_width,ypart _end-_pm_ul*_chess_arrow_head)--
                         (xpart _end +_pm_rl*_chess_arrow_width, ypart _init - _pm_ul*_chess_arrow_width)--
                         (_init-_pm_ul*(0,_chess_arrow_width))--cycle;
         
         fi
         %draw _chess_arrow;
-        transparence(_chess_arrow,c,0.41);
+        transparence(_chess_arrow,c,0.91);
     endfor
 enddef;
 
