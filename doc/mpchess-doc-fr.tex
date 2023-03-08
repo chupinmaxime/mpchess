@@ -1,0 +1,342 @@
+% mpchess: draw boards of chess positions with MetaPost
+%
+% Originally written by Maxime Chupin <notezik@gmail.com>,
+% 2023.
+%
+% Distributed under the terms of the GNU free documentation licence:
+%   http://www.gnu.org/licenses/fdl.html
+% without any invariant section or cover text.
+
+\documentclass[french]{ltxdoc}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,breakable}
+%\tcbuselibrary{documentation}
+\usepackage{enumitem}
+\usepackage[tikz]{bclogo}
+\usepackage{mflogo}
+\usepackage{hologo}
+\usepackage{luamplib}
+\mplibtextextlabel{enable}
+\usepackage{biblatex}
+\usepackage{wrapfig}
+\usepackage{fancyvrb,xparse,xargs}
+\usepackage[sfdefault]{FiraSans}
+\usepackage[mathrm=sym]{firamath-otf}
+%\setmonofont{Fira Mono}
+\setmonofont{FiraCode-Regular.ttf}[BoldFont= FiraCode-Bold.ttf,ItalicFont= FiraCode-RegularItalic.otf,BoldItalicFont= FiraCode-BoldItalic.otf,]
+
+\usepackage{xspace}
+\usepackage{animate}
+\usepackage{babel}
+\newcommand{\ctan}{\textsc{ctan}}
+\NewDocumentCommand{\package}{ m }{%
+  \href{https://ctan.org/pkg/#1}{#1}\xspace
+}
+
+\definecolor{darkred}{rgb}{0.8,0.1,0.1}
+\definecolor{vert}{rgb}{0.1,0.4,0.1}
+\definecolor{bleu}{rgb}{0.2,0.2,0.6}
+\definecolor{orange}{rgb}{0.6,0.4,0.}
+\colorlet{code}{blue!80!black}
+
+\usepackage[colorlinks=true,urlcolor=orange,linkcolor=orange,menucolor=black]{hyperref}
+
+\newcommand \file       {\nolinkurl}
+\renewcommand \cmd        {\texttt}
+\renewcommand \code   [1] {\texorpdfstring {\texttt{\color{code}#1}} {#1}}
+\renewcommand*\cs     [1] {\code{\textbackslash #1}}
+
+
+
+\newcommand*\commande{\noindent\hspace{-30pt}%
+  \SaveVerb[aftersave={%
+   \UseVerb{Vitem}
+  }%
+  ]{Vitem}}
+
+\newcommand*\textme[1]{\textcolor{black}{\rmfamily\textit{#1}}}
+%\renewcommand*\meta[1]{% % meta
+%  \textme{\ensuremath{\langle}#1\ensuremath{\rangle}}}
+\newcommand*\optstar{% % optional star
+  \meta{\ensuremath{*}}\xspace}
+\DefineShortVerb{\|}
+\newcommand\R{\mathbf{R}}
+\setlength{\fboxsep}{2pt}
+\fvset{%
+  codes={\catcode`\«\active \catcode`\×\active },
+  defineactive={\makefancyog\makefancytimes},
+  formatcom=\color{darkred},
+  frame=single
+}
+% rendre «...» équivalent à \meta{...}
+{\catcode`\«\active
+  \newcommandx\makefancyog[0][addprefix=\global]{%
+    \def«##1»{\meta{##1}}}}
+% rendre × équivalent à \optstar
+{\catcode`\×\active
+  \newcommandx\makefancytimes[0][addprefix=\global]{%
+    \def×{\optstar{}}}}
+
+
+\newcommand\mpchess{\textbf{\textlogo{MP}}\textit{chess}\xspace}
+
+
+
+%\addbibresource{biblio.bib}
+
+
+\lstset{
+  numberstyle=\footnotesize\color{vert},
+  keywordstyle=\ttfamily\bfseries\color{bleu},
+  basicstyle=\ttfamily,
+  commentstyle=\itshape\color{vert},
+  stringstyle=\ttfamily,
+  showstringspaces=false,
+  language=MetaPost,
+  breaklines=true,
+  breakindent=30pt,
+  defaultdialect=MetaPost,
+  morekeywords={}% frame=tb
+}
+
+
+\newtcblisting{Exemple}{%
+  arc=0pt,outer arc=0pt,
+  colback=red!2!white,
+  colframe=red!75!black,
+  breakable,
+  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
+  3pt, toptitle=3pt,
+  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
+  0pt, bottomrule at break = 0pt,
+  listing options={breaklines},
+}
+
+\newtcblisting{commandshell}{colback=black,colupper=white,colframe=black,
+  arc=0pt,
+  listing only,boxsep=0pt,listing
+  options={style=tcblatex,language=sh},
+  every listing line={\textcolor{red}{\small\ttfamily\bfseries user \$> }}}
+
+
+  \newtcblisting{mpcode}{
+  arc=0pt,outer arc=0pt,
+  colback=red!2!white,
+  colframe=red!75!black,
+  breakable,
+  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
+  3pt, toptitle=3pt,
+  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
+  0pt, bottomrule at break = 0pt,
+  listing only,boxsep=0pt,listing
+  options={breaklines}
+}
+
+\newtcblisting{latexcode}{
+  arc=0pt,outer arc=0pt,
+  colback=red!2!white,
+  colframe=red!75!black,
+  breakable,
+  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
+  3pt, toptitle=3pt,
+  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
+  0pt, bottomrule at break = 0pt,
+  listing only,boxsep=0pt,listing
+  options={breaklines,language={[LaTeX]TeX}}
+}
+
+
+
+
+
+%\lstset{moredelim=*[s][\color{red}\rmfamily\itshape]{<}{>}}
+%\lstset{moredelim=*[s][\color{blue}\rmfamily\itshape]{<<}{>>}}
+
+\begin{document}
+
+\title{{MPchess} : dessiner des plateaux d’échecs et des positions avec \hologo{METAPOST}}
+\author{Maxime Chupin, \url{notezik@gmail.com}}
+\date{\today}
+
+%% === Page de garde ===================================================
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+  \node[below right, shift={(-4pt,4pt)}] at (current page.north west) {%
+    \includegraphics{fond.pdf}%
+  };
+\end{tikzpicture}%
+
+\noindent
+{\Huge \mpchess}\par\medskip
+\noindent
+{\Large  dessiner des plateaux d’échecs et des positions avec \hologo{METAPOST}}\\[1cm]
+\parbox{0.6\textwidth}{
+  \begin{mplibcode}
+  input mpchess
+
+  string in;
+  in:="1. e4 e5 2. Bc4 d6 3. Nf3 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 ";
+  build_chessboards_from_pgn(in);
+  
+  beginfig(0);
+  set_backboard_width(8cm);
+  init_backboard;
+  draw backboard;
+  show_last_move(10);
+  color_square(0.3[green,black])("c4","c3","e5");
+  color_square(0.3[red,black])("e8");
+  draw chessboard_step(10);
+  draw_arrows(0.3[green,black])("e5|-f7","c3-|d5");
+  draw_arrows(0.3[red,black])("c4--f7");
+  endfig;
+  \end{mplibcode}
+}\hfill
+\parbox{0.5\textwidth}{\Large\raggedleft
+  \textbf{Contributor}\\
+  Maxime \textsc{Chupin}\\
+  \url{notezik@gmail.com}
+}
+\vfill
+\begin{center}
+  Version 0.1, 2023, March, 8th \\
+  \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
+\end{center}
+%% == Page de garde ====================================================
+\newpage
+
+%\maketitle
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+
+\begin{center}
+  \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
+\end{center}
+
+\tableofcontents
+
+
+\section{Installation}
+
+\mpchess est sur le \ctan{} et peut être installé via le gestionnaire de package
+de votre distribution. 
+
+\begin{center}
+  \url{https://www.ctan.org/pkg/mpchess}
+\end{center}
+
+
+\subsection{Avec la \TeX live sous Linux ou MacOS}
+
+Pour installer \mpchess avec \TeX live, il vous faudra créer le répertoire 
+\lstinline+texmf+ dans votre \lstinline+home+.
+
+\begin{commandshell}
+mkdir ~/texmf
+\end{commandshell}
+
+Ensuite, il faudra y placer les fichiers \lstinline+.mp+ dans le répertoire \begin{center}
+  \lstinline+~/texmf/tex/metapost/mpchess/+
+\end{center}
+
+\mpchess est constitué de 5 fichiers \hologo{METAPOST} :
+\begin{itemize}
+  \item \lstinline+mpchess.mp+;
+  \item \lstinline+mpchess-chessboard.mp+;
+  \item \lstinline+mpchess-pgn.mp+;
+  \item \lstinline+mpchess-fen.mp+;
+  \item \lstinline+mpchess-cburnett.mp+.
+\end{itemize}
+
+Une fois fait cela, \mpchess sera chargé avec le classique
+\begin{mpcode}
+input mpchess
+\end{mpcode}
+
+\subsection{Avec Mik\TeX{} et Windows}
+
+Ces deux systèmes sont inconnus de l’auteur de \mpchess, ainsi, nous renvoyons à
+leurs documentations pour y ajouter des packages locaux:
+\begin{center}
+  \url{http://docs.miktex.org/manual/localadditions.html}
+\end{center}
+
+
+
+\subsection{Dépendances}
+
+\mpchess dépend des packages \hologo{METAPOST}: \package{hatching} et, si
+\mpchess n’est pas utilisé avec \hologo{LuaLaTeX} et \package{luamplib},
+\package{latexmp}.
+
+\subsection{Utilisation avec \hologo{LuaLaTeX} et \package{luamplib}}
+
+Il est tout à fait possible d’utiliser \mpchess directement dans un fichier
+\LaTeX{} avec \hologo{LuaLaTeX} et le package \package{luamplib}. C’est
+d’ailleurs ce qui est fait pour écrire cette documentation.  
+
+\mpchess utilise, pour certaines fonctionnalités, l’opérateur
+\lstinline+infont+ de  \hologo{METAPOST}. Ainsi, pour que le contenu de ces fonctionnalités soient
+composé dans la fonte courante du document, on devra ajouter dans son document
+\LaTeX{}, la commande :
+\begin{latexcode}
+\mplibtextextlabel{enable}
+\end{latexcode}
+
+Pour plus de détails sur ces mécanismes, nous renvoyons à la documentation du
+package \package{luamplib}~\cite{luamplib}. 
+\section{Philosophie générale}
+
+Avec \mpchess, on construit l’image finale du plateau d’échec avec les pièces
+par couches successives. Ainsi, on commencera par produire et dessiner le
+plateau (\lstinline+backboard+), que l’on pourra modifier en colorant par
+exemple certaine cases, ensuite on ajoutera les pièces de la position
+(\lstinline+chessboard+), et enfin, on pourra annoter le tout avec des marques, des couleurs, des flêches, etc. 
+
+Par ailleurs, \mpchess produit des images proches graphiquement de ce que peut
+fournir l’excellent site \emph{open source} \url{https://lichess.org}. Vous
+verrez que les couleurs, les pièces, et l’aspect général sont largement inspirés
+de ce que propose ce site. 
+
+\section{Plateau}
+
+\subsection{Réglage des tailles}
+
+\subsection{Nombre de case}
+
+\subsection{Réglage du thème de couleur}
+
+\subsection{Affichage des coordonnées}
+
+\subsection{Vue blanche ou noire}
+
+\subsection{Noms des joueurs}
+
+
+\section{Pièces et positions}
+
+\subsection{Réglage du thème des pièces}
+
+\subsection{Lecture de données au format \textsc{pgn}}
+
+\subsection{Lecture de données au format \textsc{fen}}
+
+
+\section{Annotation}
+
+
+\commande|test_initbackboard«test»|
+
+
+\printbibliography
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% flyspell-mode: 1
+%%% ispell-local-dictionary: "american"
+%%% End:
