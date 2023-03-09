@@ -15,6 +15,7 @@
 %input format;
 input hatching;
 input mpchess-cburnett; % piece of lichess cburnett
+input mpchess-staunty; % piece of lichess staunty
 input mpchess-chessboard;
 input mpchess-pgn;
 input mpchess-fen;
@@ -192,7 +193,7 @@ enddef;
 _blackSquarePic:=_blackSquareColoredPic;
 _whiteSquarePic:=_whiteSquareColoredPic;
 
-def usetheme(expr t)=
+def set_color_theme(expr t)=
     _chessTheme := t; 
     if(t="BlueLichess"):
         _blackColorSquare:=(0.549,0.6353,0.6784);
@@ -229,15 +230,53 @@ _chess_wP:=_chess_cburnett_wP;
 _chess_wQ:=_chess_cburnett_wQ;
 _chess_wR:=_chess_cburnett_wR;
 
+def set_pieces_theme(expr t)=
+    if(t="cburnett"):
+        _chess_bB:=_chess_cburnett_bB;
+        _chess_bK:=_chess_cburnett_bK;
+        _chess_bN:=_chess_cburnett_bN;
+        _chess_bP:=_chess_cburnett_bP;
+        _chess_bQ:=_chess_cburnett_bQ;
+        _chess_bR:=_chess_cburnett_bR;
+
+
+        _chess_wB:=_chess_cburnett_wB;
+        _chess_wK:=_chess_cburnett_wK;
+        _chess_wN:=_chess_cburnett_wN;
+        _chess_wP:=_chess_cburnett_wP;
+        _chess_wQ:=_chess_cburnett_wQ;
+        _chess_wR:=_chess_cburnett_wR;    
+    elseif(t="staunty"):
+        _chess_bB:=_chess_staunty_bB;
+        _chess_bK:=_chess_staunty_bK;
+        _chess_bN:=_chess_staunty_bN;
+        _chess_bP:=_chess_staunty_bP;
+        _chess_bQ:=_chess_staunty_bQ;
+        _chess_bR:=_chess_staunty_bR;
+
+
+        _chess_wB:=_chess_staunty_wB;
+        _chess_wK:=_chess_staunty_wK;
+        _chess_wN:=_chess_staunty_wN;
+        _chess_wP:=_chess_staunty_wP;
+        _chess_wQ:=_chess_staunty_wQ;
+        _chess_wR:=_chess_staunty_wR;    
+    fi
+enddef;
+
 
 def init_piece(expr w)=
     begingroup
     bboxmargin:=0pt;
-    _chess_marginBottom:=0.15w;
-    % the queen as reference
+    _chess_marginBottom:=0.13w;
+    % the queen and king as reference
     %bQ
     _chess_bQ_width:=abs((urcorner _chess_bQ)-(ulcorner _chess_bQ));
-    ratio:= (0.8w/_chess_bQ_width);
+    _chess_bQ_height:=abs((urcorner _chess_bQ)-(lrcorner _chess_bQ));
+    _chess_bK_width:=abs((urcorner _chess_bK)-(ulcorner _chess_bK));
+    _chess_bK_height:=abs((urcorner _chess_bK)-(lrcorner _chess_bK));
+    _chess_max_wh:=max(_chess_bQ_height,_chess_bQ_width,_chess_bK_height,_chess_bK_width);
+    ratio:= (0.8w/_chess_max_wh);
     _chess_bQ:=((_chess_bQ shifted -(llcorner _chess_bQ-(bboxmargin,bboxmargin))) scaled  ratio );
     _chess_bQ_width_new:=abs((urcorner _chess_bQ)-(ulcorner _chess_bQ));
     _chess_bQ:= _chess_bQ shifted ((w-_chess_bQ_width_new)*0.5,_chess_marginBottom) ;
@@ -397,6 +436,7 @@ vardef _chess_build_playername(expr str)=
     picture _player_img,output;
     _player_img:=image(draw textext(str));
     output:=image(
+        linecap:=butt;
     _tmp:=_chess_get_img_h(_player_img);
     fill (0-_chess_eps_cadre,0)*_chessSquareU--(_chessSize+_chess_eps_cadre,0)*_chessSquareU--((_chessSize+_chess_eps_cadre)*_chessSquareU,1.8*_tmp)--(0-_chess_eps_cadre*_chessSquareU,1.8*_tmp)--cycle withcolor black;
     draw (0-_chess_eps_cadre,0)*_chessSquareU--(_chessSize+_chess_eps_cadre,0)*_chessSquareU--((_chessSize+_chess_eps_cadre)*_chessSquareU,1.8*_tmp)--(0-_chess_eps_cadre*_chessSquareU,1.8*_tmp)--cycle withcolor black withpen pencircle scaled (0.1*_chessSquareU);
@@ -419,7 +459,7 @@ picture _letter_img;
 picture _wplayer_img,_bplayer_img;
 
 backboard:=image(
-    
+    linecap:=butt;
     draw (0-_chess_eps_cadre,0-_chess_eps_cadre)*_chessSquareU--(_chessSize+_chess_eps_cadre,0-_chess_eps_cadre)*_chessSquareU--(_chessSize+_chess_eps_cadre,_chessSize+_chess_eps_cadre)*_chessSquareU--(0-_chess_eps_cadre,_chessSize+_chess_eps_cadre)*_chessSquareU--cycle withpen pencircle scaled (0.1*_chessSquareU);
     for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:

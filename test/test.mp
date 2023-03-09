@@ -40,17 +40,19 @@ endfig;
 
 beginfig(4);
     init_chessboard;
-    usetheme("Classical");
+    set_color_theme("BrownLichess");
     set_coords_outside;
     show _intBKing;
     set_backboard_width(8cm);
+    set_pieces_theme("staunty");
+    
     set_black_view;
     set_white_player("Roxane {\bf Spillane Chupin}");
     set_black_player("Eliott");
     init_backboard;
     draw backboard;
     draw chessboard_step(0);
-    clip_chessboard("b2-h8");
+    %clip_chessboard("b2-h8");
 endfig;
 
 beginfig(2);
@@ -61,7 +63,7 @@ endfig;
 reset_mpchess;
 beginfig(3);
     set_backboard_width(8cm);
-    usetheme("Colored");
+    set_color_theme("Colored");
     set_chessboard_size(4);
     set_white_color((0.9,0.8,0.8));
     set_black_color((0.7,0.6,0.6));

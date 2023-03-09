@@ -13,7 +13,7 @@ vardef showtext(expr origin)(expr angle)(expr string) =
 enddef;
 
 color _chess_black,_chess_white;
-_chess_black:=(0.372549,0.349020,0.333333);
+_chess_black:=(0.941176,0.941176,0.941176);
 
 
 beginfig(1);
