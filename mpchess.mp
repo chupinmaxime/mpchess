@@ -893,4 +893,8 @@ def reset_mpchess=
     clear_chessboard;
     _chess_wcaptures_nbr[0]:=0;
     _chess_bcaptures_nbr[0]:=0;
+    set_color_theme("BlueLichess");
+    set_pieces_theme("cburnett");
+    _chess_white_player:="";
+    _chess_black_player:="";
 enddef;

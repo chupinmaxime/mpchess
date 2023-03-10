@@ -93,4 +93,13 @@ beginfig(5);
     draw chessboard_step(0);
 endfig;
 
+reset_mpchess;
+beginfig(6);
+    set_pieces_theme("skak");
+    init_backboard;
+    init_chessboard;
+    draw backboard;
+    draw chessboard_step(0);
+endfig;
+
 end.
