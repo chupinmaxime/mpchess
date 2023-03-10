@@ -35,6 +35,7 @@ beginfig(1);
     %draw_arrows("g1|-h3")(red);
     draw_arrows(red)("g1--h3");
     draw_circles(red)("e6","a5");
+    draw_crosses(blue)("f6","b2");
 endfig;
 
 

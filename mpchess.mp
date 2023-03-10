@@ -560,7 +560,7 @@ backboard:=image(
         fi
         if(_chess_black_player<>""):
             if((not _chess_coords_inout) or _chess_players_side):
-                label.lrt(textext(_chess_black_player),(_chessSize*_chessSquareU,_chessSize*_chessSquareU));
+                label.lrt(textext(_chess_black_player),(1.05*_chessSize*_chessSquareU,_chessSize*_chessSquareU));
             else:
                 draw _chess_build_playername(_chess_black_player) shifted (0,_chessSquareU*(_chessSize+_chess_eps_cadre));
             fi
@@ -568,14 +568,14 @@ backboard:=image(
     else: % black view
         if(_chess_black_player<>""):
             if((not _chess_coords_inout) or _chess_players_side):
-                label.urt(textext(_chess_black_player),(_chessSize*_chessSquareU,0));
+                label.urt(textext(_chess_black_player),(1.05*_chessSize*_chessSquareU,0));
             else:
                 draw _chess_build_playername(_chess_black_player) shifted (0,-_chess_get_img_h(_chess_build_playername(_chess_black_player)));
             fi
         fi
         if(_chess_white_player<>""):
             if((not _chess_coords_inout) or _chess_players_side):
-                label.lrt(textext(_chess_white_player),(_chessSize*_chessSquareU,_chessSize*_chessSquareU));
+                label.lrt(textext(_chess_white_player),(1.05_chessSize*_chessSquareU,_chessSize*_chessSquareU));
             else:
                 draw _chess_build_playername(_chess_white_player) shifted (0,_chessSquareU*(_chessSize+_chess_eps_cadre));
             fi
@@ -856,6 +856,18 @@ def draw_circles(expr c)(text slist)=
         draw (fullcircle scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.05*_chessSquareU) withcolor c;
     endfor;
 enddef;
+
+def draw_crosses(expr c)(text slist)=
+    save _str;
+    save _i,_j;
+    for _str = slist:
+        _i:=_lettre_to_int(_get_char(_str,0));
+        _j:=_str_to_int(_get_char(_str,1));
+        draw (((-0.45,-0.45)--(0.45,0.45)) scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.1*_chessSquareU) withcolor c;
+        draw (((-0.45,0.45)--(0.45,-0.45)) scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.1*_chessSquareU) withcolor c;
+    endfor;
+enddef;
+
 
 
 % clip current chessboard to the area of type "a2-f7"
