@@ -84,6 +84,7 @@ endfig;
 
 reset_mpchess;
 beginfig(5);
+    set_pieces_theme("skak");
     init_backboard;
     set_empty_chessboard;
     add_white_pieces("e1");

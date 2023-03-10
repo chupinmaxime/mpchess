@@ -16,6 +16,7 @@
 input hatching;
 input mpchess-cburnett; % piece of lichess cburnett
 input mpchess-staunty; % piece of lichess staunty
+input mpchess-skak; % piece of skak package
 input mpchess-chessboard;
 input mpchess-pgn;
 input mpchess-fen;
@@ -261,6 +262,21 @@ def set_pieces_theme(expr t)=
         _chess_wP:=_chess_staunty_wP;
         _chess_wQ:=_chess_staunty_wQ;
         _chess_wR:=_chess_staunty_wR;    
+    elseif(t="skak"):
+        _chess_bB:=_chess_skak_bB;
+        _chess_bK:=_chess_skak_bK;
+        _chess_bN:=_chess_skak_bN;
+        _chess_bP:=_chess_skak_bP;
+        _chess_bQ:=_chess_skak_bQ;
+        _chess_bR:=_chess_skak_bR;
+
+
+        _chess_wB:=_chess_skak_wB;
+        _chess_wK:=_chess_skak_wK;
+        _chess_wN:=_chess_skak_wN;
+        _chess_wP:=_chess_skak_wP;
+        _chess_wQ:=_chess_skak_wQ;
+        _chess_wR:=_chess_skak_wR;    
     fi
 enddef;
 
