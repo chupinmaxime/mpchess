@@ -19,6 +19,7 @@
 \mplibtextextlabel{enable}
 \usepackage{biblatex}
 \usepackage{wrapfig}
+\usepackage{siunitx}
 \usepackage{fancyvrb,xparse,xargs}
 \usepackage[sfdefault]{FiraSans}
 \usepackage[mathrm=sym]{firamath-otf}
@@ -33,7 +34,7 @@
   \href{https://ctan.org/pkg/#1}{#1}\xspace
 }
 
-\definecolor{darkred}{rgb}{0.8,0.1,0.1}
+\definecolor{darkred}{rgb}{0.6,0.1,0.1}
 \definecolor{vert}{rgb}{0.1,0.4,0.1}
 \definecolor{bleu}{rgb}{0.2,0.2,0.6}
 \definecolor{orange}{rgb}{0.6,0.4,0.}
@@ -48,11 +49,12 @@
 
 
 
-\newcommand*\commande{\noindent\hspace{-30pt}%
+\newcommand*\commande{\par\bigskip\noindent\hspace{-30pt}%
   \SaveVerb[aftersave={%
-   \UseVerb{Vitem}
+   \UseVerb{Vitem}%
   }%
-  ]{Vitem}}
+  ]{Vitem}%
+  }
 
 \newcommand*\textme[1]{\textcolor{black}{\rmfamily\textit{#1}}}
 %\renewcommand*\meta[1]{% % meta
@@ -96,20 +98,29 @@
   breaklines=true,
   breakindent=30pt,
   defaultdialect=MetaPost,
-  morekeywords={}% frame=tb
+  morekeywords={init_backboard,set_backboard_width,set_backboard_size}% frame=tb
 }
 
-
-\newtcblisting{Exemple}{%
+\makeatletter
+\tcbset{%
+    listing metapost/.code={%
+        \def\tcbuselistingtext@input{\begin{mplibcode} input \jobname.listing; \end{mplibcode}}%
+    }
+}
+\makeatother
+\newtcblisting[auto counter,]{ExempleMP}[1][]{%
   arc=0pt,outer arc=0pt,
-  colback=red!2!white,
-  colframe=red!75!black,
+  colback=darkred!3,
+  colframe=darkred,
   breakable,
   boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
   3pt, toptitle=3pt,
   boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
   0pt, bottomrule at break = 0pt,
-  listing options={breaklines},
+  listing side text,
+  listing metapost, 
+  title=Exemple~\thetcbcounter,
+  listing options={breaklines},#1
 }
 
 \newtcblisting{commandshell}{colback=black,colupper=white,colframe=black,
@@ -121,8 +132,8 @@
 
   \newtcblisting{mpcode}{
   arc=0pt,outer arc=0pt,
-  colback=red!2!white,
-  colframe=red!75!black,
+  colback=darkred!3,
+  colframe=darkred,
   breakable,
   boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
   3pt, toptitle=3pt,
@@ -134,8 +145,8 @@
 
 \newtcblisting{latexcode}{
   arc=0pt,outer arc=0pt,
-  colback=red!2!white,
-  colframe=red!75!black,
+  colback=darkred!3,
+  colframe=darkred,
   breakable,
   boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
   3pt, toptitle=3pt,
@@ -302,9 +313,76 @@ de ce que propose ce site.
 
 \section{Plateau}
 
+Le plateau est appelé avec \mpchess{} \lstinline+backboard+. 
+Il faudra initialiser le plateau avant de le dessiner. Cela se fait avec la commande suivante:\par
+
+\commande|init_backboard|\smallskip
+
+
+Cette commande construit une \lstinline+picture+ de \MP{} nommée
+\mbox{\lstinline+backboard+.} Il faudra ensuite la tracer comme l’illustre l’exemple
+suivant. 
+
+\begin{ExempleMP}
+input mpchess
+
+beginfig(0);
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+
+Cette initialisation permettra de prendre en compte les différentes options et
+fonctionnalités que nous allons décrire dans la suite. 
 \subsection{Réglage des tailles}
+Lors de la création du \lstinline+backboard+, on peux décider de la largeur de celui-ci. Cela se fait grâce à la commande suivante :\par\bigskip
+
+\commande|set_backboard_width(«dim»)|\smallskip
+
+\begin{description}
+  \item[\meta{dim}:] est la largeur de plateau de jeu souhaitée (avec l’unité). Par défaut, cette dimension est à \SI{5}{cm}.
+\end{description}
+
+L’utilisation de cette commande est illustré à l’exemple~\ref{ex:widthcase}. Cette commande est à utilisée avant \lstinline+init_backboard+ pour qu’elle soit prise en compte à la création de l’image. 
+\bigskip
+
+On peut récupérer la dimension du plateau de jeu par la commande suivante.
+
+\commande|get_backboard_width|\smallskip
+
+Cette commande retourne un type \lstinline+numeric+. 
 
 \subsection{Nombre de case}
+Par défaut, le plateau de jeu contient 64 cases ($8\times 8$). On peut modifier
+cela avec la commande suivante:
+
+\commande|set_backboard_size(«nbr»)|
+\smallskip
+
+\begin{description}
+  \item[\meta{nbr}:] est le nombre de cases souhaité. Le plateau sera alors carré de taille \meta{nbr}$\times$\meta{nbr}. Par défaut ce nombre est à 8.
+\end{description}
+
+Encore une fois, cette commande est à utilisée avant \lstinline+init_backboard+ pour qu’elle soit prise en compte comme le montre l’exemple suivant. 
+
+\begin{ExempleMP}[label=ex:widthcase]
+input mpchess
+
+beginfig(0);
+set_backboard_width(3cm);
+set_backboard_size(6);
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+
+Pour obtenir la taille du plateau de jeu par la commande suivante.
+
+\commande|get_backboard_size|\smallskip
+
+Cette commande retourne un type \lstinline+numeric+. 
+
+\subsection{Dimension d’une case}
 
 \subsection{Réglage du thème de couleur}
 

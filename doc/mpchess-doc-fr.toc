@@ -7,13 +7,14 @@
 \contentsline {section}{\numberline {2}Philosophie générale}{3}{section.2}%
 \contentsline {section}{\numberline {3}Plateau}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Réglage des tailles}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Nombre de case}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Réglage du thème de couleur}{4}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Affichage des coordonnées}{4}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Vue blanche ou noire}{4}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Noms des joueurs}{4}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Pièces et positions}{4}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{4}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Lecture de données au format \textsc {pgn}}{4}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Lecture de données au format \textsc {fen}}{4}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Annotation}{4}{section.5}%
+\contentsline {subsection}{\numberline {3.2}Nombre de case}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Dimension d’une case}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Réglage du thème de couleur}{5}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Affichage des coordonnées}{5}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{5}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Noms des joueurs}{5}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Pièces et positions}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Lecture de données au format \textsc {pgn}}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Lecture de données au format \textsc {fen}}{5}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Annotation}{5}{section.5}%

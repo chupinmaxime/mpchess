@@ -1,1 +1,8 @@
-\mplibtextextlabel{enable}
+input mpchess
+
+beginfig(0);
+set_backboard_width(3cm);
+set_backboard_size(6);
+init_backboard;
+draw backboard;
+endfig;
