@@ -65,7 +65,7 @@ reset_mpchess;
 beginfig(3);
     set_backboard_width(8cm);
     set_color_theme("Colored");
-    set_chessboard_size(4);
+    set_backboard_size(4);
     set_white_color((0.9,0.8,0.8));
     set_black_color((0.7,0.6,0.6));
     init_backboard;

@@ -133,11 +133,23 @@ vardef _get_char(expr s,i)=
     output
 enddef;
 
+% size of the chessboard
+numeric _chessSize;
+_chessSize:=8;
+
+def set_backboard_size(expr w)=
+    _chessSize:=w;
+enddef;
+
+
+def get_backboard_size=
+    _chessSize
+enddef;
+
 % unit default
 numeric _chessWidth,_chessSquareU;
 _chessWidth:=5cm;
 _chessSquareU:=_chessWidth/_chessSize;
-
 
 def set_backboard_width(expr w)=
     _chessWidth:=w;
@@ -148,7 +160,7 @@ def get_square_dim=
     _chessSquareU
 enddef;
 
-def get_backboard_dim=
+def get_backboard_width=
     _chessWidth
 enddef;
 

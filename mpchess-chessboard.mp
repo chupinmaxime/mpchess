@@ -1,15 +1,4 @@
-% size of the chessboard
-numeric _chessSize;
-_chessSize:=8;
 
-def set_chessboard_size(expr w)=
-    _chessSize:=w;
-enddef;
-
-
-def get_chessboard_size=
-    _chessSize
-enddef;
 
 
 
