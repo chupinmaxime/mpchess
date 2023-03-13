@@ -195,7 +195,7 @@ enddef;
 
 def _buildClassicalSquare(expr _SquareUnit)=
     _blackSquarePic:=image(
-        hatchfill (unitsquare  scaled _SquareUnit) withcolor (white) withcolor (45,0.4*_SquareUnit/6 bp,-0.2bp);
+        hatchfill (unitsquare  scaled _SquareUnit) withcolor (white) withcolor (45,0.65*_SquareUnit/6 bp,-0.2bp);
     );
     _whiteSquarePic:=image(
         fill unitsquare scaled _SquareUnit withcolor white;
