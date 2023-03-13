@@ -1,4 +1,15 @@
 [0] Config.pm:306> INFO - This is Biber 2.18
 [0] Config.pm:309> INFO - Logfile is 'mpchess-doc-fr.blg'
-[44] biber:340> INFO - === mer. mars  8, 2023, 15:32:45
-[52] Biber.pm:418> INFO - Reading 'mpchess-doc-fr.bcf'
+[43] biber:340> INFO - === lun. mars 13, 2023, 23:23:02
+[53] Biber.pm:418> INFO - Reading 'mpchess-doc-fr.bcf'
+[98] Biber.pm:978> INFO - Found 3 citekeys in bib section 0
+[107] Biber.pm:4401> INFO - Processing section 0
+[115] Biber.pm:4592> INFO - Looking for bibtex file 'ctan.bib' for section 0
+[257] bibtex.pm:1713> INFO - LaTeX decoding ...
+[4155] bibtex.pm:1518> INFO - Found BibTeX data source 'ctan.bib'
+[4428] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[4428] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[4428] Biber.pm:4221> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[4428] Biber.pm:4227> INFO - No sort tailoring available for locale 'fr-FR'
+[4434] bbl.pm:654> INFO - Writing 'mpchess-doc-fr.bbl' with encoding 'UTF-8'
+[4435] bbl.pm:757> INFO - Output to mpchess-doc-fr.bbl

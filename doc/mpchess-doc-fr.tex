@@ -18,8 +18,10 @@
 \usepackage{luamplib}
 \mplibtextextlabel{enable}
 \usepackage{biblatex}
+\addbibresource{ctan.bib}
 \usepackage{wrapfig}
 \usepackage{siunitx}
+\usepackage{makeidx}
 \usepackage{fancyvrb,xparse,xargs}
 \usepackage[sfdefault]{FiraSans}
 \usepackage[mathrm=sym]{firamath-otf}
@@ -92,13 +94,21 @@
   keywordstyle=\ttfamily\bfseries\color{bleu},
   basicstyle=\ttfamily,
   commentstyle=\itshape\color{vert},
-  stringstyle=\ttfamily,
+  stringstyle=\ttfamily\color{orange},
   showstringspaces=false,
   language=MetaPost,
   breaklines=true,
   breakindent=30pt,
   defaultdialect=MetaPost,
-  morekeywords={init_backboard,set_backboard_width,set_backboard_size}% frame=tb
+  classoffset=1,% frame=tb
+  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim},
+  keywordstyle=\color{darkred},
+  classoffset=2,% frame=tb
+  morekeywords={backboard,chessboard},
+  keywordstyle=\color{vert},
+  classoffset=0,% frame=tb
+  morekeywords={draw},
+  keywordstyle=\color{bleu}
 }
 
 \makeatletter
@@ -157,6 +167,7 @@
 }
 
 
+\makeindex
 
 
 
@@ -297,10 +308,24 @@ composé dans la fonte courante du document, on devra ajouter dans son document
 \end{latexcode}
 
 Pour plus de détails sur ces mécanismes, nous renvoyons à la documentation du
-package \package{luamplib}~\cite{luamplib}. 
+package \package{luamplib}~\cite{ctan-luamplib}. 
 \section{Pourquoi ce package et philosophie générale}
 
-[POURQUOI, ref des autres]
+Il existe déjà des packages \LaTeX{} pour dessiner des plateaux d’échecs et des
+positions dont le très bon \package{xskak}~\cite{ctan-xskak} qui couplé avec le
+package \package{chessboard}~\cite{ctan-chessboard}. Ulrike Fisher a réalisé là un
+travail d’amélioration, de maintient, et nous a fournit d’excellent outils pour
+réaliser des diagrammes d’échecs et de traiter les différents formats de
+descriptions de parties\footnote{Elle a même développé le
+package~\package{chessfss} pour gérer divers fontes d’échec.}. Les
+documentations de ces packages sont de très bonnes qualités. 
+
+Plusieurs choses ont motivé la création de \mpchess. Tout d’abord, avec
+\package{chessboard} l’ajout d’ensemble de pièces n’est pas très aisé car cela
+repose sur des fontes. De plus, je trouve que le dessin de diagrammes de parties
+d’échec est quelque chose de très graphique, et que le passage par un langage
+dédié au dessin offre plus de souplesse.  
+
 
 Avec \mpchess, on construit l’image finale du plateau d’échec avec les pièces
 par couches successives. Ainsi, on commencera par produire et dessiner le
@@ -318,7 +343,7 @@ de ce que propose ce site.
 Le plateau est appelé avec \mpchess{} \lstinline+backboard+. 
 Il faudra initialiser le plateau avant de le dessiner. Cela se fait avec la commande suivante:\par
 
-\commande|init_backboard|\smallskip
+\commande|init_backboard|\smallskip\index{init_backboard@\lstinline+init_backboard+}
 
 
 Cette commande construit une \lstinline+picture+ de \MP{} nommée
@@ -339,7 +364,7 @@ fonctionnalités que nous allons décrire dans la suite.
 \subsection{Réglage des tailles}
 Lors de la création du \lstinline+backboard+, on peux décider de la largeur de celui-ci. Cela se fait grâce à la commande suivante :\par\bigskip
 
-\commande|set_backboard_width(«dim»)|\smallskip
+\commande|set_backboard_width(«dim»)|\smallskip\index{set_backboard_width@\lstinline+set_backboard_width+}
 
 \begin{description}
   \item[\meta{dim}:] est la largeur de plateau de jeu souhaitée (avec l’unité). Par défaut, cette dimension est à \SI{5}{cm}.
@@ -350,7 +375,7 @@ L’utilisation de cette commande est illustré à l’exemple~\ref{ex:widthcase
 
 On peut récupérer la dimension du plateau de jeu par la commande suivante.
 
-\commande|get_backboard_width|\smallskip
+\commande|get_backboard_width|\smallskip\index{get_backboard_width@\lstinline+get_backboard_width+}
 
 Cette commande retourne un type \lstinline+numeric+. 
 
@@ -359,7 +384,7 @@ Par défaut, le plateau de jeu contient 64 cases ($8\times 8$). On peut modifier
 cela avec la commande suivante:
 
 \commande|set_backboard_size(«nbr»)|
-\smallskip
+\smallskip\index{set_backboard_size@\lstinline+set_backboard_size+}
 
 \begin{description}
   \item[\meta{nbr}:] est le nombre de cases souhaité. Le plateau sera alors carré de taille \meta{nbr}$\times$\meta{nbr}. Par défaut ce nombre est à 8.
@@ -380,13 +405,50 @@ endfig;
 
 Pour obtenir la taille du plateau de jeu par la commande suivante.
 
-\commande|get_backboard_size|\smallskip
+\commande|get_backboard_size|\smallskip\index{get_backboard_size@\lstinline+get_backboard_size+}
 
 Cette commande retourne un type \lstinline+numeric+. 
 
 \subsection{Dimension d’une case}
 
+En fonction du nombre de cases sur le plateau et la largeur prescrite pour le plateau, \mpchess calcule la dimension (largeur ou hauteur) d’une case. Cela sert d’unité générale. Pour l’obtenir, on utilisera la commande suivante. 
+
+\commande|get_square_dim|\smallskip\index{get_square_dim@\lstinline+get_square_dim+}
+
+Cette commande retourne un \lstinline+numeric+. 
+
 \subsection{Réglage du thème de couleur}
+
+Plusieurs thèmes de couleurs sont accessibles. Pour choisir un thème de couleur, on utilisera la commande suivante :
+
+\commande|set_color_theme(«string»)|\smallskip\index{set_color_theme@\lstinline+set_color_theme+}
+
+où \meta{string} peut valoir :
+\begin{itemize}
+\item \lstinline+"BlueLichess"+ (thème par défaut);
+\item \lstinline+"BrownLichess"+ ;
+\item ou \lstinline+"Classical"+.
+\end{itemize}
+
+Les exemples montrent les résultats obtenus.
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_color_theme("BrownLichess");
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_color_theme("Classical");
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+
+Les deux thèmes colorés fournis sont les couleurs des thèmes de Lichess. 
 
 \subsection{Affichage des coordonnées}
 
@@ -411,7 +473,7 @@ Cette commande retourne un type \lstinline+numeric+.
 
 
 \printbibliography
-
+\printindex
 \end{document}
 
 
