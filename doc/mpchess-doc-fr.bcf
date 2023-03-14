@@ -2352,6 +2352,8 @@
     <bcf:citekey order="1" intorder="1">ctan-luamplib</bcf:citekey>
     <bcf:citekey order="2" intorder="1">ctan-xskak</bcf:citekey>
     <bcf:citekey order="3" intorder="1">ctan-chessboard</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">ctan-metapost</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">ctan-metapost</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

@@ -5,3 +5,10 @@
 \indexentry{get_backboard_size@\lstinline+get_backboard_size+|hyperpage}{5}
 \indexentry{get_square_dim@\lstinline+get_square_dim+|hyperpage}{6}
 \indexentry{set_color_theme@\lstinline+set_color_theme+|hyperpage}{6}
+\indexentry{set_white_color@\lstinline+set_white_color+|hyperpage}{7}
+\indexentry{set_black_color@\lstinline+set_black_color+|hyperpage}{7}
+\indexentry{set_coords_outside@\lstinline+set_coords_outside+|hyperpage}{8}
+\indexentry{set_coords_inside@\lstinline+set_coords_inside+|hyperpage}{8}
+\indexentry{set_coords_font@\lstinline+set_coords_font+|hyperpage}{8}
+\indexentry{set_no_coords@\lstinline+set_no_coords+|hyperpage}{8}
+\indexentry{set_coords@\lstinline+set_coords+|hyperpage}{8}

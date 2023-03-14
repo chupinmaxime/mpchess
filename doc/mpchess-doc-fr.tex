@@ -42,7 +42,7 @@
 \definecolor{orange}{rgb}{0.6,0.4,0.}
 \colorlet{code}{blue!80!black}
 
-\usepackage[colorlinks=true,urlcolor=orange,linkcolor=orange,menucolor=black]{hyperref}
+\usepackage[colorlinks=true,urlcolor=orange,linkcolor=orange,menucolor=black,citecolor=orange]{hyperref}
 
 \newcommand \file       {\nolinkurl}
 \renewcommand \cmd        {\texttt}
@@ -101,7 +101,7 @@
   breakindent=30pt,
   defaultdialect=MetaPost,
   classoffset=1,% frame=tb
-  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim},
+  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords},
   keywordstyle=\color{darkred},
   classoffset=2,% frame=tb
   morekeywords={backboard,chessboard},
@@ -324,7 +324,7 @@ Plusieurs choses ont motivé la création de \mpchess. Tout d’abord, avec
 \package{chessboard} l’ajout d’ensemble de pièces n’est pas très aisé car cela
 repose sur des fontes. De plus, je trouve que le dessin de diagrammes de parties
 d’échec est quelque chose de très graphique, et que le passage par un langage
-dédié au dessin offre plus de souplesse.  
+dédié au dessin offre plus de souplesse et quoi de mieux que \MP~\cite{ctan-metapost}.  
 
 
 Avec \mpchess, on construit l’image finale du plateau d’échec avec les pièces
@@ -419,11 +419,13 @@ Cette commande retourne un \lstinline+numeric+.
 
 \subsection{Réglage du thème de couleur}
 
+\subsubsection{Thèmes prédéfinis}
+
 Plusieurs thèmes de couleurs sont accessibles. Pour choisir un thème de couleur, on utilisera la commande suivante :
 
 \commande|set_color_theme(«string»)|\smallskip\index{set_color_theme@\lstinline+set_color_theme+}
 
-où \meta{string} peut valoir :
+\meta{string} peut valoir :
 \begin{itemize}
 \item \lstinline+"BlueLichess"+ (thème par défaut);
 \item \lstinline+"BrownLichess"+ ;
@@ -450,7 +452,65 @@ endfig;
 
 Les deux thèmes colorés fournis sont les couleurs des thèmes de Lichess. 
 
+\subsubsection{Configuration d’un thème personnel}
+
+Un thème de couleur est en réalité simplement la définition de deux couleurs. 
+Celles-ci peuvent se définir avec les commandes suivante.
+
+\commande|set_white_color(«color»)|\index{set_white_color@\lstinline+set_white_color+}\par
+\commande|set_black_color(«color»)|\index{set_black_color@\lstinline+set_black_color+}\smallskip
+
+\meta{color} est une \lstinline+color+ \MP. 
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_white_color((0.9,0.8,0.8));
+set_black_color((0.7,0.6,0.6));
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
 \subsection{Affichage des coordonnées}
+
+Vous avez pu constater dans les divers exemples que par défaut, les coordonnées sont, comme le fait le site Lichess, inscrites en petit à l’intérieur des cases. 
+
+\mpchess permet de positionner ces coordonnées à l’extérieur du plateau avec la commande suivante.
+
+\commande|set_coords_outside|\index{set_coords_outside@\lstinline+set_coords_outside+}\smallskip
+Le résultat est alors le suivante. 
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_coords_outside;
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+
+Il existe aussi la commande permettant de positionner les coordonnées à l’intérieur du plateau.
+
+\commande|set_coords_inside|\index{set_coords_inside@\lstinline+set_coords_inside+}\smallskip
+
+
+
+Vous pouvez constater dans cette documentation qu’avec \package{luamplib} et
+\LaTeX, la fonte est la fonte du document courant. Pour tracer ces lettres et
+ces chiffres, \mpchess utilise l’opérateur \MP{} \lstinline+infont+ et la fonte
+est réglée à \lstinline+defaultfont+ par défaut. On peut modifier cette fonte avec la commande suivante. 
+
+\commande|set_coords_font(«font»)|\index{set_coords_font@\lstinline+set_coords_font+}\smallskip
+
+Il faudra alors utiliser les conventions de nommage propres à l’opérateur \lstinline+infont+ de \MP{} et nous renvoyons à la documentation~\cite{ctan-metapost} pour plus de détails. 
+
+On pourra aussi supprimer les coordonnées avec la commande suivante. 
+
+\commande|set_no_coords|\index{set_no_coords@\lstinline+set_no_coords+}\smallskip
+
+Et la commande inverse aussi existe. 
+
+\commande|set_coords|\index{set_coords@\lstinline+set_coords+}\smallskip
+
 
 \subsection{Vue blanche ou noire}
 

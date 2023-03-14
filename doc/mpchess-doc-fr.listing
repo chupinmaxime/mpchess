@@ -1,6 +1,6 @@
 input mpchess
 beginfig(0);
-set_color_theme("Classical");
+set_coords_outside;
 init_backboard;
 draw backboard;
 endfig;

@@ -10,11 +10,13 @@
 \contentsline {subsection}{\numberline {3.2}Nombre de case}{5}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Dimension d’une case}{6}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Réglage du thème de couleur}{6}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Thèmes prédéfinis}{6}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Configuration d’un thème personnel}{7}{subsubsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.5}Affichage des coordonnées}{7}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{7}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Noms des joueurs}{7}{subsection.3.7}%
-\contentsline {section}{\numberline {4}Pièces et positions}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{7}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Lecture de données au format \textsc {pgn}}{7}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Lecture de données au format \textsc {fen}}{7}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Annotation}{7}{section.5}%
+\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{9}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Noms des joueurs}{9}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Pièces et positions}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Lecture de données au format \textsc {pgn}}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Lecture de données au format \textsc {fen}}{9}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Annotation}{9}{section.5}%
