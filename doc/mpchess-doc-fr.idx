@@ -12,3 +12,9 @@
 \indexentry{set_coords_font@\lstinline+set_coords_font+|hyperpage}{8}
 \indexentry{set_no_coords@\lstinline+set_no_coords+|hyperpage}{8}
 \indexentry{set_coords@\lstinline+set_coords+|hyperpage}{8}
+\indexentry{set_white_view@\lstinline+set_white_view+|hyperpage}{8}
+\indexentry{set_black_view@\lstinline+set_black_view+|hyperpage}{8}
+\indexentry{set_white_player@\lstinline+set_white_player+|hyperpage}{9}
+\indexentry{set_black_player@\lstinline+set_black_player+|hyperpage}{9}
+\indexentry{set_players_side@\lstinline+set_players_side+|hyperpage}{9}
+\indexentry{set_pieces_theme@\lstinline+set_pieces_theme+|hyperpage}{10}

@@ -1,6 +1,8 @@
 input mpchess
 beginfig(0);
-set_coords_outside;
+set_white_player("\textbf{GM} Kasparov");
+set_black_player("\textbf{GM} Kramnik");
+set_players_side;
 init_backboard;
 draw backboard;
 endfig;

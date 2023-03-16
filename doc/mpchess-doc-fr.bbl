@@ -142,6 +142,38 @@
       \verb https://ctan.org/pkg/luamplib
       \endverb
     \endentry
+    \entry{ctan-skak}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=d365823f6fdf27504e1d3c2a15d51c16}{%
+           family={Hoffmann},
+           familyi={H\bibinitperiod},
+           given={Torben},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{d365823f6fdf27504e1d3c2a15d51c16}
+      \strng{fullhash}{d365823f6fdf27504e1d3c2a15d51c16}
+      \strng{bibnamehash}{d365823f6fdf27504e1d3c2a15d51c16}
+      \strng{authorbibnamehash}{d365823f6fdf27504e1d3c2a15d51c16}
+      \strng{authornamehash}{d365823f6fdf27504e1d3c2a15d51c16}
+      \strng{authorfullhash}{d365823f6fdf27504e1d3c2a15d51c16}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{10}
+      \field{month}{12}
+      \field{subtitle}{Fonts and macros for typesetting chess games}
+      \field{title}{The \texttt{skak} package}
+      \field{version}{1.5.3}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://ctan.org/pkg/skak
+      \endverb
+      \verb{url}
+      \verb https://ctan.org/pkg/skak
+      \endverb
+    \endentry
     \entry{ctan-metapost}{manual}{}
       \name{author}{2}{}{%
         {{hash=511cd99806b631a54d6cdaf13b151cd1}{%

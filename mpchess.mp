@@ -69,7 +69,7 @@ enddef;
 boolean _chess_players_side;
 _chess_players_side:=false;
 def set_players_side=
-    _chess_player_side:=true;
+    _chess_players_side:=true;
 enddef;
 
 % boolean to choose if we print coordinates
@@ -108,6 +108,13 @@ enddef;
 boolean show_whos_to_move;
 show_whos_to_move:=true;
 
+def set_whos_to_move=
+    show_whos_to_move:=true;
+enddef;
+
+def unset_whos_to_move=
+    show_whos_to_move:=false;
+enddef;
 
 
 % integer correspondance :

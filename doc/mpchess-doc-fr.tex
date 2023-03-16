@@ -21,7 +21,7 @@
 \addbibresource{ctan.bib}
 \usepackage{wrapfig}
 \usepackage{siunitx}
-\usepackage{makeidx}
+\usepackage{imakeidx}
 \usepackage{fancyvrb,xparse,xargs}
 \usepackage[sfdefault]{FiraSans}
 \usepackage[mathrm=sym]{firamath-otf}
@@ -101,7 +101,7 @@
   breakindent=30pt,
   defaultdialect=MetaPost,
   classoffset=1,% frame=tb
-  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords},
+  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords,set_white_view,set_black_view, set_white_player,set_black_player,set_players_side},
   keywordstyle=\color{darkred},
   classoffset=2,% frame=tb
   morekeywords={backboard,chessboard},
@@ -167,7 +167,7 @@
 }
 
 
-\makeindex
+\makeindex[title=Index des commandes, columns=2]
 
 
 
@@ -492,12 +492,13 @@ Il existe aussi la commande permettant de positionner les coordonnées à l’in
 
 \commande|set_coords_inside|\index{set_coords_inside@\lstinline+set_coords_inside+}\smallskip
 
-
-
 Vous pouvez constater dans cette documentation qu’avec \package{luamplib} et
 \LaTeX, la fonte est la fonte du document courant. Pour tracer ces lettres et
 ces chiffres, \mpchess utilise l’opérateur \MP{} \lstinline+infont+ et la fonte
-est réglée à \lstinline+defaultfont+ par défaut. On peut modifier cette fonte avec la commande suivante. 
+est réglée à \lstinline+defaultfont+ par défaut\footnote{Avec \package{luamplib}
+l’opérateur \lstinline+infont+ est redéfini et son argument est simplement
+ingnoré, ainsi, il n’est pas possible de modifier la fonte de composition des
+coordonnées.}. On peut modifier cette fonte avec la commande suivante. 
 
 \commande|set_coords_font(«font»)|\index{set_coords_font@\lstinline+set_coords_font+}\smallskip
 
@@ -514,22 +515,155 @@ Et la commande inverse aussi existe.
 
 \subsection{Vue blanche ou noire}
 
+Pour choisir si l’on souhaite voir le plateau du côté blanc ou noir, \mpchess fournit deux commandes.
+
+\commande|set_white_view|\index{set_white_view@\lstinline+set_white_view+}\smallskip
+
+\commande|set_black_view|\index{set_black_view@\lstinline+set_black_view+}\smallskip
+
+Par défaut, on voit l’échiquier côté blanc. 
+
 \subsection{Noms des joueurs}
+
+On peut renseigner les noms des joueuses ou des joueurs pour qu’ils soient notés autour de l’échiquier. Ceci se fait avec les commandes suivantes.
+\commande|set_white_player(«string»)|\index{set_white_player@\lstinline+set_white_player+}\smallskip
+
+\commande|set_black_player(«string»)|\index{set_black_player@\lstinline+set_black_player+}\smallskip
+
+\begin{description}
+  \item[\meta{string}:] est la chaîne de caractères interprétée par \LaTeX à afficher. 
+\end{description}
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_white_player("\textbf{GM} Kasparov");
+set_black_player("\textbf{GM} Kramnik");
+
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+
+Il est possible de placer les noms sur le côté droit du plateau sans les
+bandeaux noirs présents par défaut. Cela se produit soit si les coordonnées sont
+imprimées à l’extérieur du plateau, soit si la commande suivante est utilisée. 
+
+\commande|set_players_side|\index{set_players_side@\lstinline+set_players_side+}\smallskip
+
+\begin{ExempleMP}[righthand width=0.6\linewidth]
+input mpchess
+beginfig(0);
+set_white_player("\textbf{GM} Kasparov");
+set_black_player("\textbf{GM} Kramnik");
+set_players_side;  
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+  
 
 
 \section{Pièces et positions}
 
+\mpchess, comme décrit plus haut, construit le graphique d’une position d’échec
+couche par couche. Cette partie est dédiée à la configuration des pièces et des
+positions. 
+
 \subsection{Réglage du thème des pièces}
+
+\mpchess fournit pour l’instant trois thèmes de pièces, deux emprunté à Lichess, et l’autre emprunté au package~\package{skak}~\cite{ctan-skak}\footnote{Qui fournit le code \MF{} pour la fonte de pièces d’échec, code qui a été facilement adapté en \MP{} pour \mpchess.}. 
+
+Pour choisir le thème on utilisera la commande suivante. 
+
+\commande|set_pieces_theme(«string»)|\index{set_pieces_theme@\lstinline+set_pieces_theme+}\smallskip
+
+\begin{description} 
+  \item[\meta{string}:] peut valoir:
+\begin{itemize}
+\item \lstinline+"cburnett"+ (valeur par défaut), pour obtenir l’ensemble de pièces nommé \emph{cburnett} de Lichess;   
+
+\item \lstinline+"staunty"+, pour obtenir l’ensemble de pièces nommé \emph{staunty} de Lichess;
+\item \lstinline+"skak"+, pour obtenir l’ensemble de pièces du package~\package{skak}.
+\end{itemize}
+\end{description}
+
+
+Le tableau~\ref{tab:pieces} montre le résultat des trois ensembles de pièces 
+\begin{table}
+  \centering
+\begin{tabular}{cc}
+
+Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(6cm);
+  set_pieces_theme("cburnett");
+  unset_whos_to_move;
+  init_backboard;
+  draw backboard;
+  draw chessboard_step(0);
+  endfig;
+\end{mplibcode}
+&\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(6cm);
+  set_pieces_theme("staunty");
+  unset_whos_to_move;
+  init_backboard;
+  draw backboard;
+  draw chessboard_step(0);
+  endfig;
+\end{mplibcode}\\
+Thème \lstinline+skak+&\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(6cm);
+  set_pieces_theme("skak");
+  unset_whos_to_move;
+  init_backboard;
+  draw backboard;
+  draw chessboard_step(0);
+  endfig;
+\end{mplibcode}&\\
+\end{tabular}
+\caption{Les différents thèmes de pièces fournits par \mpchess.}\label{tab:pieces}
+\end{table}
+
+
+\subsection{Construction de son propre ensemble de pièces}
+
 
 \subsection{Lecture de données au format \textsc{pgn}}
 
 \subsection{Lecture de données au format \textsc{fen}}
 
+\subsection{Trait}
+
+\subsection{Ajout de pièces}
+
+\subsection{Suppression de pièces}
 
 \section{Annotation}
 
+\section{Divers}
 
-\commande|test_initbackboard«test»|
+Reset 
+
+\section{To do}
+
+\begin{itemize}
+\item Captured
+\item 
+\end{itemize}
+
+
 
 
 \printbibliography

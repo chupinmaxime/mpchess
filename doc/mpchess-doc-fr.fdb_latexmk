@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber mpchess-doc-fr"] 1678831121 "mpchess-doc-fr.bcf" "mpchess-doc-fr.bbl" "mpchess-doc-fr" 1678831135 0
+["biber mpchess-doc-fr"] 1679003192 "mpchess-doc-fr.bcf" "mpchess-doc-fr.bbl" "mpchess-doc-fr" 1679005518 0
   "./ctan.bib" 1678745888 2769040 cd127d38076f11dfca2e3791d6616128 ""
-  "mpchess-doc-fr.bcf" 1678831134 107521 09678cbedf49b66088054c984da83068 "lualatex"
+  "mpchess-doc-fr.bcf" 1679005517 107585 223f03116413db94369920e0df2eda99 "lualatex"
   (generated)
   "mpchess-doc-fr.bbl"
   "mpchess-doc-fr.blg"
   (rewritten before read)
-["lualatex"] 1678831127 "mpchess-doc-fr.tex" "mpchess-doc-fr.pdf" "mpchess-doc-fr" 1678831135 0
+["lualatex"] 1679005511 "mpchess-doc-fr.tex" "mpchess-doc-fr.pdf" "mpchess-doc-fr" 1679005518 0
   "/home/mc/.local/share/fonts/FiraCode-RegularItalic.otf" 1673210279 129596 15c86d5514dadc686f79e5e0da3978dd ""
   "/home/mc/.texlive2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1668775111 4613367 d683de680f8b45d3b4352781a586eea9 ""
   "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/fonts/otl/firacode-bold.luc" 1673645076 342726 39ea98ff919f4b64b7bb37f59d442107 ""
@@ -41,7 +41,7 @@
   "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-regular.luc" 1657136025 128375 40c06cbf98a16595401af9796e69e046 ""
   "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/fonts/streams/firacodeboldttf-1.luc" 1673297715 187652 402473fe5325b29b955d8d1c72b6e180 ""
   "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/fonts/streams/firacoderegularttf-1.luc" 1673297715 186519 65ecf94b91add9b06c905b1f93985ce9 ""
-  "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1678267449 4990 cd8c2c1d124cd46a99debe936e39c8bc ""
+  "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1678979831 9084 4a38680b3d212d1307b92eaf13b31a02 ""
   "/home/mc/.texlive2022/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1678199155 450451 1d6c1e2519d2036be1824bc1732cd12c ""
   "/home/mc/texmf/metapost/mpchess/mpchess-cburnett.mp" 1676455777 41574 dbecaef5570a59990913aa1c0cd0da9a ""
   "/home/mc/texmf/metapost/mpchess/mpchess-chessboard.mp" 1678656644 13914 ce376e5247146c67c302f462508a8f1c ""
@@ -49,7 +49,7 @@
   "/home/mc/texmf/metapost/mpchess/mpchess-pgn.mp" 1677709195 8920 50d3f1f9b2525d644b2aab6fec1c6cd0 ""
   "/home/mc/texmf/metapost/mpchess/mpchess-skak.mp" 1678458099 15233 7d82ec2cb3a0f25ce4330d8d07a94985 ""
   "/home/mc/texmf/metapost/mpchess/mpchess-staunty.mp" 1678399308 66778 70507beed6582cb813b464d9f411a6f0 ""
-  "/home/mc/texmf/metapost/mpchess/mpchess.mp" 1678745530 30796 5bc0d3e6d56db3143a708fc745af7be3 ""
+  "/home/mc/texmf/metapost/mpchess/mpchess.mp" 1679004917 30919 ace2281b36cbcd29a8475277c1e9a77d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/opentype/public/fira/FiraSans-Bold.otf" 1554498137 521796 b69f0518bb1ec66c91ae284749de268f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/opentype/public/fira/FiraSans-BoldItalic.otf" 1554498137 536828 43217cb6ac9c3df24c0cb144deee64cf ""
   "/usr/local/texlive/2022/texmf-dist/fonts/opentype/public/fira/FiraSans-Italic.otf" 1554498137 524840 dea7c0ccbe5363fe38d1a94525eca4f0 ""
@@ -62,8 +62,10 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm" 1136768653 1528 e2423ae06dc7dee599cceb79d1c9dc32 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/knuth-lib/logo10.tfm" 1418515923 200 14906d432f6644db247e04507b921171 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/knuth-lib/logo8.tfm" 1418515923 200 ba18482f3af93af82f9edbe6012b9eb9 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/knuth-local/logod10.tfm" 1444704004 200 a307fb55b539ad396afb436b806b95eb ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb" 1418407782 3724 64a7599d5c6927bb0318e35f2f564cef ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo8.pfb" 1418407782 3712 e26b78fb1f1cc3e4e06c919fe5a381a9 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb" 1418407782 3634 96a2e0e29f9fdbb60205776e1d1e13cb ""
   "/usr/local/texlive/2022/texmf-dist/metapost/base/plain.mp" 1394807998 16117 84db46d8b608173348ee3bd5b979de49 ""
   "/usr/local/texlive/2022/texmf-dist/metapost/hatching/hatching.mp" 1137020316 2255 e4317710fc5d7ba8395dcd4608473dec ""
@@ -180,7 +182,6 @@
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/ltluatex.lua" 1667332637 24386 83c652de0f414f3e99ca4bc3359bc2f2 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/ltxdoc.cfg" 1655411061 2234 25e8f1db87fe833de8045d08aa09ee2f ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/ltxdoc.cls" 1669927091 8655 83097200fdaf6628811a65502a96a124 ""
-  "/usr/local/texlive/2022/texmf-dist/tex/latex/base/makeidx.sty" 1654720880 1939 6ddbd9091294c45e7eac2e9cff8994ff ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/size10.clo" 1667332637 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/textcomp.sty" 1654720880 2894 f2f8ee7d4fb94263f9f255fa22cab2d3 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/ts1enc.def" 1654720880 8090 4db9ed5f90a74e5a2796a28b05fc0731 ""
@@ -223,6 +224,7 @@
   "/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty" 1675889938 12947 1ce831528e963a8568de1f4d67cfb982 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/pd1enc.def" 1675889938 14249 d947c5c09f3af04ae2f37fc11c7ac2f6 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/puenc.def" 1675889938 117125 aa115cac3914abcf3769f370e6325117 ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/imakeidx/imakeidx.sty" 1476653784 13125 125eef0f7c172b11b3241e78413dc5e1 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/kvoptions/kvoptions.sty" 1655478651 22555 6d8e155cfef6d82c3d5c742fea7c992e ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty" 1665067230 13815 760b0c02f691ea230f5359c4e1de23a7 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-luatex.def" 1673989714 30800 b6c94a4019ed1f4752f2973a6755cd8d ""
@@ -337,15 +339,15 @@
   "FiraCode-Bold.ttf" 1553457600 188876 5dc8fc4a9c756c224ecc7643a1b67212 ""
   "FiraCode-Regular.ttf" 1553457600 188252 3b9ae46edda611c5567610d2efd3e703 ""
   "fond.pdf" 1656594306 1309 210d7ac56417b4147880eaa5b23fff9a ""
-  "mpchess-doc-fr.aux" 1678831134 4450 1830c12978931d3878f55031780d1eff "lualatex"
-  "mpchess-doc-fr.bbl" 1678831127 6602 dce28ac40a9c231944cc210d3232d595 "biber mpchess-doc-fr"
-  "mpchess-doc-fr.hd" 1678831131 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
-  "mpchess-doc-fr.ind" 1678831121 790 198bfdd6567b55f617a8ea0b0b8b32ef "makeindex mpchess-doc-fr.idx"
-  "mpchess-doc-fr.listing" 1678831134 87 6beab0a0c92218966329050146a5594e "lualatex"
-  "mpchess-doc-fr.out" 1678831134 4437 4fae72136e1caba39bd45d0bb2fea1a5 "lualatex"
-  "mpchess-doc-fr.run.xml" 1678831134 2403 8d3f9894083fb8768ad40990fc10fa78 "lualatex"
-  "mpchess-doc-fr.tex" 1678831108 17234 142ad0270648b746fea1a8afdef2d856 ""
-  "mpchess-doc-fr.toc" 1678831134 1938 46db827b5770d0b5f8b4fca86b6c20fd "lualatex"
+  "mpchess-doc-fr.aux" 1679005517 5622 e650b79aa82509311eecf818768cea02 "lualatex"
+  "mpchess-doc-fr.bbl" 1679005480 7782 3f2ef9056b9f80438a265d23a9f3e8a1 "biber mpchess-doc-fr"
+  "mpchess-doc-fr.hd" 1679005514 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
+  "mpchess-doc-fr.ind" 1679005517 1099 dc94cc00395be60b2061fb5ae0802dba "makeindex mpchess-doc-fr.idx"
+  "mpchess-doc-fr.listing" 1679005517 168 4351677f25e53186fc38215d11e309c6 "lualatex"
+  "mpchess-doc-fr.out" 1679005517 5334 d866d4d4611a35f51229ab14fdb1cc42 "lualatex"
+  "mpchess-doc-fr.run.xml" 1679005517 2403 8d3f9894083fb8768ad40990fc10fa78 "lualatex"
+  "mpchess-doc-fr.tex" 1679005447 21460 158f7cb4050af7399bfa661b928d2a87 ""
+  "mpchess-doc-fr.toc" 1679005517 2425 7616f2cab07027f1ec253765fe31c604 "lualatex"
   (generated)
   "/home/mc/.texlive2022/texmf-var/luamplib_cache/luamplib_input_mpchess_doc_fr_listing"
   "mpchess-doc-fr.aux"
@@ -360,8 +362,8 @@
   "mpchess-doc-fr.toc"
   (rewritten before read)
   "mpchess-doc-fr.listing"
-["makeindex mpchess-doc-fr.idx"] 1678831121 "mpchess-doc-fr.idx" "mpchess-doc-fr.ind" "mpchess-doc-fr" 1678831135 0
-  "mpchess-doc-fr.idx" 1678831134 1000 b9a90859f7c41019097c663b85d7c066 "lualatex"
+["makeindex mpchess-doc-fr.idx"] 1679004732 "mpchess-doc-fr.idx" "mpchess-doc-fr.ind" "mpchess-doc-fr" 1679005518 0
+  "mpchess-doc-fr.idx" 1679005517 1425 cc07b3131f9edc48ed3419a6309fa166 "lualatex"
   (generated)
   "mpchess-doc-fr.ilg"
   "mpchess-doc-fr.ind"

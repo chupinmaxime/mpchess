@@ -1,10 +1,10 @@
 \babel@toc {french}{}\relax 
 \contentsline {section}{\numberline {1}Installation}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Avec la \TeX live sous Linux ou MacOS}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Avec la \TeX live sous Linux ou MacOS}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Avec Mik\TeX {} et Windows}{3}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Dépendances}{3}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Utilisation avec \hologoRobust {LuaLaTeX} et \package {luamplib}}{3}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Pourquoi ce package et philosophie générale}{3}{section.2}%
+\contentsline {section}{\numberline {2}Pourquoi ce package et philosophie générale}{4}{section.2}%
 \contentsline {section}{\numberline {3}Plateau}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Réglage des tailles}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Nombre de case}{5}{subsection.3.2}%
@@ -13,10 +13,16 @@
 \contentsline {subsubsection}{\numberline {3.4.1}Thèmes prédéfinis}{6}{subsubsection.3.4.1}%
 \contentsline {subsubsection}{\numberline {3.4.2}Configuration d’un thème personnel}{7}{subsubsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.5}Affichage des coordonnées}{7}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{9}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{8}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}Noms des joueurs}{9}{subsection.3.7}%
-\contentsline {section}{\numberline {4}Pièces et positions}{9}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{9}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Lecture de données au format \textsc {pgn}}{9}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Lecture de données au format \textsc {fen}}{9}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Annotation}{9}{section.5}%
+\contentsline {section}{\numberline {4}Pièces et positions}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Construction de son propre ensemble de pièces}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Lecture de données au format \textsc {pgn}}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Lecture de données au format \textsc {fen}}{10}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Trait}{10}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Ajout de pièces}{10}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Suppression de pièces}{10}{subsection.4.7}%
+\contentsline {section}{\numberline {5}Annotation}{10}{section.5}%
+\contentsline {section}{\numberline {6}Divers}{10}{section.6}%
+\contentsline {section}{\numberline {7}To do}{10}{section.7}%

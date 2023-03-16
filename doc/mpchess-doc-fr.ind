@@ -13,12 +13,18 @@
   \item \lstinline+set_backboard_size+, \hyperpage{5}
   \item \lstinline+set_backboard_width+, \hyperpage{5}
   \item \lstinline+set_black_color+, \hyperpage{7}
+  \item \lstinline+set_black_player+, \hyperpage{9}
+  \item \lstinline+set_black_view+, \hyperpage{8}
   \item \lstinline+set_color_theme+, \hyperpage{6}
   \item \lstinline+set_coords+, \hyperpage{8}
   \item \lstinline+set_coords_font+, \hyperpage{8}
   \item \lstinline+set_coords_inside+, \hyperpage{8}
   \item \lstinline+set_coords_outside+, \hyperpage{8}
   \item \lstinline+set_no_coords+, \hyperpage{8}
+  \item \lstinline+set_pieces_theme+, \hyperpage{10}
+  \item \lstinline+set_players_side+, \hyperpage{9}
   \item \lstinline+set_white_color+, \hyperpage{7}
+  \item \lstinline+set_white_player+, \hyperpage{9}
+  \item \lstinline+set_white_view+, \hyperpage{8}
 
 \end{theindex}
