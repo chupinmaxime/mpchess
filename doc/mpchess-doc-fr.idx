@@ -18,3 +18,11 @@
 \indexentry{set_black_player@\lstinline+set_black_player+|hyperpage}{9}
 \indexentry{set_players_side@\lstinline+set_players_side+|hyperpage}{9}
 \indexentry{set_pieces_theme@\lstinline+set_pieces_theme+|hyperpage}{10}
+\indexentry{chessboard@\lstinline+chessboard+|hyperpage}{10}
+\indexentry{init_chessboard@\lstinline+init_chessboard+|hyperpage}{10}
+\indexentry{set_empty_chessboard@\lstinline+set_empty_chessboard+|hyperpage}{11}
+\indexentry{add_white_pieces@\lstinline+add_white_pieces+|hyperpage}{12}
+\indexentry{add_black_pieces@\lstinline+add_black_pieces+|hyperpage}{12}
+\indexentry{clear_areas@\lstinline+clear_areas+|hyperpage}{12}
+\indexentry{clear_files@\lstinline+clear_files+|hyperpage}{12}
+\indexentry{clear_ranks@\lstinline+clear_ranks+|hyperpage}{12}

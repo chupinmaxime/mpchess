@@ -101,7 +101,7 @@
   breakindent=30pt,
   defaultdialect=MetaPost,
   classoffset=1,% frame=tb
-  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords,set_white_view,set_black_view, set_white_player,set_black_player,set_players_side},
+  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords,set_white_view,set_black_view, set_white_player,set_black_player,set_pieces_theme,set_players_side,init_chessboard,set_empty_chessboard,add_white_pieces,add_black_pieces,clear_areas,clear_files,clear_ranks},
   keywordstyle=\color{darkred},
   classoffset=2,% frame=tb
   morekeywords={backboard,chessboard},
@@ -570,6 +570,8 @@ endfig;
 couche par couche. Cette partie est dédiée à la configuration des pièces et des
 positions. 
 
+En interne, \mpchess construit un tableau sur la grille du plateau. Ensuite, des macros permettent de générer une \lstinline+picture+ à dessiner \emph{par dessus} le plateau (\lstinline+backboard+). 
+
 \subsection{Réglage du thème des pièces}
 
 \mpchess fournit pour l’instant trois thèmes de pièces, deux emprunté à Lichess, et l’autre emprunté au package~\package{skak}~\cite{ctan-skak}\footnote{Qui fournit le code \MF{} pour la fonte de pièces d’échec, code qui a été facilement adapté en \MP{} pour \mpchess.}. 
@@ -599,7 +601,7 @@ Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
   input mpchess
   beginfig(0);
   init_chessboard;
-  set_backboard_width(6cm);
+  set_backboard_width(4cm);
   set_pieces_theme("cburnett");
   unset_whos_to_move;
   init_backboard;
@@ -611,7 +613,7 @@ Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
   input mpchess
   beginfig(0);
   init_chessboard;
-  set_backboard_width(6cm);
+  set_backboard_width(4cm);
   set_pieces_theme("staunty");
   unset_whos_to_move;
   init_backboard;
@@ -624,7 +626,7 @@ Thème \lstinline+skak+&\\
   input mpchess
   beginfig(0);
   init_chessboard;
-  set_backboard_width(6cm);
+  set_backboard_width(4cm);
   set_pieces_theme("skak");
   unset_whos_to_move;
   init_backboard;
@@ -636,25 +638,89 @@ Thème \lstinline+skak+&\\
 \caption{Les différents thèmes de pièces fournits par \mpchess.}\label{tab:pieces}
 \end{table}
 
+\subsection{Dessiner une position}
 
-\subsection{Construction de son propre ensemble de pièces}
+Les commandes décrites ci-dessous permet de construire une position de plusieurs façons (ajout de pièces une à une, lecteur de fichie \textsc{fen}, etc.). Une fois une position construite, on peut la tracer grâce à la commande suivante qui génère une \lstinline+picture+.
+
+\commande|chessboard|\index{chessboard@\lstinline+chessboard+}\smallskip
+
+L’utilisation de cette commande va être largement illustrée dans les exemples suivants. 
+
+\subsection{Construire une position}
+
+\subsubsection{Initialisation}
+
+Pour obtenir la position initiale d’une partie, il suffit d’utiliser la commande suivante. 
+
+\commande|init_chessboard|\index{init_chessboard@\lstinline+init_chessboard+}\smallskip
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard;
+endfig;
+\end{ExempleMP}
+
+On pourra aussi initialiser un \lstinline+chessboard+ vide grâce à la commande suivante. 
+
+\commande|set_empty_chessboard|\index{set_empty_chessboard@\lstinline+set_empty_chessboard+}\smallskip
+
+\subsubsection{Ajout de pièces}
+
+On peut ajouter des pièces pour construire une position grâce aux deux commandes suivantes. 
+
+\commande|add_white_pieces(«piece1»,«piece2»,etc.)|\index{add_white_pieces@\lstinline+add_white_pieces+}\smallskip
+
+
+\commande|add_black_pieces(«piece1»,«piece2»,etc.)|\index{add_black_pieces@\lstinline+add_black_pieces+}\smallskip
+
+Ces commandes prennent des listes de \textbf{\meta{piece}} qui sont des chaînes
+de caractères qui décrivent la pièce et la position en utilisant la notation
+algébrique. Il n’y a pas de limitation au nombre de pièces dans la liste. 
+
+L’exemple suivant illustre l’utilisation de ces commandes. 
+\begin{ExempleMP}
+  input mpchess
+  beginfig(0);
+  init_backboard;
+  draw backboard;
+  set_empty_chessboard;
+  add_white_pieces("e1","Kd2");
+  add_black_pieces("e7","f6","Kb8");
+  draw chessboard;
+  endfig;
+  \end{ExempleMP}
+  
+
+\subsubsection{Suppression de pièces}
+
+\mpchess fournit plusieurs commandes permettant de supprimer des éléments d’une position. 
+
+\commande|clear_areas(«area1»,«area2»,etc.)|\index{clear_areas@\lstinline+clear_areas+}\smallskip
+
+\commande|clear_files(«file1»,«file2»,etc.)|\index{clear_files@\lstinline+clear_files+}\smallskip
+
+\commande|clear_ranks(«rank1»,«rank2»,etc.)|\index{clear_ranks@\lstinline+clear_ranks+}\smallskip
+
+
+\subsection{Lecture de données au format \textsc{fen}}
 
 
 \subsection{Lecture de données au format \textsc{pgn}}
 
-\subsection{Lecture de données au format \textsc{fen}}
 
 \subsection{Trait}
 
-\subsection{Ajout de pièces}
-
-\subsection{Suppression de pièces}
 
 \section{Annotation}
 
 \section{Divers}
 
 Reset 
+Clear chessboard
 
 \section{To do}
 

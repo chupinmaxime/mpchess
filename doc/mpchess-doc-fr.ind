@@ -1,5 +1,17 @@
 \begin{theindex}
 
+  \item \lstinline+add_black_pieces+, \hyperpage{12}
+  \item \lstinline+add_white_pieces+, \hyperpage{12}
+
+  \indexspace
+
+  \item \lstinline+chessboard+, \hyperpage{10}
+  \item \lstinline+clear_areas+, \hyperpage{12}
+  \item \lstinline+clear_files+, \hyperpage{12}
+  \item \lstinline+clear_ranks+, \hyperpage{12}
+
+  \indexspace
+
   \item \lstinline+get_backboard_size+, \hyperpage{5}
   \item \lstinline+get_backboard_width+, \hyperpage{5}
   \item \lstinline+get_square_dim+, \hyperpage{6}
@@ -7,6 +19,7 @@
   \indexspace
 
   \item \lstinline+init_backboard+, \hyperpage{4}
+  \item \lstinline+init_chessboard+, \hyperpage{10}
 
   \indexspace
 
@@ -20,6 +33,7 @@
   \item \lstinline+set_coords_font+, \hyperpage{8}
   \item \lstinline+set_coords_inside+, \hyperpage{8}
   \item \lstinline+set_coords_outside+, \hyperpage{8}
+  \item \lstinline+set_empty_chessboard+, \hyperpage{11}
   \item \lstinline+set_no_coords+, \hyperpage{8}
   \item \lstinline+set_pieces_theme+, \hyperpage{10}
   \item \lstinline+set_players_side+, \hyperpage{9}

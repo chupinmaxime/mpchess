@@ -1,8 +1,9 @@
 input mpchess
-beginfig(0);
-set_white_player("\textbf{GM} Kasparov");
-set_black_player("\textbf{GM} Kramnik");
-set_players_side;
-init_backboard;
-draw backboard;
-endfig;
+  beginfig(0);
+  init_backboard;
+  draw backboard;
+  set_empty_chessboard;
+  add_white_pieces("e1","Kd2");
+  add_black_pieces("e7","f6","Kb8");
+  draw chessboard;
+  endfig;

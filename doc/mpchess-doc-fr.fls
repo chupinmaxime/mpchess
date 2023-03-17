@@ -685,6 +685,14 @@ INPUT ./mpchess-doc-fr.listing
 INPUT ./mpchess-doc-fr.listing
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/knuth-lib/logo8.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/knuth-lib/logo8.tfm
+OUTPUT mpchess-doc-fr.listing
+INPUT ./mpchess-doc-fr.listing
+INPUT ./mpchess-doc-fr.listing
+INPUT ./mpchess-doc-fr.listing
+OUTPUT mpchess-doc-fr.listing
+INPUT ./mpchess-doc-fr.listing
+INPUT ./mpchess-doc-fr.listing
+INPUT ./mpchess-doc-fr.listing
 INPUT ./mpchess-doc-fr.ind
 INPUT ./mpchess-doc-fr.ind
 INPUT ./mpchess-doc-fr.aux
