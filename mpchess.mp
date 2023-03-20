@@ -872,7 +872,7 @@ def draw_circles(expr c)(text slist)=
     for _str = slist:
         _i:=_lettre_to_int(_get_char(_str,0));
         _j:=_str_to_int(_get_char(_str,1));
-        draw (fullcircle scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.05*_chessSquareU) withcolor c;
+        draw (fullcircle scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.08*_chessSquareU) withcolor c;
     endfor;
 enddef;
 
