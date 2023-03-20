@@ -1,1 +1,0 @@
-../mpchess-fen.mp

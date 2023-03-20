@@ -97,10 +97,12 @@ endfig;
 reset_mpchess;
 beginfig(6);
     set_pieces_theme("skak");
+    %set_black_view;
     init_backboard;
     init_chessboard;
     draw backboard;
     draw chessboard_step(0);
+    draw_comments("?!","c7");
 endfig;
 
 end.

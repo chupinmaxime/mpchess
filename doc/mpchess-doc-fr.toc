@@ -22,9 +22,9 @@
 \contentsline {subsubsection}{\numberline {4.3.1}Initialisation}{10}{subsubsection.4.3.1}%
 \contentsline {subsubsection}{\numberline {4.3.2}Ajout de pièces}{11}{subsubsection.4.3.2}%
 \contentsline {subsubsection}{\numberline {4.3.3}Suppression de pièces}{12}{subsubsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.4}Lecture de données au format \textsc {fen}}{12}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Lecture de données au format \textsc {pgn}}{12}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Trait}{12}{subsection.4.6}%
-\contentsline {section}{\numberline {5}Annotation}{12}{section.5}%
-\contentsline {section}{\numberline {6}Divers}{12}{section.6}%
+\contentsline {subsection}{\numberline {4.4}Lecture de données au format \textsc {fen}}{13}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Lecture de données au format \textsc {pgn}}{13}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Trait}{13}{subsection.4.6}%
+\contentsline {section}{\numberline {5}Annotation}{13}{section.5}%
+\contentsline {section}{\numberline {6}Divers}{13}{section.6}%
 \contentsline {section}{\numberline {7}To do}{13}{section.7}%

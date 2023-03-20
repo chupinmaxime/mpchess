@@ -70,6 +70,19 @@ def clear_areas(text plist)=
     endfor
 enddef;
 
+% function to clear squares with a arg of type "a1-b6","g1-f2", etc
+def clear_squares(text plist)=
+    save _first_letter,_firt_nbr,_fl,_fn,_str;
+    string _first_letter,_first_nbr,_str;
+    for _str = plist:
+    _first_letter:=substring (0,1) of _str;
+    _first_nbr:=substring (1,2) of _str;
+    _fl:=_lettre_to_int(_first_letter);
+    _fn:=_str_to_int(_first_nbr);
+    chessboard_table[0][_fl][_fn]:=0;
+    endfor
+enddef;
+
 % function to clear an area specified with a arg of type "a","c",etc
 def clear_files(text plist)=
     save _letter,_l,_str;
@@ -436,4 +449,36 @@ def add_black_pieces(text plists) =
         fi
         chessboard_table[0][_letter][_nbr]:=_piecetype;
     endfor
+enddef;
+
+
+color _commentsColor;
+_commentsColor:=(0.6,0.2,0.2);
+
+def set_comments_color(expr c)=
+    _commentsColor:=c;
+enddef;
+
+_commentsScale:=0.25;
+
+def draw_comments(expr ind, pos)=
+    save _img, _letter, _nbr;
+    picture _img;
+    _img:=image(
+        draw textext("\bfseries"&ind);                        
+    );
+    _width:=abs(urcorner _img-ulcorner _img);
+    _height:=abs(urcorner _img-lrcorner _img);
+    _img:=image(
+        fill fullcircle scaled (2*max(_width,_height)) shifted (0.5*_width,0.5*_height) withcolor 0.8[_commentsColor,white];
+        draw fullcircle scaled (2*max(_width,_height)) shifted (0.5*_width,0.5*_height) withcolor _commentsColor;
+        draw _img;
+    );
+    _letter:=_lettre_to_int(_get_char(pos,0));
+    _nbr:=_str_to_int(_get_char(pos,1));
+    if(_chess_view_wb): % white view
+        draw _img scaled (_commentsScale*_chessSquareU/_width) shifted  ((_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(_nbr)*_chessSquareU-0.3*_chessSquareU);
+    else:
+       draw _img scaled (_commentsScale*_chessSquareU/_width) shifted  ((9-_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(9-_nbr)*_chessSquareU-0.3*_chessSquareU);
+    fi
 enddef;
