@@ -83,3 +83,8 @@ def _chess_extract_position(expr fen)=
         fi
     endfor
 enddef;
+
+def build_chessboard_from_fen(expr s)=
+    set_empty_chessboard;
+    _chess_extract_position(s);
+enddef;
