@@ -1,15 +1,15 @@
-[0] Config.pm:306> INFO - This is Biber 2.18
-[0] Config.pm:309> INFO - Logfile is 'mpchess-doc-fr.blg'
-[49] biber:340> INFO - === jeu. mars 16, 2023, 23:24:36
-[58] Biber.pm:418> INFO - Reading 'mpchess-doc-fr.bcf'
-[103] Biber.pm:978> INFO - Found 5 citekeys in bib section 0
-[112] Biber.pm:4401> INFO - Processing section 0
-[119] Biber.pm:4592> INFO - Looking for bibtex file 'ctan.bib' for section 0
-[262] bibtex.pm:1713> INFO - LaTeX decoding ...
-[4190] bibtex.pm:1518> INFO - Found BibTeX data source 'ctan.bib'
-[4475] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
-[4475] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[4475] Biber.pm:4221> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
-[4475] Biber.pm:4227> INFO - No sort tailoring available for locale 'fr-FR'
-[4482] bbl.pm:654> INFO - Writing 'mpchess-doc-fr.bbl' with encoding 'UTF-8'
-[4484] bbl.pm:757> INFO - Output to mpchess-doc-fr.bbl
+[1] Config.pm:306> INFO - This is Biber 2.18
+[2] Config.pm:309> INFO - Logfile is 'mpchess-doc-fr.blg'
+[329] biber:340> INFO - === lun. mars 20, 2023, 21:33:22
+[375] Biber.pm:418> INFO - Reading 'mpchess-doc-fr.bcf'
+[469] Biber.pm:978> INFO - Found 5 citekeys in bib section 0
+[482] Biber.pm:4401> INFO - Processing section 0
+[491] Biber.pm:4592> INFO - Looking for bibtex file 'ctan.bib' for section 0
+[774] bibtex.pm:1713> INFO - LaTeX decoding ...
+[6050] bibtex.pm:1518> INFO - Found BibTeX data source 'ctan.bib'
+[6405] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[6405] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[6405] Biber.pm:4221> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[6405] Biber.pm:4227> INFO - No sort tailoring available for locale 'fr-FR'
+[6412] bbl.pm:654> INFO - Writing 'mpchess-doc-fr.bbl' with encoding 'UTF-8'
+[6415] bbl.pm:757> INFO - Output to mpchess-doc-fr.bbl

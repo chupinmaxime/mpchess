@@ -1,9 +1,8 @@
 input mpchess
-  beginfig(0);
-  init_backboard;
-  draw backboard;
-  set_empty_chessboard;
-  add_white_pieces("e1","Kd2");
-  add_black_pieces("e7","f6","Kb8");
-  draw chessboard;
-  endfig;
+beginfig(0);
+init_backboard;
+draw backboard;
+draw_circles(green)("e2","e7");
+init_chessboard;
+draw chessboard;
+endfig;

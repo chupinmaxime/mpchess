@@ -1,9 +1,9 @@
 \babel@toc {french}{}\relax 
-\contentsline {section}{\numberline {1}Installation}{2}{section.1}%
+\contentsline {section}{\numberline {1}Installation}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Avec la \TeX live sous Linux ou MacOS}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Avec Mik\TeX {} et Windows}{3}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Dépendances}{3}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Utilisation avec \hologoRobust {LuaLaTeX} et \package {luamplib}}{3}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.4}Utilisation avec \hologoRobust {LuaLaTeX} et \package {luamplib}}{4}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Pourquoi ce package et philosophie générale}{4}{section.2}%
 \contentsline {section}{\numberline {3}Plateau}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Réglage des tailles}{5}{subsection.3.1}%
@@ -12,19 +12,26 @@
 \contentsline {subsection}{\numberline {3.4}Réglage du thème de couleur}{6}{subsection.3.4}%
 \contentsline {subsubsection}{\numberline {3.4.1}Thèmes prédéfinis}{6}{subsubsection.3.4.1}%
 \contentsline {subsubsection}{\numberline {3.4.2}Configuration d’un thème personnel}{7}{subsubsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.5}Affichage des coordonnées}{7}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{8}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.5}Affichage des coordonnées}{8}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Vue blanche ou noire}{9}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}Noms des joueurs}{9}{subsection.3.7}%
 \contentsline {section}{\numberline {4}Pièces et positions}{10}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{10}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Dessiner une position}{10}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Construire une position}{10}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Initialisation}{10}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Ajout de pièces}{11}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Suppression de pièces}{12}{subsubsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.4}Lecture de données au format \textsc {fen}}{13}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Lecture de données au format \textsc {pgn}}{13}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Trait}{13}{subsection.4.6}%
-\contentsline {section}{\numberline {5}Annotation}{13}{section.5}%
-\contentsline {section}{\numberline {6}Divers}{13}{section.6}%
-\contentsline {section}{\numberline {7}To do}{13}{section.7}%
+\contentsline {subsection}{\numberline {4.1}Réglage du thème des pièces}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Trait}{11}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Dessiner une position}{12}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Construire une position}{12}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Initialisation}{12}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Ajout de pièces}{13}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Suppression de pièces}{13}{subsubsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.5}Lecture de données au format \textsc {fen}}{14}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Lecture de données au format \textsc {pgn}}{15}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}Montrer le dernier coup}{16}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}Obtenir le nombre de coups}{17}{subsubsection.4.6.2}%
+\contentsline {section}{\numberline {5}Annotation}{17}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Flêches}{17}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Coloration de cases}{18}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Cercles}{19}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Croix}{19}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Commentaires de coup}{19}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Divers}{19}{section.6}%
+\contentsline {section}{\numberline {7}To do}{19}{section.7}%

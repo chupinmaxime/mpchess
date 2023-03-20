@@ -57,7 +57,8 @@
   }%
   ]{Vitem}%
   }
-
+  \newcommand\vitem[1][]{\SaveVerb[%
+  aftersave={\item[\textnormal{\UseVerb[#1]{vsave}}]}]{vsave}}
 \newcommand*\textme[1]{\textcolor{black}{\rmfamily\textit{#1}}}
 %\renewcommand*\meta[1]{% % meta
 %  \textme{\ensuremath{\langle}#1\ensuremath{\rangle}}}
@@ -101,7 +102,7 @@
   breakindent=30pt,
   defaultdialect=MetaPost,
   classoffset=1,% frame=tb
-  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords,set_white_view,set_black_view, set_white_player,set_black_player,set_pieces_theme,set_players_side,init_chessboard,set_empty_chessboard,add_white_pieces,add_black_pieces,clear_areas,clear_files,clear_ranks},
+  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords, set_no_coords,set_white_view,set_black_view, set_white_player,set_black_player,set_pieces_theme,set_players_side,init_chessboard,set_empty_chessboard,add_white_pieces,add_black_pieces,clear_areas,clear_files,clear_ranks,clear_squares},
   keywordstyle=\color{darkred},
   classoffset=2,% frame=tb
   morekeywords={backboard,chessboard},
@@ -122,7 +123,7 @@
   arc=0pt,outer arc=0pt,
   colback=darkred!3,
   colframe=darkred,
-  breakable,
+  breakable,fontupper=\small,
   boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
   3pt, toptitle=3pt,
   boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
@@ -638,11 +639,34 @@ Thème \lstinline+skak+&\\
 \caption{Les différents thèmes de pièces fournits par \mpchess.}\label{tab:pieces}
 \end{table}
 
+
+\subsection{Trait}
+
+\mpchess indique qui a le trait entre les blancs et les noirs. Ceci ce fait par
+un petit triangle coloré (blanc ou noir) à l’extrérieur du plateau (que vous
+pourrez observer dans les nombreux exemples suivants). 
+
+Pour spécifier qui a le trait on utilisera les commandes suivantes. 
+
+\commande|set_white_to_move|\index{set_white_to_move@\lstinline+set_white_to_move+}\smallskip
+
+
+\commande|set_black_to_move|\index{set_black_to_move@\lstinline+set_black_to_move+}\smallskip
+
+Par défaut, c’est aux blancs de jouer, et cette information est affichée. 
+
+Pour activer ou désactiver l’affichage du trait, on utilisera une des deux commandes suivantes. 
+
+\commande|set_whos_to_move|\index{set_whos_to_move@\lstinline+set_whos_to_move+}\smallskip
+
+
+\commande|unset_whos_to_move|\index{unset_whos_to_move@\lstinline+unset_whos_to_move+}\smallskip
+
 \subsection{Dessiner une position}
 
 Les commandes décrites ci-dessous permet de construire une position de plusieurs façons (ajout de pièces une à une, lecteur de fichie \textsc{fen}, etc.). Une fois une position construite, on peut la tracer grâce à la commande suivante qui génère une \lstinline+picture+.
 
-\commande|chessboard|\index{chessboard@\lstinline+chessboard+}\smallskip
+\commande|chessboard|\index{chessboard@\lstinline+chessboard+}\smallskip \label{com:chessboard}
 
 L’utilisation de cette commande va être largement illustrée dans les exemples suivants. 
 
@@ -683,39 +707,271 @@ algébrique. Il n’y a pas de limitation au nombre de pièces dans la liste.
 
 L’exemple suivant illustre l’utilisation de ces commandes. 
 \begin{ExempleMP}
-  input mpchess
-  beginfig(0);
-  init_backboard;
-  draw backboard;
-  set_empty_chessboard;
-  add_white_pieces("e1","Kd2");
-  add_black_pieces("e7","f6","Kb8");
-  draw chessboard;
-  endfig;
-  \end{ExempleMP}
+input mpchess
+beginfig(0);
+init_backboard;
+draw backboard;
+set_empty_chessboard;
+add_white_pieces("e1","Kd2");
+add_black_pieces("e7","f6","Kb8");
+draw chessboard;
+endfig;
+\end{ExempleMP}
   
 
 \subsubsection{Suppression de pièces}
 
 \mpchess fournit plusieurs commandes permettant de supprimer des éléments d’une position. 
 
+La première commande permet de supprimer un élément d’une case. Cette commande permet de prendre une liste de cases, en utilisant la notation algébrique.
+
+\commande|clear_squares(«square1»,«square2»,etc.)|\index{clear_squares@\lstinline+clear_squares+}\smallskip
+
+Les \textbf{\meta{square1}}, \textbf{\meta{square2}}, etc., sont des chaînes de caractères, par exemple \lstinline+"a3"+
+\medskip
+
+La commande suivante permet de supprimer un ensemble de cases dans une région
+déterminé par deux coordonnées sur le plateau. Cette commande permet de prendre
+une liste de régions.
+
 \commande|clear_areas(«area1»,«area2»,etc.)|\index{clear_areas@\lstinline+clear_areas+}\smallskip
+
+Les \textbf{\meta{area1}}, \textbf{\meta{area2}}, etc., sont des chaînes de caractères constituées de deux coordonnées séparées par un tiret, par exemple \lstinline+"a3-g7"+.
+\medskip
+
+La commande suivante permet de supprimer l’ensemble des cases d’une colonne
+déterminé par une lettre sur le plateau. Cette commande permet de prendre
+une liste de colonnes.
 
 \commande|clear_files(«file1»,«file2»,etc.)|\index{clear_files@\lstinline+clear_files+}\smallskip
 
+Les \textbf{\meta{file1}}, \textbf{\meta{file2}}, etc., sont des chaînes de caractères constituées d’une lettre, par exemple \lstinline+"a"+.
+\medskip
+
+La commande suivante permet de supprimer l’ensemble des cases d’une ligne
+déterminé par un nombre sur le plateau. Cette commande permet de prendre
+une liste de lignes.
+
 \commande|clear_ranks(«rank1»,«rank2»,etc.)|\index{clear_ranks@\lstinline+clear_ranks+}\smallskip
+
+Les \textbf{\meta{rank1}}, \textbf{\meta{rank2}}, etc., sont des chaînes de caractères constituées d’un nombre, par exemple \lstinline+"4"+.
+
+L’utilisation de l’ensemble des ces commandes est illustrée dans l’exemple suivant. 
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+init_backboard;
+draw backboard;
+init_chessboard;
+clear_squares("a1","b2");
+clear_areas("c2-d7");
+clear_files("f","h");
+clear_ranks("8");
+draw chessboard;
+endfig;
+\end{ExempleMP}
+  
 
 
 \subsection{Lecture de données au format \textsc{fen}}
 
+\mpchess permet de lire une position au format \textsc{fen} grâce à la commande suivante. 
+\commande|build_chessboard_from_fen(«string»)|\index{build_chessboard_from_fen@\lstinline+build_chessboard_from_fen+}\smallskip
+
+\begin{description}
+\item[\meta{string}:] est une chaîne de caractères décrivant une position au
+format \textsc{fen}. Notons que toutes les informations après l’information du
+\emph{trait} (\texttt{w} ou \texttt{b}) sont ignorées. 
+\end{description}
+
+\begin{ExempleMP}
+input mpchess;
+beginfig(0);
+init_backboard;
+draw backboard;
+string fenstr;
+fenstr := "7r/2p1kp1p/p1B2p2/1pb5/8/2PP4/PP1N1PPP/R5K1 b - - 2 19";
+build_chessboard_from_fen(fenstr);
+draw chessboard;
+endfig;
+\end{ExempleMP}
+
 
 \subsection{Lecture de données au format \textsc{pgn}}
 
+\mpchess permet aussi de lire une chaîne de caractères au format \textsc{pgn}.
+Lorsque une telle fonctionnalité est utilisé, \mpchess stocke toutes les
+positions intermédiaires et permet ainsi de les représenter. 
 
-\subsection{Trait}
+Pour construire les positions, on utilisera la commande suivante. 
 
+\commande|build_chessboards_from_pgn(«string»)|\index{build_chessboards_from_pgn@\lstinline+build_chessboards_from_pgn+}\smallskip
+
+Le format \textsc{PGN} accepté par \mpchess est un format simplifié qui
+n’accepte pas les variantes ni les commentaires. 
+
+Une fois le positions construites, on pourra les représenter grâce à la commande suivante. 
+
+\commande|chessboard_step(«int»)|\index{build_chessboards_from_pgn@\lstinline+build_chessboards_from_pgn+}\smallskip
+\begin{description}
+\item[\meta{int}:] est le numéro du l’étape. La configuration initiale est numérotée 0, et ensuite, chaque coup, blanc ou noir, est numéroté.  
+\end{description}
+
+Cette commande, comme \lstinline+chessboard+ (voir page~\pageref{com:chessboard}), retourne une \lstinline+picture+. 
+
+L’exemple suivant illustre l’utilisation de ces commandes. 
+
+\begin{ExempleMP}
+input mpchess;
+string pgnstr;
+pgnstr := "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. Bb5 c6";
+build_chessboards_from_pgn(pgnstr);
+beginfig(0);
+init_backboard;
+draw backboard;
+draw chessboard_step(3); % Nf3
+endfig;
+\end{ExempleMP}
+  
+\subsubsection{Montrer le dernier coup}
+
+On peut afficher automatiquement le dernier coup grâce à la commande suivante. 
+
+\commande|show_last_move(«int»)|\index{show_last_move@\lstinline+show_last_move+}\smallskip
+
+\begin{description}
+\item[\meta{int}:] est le numéro du l’étape. La configuration initiale est numérotée 0, et ensuite, chaque coup, blanc ou noir, est numéroté.  
+\end{description}
+
+Cette commande colorie en transparence les deux cases de départ et d’arrivée du dernier coup. Ainsi, elle doit être utilisée entre le dessin du plateau (\lstinline+draw backboard+) et le dessin des pièces (\lstinline+draw chessboard_step(i)+). 
+
+\begin{ExempleMP}
+input mpchess;
+string pgnstr;
+pgnstr := "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. Bb5 c6";
+build_chessboards_from_pgn(pgnstr);
+beginfig(0);
+init_backboard;
+draw backboard;
+show_last_move(3);
+draw chessboard_step(3); % Nf3
+endfig;
+\end{ExempleMP}
+
+On pourra configurer la couleur utilisée pour colorier en transparence les cases du dernier coup grâce à la commande suivante. 
+
+\commande|set_color_last_move(«color»)|\index{set_color_last_move@\lstinline+set_color_last_move+}\smallskip
+\begin{description}
+  \item[\meta{color}:] est une \lstinline+color+ \MP.
+\end{description}
+  
+
+
+\subsubsection{Obtenir le nombre de coups}
+
+On pourra récupérer le nombre de \emph{demi}-coups) grâce à la
+commande suivante. 
+
+\commande|get_halfmove_number|\index{get_halfmove_number@\lstinline+get_halfmove_number+}\smallskip
+
+Cette commande retourne un \lstinline+numeric+. 
+
+On pourra aussi récupérer le nombre de coups \og{}total\fg{} au sens où il sont numéroté dans le format \textsc{pgn}, grâce à la commande suivante :
+
+\commande|get_totalmove_number|\index{get_totalmove_number@\lstinline+get_totalmove_number+}\smallskip
+
+Cette commande retourne un \lstinline+numeric+. 
 
 \section{Annotation}
+
+De nombreuses commandes permettent d’annonter l’échiquier (flêche, coulour, cercle, croix, etc.).
+
+\subsection{Flêches}
+
+La commande pour tracer des flêches sur l’échiquier est la suivante. 
+
+\commande|draw_arrows(«color»)(«string1»,«string2», etc.)|\index{draw_arrows@\lstinline+draw_arrows+}\smallskip
+\begin{description}
+\item[\meta{color}:] est une \lstinline+color+ \MP.
+\item[\meta{string1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre) séparés par deux caractères qui peuvent être 
+\begin{description}
+\vitem+--+ pour relier les deux cases en ligne droite ;
+\vitem+-|+ pour relier les deux cases en ligne brisée, d’abord horizontalement puis verticalement ;   
+\vitem+|-+ pour relier les deux cases en ligne brisée, d’abord verticalement puis horizontalement.   
+\end{description} 
+\end{description}
+
+L’exemple suivant illustre l’utilisation de cette commande. 
+\begin{ExempleMP}
+input mpchess;
+string pgnstr;
+pgnstr := "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. Bb5 c6";
+build_chessboards_from_pgn(pgnstr);
+beginfig(0);
+init_backboard;
+draw backboard;
+show_last_move(3);
+draw chessboard_step(3); % Nf3
+draw_arrows(red)("f8--b4","g1|-f3");
+endfig;
+\end{ExempleMP}
+
+
+\subsection{Coloration de cases}
+\mpchess permet aussi de colorer des cases grâce à la commande suivante. 
+
+\commande|color_square(«color»)(«coord1»,«coord2», etc.)|\index{color_square@\lstinline+color_square+}\smallskip
+
+\begin{description}
+\item[\meta{color}:] est une \lstinline+color+ \MP.
+\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+\end{description}
+
+L’exemple suivant permet d’illustrer l’utilisation de cette commande.
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+init_backboard;
+draw backboard;
+color_square(red)("e2","e7");
+init_chessboard;
+draw chessboard;
+endfig;
+\end{ExempleMP}
+  
+Cette commande colorie les cases avec une certaine transparence pour s’adapter
+aux cases blanches et noires. 
+
+\subsection{Cercles}
+\mpchess permet d’entourer des cases avec des cercles grâce à la commande
+suivante. 
+\commande|draw_circles(«color»)(«coord1»,«coord2», etc.)|\index{draw_circles@\lstinline+draw_circles+}\smallskip
+
+\begin{description}
+\item[\meta{color}:] est une \lstinline+color+ \MP.
+\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+\end{description}
+
+L’exemple suivant permet d’illustrer l’utilisation de cette commande.
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+init_backboard;
+draw backboard;
+draw_circles(green)("e2","e7");
+init_chessboard;
+draw chessboard;
+endfig;
+\end{ExempleMP}
+
+
+
+\subsection{Croix}
+
+\subsection{Commentaires de coup}
 
 \section{Divers}
 
