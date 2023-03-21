@@ -41,3 +41,6 @@
 \indexentry{draw_arrows@\lstinline+draw_arrows+|hyperpage}{17}
 \indexentry{color_square@\lstinline+color_square+|hyperpage}{18}
 \indexentry{draw_circles@\lstinline+draw_circles+|hyperpage}{19}
+\indexentry{draw_crosses@\lstinline+draw_crosses+|hyperpage}{19}
+\indexentry{draw_comment@\lstinline+draw_comment+|hyperpage}{20}
+\indexentry{set_comment_color@\lstinline+set_comment_color+|hyperpage}{20}

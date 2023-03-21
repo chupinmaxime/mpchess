@@ -21,6 +21,8 @@
 
   \item \lstinline+draw_arrows+, \hyperpage{17}
   \item \lstinline+draw_circles+, \hyperpage{19}
+  \item \lstinline+draw_comment+, \hyperpage{20}
+  \item \lstinline+draw_crosses+, \hyperpage{19}
 
   \indexspace
 
@@ -45,6 +47,7 @@
   \item \lstinline+set_black_view+, \hyperpage{9}
   \item \lstinline+set_color_last_move+, \hyperpage{16}
   \item \lstinline+set_color_theme+, \hyperpage{6}
+  \item \lstinline+set_comment_color+, \hyperpage{20}
   \item \lstinline+set_coords+, \hyperpage{9}
   \item \lstinline+set_coords_font+, \hyperpage{9}
   \item \lstinline+set_coords_inside+, \hyperpage{8}

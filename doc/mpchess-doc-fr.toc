@@ -32,6 +32,6 @@
 \contentsline {subsection}{\numberline {5.2}Coloration de cases}{18}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}Cercles}{19}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}Croix}{19}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Commentaires de coup}{19}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Divers}{19}{section.6}%
-\contentsline {section}{\numberline {7}To do}{19}{section.7}%
+\contentsline {subsection}{\numberline {5.5}Commentaires de coup}{20}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Divers}{20}{section.6}%
+\contentsline {section}{\numberline {7}To do}{20}{section.7}%

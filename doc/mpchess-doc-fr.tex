@@ -961,9 +961,9 @@ input mpchess
 beginfig(0);
 init_backboard;
 draw backboard;
-draw_circles(green)("e2","e7");
 init_chessboard;
 draw chessboard;
+draw_circles(green)("e2","e7");
 endfig;
 \end{ExempleMP}
 
@@ -971,7 +971,60 @@ endfig;
 
 \subsection{Croix}
 
+
+\mpchess permet de tracer des croix sur des cases  grâce à la commande
+suivante. 
+\commande|draw_crosses(«color»)(«coord1»,«coord2», etc.)|\index{draw_crosses@\lstinline+draw_crosses+}\smallskip
+
+\begin{description}
+  \item[\meta{color}:] est une \lstinline+color+ \MP.
+  \item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+  \end{description}
+
+L’exemple suivant permet d’illustrer l’utilisation de cette commande.
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard
+draw_crosses(0.7[green,black])("e2","e7");
+endfig;
+\end{ExempleMP}
+
 \subsection{Commentaires de coup}
+
+\mpchess permet d’afficher les classiques commentaires de coups du type
+\og{}!?\fg{} grâce à la commande suivante. 
+
+\commande|draw_comment(«str»,«pos»)|\index{draw_comment@\lstinline+draw_comment+}\smallskip
+
+\begin{description}
+\item[\meta{str}:] est une chaîne de caractères (netre double-quotes) à afficher.
+\item[\meta{pos}:] est une chaîne de caractères (entre double-quotes) consituée d’une coordonnée (lettre et chiffre).
+\end{description}
+
+\begin{ExempleMP}
+input mpchess;
+string pgnstr;
+pgnstr := "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. Bb5 c6";
+build_chessboards_from_pgn(pgnstr);
+beginfig(0);
+init_backboard;
+draw backboard;
+show_last_move(3);
+draw chessboard_step(3); % Nf3
+draw_comment("?!","f3");
+endfig;
+\end{ExempleMP}
+
+La couleur des annotation de commentaires peut être changé grâce à la commande
+suivante. 
+\commande|set_comment_color(«color»)|\index{set_comment_color@\lstinline+set_comment_color+}\smallskip
+
+
 
 \section{Divers}
 
@@ -982,6 +1035,7 @@ Clear chessboard
 
 \begin{itemize}
 \item Captured
+\item Time
 \item 
 \end{itemize}
 

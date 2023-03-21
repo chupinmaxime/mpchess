@@ -102,7 +102,7 @@ beginfig(6);
     init_chessboard;
     draw backboard;
     draw chessboard_step(0);
-    draw_comments("?!","c7");
+    draw_comment("?!","c7");
 endfig;
 
 end.
