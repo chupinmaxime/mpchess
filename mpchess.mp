@@ -930,16 +930,16 @@ def reset_mpchess=
     _chess_black_player:="";
 enddef;
 
-color _commentsColor;
-_commentsColor:=(0.6,0.2,0.2);
+color _commentColor;
+_commentColor:=(0.6,0.2,0.2);
 
-def set_comments_color(expr c)=
-    _commentsColor:=c;
+def set_comment_color(expr c)=
+    _commentColor:=c;
 enddef;
 
-_commentsScale:=0.25;
+_commentScale:=0.25;
 
-def draw_comments(expr ind, pos)=
+def draw_comment(expr ind, pos)=
     save _img, _letter, _nbr;
     picture _img;
     _img:=image(
@@ -948,15 +948,15 @@ def draw_comments(expr ind, pos)=
     _width:=abs(urcorner _img-ulcorner _img);
     _height:=abs(urcorner _img-lrcorner _img);
     _img:=image(
-        fill fullcircle scaled (2*max(_width,_height)) shifted (0.5*_width,0.5*_height) withcolor 0.8[_commentsColor,white];
-        draw fullcircle scaled (2*max(_width,_height)) shifted (0.5*_width,0.5*_height) withcolor _commentsColor;
+        fill fullcircle scaled (2*max(_width,_height)) shifted (0.5*_width,0.5*_height) withcolor 0.8[_commentColor,white];
+        draw fullcircle scaled (2*max(_width,_height)) shifted (0.5*_width,0.5*_height) withcolor _commentColor;
         draw _img;
     );
     _letter:=_lettre_to_int(_get_char(pos,0));
     _nbr:=_str_to_int(_get_char(pos,1));
     if(_chess_view_wb): % white view
-        draw _img scaled (_commentsScale*_chessSquareU/_width) shifted  ((_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(_nbr)*_chessSquareU-0.3*_chessSquareU);
+        draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(_nbr)*_chessSquareU-0.3*_chessSquareU);
     else:
-       draw _img scaled (_commentsScale*_chessSquareU/_width) shifted  ((9-_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(9-_nbr)*_chessSquareU-0.3*_chessSquareU);
+       draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((9-_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(9-_nbr)*_chessSquareU-0.3*_chessSquareU);
     fi
 enddef;
