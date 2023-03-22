@@ -300,7 +300,7 @@ def set_pieces_theme(expr t)=
 enddef;
 
 
-def init_piece(expr w)=
+def _init_piece(expr w)=
     begingroup
     bboxmargin:=0pt;
     _chess_marginBottom:=0.13w;
@@ -485,7 +485,7 @@ picture backboard;
 
 def init_backboard =
 _chessSquareU:=_chessWidth/_chessSize;
-init_piece(_chessSquareU);
+_init_piece(_chessSquareU);
 if(_chessTheme="Classical"):
     _buildClassicalSquare(_chessSquareU);
 else: % colored themes
@@ -640,7 +640,7 @@ color _chess_last_move_color;
 _chess_last_move_color:=(0.6078,0.7803,0);
 
 
-def set_color_last_move(expr c)=
+def set_last_move_color(expr c)=
     _chess_last_move_color:=c;
 enddef;
 
@@ -649,7 +649,11 @@ def show_last_move(expr k)=
      for i:=1 upto _chessSize:
         for j:=1 upto _chessSize:
             if(chessboard_table[k][i][j]<>chessboard_table[k-1][i][j]):
+                if(_chess_view_wb):%white side
                 _chess_color_square(_chess_last_move_color,i,j);
+                else:
+                _chess_color_square(_chess_last_move_color,8+1-i,8+1-j);
+                fi
             fi
         endfor
     endfor
@@ -725,7 +729,13 @@ vardef color_square(expr c)(text slist)=
         _i:=_lettre_to_int(_get_char(_str,0));
         _j:=_str_to_int(_get_char(_str,1));
         path ss;
-        ss:=(unitsquare scaled _chessSquareU) shifted ((_i-1)*_chessSquareU,(_j-1)*_chessSquareU);
+        if(_chess_view_wb):%white side
+        ss:=(unitsquare scaled _chessSquareU) shifted
+        ((_i-1)*_chessSquareU,(_j-1)*_chessSquareU);
+        else:
+        ss:=(unitsquare scaled _chessSquareU) shifted
+        ((8+1-_i-1)*_chessSquareU,(8+1-_j-1)*_chessSquareU);
+        fi
         transparence(ss,c,0.41);
     endfor
 enddef;
@@ -780,9 +790,14 @@ def draw_arrows(expr c)(text slist)=
         _i:=_lettre_to_int(_get_char(_str,0));
         _j:=_str_to_int(_get_char(_str,1));
         _k:=_lettre_to_int(_get_char(_str,4));
-        _l:=_str_to_int(_get_char(_str,5));
-        _end:=(_k,_l)*_chessSquareU-(0.5,0.5)*_chessSquareU;
-        _init:=(_i,_j)*_chessSquareU-(0.5,0.5)*_chessSquareU;
+        _l:=_str_to_int(_get_char(_str,5));           
+        if(_chess_view_wb): %white side
+            _end:=(_k,_l)*_chessSquareU-(0.5,0.5)*_chessSquareU;
+            _init:=(_i,_j)*_chessSquareU-(0.5,0.5)*_chessSquareU;
+        else:
+            _end:=(8-_k,8-_l)*_chessSquareU+(0.5,0.5)*_chessSquareU;
+            _init:=(8-_i,8-_j)*_chessSquareU+(0.5,0.5)*_chessSquareU;
+        fi
         if((substring (2,4) of _str)="--"):
             _vec:= _end-_init;
             _unit_vec:=_chess_unit_vec(_vec);
@@ -800,12 +815,12 @@ def draw_arrows(expr c)(text slist)=
             (_init-(_chess_arrow_width*_ortho_vec)+((_vec_norm-_chess_arrow_head)*_unit_vec))--
             (_init-(_chess_arrow_width*_ortho_vec))--cycle;
         elseif((substring (2,4) of _str)="|-"):
-            if(_k>_i): % to the right
+            if((xpart _end)> (xpart _init)): % to the right
                 _pm_rl:=+1;
             else:
                 _pm_rl:=-1;
             fi
-            if(_l>_j): % to the to
+            if((ypart _end)>(ypart _init)): % to the to
                 _pm_ul:=+1;
             else:
                 _pm_ul:=-1;
@@ -822,12 +837,12 @@ def draw_arrows(expr c)(text slist)=
                         (xpart _init +_pm_rl*_chess_arrow_width, ypart _end - _pm_ul*_chess_arrow_width) --
                          (_init+_pm_rl*(_chess_arrow_width,0))--cycle;
         elseif((substring (2,4) of _str)="-|"):
-            if(_k>_i): % to the right
+            if((xpart _end)>(xpart _init)): % to the right
                 _pm_rl:=+1;
             else:
                 _pm_rl:=-1;
             fi
-            if(_l>_j): % to the to
+            if((ypart _end)>(ypart _init)): % to the to
                 _pm_ul:=+1;
             else:
                 _pm_ul:=-1;
@@ -872,7 +887,15 @@ def draw_circles(expr c)(text slist)=
     for _str = slist:
         _i:=_lettre_to_int(_get_char(_str,0));
         _j:=_str_to_int(_get_char(_str,1));
-        draw (fullcircle scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.08*_chessSquareU) withcolor c;
+        if(_chess_view_wb): % white side
+        draw (fullcircle scaled (0.95*_chessSquareU)) shifted
+        ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled
+        (0.08*_chessSquareU) withcolor c;
+        else:
+        draw (fullcircle scaled (0.95*_chessSquareU)) shifted
+        ((8+1-_i-0.5,8+1-_j-0.5)*_chessSquareU) withpen pencircle scaled
+        (0.08*_chessSquareU) withcolor c;
+        fi
     endfor;
 enddef;
 
@@ -882,8 +905,17 @@ def draw_crosses(expr c)(text slist)=
     for _str = slist:
         _i:=_lettre_to_int(_get_char(_str,0));
         _j:=_str_to_int(_get_char(_str,1));
+        if(_chess_view_wb):% white side
         draw (((-0.45,-0.45)--(0.45,0.45)) scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.1*_chessSquareU) withcolor c;
-        draw (((-0.45,0.45)--(0.45,-0.45)) scaled (0.95*_chessSquareU)) shifted ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled (0.1*_chessSquareU) withcolor c;
+        draw (((-0.45,0.45)--(0.45,-0.45)) scaled (0.95*_chessSquareU)) shifted
+        ((_i-0.5,_j-0.5)*_chessSquareU) withpen pencircle scaled
+        (0.1*_chessSquareU) withcolor c;
+        else:
+        draw (((-0.45,-0.45)--(0.45,0.45)) scaled (0.95*_chessSquareU)) shifted ((8+1-_i-0.5,8+1-_j-0.5)*_chessSquareU) withpen pencircle scaled (0.1*_chessSquareU) withcolor c;
+        draw (((-0.45,0.45)--(0.45,-0.45)) scaled (0.95*_chessSquareU)) shifted
+        ((8+1-_i-0.5,8+1-_j-0.5)*_chessSquareU) withpen pencircle scaled
+        (0.1*_chessSquareU) withcolor c;
+        fi
     endfor;
 enddef;
 
@@ -898,8 +930,8 @@ def clip_chessboard(expr s)=
     _first_nbr:=substring (1,2) of _str;
     _second_letter:=substring (3,4) of _str;
     _second_nbr:=substring (4,5) of _str;
-    _fl:=_lettre_to_int(_first_letter);
-    _fn:=_str_to_int(_first_nbr);
+    _fl:=_lettre_to_int(_first_letter)-1;
+    _fn:=_str_to_int(_first_nbr)-1;
     _sl:=_lettre_to_int(_second_letter);
     _sn:=_str_to_int(_second_nbr);
     clip currentpicture to (_fl,_fn)*_chessSquareU--(_fl,_sn)*_chessSquareU--(_sl,_sn)*_chessSquareU--(_sl,_fn)*_chessSquareU--cycle;
@@ -957,6 +989,6 @@ def draw_comment(expr ind, pos)=
     if(_chess_view_wb): % white view
         draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(_nbr)*_chessSquareU-0.3*_chessSquareU);
     else:
-       draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((9-_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(9-_nbr)*_chessSquareU-0.3*_chessSquareU);
+       draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((8+1-_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(8+1-_nbr)*_chessSquareU-0.3*_chessSquareU);
     fi
 enddef;
