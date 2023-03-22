@@ -3,9 +3,11 @@ string pgnstr;
 pgnstr := "1. e4 e5 2. Nf3 Nc6 3. Nxe5 Nxe5 4. Bb5 c6";
 build_chessboards_from_pgn(pgnstr);
 beginfig(0);
+set_black_view;
 init_backboard;
 draw backboard;
 show_last_move(3);
 draw chessboard_step(3); % Nf3
 draw_comment("?!","f3");
+clip_chessboard("e1-g4");
 endfig;

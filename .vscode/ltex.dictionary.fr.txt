@@ -1,0 +1,2 @@
+Lichess
+set_players_side

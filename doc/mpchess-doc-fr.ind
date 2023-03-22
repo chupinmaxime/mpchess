@@ -11,18 +11,21 @@
   \indexspace
 
   \item \lstinline+chessboard+, \hyperpage{12}
+  \item \lstinline+chessboard_step+, \hyperpage{15}
   \item \lstinline+clear_areas+, \hyperpage{14}
+  \item \lstinline+clear_chessboard+, \hyperpage{21}
   \item \lstinline+clear_files+, \hyperpage{14}
   \item \lstinline+clear_ranks+, \hyperpage{14}
   \item \lstinline+clear_squares+, \hyperpage{13}
-  \item \lstinline+color_square+, \hyperpage{18}
+  \item \lstinline+clip_chessboard+, \hyperpage{21}
+  \item \lstinline+color_square+, \hyperpage{19}
 
   \indexspace
 
   \item \lstinline+draw_arrows+, \hyperpage{17}
   \item \lstinline+draw_circles+, \hyperpage{19}
   \item \lstinline+draw_comment+, \hyperpage{20}
-  \item \lstinline+draw_crosses+, \hyperpage{19}
+  \item \lstinline+draw_crosses+, \hyperpage{20}
 
   \indexspace
 
@@ -34,25 +37,30 @@
 
   \indexspace
 
-  \item \lstinline+init_backboard+, \hyperpage{4}
+  \item \lstinline+init_backboard+, \hyperpage{5}
   \item \lstinline+init_chessboard+, \hyperpage{12}
 
   \indexspace
 
-  \item \lstinline+set_backboard_size+, \hyperpage{5}
+  \item \lstinline+reset_mpchess+, \hyperpage{21}
+
+  \indexspace
+
+  \item \lstinline+set_arrow_width+, \hyperpage{18}
+  \item \lstinline+set_backboard_size+, \hyperpage{6}
   \item \lstinline+set_backboard_width+, \hyperpage{5}
   \item \lstinline+set_black_color+, \hyperpage{7}
   \item \lstinline+set_black_player+, \hyperpage{9}
   \item \lstinline+set_black_to_move+, \hyperpage{12}
   \item \lstinline+set_black_view+, \hyperpage{9}
-  \item \lstinline+set_color_last_move+, \hyperpage{16}
   \item \lstinline+set_color_theme+, \hyperpage{6}
-  \item \lstinline+set_comment_color+, \hyperpage{20}
+  \item \lstinline+set_comment_color+, \hyperpage{21}
   \item \lstinline+set_coords+, \hyperpage{9}
   \item \lstinline+set_coords_font+, \hyperpage{9}
   \item \lstinline+set_coords_inside+, \hyperpage{8}
   \item \lstinline+set_coords_outside+, \hyperpage{8}
   \item \lstinline+set_empty_chessboard+, \hyperpage{13}
+  \item \lstinline+set_last_move_color+, \hyperpage{16}
   \item \lstinline+set_no_coords+, \hyperpage{9}
   \item \lstinline+set_pieces_theme+, \hyperpage{11}
   \item \lstinline+set_players_side+, \hyperpage{10}

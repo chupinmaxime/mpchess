@@ -1,0 +1,3 @@
+{"rule":"PREP_VERBECONJUGUE","sentence":"^\\QS'appuyer sur permet sans doute plus de flexibilité graphique que les excellent packages \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"AGREEMENT_POSTPONED_ADJ","sentence":"^\\QCette commande construit une +picture+ de nommée +backboard+.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QQui fournit le code pour la fonte de pièces d'échec, code qui a été facilement adapté en pour .\\E$"}
