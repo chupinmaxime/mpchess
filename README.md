@@ -1,4 +1,4 @@
-# mpchess
+# MPchess
 
 This package allows you to draw chess boards and positions. The appearance of
 the drawings is modern and largely inspired by what is offered by the excellent
