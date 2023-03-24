@@ -3,7 +3,7 @@
 This package allows you to draw chess boards and positions. The appearance of
 the drawings is modern and largely inspired by what is offered by the excellent
 web site [Lichess.org](lichess.org). Relying on METAPOST probably
-allows more graphic flexibility than the excellent packages LaTeX.
+allows more graphic flexibility than the excellent LaTeX packages.
 
 _This package is in beta version, do not hesitate to report bugs, as well as
 requests for improvement_.
