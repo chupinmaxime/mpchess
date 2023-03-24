@@ -38,3 +38,4 @@
 \contentsline {subsection}{\numberline {6.2}Réinitialisation globale}{21}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Découpe de l’échiquier}{21}{subsection.6.3}%
 \contentsline {section}{\numberline {7}To do}{22}{section.7}%
+\contentsline {section}{\numberline {8}Un exemple complet}{23}{section.8}%

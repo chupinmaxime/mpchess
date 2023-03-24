@@ -1,5 +1,5 @@
 
-% LTeX: language=fr
+% LTeX: language=en
 
 % mpchess: draw chess boards and positions with MetaPost
 %
@@ -10,7 +10,7 @@
 %   http://www.gnu.org/licenses/fdl.html
 % without any invariant section or cover text.
 
-\documentclass[french]{ltxdoc}
+\documentclass[english]{ltxdoc}
 \usepackage{tcolorbox}
 \tcbuselibrary{listings,breakable}
 %\tcbuselibrary{documentation}
@@ -25,7 +25,6 @@
 \usepackage{wrapfig}
 \usepackage{siunitx}
 \usepackage{imakeidx}
-%\usepackage{csquotes}
 \usepackage{fancyvrb,xparse,xargs}
 \usepackage[sfdefault]{FiraSans}
 \usepackage[mathrm=sym]{firamath-otf}
@@ -34,7 +33,7 @@
 
 \usepackage{xspace}
 \usepackage{animate}
-\usepackage[french]{babel}
+\usepackage[english]{babel}
 \newcommand{\ctan}{\textsc{ctan}}
 \NewDocumentCommand{\package}{ m }{%
   \href{https://ctan.org/pkg/#1}{#1}\xspace
@@ -176,7 +175,7 @@
 }
 
 
-\makeindex[title=Index des commandes, columns=2]
+\makeindex[title=Command Index, columns=2]
 
 
 
@@ -185,7 +184,7 @@
 
 \begin{document}
 
-\title{{MPchess} : dessiner des plateaux d’échecs et des positions avec \hologo{METAPOST}}
+\title{{MPchess} : drawing chess boards and positions with \hologo{METAPOST}}
 \author{Maxime Chupin, \url{notezik@gmail.com}}
 \date{\today}
 
@@ -197,11 +196,10 @@
   };
 \end{tikzpicture}%
 
-
 \noindent
 {\Huge \mpchess}\par\medskip
 \noindent
-{\Large  dessiner des plateaux d’échecs et des positions avec \hologo{METAPOST}}\\[1cm]
+{\Large  drawing chess boards and positions with \hologo{METAPOST}}\\[1cm]
 \parbox{0.6\textwidth}{
   \begin{mplibcode}
     input mpchess
@@ -223,13 +221,13 @@
   \end{mplibcode}
 }\hfill
 \parbox{0.5\textwidth}{\Large\raggedleft
-  \textbf{Contributeur}\\
+  \textbf{Contributor}\\
   Maxime \textsc{Chupin}\\
   \url{notezik@gmail.com}
 }
 \vfill
 \begin{center}
-  Version 0.1, 23 mars 2023 \\
+  Version 0.1, 2023, March, 23th \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -238,11 +236,11 @@
 %\maketitle
 
 \begin{abstract}
-Ce package \MP{} permet de dessiner des plateaux d’échecs et des positions.
-L’apparence des dessins se veut moderne et largement inspiré de ce que propose
-l’excellent site web \url{Lichess.org}.
-S’appuyer sur \MP{} permet sans doute plus de flexibilité graphique que les
-excellent packages \LaTeX{}.
+  This package allows you to draw chess boards and positions.
+  The appearance of the drawings is modern and largely inspired by what is offered by
+  the excellent web site \url{Lichess.org}.
+  Relying on \MP{} probably allows more graphic flexibility than the
+  excellent packages \LaTeX{}.
 \end{abstract}
 
 
@@ -253,34 +251,34 @@ excellent packages \LaTeX{}.
 \tableofcontents
 
 \begin{itshape}
-  Ce package est en version beta, n’hésitez pas à faire remonter les bugs, ainsi
-  que les demandes d’amélioration. 
+  This package is in beta version, do not hesitate to report bugs, as well as requests for improvement.
 \end{itshape}
 
 \section{Installation}
 
-\mpchess est sur le \ctan{} et peut être installé via le gestionnaire de package
-de votre distribution.
+\mpchess is on the \ctan{} and can be installed via the package manager of your
+distribution.
 
 \begin{center}
   \url{https://www.ctan.org/pkg/mpchess}
 \end{center}
 
 
-\subsection{Avec la \TeX live sous Linux ou MacOS}
+\subsection{With \TeX live under Linux or MacOS}
 
-Pour installer \mpchess avec \TeX live, il vous faudra créer le répertoire
-\lstinline+texmf+ dans votre \lstinline+home+.
+To install \mpchess with \TeX live, you will have to create the directory
+\lstinline+texmf+ directory in your \lstinline+home+. 
 
 \begin{commandshell}
 mkdir ~/texmf
 \end{commandshell}
 
-Ensuite, il faudra y placer les fichiers \lstinline+.mp+ dans le répertoire \begin{center}
+Then, you will have to place the \lstinline+.mp+ files in the 
+\begin{center}
   \lstinline+~/texmf/tex/metapost/mpchess/+
 \end{center}
 
-\mpchess est constitué de 7 fichiers \hologo{METAPOST} :
+\mpchess consists of 7 files \hologo{METAPOST} :
 \begin{itemize}
   \item \verb+mpchess.mp+;
   \item \verb+mpchess-chessboard.mp+;
@@ -291,86 +289,82 @@ Ensuite, il faudra y placer les fichiers \lstinline+.mp+ dans le répertoire \be
   \item \verb+mpchess-skak.mp+.
 \end{itemize}
 
-Une fois fait cela, \mpchess sera chargé avec le classique
+Once this is done, \mpchess will be loaded with the classic
 \begin{mpcode}
 input mpchess
 \end{mpcode}
 
-\subsection{Avec Mik\TeX{} et Windows}
+\subsection{With Mik\TeX{} and Windows}
 
-Ces deux systèmes sont inconnus de l’auteur de \mpchess, ainsi, nous renvoyons à
-leurs documentations pour y ajouter des packages locaux :
+These two systems are unknown to the author of \mpchess, so we refer to their documentation to add local packages:
 \begin{center}
   \url{http://docs.miktex.org/manual/localadditions.html}
 \end{center}
 
 
 
-\subsection{Dépendances}
+\subsection{Dependencies}
 
-\mpchess dépend des packages \MP: \package{hatching} et, si
-\mpchess n’est pas utilisé avec \hologo{LuaLaTeX} et \package{luamplib},
+
+\mpchess depends on the packages \MP: \package{hatching} and, if
+\mpchess is not used with \hologo{LuaLaTeX} and package{luamplib},
 \package{latexmp}.
 
-\subsection{Utilisation avec \hologo{LuaLaTeX} et \package{luamplib}}
+\subsection{Use with \hologo{LuaLaTeX} and \package{luamplib}}
 
-Il est tout à fait possible d’utiliser \mpchess directement dans un fichier
-\LaTeX{} avec \hologo{LuaLaTeX} et le package \package{luamplib}. C’est
-d’ailleurs ce qui est fait pour écrire cette documentation.
+It is possible to use \mpchess directly in a \LaTeX{} file with
+\hologo{LuaLaTeX} and the package \package{luamplib}. This is what is done to
+write this documentation. 
 
-\mpchess utilise, pour certaines fonctionnalités, l’opérateur
-\lstinline+infont+ de  \MP. Ainsi, pour que le contenu de ces fonctionnalités
-soit composé dans la fonte courante du document, on devra ajouter dans son
-document
-\LaTeX{}, la commande :
+For certain functionalities, \mpchess uses the \MP{} operator
+\lstinline+infont+. Thus, in order for the content of these features to be composed in the current font of the document, one must add the command :
 \begin{latexcode}
 \mplibtextextlabel{enable}
 \end{latexcode}
 
-Pour plus de détails sur ces mécanismes, nous renvoyons à la documentation du
+For more details on these mechanisms, we refer to the documentation of the
 package \package{luamplib}~\cite{ctan-luamplib}.
-\section{Pourquoi ce package et philosophie générale}
 
-Il existe déjà des packages \LaTeX{} pour dessiner des plateaux d’échecs et des
-positions dont le très bon \package{xskak}~\cite{ctan-xskak} couplé avec le
-package \package{chessboard}~\cite{ctan-chessboard}. Ulrike Fisher a réalisé là un
-travail d’amélioration, de maintient, et nous a fourni d’excellents outils pour
-réaliser des diagrammes d’échecs et de traiter les différents formats de
-descriptions de parties\footnote{Elle a même développé le
-package~\package{chessfss} pour gérer diverses fontes d’échec.}. Les
-documentations de ces packages sont de très bonnes qualités.
+\section{Why this package and general philosophy}
 
-Plusieurs choses ont motivé la création de \mpchess. Tout d’abord, avec
-\package{chessboard} l’ajout d’ensemble de pièces n’est pas très aisé, car cela
-repose sur des fontes. De plus, je trouve que le dessin de diagrammes de parties
-d’échec est quelque chose de très graphique, et que le passage par un langage
-dédié au dessin offre plus de souplesse et quoi de mieux que \MP~\cite{ctan-metapost}.
+There are already \LaTeX{} packages for drawing chess boards and positions,
+including the very good \package{xskak}~\cite{ctan-xskak}coupled with the
+package \package{chessboard}~\cite{ctan-chessboard}. 
+Ulrike Fisher has done there improvement, maintenance work, and provided us with
+excellent tools to make chess diagrams and to handle the different formats of
+game descriptions\footnote{She even developed the
+package to handle various chess fonts.}. The
+documentations of these packages are very good.
+
+Several things motivated the creation of \mpchess. First of all, with
+\package{chessboard} the addition of a set of pieces is not very easy, because
+it relies on fonts. Moreover, I find that drawing chess game diagrams is
+something diagrams is a very graphical thing, and that using a dedicated drawing
+language offers more flexibility and what better than \MP~\cite{ctan-metapost}.
+
+With \mpchess, we build the final image of the chess board with the pieces
+by successive layers. Thus, we begin by producing and drawing the board
+(\lstinline+backboard+), which we can modify by coloring some squares for
+example, then we will add the pieces of the position (\lstinline+chessboard+),
+and finally, we can annotate the whole with marks, colors, arrows, etc. 
 
 
-Avec \mpchess, on construit l’image finale du plateau d’échec avec les pièces
-par couches successives. Ainsi, on commencera par produire et dessiner le
-plateau (\lstinline+backboard+), que l’on pourra modifier en colorant par
-exemple certaines cases, ensuite on ajoutera les pièces de la position
-(\lstinline+chessboard+), et enfin, on pourra annoter le tout avec des marques, des couleurs, des flèches, etc.
 
-Par ailleurs, \mpchess produit des images proches graphiquement de ce que peut
-fournir l’excellent site \emph{open source} \url{https://lichess.org}. Vous
-verrez que les couleurs, les pièces et l’aspect général sont largement inspirés
-de ce que propose ce site.
+Moreover, \mpchess produces images that are graphically close to what can be
+provided by excellent  \emph{open source} website \url{https://lichess.org}. You
+will see that the colors, the pieces and the general aspect are largely inspired
+of what this website offers.
 
-\section{Plateau}
+\section{Board}
 
-Le plateau est appelé avec \mpchess{} \lstinline+backboard+.
-Il faudra initialiser le plateau avant de le dessiner. Cela se fait avec la
-commande suivante :\par
+The board is called with \mpchess{} \lstinline+backboard+.
+You have to initialize the board before drawing it. This is done with the
+following command:\par
 
 \commande|init_backboard|\smallskip\index{init_backboard@\lstinline+init_backboard+}
 
-
-Cette commande construit une \lstinline+picture+ de \MP{} nommée
-\mbox{\lstinline+backboard+.} Il faudra ensuite la tracer comme l’illustre l’exemple
-suivant.
-
+This command constructs a \MP{} \lstinline+picture+ named
+\mbox{\lstinline+backboard+.} It should then be drawn as illustrated in the following example.
 \begin{ExempleMP}
 input mpchess
 
@@ -380,38 +374,43 @@ draw backboard;
 endfig;
 \end{ExempleMP}
 
-Cette initialisation permettra de prendre en compte les différentes options et
-fonctionnalités que nous allons décrire dans la suite.
-\subsection{Réglage des tailles}
-Lors de la création du \lstinline+backboard+, on peut décider de la largeur de celui-ci. Cela se fait grâce à la commande suivante :\par\bigskip
+This initialization will make it possible to take into account the various options and features that we will describe in the following.
+
+\subsection{Setting the size}
+
+When creating the \lstinline+backboard+, you can decide on the width of it. This is done with the following command:\par\bigskip
 
 \commande|set_backboard_width(«dim»)|\smallskip\index{set_backboard_width@\lstinline+set_backboard_width+}
 
 \begin{description}
-  \item[\meta{dim}:] est la largeur de plateau de jeu souhaitée (avec l’unité). Par défaut, cette dimension est à \SI{5}{cm}.
+  \item[\meta{dim}:] is the width of the board (with units). By default, this dimension is \SI{5}{cm}.
 \end{description}
 
-L’utilisation de cette commande est illustré à l’exemple~\ref{ex:widthcase}. Cette commande est à utilisée avant \lstinline+init_backboard+ pour qu’elle soit prise en compte à la création de l’image.
+The use of this command is illustrated in the example~\ref{ex:widthcase}. This
+command should be used before \lstinline+init_backboard+ so that it is taken
+into account when creating the \lstinline+picture+. 
 \bigskip
 
-On peut récupérer la dimension du plateau de jeu par la commande suivante.
+The size of the board can be retrieved with the following command:
 
 \commande|get_backboard_width|\smallskip\index{get_backboard_width@\lstinline+get_backboard_width+}
 
-Cette commande retourne un type \lstinline+numeric+.
+This command returns a \lstinline+numeric+.
 
-\subsection{Nombre de case}
-Par défaut, le plateau de jeu contient 64 cases ($8\times 8$). On peut modifier
-cela avec la commande suivante:
+\subsection{Number of squares}
 
+By default, the game board contains 64 squares ($8\times 8$). You can change
+this with the following command: 
 \commande|set_backboard_size(«nbr»)|
 \smallskip\index{set_backboard_size@\lstinline+set_backboard_size+}
 
 \begin{description}
-  \item[\meta{nbr}:] est le nombre de cases souhaité. Le plateau sera alors carré de taille \meta{nbr}$\times$\meta{nbr}. Par défaut ce nombre est à 8.
+  \item[\meta{nbr}:] is the desired number of squares. The board will then be
+  square of size \meta{nbr}$\times$\meta{nbr}. By default this number is 8. 
 \end{description}
 
-Encore une fois, cette commande est à utilisée avant \lstinline+init_backboard+ pour qu’elle soit prise en compte comme le montre l’exemple suivant.
+Again, this command must be used before \lstinline+init_backboard+ for it to be
+taken into account as shown in the following example. 
 
 \begin{ExempleMP}[label=ex:widthcase]
 input mpchess
@@ -424,41 +423,41 @@ draw backboard;
 endfig;
 \end{ExempleMP}
 
-Pour obtenir la taille du plateau de jeu, on pourra utiliser la commande
-suivante. 
+To obtain the size of the game board, you can use the following command the
+following command 
 
 \commande|get_backboard_size|\smallskip\index{get_backboard_size@\lstinline+get_backboard_size+}
 
-Cette commande retourne un type \lstinline+numeric+.
+This command returns a \lstinline+numeric+.
 
-\subsection{Dimension d’une case}
+\subsection{Dimension of a square}
 
-En fonction du nombre de cases sur le plateau et la largeur prescrite pour le
-plateau, \mpchess calcule la dimension (largeur ou hauteur) d’une case. Cela
-sert d’unité générale. Pour l’obtenir, on utilisera la commande suivante.
+Depending on the number of squares on the board and the prescribed width of the board, \mpchess calculates the dimension (width or height) of a square. This
+serves as a general unit. To obtain it, use the following command.
 
 \commande|get_square_dim|\smallskip\index{get_square_dim@\lstinline+get_square_dim+}
 
-Cette commande retourne un \lstinline+numeric+.
+This command returns a \lstinline+numeric+.
 
-\subsection{Réglage du thème de couleur}
+\subsection{Setting the color theme}
 
-\subsubsection{Thèmes prédéfinis}
+\subsubsection{Predefined themes}
 
-Plusieurs thèmes de couleurs sont accessibles. Pour choisir un thème de couleur, on utilisera la commande suivante :
+Several color themes are available. To choose a color theme, use the following
+command:
 
 \commande|set_color_theme(«string»)|\smallskip\index{set_color_theme@\lstinline+set_color_theme+}
 
 \begin{description}
-  \item[\meta{string}] peut valoir :
+  \item[\meta{string}] can be:
 \begin{itemize}
 \item \lstinline+"BlueLichess"+ (thème par défaut);
 \item \lstinline+"BrownLichess"+ ;
-\item ou \lstinline+"Classical"+.
+\item or \lstinline+"Classical"+.
 \end{itemize}
 \end{description}
 
-Les exemples suivants montrent les résultats obtenus.
+The following examples show the results obtained.
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
@@ -476,17 +475,18 @@ draw backboard;
 endfig;
 \end{ExempleMP}
 
-Les deux thèmes colorés fournis empruntent les couleurs des thèmes de Lichess.
+The two color themes provided borrow the colors of the Lichess themes.
 
-\subsubsection{Configuration d’un thème personnel}
 
-Un thème de couleur est en réalité simplement la définition de deux couleurs.
-Celles-ci peuvent se définir avec les commandes suivantes.
+\subsubsection{Configuration of a personal theme}
+
+A color theme is really just the definition of two colors.
+These can be defined with the following commands.
 
 \commande|set_white_color(«color»)|\index{set_white_color@\lstinline+set_white_color+}\par
 \commande|set_black_color(«color»)|\index{set_black_color@\lstinline+set_black_color+}\smallskip
 
-\meta{color} est une \lstinline+color+ \MP.
+\meta{color} is a \MP{} \lstinline+color+.
 
 \begin{ExempleMP}
 input mpchess
@@ -497,17 +497,18 @@ init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
-\subsection{Affichage des coordonnées}
+\subsection{Display coordinates}
 
-Vous avez pu constater dans les divers exemples que par défaut, les coordonnées
-sont, comme le fait le site Lichess, inscrites en petit à l’intérieur des
-cases.
+You may have noticed in the various examples that by default, the coordinates are, as on the Lichess site, written in small letters inside the boxes.
 
-\mpchess permet de positionner ces coordonnées à l’extérieur du plateau avec la commande suivante.
+\mpchess allows to position these coordinates outside the board with the
+following command. 
 
 \commande|set_coords_outside|\index{set_coords_outside@\lstinline+set_coords_outside+}\smallskip
 
-Le résultat est alors le suivant.
+The result is as follows.
+
+
 
 \begin{ExempleMP}
 input mpchess
@@ -518,53 +519,56 @@ draw backboard;
 endfig;
 \end{ExempleMP}
 
-Il existe aussi la commande permettant de positionner les coordonnées à l’intérieur du plateau.
+There is also a command to position the coordinates inside the board.
 
 \commande|set_coords_inside|\index{set_coords_inside@\lstinline+set_coords_inside+}\smallskip
 
-Vous pouvez constater dans cette documentation qu’avec \package{luamplib} et
-\LaTeX, la fonte est la fonte du document courant. Pour tracer ces lettres et
-ces chiffres, \mpchess utilise l’opérateur \MP{} \lstinline+infont+ et la fonte
-est réglée à \lstinline+defaultfont+ par défaut\footnote{Avec \package{luamplib}
-l’opérateur \lstinline+infont+ est redéfini et son argument est simplement
-ignoré, ainsi, il n’est pas possible de modifier la fonte de composition des
-coordonnées.}. On peut modifier cette fonte avec la commande suivante.
+You can see in this documentation that with \package{luamplib} and
+\LaTeX, the font is the font of the current document. To draw these letters and
+these numbers, \mpchess uses the \MP{} operator  \lstinline+infont+ and the font
+is set to \lstinline+defaultfont+ by default\footnote{With \package{luamplib}
+the \lstinline+infont+ operator is redefined and its argument is simply
+ignored}, so it is not possible to modify the composition font of the
+coordinates. This font can be changed with the following command.
 
 \commande|set_coords_font(«font»)|\index{set_coords_font@\lstinline+set_coords_font+}\smallskip
 
-Il faudra alors utiliser les conventions de nommage propres à l’opérateur
-\lstinline+infont+ de \MP{} et nous renvoyons à la
-documentation~\cite{ctan-metapost} pour plus de détails.
+It will then be necessary to use the naming conventions specific to the \MP{}
+operator
+\lstinline+infont+ and we refer to the
+documentation~\cite{ctan-metapost} for more details.
 
-On pourra aussi supprimer les coordonnées avec la commande suivante.
+You can also delete the coordinates with the following command.
 
 \commande|set_no_coords|\index{set_no_coords@\lstinline+set_no_coords+}\smallskip
 
-Et la commande inverse aussi existe.
+And the reverse command also exists.
 
 \commande|set_coords|\index{set_coords@\lstinline+set_coords+}\smallskip
 
 
-\subsection{Vue blanche ou noire}
+\subsection{White or black side}
 
-Pour choisir si l’on souhaite voir le plateau du côté blanc ou noir, \mpchess fournit deux commandes.
+To choose if you want to see the tray on the white or black side, \mpchess
+provides two commands. 
 
 \commande|set_white_view|\index{set_white_view@\lstinline+set_white_view+}\smallskip
 
 \commande|set_black_view|\index{set_black_view@\lstinline+set_black_view+}\smallskip
 
-Par défaut, on voit l’échiquier côté blanc.
+By default, we see the board on the white side.
 
-\subsection{Noms des joueurs}
+\subsection{Players' names}
 
-On peut renseigner les noms des joueuses ou des joueurs pour qu’ils soient notés
-autour de l’échiquier. Ceci se fait avec les commandes suivantes.
+You can fill in the names of the players so that they are noted around the
+chessboard. This is done with the following commands. 
+
 \commande|set_white_player(«string»)|\index{set_white_player@\lstinline+set_white_player+}\smallskip
 
 \commande|set_black_player(«string»)|\index{set_black_player@\lstinline+set_black_player+}\smallskip
 
 \begin{description}
-  \item[\meta{string} :] est la chaîne de caractères interprétée par \LaTeX à afficher.
+  \item[\meta{string} :] is the string interpreted by \LaTeX to display.
 \end{description}
 
 \begin{ExempleMP}
@@ -578,9 +582,10 @@ draw backboard;
 endfig;
 \end{ExempleMP}
 
-Il est possible de placer les noms sur le côté droit du plateau sans les
-bandeaux noirs présents par défaut. Cela se produit soit si les coordonnées sont
-imprimées à l’extérieur du plateau, soit si la commande suivante est utilisée.
+It is possible to place the names on the right side of the board without the
+black bands present by default. 
+This happens either if the coordinates are printed outside the tray, or if the
+following command is used.
 
 \commande|set_players_side|\index{set_players_side@\lstinline+set_players_side+}\smallskip
 
@@ -597,44 +602,45 @@ endfig;
 
 
 
-\section{Pièces et positions}
+\section{Pieces et positions}
 
-\mpchess, comme décrit plus haut, construit le graphique d’une position d’échec
-couche par couche. Cette partie est dédiée à la configuration des pièces et des
+\mpchess, as described above, builds the picture of a chess position
+layer by layer. This part is dedicated to the configuration of pieces and
 positions.
 
-En interne, \mpchess construit un tableau sur la grille du plateau. Ensuite, des
-macros permettent de générer une \lstinline+picture+ à dessiner \emph{par
-  dessus} le plateau (\lstinline+backboard+).
+Internally, \mpchess builds a table on the board grid. Then, some
+macros allow to generate a \lstinline+picture+ to be drawn \emph{over} the board (\lstinline+backboard+).
 
-\subsection{Réglage du thème des pièces}
+\subsection{Setting the theme of the pieces}
 
-\mpchess fournit pour l’instant trois thèmes de pièces, deux emprunté à Lichess,
-et l’autre emprunté au package~\package{skak}~\cite{ctan-skak}\footnote{Qui
-  fournit le code \MF{} pour la fonte de pièces d’échec, code qui a été
-  facilement adapté en \MP{} pour \mpchess.}.
+\mpchess provides for the moment three themes of pieces, two borrowed from
+Lichess, and the other borrowed from the
+package~\package{skak}~cite{ctan-skak}\footnote{Which provides the \MF{} code
+for a chess font, which has been easily adapted to \MP{} for \mpchess.}.
 
-Pour choisir le thème on utilisera la commande suivante.
+To choose the theme we will use the following command.
 
 \commande|set_pieces_theme(«string»)|\index{set_pieces_theme@\lstinline+set_pieces_theme+}\smallskip
 
 \begin{description}
-  \item[\meta{string}:] peut valoir:
+  \item[\meta{string}:] can be:
 \begin{itemize}
-\item \lstinline+"cburnett"+ (valeur par défaut), pour obtenir l’ensemble de pièces nommé \emph{cburnett} de Lichess;
-
-\item \lstinline+"staunty"+, pour obtenir l’ensemble de pièces nommé \emph{staunty} de Lichess;
-\item \lstinline+"skak"+, pour obtenir l’ensemble de pièces du package~\package{skak}.
+\item \lstinline+"cburnett"+ (default), to get the Lichess \emph{cburnett}
+pieces set;
+\item \lstinline+"staunty"+, to get the Lichess \emph{staunty}
+pieces set;
+\item \lstinline+"skak"+, to get the \package{skak}
+pieces set.
 \end{itemize}
 \end{description}
 
 
-Le tableau~\ref{tab:pieces} montre le résultat des trois ensembles de pièces.
+The table~\ref{tab:pieces} shows the result of the three sets of pieces.
 \begin{table}
   \centering
 \begin{tabular}{cc}
 
-Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
+\lstinline+cburnett+ theme&\lstinline+staunty+ theme\\
 \begin{mplibcode}
   input mpchess
   beginfig(0);
@@ -659,7 +665,7 @@ Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
   draw chessboard_step(0);
   endfig;
 \end{mplibcode}\\
-Thème \lstinline+skak+&\\
+\lstinline+skak+ theme&\\
 \begin{mplibcode}
   input mpchess
   beginfig(0);
@@ -673,48 +679,50 @@ Thème \lstinline+skak+&\\
   endfig;
 \end{mplibcode}&\\
 \end{tabular}
-\caption{Les différents thèmes de pièces fournits par \mpchess.}\label{tab:pieces}
+\caption{The different themes of pieces provided by \mpchess.}\label{tab:pieces}
 \end{table}
 
 
-\subsection{Trait}
+\subsection{Who’s to move}
 
-\mpchess indique qui a le trait entre les blancs et les noirs. Ceci ce fait par
-un petit triangle coloré (blanc ou noir) à l’extrérieur du plateau (que vous
-pourrez observer dans les nombreux exemples suivants).
+\mpchess indicates who has the move between white and black. This is done by
+a small colored triangle (white or black) at the end of the board (which you can
+you can see in the following examples).
 
-Pour spécifier qui a le trait on utilisera les commandes suivantes.
+To specify who has to move we use the following commands.
 
 \commande|set_white_to_move|\index{set_white_to_move@\lstinline+set_white_to_move+}\smallskip
 
 
 \commande|set_black_to_move|\index{set_black_to_move@\lstinline+set_black_to_move+}\smallskip
 
-Par défaut, c’est aux blancs de jouer, et cette information est affichée.
+By default, white has to move, and this information is displayed.
 
-Pour activer ou désactiver l’affichage du trait, on utilisera une des deux commandes suivantes.
+To activate or deactivate this display, use one of the following two
+commands.
 
 \commande|set_whos_to_move|\index{set_whos_to_move@\lstinline+set_whos_to_move+}\smallskip
 
 
 \commande|unset_whos_to_move|\index{unset_whos_to_move@\lstinline+unset_whos_to_move+}\smallskip
 
-\subsection{Dessiner une position}
+\subsection{Draw position}
 
-Les commandes décrites ci-dessous permet de construire une position de plusieurs
-façons (ajout de pièces une à une, lecture de fichier \textsc{fen}, etc.). Une
-fois une position construite, on peut la tracer grâce à la commande suivante qui
-génère une \lstinline+picture+.
+The commands described below allow you to build a position in several ways
+(adding pieces one by one, reading a \textsc{fen} file, etc.). Once a position
+has been constructed, it can be plotted 
+using the following command which generates a \MP{} \lstinline+picture+.
+
 
 \commande|chessboard|\index{chessboard@\lstinline+chessboard+}\smallskip \label{com:chessboard}
 
-L’utilisation de cette commande va être largement illustrée dans les exemples suivants.
+The use of this command will be widely illustrated in the following examples.
 
-\subsection{Construire une position}
+\subsection{Build a position}
 
-\subsubsection{Initialisation}
+\subsubsection{Initialization}
 
-Pour obtenir la position initiale d’une partie, il suffit d’utiliser la commande suivante.
+To obtain the initial position of a game, simply use the following command.
 
 \commande|init_chessboard|\index{init_chessboard@\lstinline+init_chessboard+}\smallskip
 
@@ -728,24 +736,25 @@ draw chessboard;
 endfig;
 \end{ExempleMP}
 
-On pourra aussi initialiser un \lstinline+chessboard+ vide grâce à la commande suivante.
+You can also initialize an empty \lstinline+chessboard+ with the following command. 
 
 \commande|set_empty_chessboard|\index{set_empty_chessboard@\lstinline+set_empty_chessboard+}\smallskip
 
-\subsubsection{Ajout de pièces}
+\subsubsection{Adding pieces}
 
-On peut ajouter des pièces pour construire une position grâce aux deux commandes suivantes.
+You can add pieces to build a position with the following two commands.
 
 \commande|add_white_pieces(«piece1»,«piece2»,etc.)|\index{add_white_pieces@\lstinline+add_white_pieces+}\smallskip
 
 
 \commande|add_black_pieces(«piece1»,«piece2»,etc.)|\index{add_black_pieces@\lstinline+add_black_pieces+}\smallskip
 
-Ces commandes prennent des listes de \textbf{\meta{piece}} qui sont des chaînes
-de caractères qui décrivent la pièce et la position en utilisant la notation
-algébrique. Il n’y a pas de limitation au nombre de pièces dans la liste.
+These commands take lists of \textbf{\meta{piece}} which are strings
+that describe the piece and the position using the
+algebraic notation. There is no limitation on the number of pieces in the list.
 
-L’exemple suivant illustre l’utilisation de ces commandes.
+The following example illustrates the use of these commands.
+
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
@@ -759,44 +768,44 @@ endfig;
 \end{ExempleMP}
 
 
-\subsubsection{Suppression de pièces}
+\subsubsection{Delete piece}
 
-\mpchess fournit plusieurs commandes permettant de supprimer des éléments d’une position.
+\mpchess provides several commands to remove items from a position.
 
-La première commande permet de supprimer un élément d’une case. Cette commande permet de prendre une liste de cases, en utilisant la notation algébrique.
+The first command allows you to delete an item from a square. This command takes
+a list of squares, using algebraic notation.
 
 \commande|clear_squares(«square1»,«square2»,etc.)|\index{clear_squares@\lstinline+clear_squares+}\smallskip
 
-Les \textbf{\meta{square1}}, \textbf{\meta{square2}}, etc., sont des chaînes de caractères, par exemple \lstinline+"a3"+.
+The \textbf{\meta{square1}}, \textbf{\meta{square2}}, etc., are strings, for example \lstinline+"a3"+.
 \medskip
 
-La commande suivante permet de supprimer un ensemble de cases dans une région
-déterminé par deux coordonnées sur le plateau. Cette commande permet de prendre
-une liste de régions.
+The following command allows to delete a set of squares in a region
+determined by two coordinates on the board. This command allows to take
+a list of regions.
 
 \commande|clear_areas(«area1»,«area2»,etc.)|\index{clear_areas@\lstinline+clear_areas+}\smallskip
 
-Les \textbf{\meta{area1}}, \textbf{\meta{area2}}, etc., sont des chaînes de caractères constituées de deux coordonnées séparées par un tiret, par exemple \lstinline+"a3-g7"+.
+The \textbf{\meta{area1}}, \textbf{\meta{area2}}, etc., are strings consisting of two coordinates separated by a dash, for example \lstinline+"a3-g7"+.
 \medskip
 
-La commande suivante permet de supprimer l’ensemble des cases d’une colonne
-déterminé par une lettre sur le plateau. Cette commande permet de prendre
-une liste de colonnes.
+The following command deletes all the cells in a file (column) determined by a
+letter on the board. This command allows to take a list of files.
+
 
 \commande|clear_files(«file1»,«file2»,etc.)|\index{clear_files@\lstinline+clear_files+}\smallskip
 
-Les \textbf{\meta{file1}}, \textbf{\meta{file2}}, etc., sont des chaînes de caractères constituées d’une lettre, par exemple \lstinline+"a"+.
+The \textbf{\meta{file1}}, \textbf{\meta{file2}}, etc., are strings of characters consisting of a letter, for example \lstinline+"a"+.
 \medskip
 
-La commande suivante permet de supprimer l’ensemble des cases d’une ligne
-déterminé par un nombre sur le plateau. Cette commande permet de prendre
-une liste de lignes.
+The following command deletes all the cells in a rank (line) determined by a
+number on the board. This command allows to take a list of ranks.
 
 \commande|clear_ranks(«rank1»,«rank2»,etc.)|\index{clear_ranks@\lstinline+clear_ranks+}\smallskip
 
-Les \textbf{\meta{rank1}}, \textbf{\meta{rank2}}, etc., sont des chaînes de caractères constituées d’un nombre, par exemple \lstinline+"4"+.
+The \textbf{\meta{rank1}}, \textbf{\meta{rank2}}, etc., are strings made up of a number, for example \lstinline+"4"+.
 
-L’utilisation de l’ensemble des ces commandes est illustrée dans l’exemple suivant.
+The use of all these commands is illustrated in the following example.
 
 \begin{ExempleMP}
 input mpchess
@@ -814,15 +823,16 @@ endfig;
 
 
 
-\subsection{Lecture de données au format \textsc{fen}}
+\subsection{Reading data in \textsc{fen} format}
 
-\mpchess permet de lire une position au format \textsc{fen} grâce à la commande suivante.
+\mpchess allows you to read a position in the \textsc{fen} format thanks to the following command.
+
 \commande|build_chessboard_from_fen(«string»)|\index{build_chessboard_from_fen@\lstinline+build_chessboard_from_fen+}\smallskip
 
 \begin{description}
-\item[\meta{string}:] est une chaîne de caractères décrivant une position au
-format \textsc{fen}. Notons que toutes les informations après l’information du
-\emph{trait} (\texttt{w} ou \texttt{b}) sont ignorées.
+\item[\meta{string}:] is a string describing a position in
+\textsc{fen} format. Note that all information after the 
+\texttt{w} or \texttt{b} character is ignored. 
 \end{description}
 
 \begin{ExempleMP}
@@ -838,29 +848,30 @@ endfig;
 \end{ExempleMP}
 
 
-\subsection{Lecture de données au format \textsc{pgn}}
+\subsection{Reading data in \textsc{pgn} format}
 
-\mpchess permet aussi de lire une chaîne de caractères au format \textsc{pgn}.
-Lorsque une telle fonctionnalité est utilisé, \mpchess stocke toutes les
-positions intermédiaires et permet ainsi de les représenter.
+\mpchess also makes it possible to read a string in the \textsc{pgn}
+format. 
+When such a functionality is used, \mpchess stores all the
+intermediate positions and thus allows to represent them.
 
-Pour construire les positions, on utilisera la commande suivante.
+To construct the positions, we use the following command.
 
 \commande|build_chessboards_from_pgn(«string»)|\index{build_chessboards_from_pgn@\lstinline+build_chessboards_from_pgn+}\smallskip
 
-Le format \textsc{pgn} accepté par \mpchess est un format simplifié qui
-n’accepte ni les variantes ni les commentaires.
+The \textsc{pgn} format accepted is a simplified one which does not accept variants or comments.
 
-Une fois le positions construites, on pourra les représenter grâce à la commande suivante.
+Once the positions are built, we can represent them with the following command.
 
 \commande|chessboard_step(«int»)|\index{chessboard_step@\lstinline+chessboard_step+}\smallskip
 \begin{description}
-\item[\meta{int}:] est le numéro du l’étape. La configuration initiale est numérotée 0, et ensuite, chaque coup, blanc ou noir, est numéroté.
+\item[\meta{int}:] is the number of the step. The initial configuration is numbered 0, and then each move, white or black, is numbered.
 \end{description}
 
-Cette commande, comme \lstinline+chessboard+ (voir page~\pageref{com:chessboard}), retourne une \lstinline+picture+.
+This command, like \lstinline+chessboard+ (see page~\pageref{com:chessboard}),
+returns a \lstinline+picture+. 
 
-L’exemple suivant illustre l’utilisation de ces commandes.
+The following example illustrates the use of these commands.
 
 \begin{ExempleMP}
 input mpchess;
@@ -874,17 +885,20 @@ draw chessboard_step(3); % Nf3
 endfig;
 \end{ExempleMP}
 
-\subsubsection{Montrer le dernier coup}
+\subsubsection{Show last move}
 
-On peut afficher automatiquement le dernier coup grâce à la commande suivante.
+The last move can be displayed automatically with the following command.
 
 \commande|show_last_move(«int»)|\index{show_last_move@\lstinline+show_last_move+}\smallskip
 
 \begin{description}
-\item[\meta{int}:] est le numéro du l’étape. La configuration initiale est numérotée 0, et ensuite, chaque coup, blanc ou noir, est numéroté.
+\item[\meta{int}:] is the number of the step. The initial setup is numbered 0, and then each move, white or black, is numbered.
 \end{description}
 
-Cette commande colorie en transparence les deux cases de départ et d’arrivée du dernier coup. Ainsi, elle doit être utilisée entre le dessin du plateau (\lstinline+draw backboard+) et le dessin des pièces (\lstinline+draw chessboard_step(i)+).
+This command colors in transparency the two squares where the last move starts
+and ends. Thus, it must be used between the drawing of the board
+(\lstinline+draw backboard+) and the drawing of the pieces 
+(\lstinline+draw chessboard_step(i)+).
 
 \begin{ExempleMP}
 input mpchess;
@@ -899,50 +913,55 @@ draw chessboard_step(3); % Nf3
 endfig;
 \end{ExempleMP}
 
-On pourra configurer la couleur utilisée pour colorier en transparence les cases du dernier coup grâce à la commande suivante.
+You can configure the color used to color the squares of the last
+move with the following command.
 
 \commande|set_last_move_color(«color»)|\index{set_last_move_color@\lstinline+set_last_move_color+}\smallskip
 \begin{description}
-  \item[\meta{color}:] est une \lstinline+color+ \MP.
+  \item[\meta{color}:] is a \MP{} \lstinline+color+.
 \end{description}
 
 
 
-\subsubsection{Obtenir le nombre de coups}
+\subsubsection{Get the number of moves}
 
-On pourra récupérer le nombre de \emph{demi}-coups grâce à la
-commande suivante.
+You can get the number of half moves with the following command.
 
 \commande|get_halfmove_number|\index{get_halfmove_number@\lstinline+get_halfmove_number+}\smallskip
 
-Cette commande retourne un \lstinline+numeric+.
+This command returns a \lstinline+numeric+.
 
-On pourra aussi récupérer le nombre de coups \og{}total\fg{} au sens où il sont numéroté dans le format \textsc{pgn}, grâce à la commande suivante :
+You can also get the total number of moves in the sense that they are numbered
+in the \textsc{pgn} format, with the following command:
 
 \commande|get_totalmove_number|\index{get_totalmove_number@\lstinline+get_totalmove_number+}\smallskip
 
-Cette commande retourne un \lstinline+numeric+.
+This command returns a \lstinline+numeric+.
 
 \section{Annotation}
 
-De nombreuses commandes permettent d’annonter l’échiquier (flêche, couleur, cercle, croix, etc.).
+Numerous commands allow to annotate the chessboard (arrow, color, circle, cross,
+etc.).
 
-\subsection{Flèches}
+\subsection{Arrows}
 
-La commande pour tracer des flêches sur l’échiquier est la suivante.
+The command for drawing arrows on the chessboard is the following.
 
 \commande|draw_arrows(«color»)(«string1»,«string2», etc.)|\index{draw_arrows@\lstinline+draw_arrows+}\smallskip
 \begin{description}
-\item[\meta{color}:] est une \lstinline+color+ \MP.
-\item[\meta{string1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre) séparés par deux caractères qui peuvent être
+\item[\meta{color}:] is a \MP{} \lstinline+color+.
+\item[\meta{string1}:] is a string (between double-quotes) consisting of two
+coordinates (letter and number) separated by two characters which can be 
 \begin{description}
-\vitem+--+ pour relier les deux cases en ligne droite ;
-\vitem+-|+ pour relier les deux cases en ligne brisée, d’abord horizontalement puis verticalement ;
-\vitem+|-+ pour relier les deux cases en ligne brisée, d’abord verticalement puis horizontalement.
+\vitem+--+ to connect the two squares in a straight line;
+\vitem+-|+ to connect the two squares in a broken line, first horizontally then
+vertically; 
+\vitem+|-+ to connect the two squares in a broken line, first vertically then
+horizontally. 
 \end{description}
 \end{description}
 
-L’exemple suivant illustre l’utilisation de cette commande.
+The following example illustrates the use of this command.
 \begin{ExempleMP}
 input mpchess;
 string pgnstr;
@@ -957,16 +976,15 @@ draw_arrows(red)("f8--b4","g1|-f3");
 endfig;
 \end{ExempleMP}
 
-On pourra modifier l’épaisseur des flêches grâce à la commande suivante.
+The thickness of the arrows can be changed with the following command.
 \commande|set_arrow_width(«coeff»)|\index{set_arrow_width@\lstinline+set_arrow_width+}\smallskip
 
 \begin{description}
-  \item[\meta{coeff}:] est un coefficient (\lstinline+numeric+) qui permet de
-  régler la largeur des flêches proportionnellement à la largeur d’une case de
-  l’échiquier. Par défaut, ce coefficient vaut \lstinline+0.08+.
+  \item[\meta{coeff}:] is a coefficient (\lstinline+numeric+) which allows you 
+  to adjust the width of the arrows in proportion to the width of a square on the chessboard. By default, this coefficient is \lstinline+0.08+.
 \end{description}
 
-L’exemple suivant illustre l’utilisation de cette commande.
+The following example illustrates the use of this command.
 \begin{ExempleMP}
 input mpchess;
 string pgnstr;
@@ -983,17 +1001,19 @@ draw_arrows(red)("f8--b4","g1|-f3");
 endfig;
 \end{ExempleMP}
 
-\subsection{Coloration de cases}
-\mpchess permet aussi de colorer des cases grâce à la commande suivante.
+\subsection{Coloring squares}
+
+\mpchess also allows you to color squares with the following command.
 
 \commande|color_square(«color»)(«coord1»,«coord2», etc.)|\index{color_square@\lstinline+color_square+}\smallskip
 
 \begin{description}
-\item[\meta{color}:] est une \lstinline+color+ \MP.
-\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+\item[\meta{color}:] is a \MP{} \lstinline+color+.
+\item[\meta{coord1}:] is a string (between double quotes) consisting of two
+coordinates (letter and number). 
 \end{description}
 
-L’exemple suivant permet d’illustrer l’utilisation de cette commande.
+The following example illustrates the use of this command.
 
 \begin{ExempleMP}
 input mpchess
@@ -1006,20 +1026,23 @@ draw chessboard;
 endfig;
 \end{ExempleMP}
 
-Cette commande colorie les cases avec une certaine transparence pour s’adapter
-aux cases blanches et noires.
+This command colors the squares with a certain transparency to fit to the white
+and black squares.
 
-\subsection{Cercles}
-\mpchess permet d’entourer des cases avec des cercles grâce à la commande
-suivante.
+\subsection{Circles}
+
+\mpchess allows you to surround squares with circles using the following command
+ below. 
+
 \commande|draw_circles(«color»)(«coord1»,«coord2», etc.)|\index{draw_circles@\lstinline+draw_circles+}\smallskip
 
 \begin{description}
-\item[\meta{color}:] est une \lstinline+color+ \MP.
-\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+\item[\meta{color}:] is a \MP{} \lstinline+color+.
+\item[\meta{coord1}:] is a string (between double quotes) consisting of two
+coordinates (letter and number). 
 \end{description}
 
-L’exemple suivant permet d’illustrer l’utilisation de cette commande.
+The following example illustrates the use of this command.
 
 \begin{ExempleMP}
 input mpchess
@@ -1034,20 +1057,22 @@ endfig;
 
 
 
-\subsection{Croix}
+\subsection{Crosses}
 
 
-\mpchess permet de tracer des croix sur des cases  grâce à la commande
-suivante.
+\mpchess allows you to draw crosses on squares with the following command.
+
 \commande|draw_crosses(«color»)(«coord1»,«coord2», etc.)|\index{draw_crosses@\lstinline+draw_crosses+}\smallskip
 
 \begin{description}
-  \item[\meta{color}:] est une \lstinline+color+ \MP.
-  \item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
-  \end{description}
+\item[\meta{color}:] is a \MP{} \lstinline+color+.
+\item[\meta{coord1}:] is a string (between double quotes) consisting of two
+coordinates (letter and number). 
+\end{description}
 
-L’exemple suivant permet d’illustrer l’utilisation de cette commande.
+The following example illustrates the use of this command.
 
+  
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
@@ -1059,18 +1084,16 @@ draw_crosses(0.7[green,black])("e2","e7","c5");
 endfig;
 \end{ExempleMP}
 
-\subsection{Commentaires de coup}
+\subsection{Move comments}
 
-\mpchess permet d’afficher les classiques commentaires de coups du type
-\og{}!?\fg{} grâce à la commande suivante.
+\mpchess allows you to display the classic move comments of the type
+``!?’’ with the following command.
 
 \commande|draw_comment(«str»,«pos»)|\index{draw_comment@\lstinline+draw_comment+}\smallskip
 
 \begin{description}
-\item[\meta{str}:] est une chaîne de caractères (entre double-quotes) à
-afficher. 
-\item[\meta{pos}:] est une chaîne de caractères (entre double-quotes) consituée
-d’une coordonnée (lettre et chiffre). 
+\item[\meta{str}:] is a string (between double-quotes) to display.
+\item[\meta{pos}:] is a string (between double-quotes) consisting of a coordinate (letter and number).
 \end{description}
 
 \begin{ExempleMP}
@@ -1087,44 +1110,44 @@ draw_comment("?!","f3");
 endfig;
 \end{ExempleMP}
 
-La couleur des annotation de commentaires peut être changé grâce à la commande
-suivante.
+The color of the comment annotation can be changed with the following command
+following command.
 \commande|set_comment_color(«color»)|\index{set_comment_color@\lstinline+set_comment_color+}\smallskip
 
 
 
-\section{Divers}
+\section{Miscellaneous}
 
-\subsection{Réinitialisation du \lstinline+chessboard+}
+\subsection{Reset the \lstinline+chessboard+}
 
-Pour réinitialiser la structure interne stockant les positions des pièces, on
-pourra utiliser la commande suivante.
+To reset the internal structure storing the positions of the parts, you can use
+the following command. 
+
 
 \commande|clear_chessboard|\index{clear_chessboard@\lstinline+clear_chessboard+}\smallskip
 
 
-\subsection{Réinitialisation globale}
+\subsection{Global reset}
 
-Pour réinitialiser les valeurs des différents paramètres de \mpchess, on pourra
-utiliser la commande suivante.
+To reinitialize the values of the different parameters of \mpchess, you can use
+the following command.
 
 \commande|reset_mpchess|\index{reset_mpchess@\lstinline+reset_mpchess+}\smallskip
 
 
-\subsection{Découpe de l’échiquier}
+\subsection{Clip the board}
 
-On pourra faire une découpe dans l’image de l’échiquier grâce à la commande suivante.
+We can clip the chessboard with the following command.
 
 \commande|clip_chessboard(«string»)|\index{clip_chessboard@\lstinline+clip_chessboard+}\smallskip
 
 
 \begin{description}
-\item[\meta{string}:] est une chaîne de caractères (entre double-quotes)
-composée de deux coordonnées (lettre et chiffre) séparé par un tiret, par
-exemple \lstinline+"a1-c6"+.
+\item[\meta{string}:] is a string (between double quotes)
+composed of two coordinates (letter and number) separated by a dash, for example \lstinline+"a1-c6"+.
 \end{description}
 
-Voici un exemple d’illustration.
+Here is an example of an illustration.
 \begin{ExempleMP}
 input mpchess;
 string pgnstr;
@@ -1143,21 +1166,19 @@ endfig;
 
 \section{To do}
 
-De nombreuses choses sont à ajouter à \mpchess. Parmi celles-ci, on peut penser
-à :
-
+Many things can be added to \mpchess. Among these, we can think of:
 \begin{itemize}
-\item afficher les pièces capturées, ou le différentiel des pièces capturées ;
+\item display the captured pieces, or the differential of the captured pieces;
 \item afficher le temps restant pour chaque joueur ;
-\item montrer les cases accessibles pour une pièces choisie (les points de
-Lichess) ;
-\item ajouter les coordonnées en extérieur lorsque le plateau est découpé ;
-\item afficher les $n$ flèches indiquant les $n$ coups des premières lignes
-d’une position (avec une épaisseur des flèches qui décroit) ;
-\item ajouter des thèmes de pièces.
+\item show the accessible squares for a chosen piece (the
+Lichess points);
+\item display the $n$ arrows indicating the $n$ moves of the first lines of a
+position (with a decreasing thickness of the arrows); 
+\item adding the coordinates outside the board when it is clipped;
+\item add piece themes.
 \end{itemize}
 
-\section{Un exemple complet}
+\section{Complete example}
 
 \begin{ExempleMP}[sidebyside=false]
 input mpchess
@@ -1165,9 +1186,9 @@ string pgnstr;
 pgnstr:="1. e4 e5 2. Bc4 d6 3. Nf3 Bg4 4. Nc3 g6 5. Nxe5 Bxd1";
 build_chessboards_from_pgn(pgnstr);
 beginfig(0);
-set_backboard_width(8cm);
 set_white_player("Kermur de Legal");
 set_black_player("Saint-Brie");
+set_backboard_width(8cm);
 init_backboard;
 draw backboard;
 show_last_move(10);
