@@ -2,7 +2,7 @@
 %%                        mpchess.mp                          %%
 %%              draw chessboards with metapost                %%
 %%                chupin@ceremade.dauphine.fr                 %%
-%%                Version 0.1 (Février 2023)                  %%
+%%                Version 0.1 (mars 2023)                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This work may be distributed and/or modified under the conditions of
@@ -574,14 +574,14 @@ backboard:=image(
             if((not _chess_coords_inout) or _chess_players_side): % if coord outside or option so set players to the site
                 label.urt(textext(_chess_white_player),(1.05*_chessSize*_chessSquareU,0));
             else:
-                draw _chess_build_playername(_chess_white_player) shifted (0,-_chess_get_img_h(_chess_build_playername(_chess_white_player)));
+                draw _chess_build_playername(_chess_white_player) shifted (0,-_chess_get_img_h(_chess_build_playername(_chess_white_player))+_chess_eps_cadre*_chessSquareU);
             fi
         fi
         if(_chess_black_player<>""):
             if((not _chess_coords_inout) or _chess_players_side):
                 label.lrt(textext(_chess_black_player),(1.05*_chessSize*_chessSquareU,_chessSize*_chessSquareU));
             else:
-                draw _chess_build_playername(_chess_black_player) shifted (0,_chessSquareU*(_chessSize+_chess_eps_cadre));
+                draw _chess_build_playername(_chess_black_player) shifted (0,_chessSquareU*(_chessSize+2*_chess_eps_cadre));
             fi
         fi
     else: % black view
@@ -969,7 +969,7 @@ def set_comment_color(expr c)=
     _commentColor:=c;
 enddef;
 
-_commentScale:=0.25;
+_commentScale:=0.2;
 
 def draw_comment(expr ind, pos)=
     save _img, _letter, _nbr;
@@ -987,8 +987,8 @@ def draw_comment(expr ind, pos)=
     _letter:=_lettre_to_int(_get_char(pos,0));
     _nbr:=_str_to_int(_get_char(pos,1));
     if(_chess_view_wb): % white view
-        draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(_nbr)*_chessSquareU-0.3*_chessSquareU);
+        draw _img scaled (_commentScale*_chessSquareU/max(_width,_height)) shifted  ((_letter)*_chessSquareU-0.15*(_chessSquareU-_width),(_nbr)*_chessSquareU-0.15*_chessSquareU);
     else:
-       draw _img scaled (_commentScale*_chessSquareU/_width) shifted  ((8+1-_letter)*_chessSquareU-0.4*(_chessSquareU-_width),(8+1-_nbr)*_chessSquareU-0.3*_chessSquareU);
+       draw _img scaled (_commentScale*_chessSquareU/max(_width,_height)) shifted  ((8+1-_letter)*_chessSquareU-0.15*(_chessSquareU-_width),(8+1-_nbr)*_chessSquareU-0.15*_chessSquareU);
     fi
 enddef;
