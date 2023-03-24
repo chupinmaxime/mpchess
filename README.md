@@ -1,3 +1,49 @@
 # mpchess
 
+This package allows you to draw chess boards and positions. The appearance of
+the drawings is modern and largely inspired by what is offered by the excellent
+web site (Lichess.org)[lichess.org]. Relying on METAPOST probably
+allows more graphic flexibility than the excellent packages LaTeX.
 
+_This package is in beta version, do not hesitate to report bugs, as well as
+requests for improvement_.
+
+## Installation
+
+MPchess is on the (ctan)[ctan.org] and can be installed via the package manager of your
+distribution (https://www.ctan.org/pkg/mpchess)[https://www.ctan.org/pkg/mpchess].
+
+### With TeX live under Linux or MacOS
+
+To install MPchess with TeX live, you will have to create the directory texmf directory in your home.
+```bash
+user $> mkdir ~/texmf
+```
+
+Then, you will have to place the .mp files in the
+`~/texmf/tex/metapost/mpchess/`.
+
+MPchess consists of 7 files METAPOST :
+* mpchess.mp;
+* mpchess-chessboard.mp;
+* mpchess-pgn.mp;
+* mpchess-fen.mp;
+* mpchess-cburnett.mp;
+* mpchess-staunty.mp;
+* mpchess-skak.mp.
+
+Once this is done, MPchess will be loaded with the classic
+```metapost
+input mpchess
+```
+
+### With MikTEX and Windows
+
+These two systems are unknown to the author of MPchess, so we refer to their
+documentation to add local packages:
+(http://docs.miktex.org/manual/localadditions.html)[http://docs.miktex.org/manual/localadditions.html]
+
+## Dependencies
+
+MPchess depends on the packages METAPOST: `hatching` and, if MPchess is not
+used with LuaLaTeX and luamplib, `latexmp`.
