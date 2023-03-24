@@ -48,3 +48,8 @@ documentation to add local packages:
 
 MPchess depends on the packages METAPOST: `hatching` and, if MPchess is not
 used with LuaLaTeX and luamplib, `latexmp`.
+
+## Documentation
+
+* [English documentation](doc/mpchess-doc-en.pdf)
+* [Documentation en français](doc/mpchess-doc-fr.pdf)
