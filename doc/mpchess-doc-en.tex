@@ -250,9 +250,19 @@
 
 \tableofcontents
 
-\begin{itshape}
+\bigskip
+
+\begin{tcolorbox}[ arc=0pt,outer arc=0pt,
+  colback=darkred!3,
+  colframe=darkred,
+  breakable,
+  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
+  3pt, toptitle=3pt,
+  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
+  0pt, bottomrule at break = 0pt,]
+  \itshape
   This package is in beta version, do not hesitate to report bugs, as well as requests for improvement.
-\end{itshape}
+\end{tcolorbox}
 
 \section{Installation}
 
@@ -307,7 +317,7 @@ These two systems are unknown to the author of \mpchess, so we refer to their do
 
 
 \mpchess depends on the packages \MP: \package{hatching} and, if
-\mpchess is not used with \hologo{LuaLaTeX} and package{luamplib},
+\mpchess is not used with \hologo{LuaLaTeX} and \package{luamplib},
 \package{latexmp}.
 
 \subsection{Use with \hologo{LuaLaTeX} and \package{luamplib}}

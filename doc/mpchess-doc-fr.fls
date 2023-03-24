@@ -603,8 +603,6 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mflogo/ulogo.fd
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/mflogo/ulogo.fd
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/knuth-local/logod10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/knuth-lib/logo10.tfm
-INPUT /home/mc/texmf/metapost/mpchess/mpchess.mp
-OUTPUT /home/mc/.texlive2023/texmf-var/luamplib_cache/luamplib_input_mpchess_mp
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm
 INPUT /usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
