@@ -88,3 +88,11 @@ def build_chessboard_from_fen(expr s)=
     set_empty_chessboard;
     _chess_extract_position(s);
 enddef;
+
+def build_chessboard_from_fen_file(expr s)=
+    set_empty_chessboard;
+    string _rf;
+    _rf:=readfrom s;
+    _chess_extract_position(_rf);
+enddef;
+

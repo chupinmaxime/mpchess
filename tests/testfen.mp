@@ -8,9 +8,15 @@ build_chessboard_from_fen(in);
 
 beginfig(0);
 init_backboard;
-%set_black_view;
-    %draw backboard;
+draw backboard;
 draw chessboard;
 endfig;
 
+
+beginfig(1);
+build_chessboard_from_fen_file("test.fen");
+init_backboard;
+draw backboard;
+draw chessboard;
+endfig;
 end.
