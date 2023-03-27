@@ -685,10 +685,35 @@ endfig;
 \end{ExempleMP}
 
 
+It is also possible to read an external file containing on the first line a
+string in the format \textsc{fen} with the following command.
+
+\commande|build_chessboard_from_fen_file(«string»)|\index{build_chessboard_from_fen_file@\lstinline+build_chessboard_from_fen_file+}\smallskip
+
+\begin{description}
+  \item[\meta{string}:] is a string of characters (between double quotes)
+  indicating the name of the file to read.  
+\end{description}
+
+
+\begin{ExempleMP}
+input mpchess;
+beginfig(0);
+init_backboard;
+draw backboard;
+build_chessboard_from_fen_file("test.fen");
+draw chessboard;
+endfig;
+\end{ExempleMP}
+
 \subsection{Reading data in \textsc{pgn} format}
 
-\mpchess also makes it possible to read a string in the \textsc{pgn}
-format. 
+\mpchess also allows to read a string in the format \textsc{pgn}.
+Attention, this is a partial management of the format, in particular \mpchess
+does not manage the \emph{tags} of the format. In reality, \mpchess only handles
+the string describing the moves played. In the same way, the accepted format
+ by \mpchess does not allow variants or comments.
+
 When such a functionality is used, \mpchess stores all the
 intermediate positions and thus allows to represent them.
 
@@ -696,7 +721,6 @@ To construct the positions, we use the following command.
 
 \commande|build_chessboards_from_pgn(«string»)|\index{build_chessboards_from_pgn@\lstinline+build_chessboards_from_pgn+}\smallskip
 
-The \textsc{pgn} format accepted is a simplified one which does not accept variants or comments.
 
 Once the positions are built, we can represent them with the following command.
 
@@ -722,6 +746,26 @@ draw chessboard_step(3); % Nf3
 endfig;
 \end{ExempleMP}
 
+
+It is also possible to read an external file containing on the first line a
+string in the format \textsc{pgn} with the following command.
+
+\commande|build_chessboard_from_pgn_file(«string»)|\index{build_chessboard_from_pgn_file@\lstinline+build_chessboard_from_pgn_file+}\smallskip
+
+\begin{description}
+  \item[\meta{string}:] is a string of characters (between double quotes)
+  indicating the name of the file to read.  
+\end{description}
+
+\begin{ExempleMP}
+input mpchess;
+build_chessboards_from_pgn_file("test.pgn");
+beginfig(0);
+init_backboard;
+draw backboard;
+draw chessboard_step(4); % Nc6
+endfig;
+\end{ExempleMP}
 \subsubsection{Show last move}
 
 The last move can be displayed automatically with the following command.

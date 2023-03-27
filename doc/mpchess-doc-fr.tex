@@ -671,19 +671,46 @@ draw chessboard;
 endfig;
 \end{ExempleMP}
 
+Il est aussi possible de lire un fichier externe contenant sur la première ligne
+une chaîne de caractères au format \textsc{fen} avec la commande suivante. 
 
+\commande|build_chessboard_from_fen_file(«string»)|\index{build_chessboard_from_fen_file@\lstinline+build_chessboard_from_fen_file+}\smallskip
+
+\begin{description}
+\item[\meta{string}:] est une chaîne de caractères (entre double-quotes)
+indiquant le nom du fichier à lire. 
+\end{description}
+
+\begin{ExempleMP}
+input mpchess;
+beginfig(0);
+init_backboard;
+draw backboard;
+build_chessboard_from_fen_file("test.fen");
+draw chessboard;
+endfig;
+\end{ExempleMP}
+
+  
+
+  
 \subsection{Lecture de données au format \textsc{pgn}}
 
 \mpchess permet aussi de lire une chaîne de caractères au format \textsc{pgn}.
-Lorsque une telle fonctionnalité est utilisé, \mpchess stocke toutes les
+Attention, il s’agit d’une gestion partielle du format, en particulier
+\mpchess ne gère pas les \emph{tags} du format. En réalité, \mpchess ne traite
+que la chaîne de caractères décrivant les coups joués. De même, le format
+\textsc{pgn} accepté par \mpchess n’accepte ni les variantes ni les
+commentaires.  
+
+Lorsqu’une telle fonctionnalité est utilisé, \mpchess stocke toutes les
 positions intermédiaires et permet ainsi de les représenter.
 
 Pour construire les positions, on utilisera la commande suivante.
 
 \commande|build_chessboards_from_pgn(«string»)|\index{build_chessboards_from_pgn@\lstinline+build_chessboards_from_pgn+}\smallskip
 
-Le format \textsc{pgn} accepté par \mpchess est un format simplifié qui
-n’accepte ni les variantes ni les commentaires.
+
 
 Une fois le positions construites, on pourra les représenter grâce à la commande suivante.
 
@@ -705,6 +732,26 @@ beginfig(0);
 init_backboard;
 draw backboard;
 draw chessboard_step(3); % Nf3
+endfig;
+\end{ExempleMP}
+
+Il est aussi possible de lire un fichier externe contenant sur la première ligne
+une chaîne de caractères au format \textsc{pgn} avec la commande suivante. 
+
+\commande|build_chessboard_from_pgn_file(«string»)|\index{build_chessboard_from_pgn_file@\lstinline+build_chessboard_from_pgn_file+}\smallskip
+
+\begin{description}
+\item[\meta{string}:] est une chaîne de caractères (entre double-quotes)
+indiquant le nom du fichier à lire. 
+\end{description}
+
+\begin{ExempleMP}
+input mpchess;
+build_chessboards_from_pgn_file("test.pgn");
+beginfig(0);
+init_backboard;
+draw backboard;
+draw chessboard_step(4); % Nc6
 endfig;
 \end{ExempleMP}
 
