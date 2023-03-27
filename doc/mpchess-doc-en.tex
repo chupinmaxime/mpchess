@@ -11,169 +11,10 @@
 % without any invariant section or cover text.
 
 \documentclass[english]{ltxdoc}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings,breakable}
-%\tcbuselibrary{documentation}
-\usepackage{enumitem}
-\usepackage[tikz]{bclogo}
-\usepackage{mflogo}
-\usepackage{hologo}
-\usepackage{luamplib}
-\mplibtextextlabel{enable}
-\usepackage{biblatex}
-\addbibresource{ctan.bib}
-\usepackage{wrapfig}
-\usepackage{siunitx}
-\usepackage{imakeidx}
-\usepackage{fancyvrb,xparse,xargs}
-\usepackage[sfdefault]{FiraSans}
-\usepackage[mathrm=sym]{firamath-otf}
-%\setmonofont{Fira Mono}
-\setmonofont{FiraCode-Regular.ttf}[BoldFont= FiraCode-Bold.ttf,ItalicFont= FiraCode-RegularItalic.otf,BoldItalicFont= FiraCode-BoldItalic.otf,]
 
-\usepackage{xspace}
-\usepackage{animate}
+\input{mpchess-preamble}
+
 \usepackage[english]{babel}
-\newcommand{\ctan}{\textsc{ctan}}
-\NewDocumentCommand{\package}{ m }{%
-  \href{https://ctan.org/pkg/#1}{#1}\xspace
-}
-
-\definecolor{darkred}{rgb}{0.6,0.1,0.1}
-\definecolor{vert}{rgb}{0.1,0.4,0.1}
-\definecolor{bleu}{rgb}{0.2,0.2,0.6}
-\definecolor{orange}{rgb}{0.6,0.4,0.}
-\colorlet{code}{blue!80!black}
-
-\usepackage[colorlinks=true,urlcolor=orange,linkcolor=orange,menucolor=black,citecolor=orange]{hyperref}
-
-\newcommand \file       {\nolinkurl}
-\renewcommand \cmd        {\texttt}
-\renewcommand \code   [1] {\texorpdfstring {\texttt{\color{code}#1}} {#1}}
-\renewcommand*\cs     [1] {\code{\textbackslash #1}}
-
-
-
-\newcommand*\commande{\par\bigskip\noindent\hspace{-30pt}%
-  \SaveVerb[aftersave={%
-   \UseVerb{Vitem}%
-  }%
-  ]{Vitem}%
-  }
-  \newcommand\vitem[1][]{\SaveVerb[%
-  aftersave={\item[\textnormal{\UseVerb[#1]{vsave}}]}]{vsave}}
-\newcommand*\textme[1]{\textcolor{black}{\rmfamily\textit{#1}}}
-%\renewcommand*\meta[1]{% % meta
-%  \textme{\ensuremath{\langle}#1\ensuremath{\rangle}}}
-\newcommand*\optstar{% % optional star
-  \meta{\ensuremath{*}}\xspace}
-\DefineShortVerb{\|}
-\newcommand\R{\mathbf{R}}
-\setlength{\fboxsep}{2pt}
-\fvset{%
-  codes={\catcode`\«\active \catcode`\×\active },
-  defineactive={\makefancyog\makefancytimes},
-  formatcom=\color{darkred},
-  frame=single
-}
-% rendre «...» équivalent à \meta{...}
-{\catcode`\«\active
-  \newcommandx\makefancyog[0][addprefix=\global]{%
-    \def«##1»{\meta{##1}}}}
-% rendre × équivalent à \optstar
-{\catcode`\×\active
-  \newcommandx\makefancytimes[0][addprefix=\global]{%
-    \def×{\optstar{}}}}
-
-
-\newcommand\mpchess{\textbf{\textlogo{MP}}\textit{chess}\xspace}
-
-
-
-%\addbibresource{biblio.bib}
-
-
-\lstset{
-  numberstyle=\footnotesize\color{vert},
-  keywordstyle=\ttfamily\bfseries\color{bleu},
-  basicstyle=\ttfamily,
-  commentstyle=\itshape\color{vert},
-  stringstyle=\ttfamily\color{orange},
-  showstringspaces=false,
-  language=MetaPost,
-  breaklines=true,
-  breakindent=30pt,
-  defaultdialect=MetaPost,
-  classoffset=1,% frame=tb
-  morekeywords={init_backboard,set_backboard_width,set_backboard_size,set_color_theme,get_backboard_width,get_backboard_size,set_backboard_width,get_square_dim,set_white_color,set_black_color,set_coords_inside,set_coords_outside,set_coords_font,set_coords,
-  set_no_coords,set_white_view,set_black_view,
-  set_white_player,set_black_player,set_pieces_theme,set_players_side,init_chessboard,set_empty_chessboard,add_white_pieces,add_black_pieces,clear_areas,clear_files,clear_ranks,clear_squares,build_chessboard_from_fen,build_chessboards_from_pgn,clear_chessboard,
-  color_square,draw_arrows,draw_circles,draw_comment,draw_crosses,get_halfmove_number,get_totalmove_number,
-  reset_mpchess,set_black_to_move,set_last_move_color,set_comment_color,set_white_to_move,set_whos_to_move,show_last_move,unset_whos_to_move,set_arrow_width,clip_chessboard},
-  keywordstyle=\color{darkred},
-  classoffset=2,% frame=tb
-  morekeywords={backboard,chessboard,chessboard_step},
-  keywordstyle=\color{vert},
-  classoffset=0,% frame=tb
-  morekeywords={draw},
-  keywordstyle=\color{bleu}
-}
-
-\makeatletter
-\tcbset{%
-    listing metapost/.code={%
-        \def\tcbuselistingtext@input{\begin{mplibcode} input \jobname.listing; \end{mplibcode}}%
-    }
-}
-\makeatother
-\newtcblisting[auto counter,]{ExempleMP}[1][]{%
-  arc=0pt,outer arc=0pt,
-  colback=darkred!3,
-  colframe=darkred,
-  breakable,fontupper=\small,
-  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
-  3pt, toptitle=3pt,
-  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
-  0pt, bottomrule at break = 0pt,
-  listing side text,
-  listing metapost,
-  title=Exemple~\thetcbcounter,
-  listing options={breaklines},#1
-}
-
-\newtcblisting{commandshell}{colback=black,colupper=white,colframe=black,
-  arc=0pt,
-  listing only,boxsep=0pt,listing
-  options={style=tcblatex,language=sh},
-  every listing line={\textcolor{red}{\small\ttfamily\bfseries user \$> }}}
-
-
-  \newtcblisting{mpcode}{
-  arc=0pt,outer arc=0pt,
-  colback=darkred!3,
-  colframe=darkred,
-  breakable,
-  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
-  3pt, toptitle=3pt,
-  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
-  0pt, bottomrule at break = 0pt,
-  listing only,boxsep=0pt,listing
-  options={breaklines}
-}
-
-\newtcblisting{latexcode}{
-  arc=0pt,outer arc=0pt,
-  colback=darkred!3,
-  colframe=darkred,
-  breakable,
-  boxsep=0pt,left=5pt,right=5pt,top=5pt,bottom=5pt, bottomtitle =
-  3pt, toptitle=3pt,
-  boxrule=0pt,bottomrule=0.5pt,toprule=0.5pt, toprule at break =
-  0pt, bottomrule at break = 0pt,
-  listing only,boxsep=0pt,listing
-  options={breaklines,language={[LaTeX]TeX}}
-}
-
 
 \makeindex[title=Command Index, columns=2]
 
@@ -320,20 +161,6 @@ These two systems are unknown to the author of \mpchess, so we refer to their do
 \mpchess is not used with \hologo{LuaLaTeX} and \package{luamplib},
 \package{latexmp}.
 
-\subsection{Use with \hologo{LuaLaTeX} and \package{luamplib}}
-
-It is possible to use \mpchess directly in a \LaTeX{} file with
-\hologo{LuaLaTeX} and the package \package{luamplib}. This is what is done to
-write this documentation. 
-
-For certain functionalities, \mpchess uses the \MP{} operator
-\lstinline+infont+. Thus, in order for the content of these features to be composed in the current font of the document, one must add the command :
-\begin{latexcode}
-\mplibtextextlabel{enable}
-\end{latexcode}
-
-For more details on these mechanisms, we refer to the documentation of the
-package \package{luamplib}~\cite{ctan-luamplib}.
 
 \section{Why this package and general philosophy}
 
@@ -1173,6 +1000,127 @@ draw_comment("?!","f3");
 clip_chessboard("e1-g4");
 endfig;
 \end{ExempleMP}
+
+
+\section{Use with \LaTeX{}}
+
+\subsection{Use with \hologo{pdfLaTeX} or \hologo{XeLaTeX}}
+
+There are several ways to include the images produced by \mpchess in a \LaTeX
+document. The first is to generate pdf files with \MP{} and then to include them
+with \lstinline[language=TeX]+\includegraphics+. This solution works with all
+engines.
+
+You can also use the packages \package{gmp} or \package{mpgraphics} with
+\hologo{pdfLaTeX} or \hologo{XeLaTeX}\footnote{We would like to thank Quark67
+for the questions and advice}.
+
+\subsubsection{With \package{mpgraphics}}
+
+With \package{mpgraphics}~\cite{ctan-mpgraphics}, we load \mpchess with the
+\lstinline+mpdefs+ environment and we can produce images with \MP{}
+code but without using \lstinline+beginfig+ and \lstinline+endfig+,
+the code to generate a figure is in the \lstinline+mpdisplay+ environment. It will be necessary to use the option \lstinline+-shell-escape+ option when compiling the \LaTeX document. 
+
+Here is a complete example of illustration.
+
+\begin{latexcode}
+\documentclass{article}
+\usepackage{mpgraphics}
+\begin{document}
+\begin{mpdefs}
+input mpchess
+\end{mpdefs}
+\begin{mpdisplay}
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard;
+draw_arrows(red)("e7--e5","g1|-f3");
+\end{mpdisplay}
+\end{figure}
+\end{document}
+\end{latexcode}
+
+\subsubsection{With \package{gmp}}
+
+The use of \package{gmp}~\cite{ctan-gmp} is quite similar to that of
+\package{mpgraphics}. Some commands are different, but as with
+\package{mpgraphics}, we do not use \lstinline+beginfig+ and
+\lstinline+endfig+. The loading of \mpchess can be done when loading the
+package, and the \MP{} code is in a \lstinline+mpost+ environment. Here again
+it will be necessary to compile the \LaTeX{} document with the
+\lstinline+-shell-escape+ option. 
+
+
+
+Here is a complete example of illustration.
+
+
+\begin{latexcode}
+\documentclass{article}
+\usepackage[shellescape, everymp={input mpchess;}]{gmp}
+
+\begin{document}
+
+\begin{mpost}
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard;
+draw_arrows(red)("e7--e5","g1|-f3");
+\end{mpost}
+\end{document}
+\end{latexcode}
+\subsection{Use with \hologo{LuaLaTeX} and \package{luamplib}}
+
+It is possible to use \mpchess directly in a \LaTeX{} file with
+\hologo{LuaLaTeX} and the package \package{luamplib}. This is what is done to
+write this documentation. 
+
+It will then suffice to put the \MP{} code in the environment
+\lstinline+mplibcode+. 
+
+For certain functionalities, \mpchess uses the \MP{} operator
+\lstinline+infont+. Thus, in order for the content of these features to be composed in the current font of the document, one must add the command :
+\begin{latexcode}
+\mplibtextextlabel{enable}
+\end{latexcode}
+
+
+
+For more details on these mechanisms, we refer to the documentation of the
+package \package{luamplib}~\cite{ctan-luamplib}.
+
+We can load globally \mpchess with the following command. 
+
+\begin{latexcode}
+\everymplib{input mpchess;}
+\end{latexcode}
+
+Here is a complete example of illustration (to be compiled with
+\hologo{LuaLaTeX}). 
+
+
+\begin{latexcode}
+\documentclass{article}
+\usepackage{luamplib}
+
+\everymplib{input mpchess;}
+
+\begin{document}
+
+\begin{mplibcode}
+beginfig(0);
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard;
+draw_arrows(red)("e7--e5","g1|-f3");
+endfig;
+\end{mplibcode}
+\end{document}
+\end{latexcode}
 
 \section{To do}
 
