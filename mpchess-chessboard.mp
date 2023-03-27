@@ -386,11 +386,6 @@ def _build_all_chessboards=
     chessboard_number:=_chess_step_numtable;
 enddef;
 
-def build_chessboards_from_pgn(expr s)=
-    _build_chess_moves_tables(s);
-    _build_all_chessboards;
-enddef;
-
 
 % set the starting empty board
 def set_empty_chessboard =

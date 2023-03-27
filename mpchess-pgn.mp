@@ -313,3 +313,15 @@ vardef _extract_move(expr _step,s,wb)=
     _chess_moves_table_numeric[_step][6]:=_ambiguity;
 enddef;
 
+def build_chessboards_from_pgn(expr s)=
+    _build_chess_moves_tables(s);
+    _build_all_chessboards;
+enddef;
+
+def build_chessboards_from_pgn_file(expr s)=
+    set_empty_chessboard;
+    string _rf;
+    _rf:=readfrom s;
+    _build_chess_moves_tables(_rf);
+    _build_all_chessboards;
+enddef;
