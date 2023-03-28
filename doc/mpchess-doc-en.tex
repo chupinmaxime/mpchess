@@ -68,7 +68,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.1, 2023, March, 23th \\
+  Version 0.2, 2023, March, 28th \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -136,7 +136,7 @@ Then, you will have to place the \lstinline+.mp+ files in the
   \item \verb+mpchess-pgn.mp+;
   \item \verb+mpchess-fen.mp+;
   \item \verb+mpchess-cburnett.mp+;
-  \item \verb+mpchess-staunty.mp+;
+  \item \verb+mpchess-pieces.mp+;
   \item \verb+mpchess-skak.mp+.
 \end{itemize}
 
@@ -464,8 +464,8 @@ To choose the theme we will use the following command.
 \begin{itemize}
 \item \lstinline+"cburnett"+ (default), to get the Lichess \emph{cburnett}
 pieces set;
-\item \lstinline+"staunty"+, to get the Lichess \emph{staunty}
-pieces set;
+\item \lstinline+"mpchess"+, to get the set specially designed for this
+package;
 \item \lstinline+"skak"+, to get the \package{skak}
 pieces set.
 \end{itemize}
@@ -477,7 +477,7 @@ The table~\ref{tab:pieces} shows the result of the three sets of pieces.
   \centering
 \begin{tabular}{cc}
 
-\lstinline+cburnett+ theme&\lstinline+staunty+ theme\\
+\lstinline+cburnett+ theme&\lstinline+mpchess+ theme\\
 \begin{mplibcode}
   input mpchess
   beginfig(0);
@@ -495,7 +495,7 @@ The table~\ref{tab:pieces} shows the result of the three sets of pieces.
   beginfig(0);
   init_chessboard;
   set_backboard_width(4cm);
-  set_pieces_theme("staunty");
+  set_pieces_theme("mpchess");
   unset_whos_to_move;
   init_backboard;
   draw backboard;
@@ -996,6 +996,52 @@ following command.
 \commande|set_comment_color(«color»)|\index{set_comment_color@\lstinline+set_comment_color+}\smallskip
 
 
+\subsection{Main Lines}
+
+\mpchess provides a command to display the arrows of the moves of the
+main lines of analysis. There are commands for both colors. 
+
+\commande|draw_white_main_lines(«move1»,«move2»,etc.)|\index{draw_white_main_lines@\lstinline+draw_white_main_lines+}\smallskip
+
+\commande|draw_black_main_lines(«move1»,«move2»,etc.)|\index{draw_black_main_lines@\lstinline+draw_black_main_lines+}\smallskip
+
+\begin{description}
+  \item[\meta{move1}, \meta{move2}, etc.:] are the moves to be illustrated using
+\textsc{pgn} notation.
+\end{description}
+  
+When using the format \textsc{pgn} for the construction of the positions to be  
+to be displayed, the following commands can be used  
+to specify which move of the game is being commented on. 
+
+\commande|draw_white_main_lines_step(«step»)(«move1»,«move2»,etc.)|\index{draw_white_main_lines_step@\lstinline+draw_white_main_lines_step+}\smallskip
+
+\commande|draw_black_main_lines_step(«step»)(«move1»,«move2»,etc.)|\index{draw_black_main_lines_step@\lstinline+draw_black_main_lines_step+}\smallskip
+
+\begin{description}
+\item[\meta{step}:] is the step of the game you want to annote; 
+\item[\meta{move1}, \meta{move2}, etc.:] are the moves to be illustrated using
+\textsc{pgn} notation.
+\end{description}
+
+The following example illustrates the use of this command. 
+\begin{ExempleMP}
+input mpchess
+string pgnstr;
+pgnstr:="1. e4 d5";
+build_chessboards_from_pgn(pgnstr);
+beginfig(0);
+init_backboard;
+draw backboard;
+draw chessboard_step(2);
+draw_white_main_lines_step(2)("exd5","e5","Nc3");
+endfig;
+\end{ExempleMP}
+
+To change the color (by default \lstinline+0.3[_blackColorSquare,black]+),
+we will use the following command. 
+
+\commande|set_main_lines_color(«color»)|\index{set_main_lines_color@\lstinline+set_main_lines_color+}\smallskip
 
 \section{Miscellaneous}
 
@@ -1202,6 +1248,16 @@ draw_arrows(0.3[green,black])("e5|-f7","c3-|d5");
 draw_arrows(0.3[red,black])("c4--f7");
 endfig;
 \end{ExempleMP}
+
+\section{History}
+
+\begin{description}
+\item [v0.2, March 28, 2023:] Added commands for \textsc{pgn} and \textsc{fen}
+file reading; added commands for displaying the main lines of
+analysis; removal of the \lstinline+staunty+ theme (because of
+license) and creation of the \lstinline+mpchess+ parts theme.
+\item[v0.1, March 23, 2023:] First publication on the \ctan.
+\end{description}
 
 
 \printbibliography

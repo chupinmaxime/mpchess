@@ -9,7 +9,7 @@ cp mpchess-chessboard.mp mpchess/metapost
 cp mpchess-fen.mp mpchess/metapost
 cp mpchess-pgn.mp mpchess/metapost
 cp mpchess-skak.mp mpchess/metapost
-cp mpchess-staunty.mp mpchess/metapost
+cp mpchess-pieces.mp mpchess/metapost
 
 cp doc/fond.pdf mpchess/doc/
 cp doc/ctan.bib mpchess/doc/
@@ -17,12 +17,16 @@ cp doc/mpchess-doc-en.pdf mpchess/doc/
 cp doc/mpchess-doc-en.tex mpchess/doc/
 cp doc/mpchess-doc-fr.pdf mpchess/doc/
 cp doc/mpchess-doc-fr.tex mpchess/doc/
+cp doc/mpchess-preamble.tex mpchess/doc/
+cp doc/test.fen mpchess/doc/
+cp doc/test.pgn mpchess/doc/
+
 
 cp README.md mpchess/
 cp LICENSE mpchess/
 
 
 
-zip -r archives/mpchess-v0.1-CTAN.zip mpchess/
+zip -r archives/mpchess-v0.2-CTAN.zip mpchess/
 
 rm -r mpchess

@@ -71,7 +71,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.1, 23 mars 2023 \\
+  Version 0.2, 28 mars 2023 \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -139,7 +139,7 @@ Ensuite, il faudra y placer les fichiers \lstinline+.mp+ dans le répertoire \be
   \item \verb+mpchess-pgn.mp+;
   \item \verb+mpchess-fen.mp+;
   \item \verb+mpchess-cburnett.mp+;
-  \item \verb+mpchess-staunty.mp+;
+  \item \verb+mpchess-pieces.mp+;
   \item \verb+mpchess-skak.mp+.
 \end{itemize}
 
@@ -457,18 +457,18 @@ Pour choisir le thème on utilisera la commande suivante.
 \begin{itemize}
 \item \lstinline+"cburnett"+ (valeur par défaut), pour obtenir l’ensemble de pièces nommé \emph{cburnett} de Lichess;
 
-\item \lstinline+"staunty"+, pour obtenir l’ensemble de pièces nommé \emph{staunty} de Lichess;
+\item \lstinline+"mpchess"+, pour obtenir l’ensemble de pièces spécialement
+conçu pour ce package ;
 \item \lstinline+"skak"+, pour obtenir l’ensemble de pièces du package~\package{skak}.
 \end{itemize}
 \end{description}
-
 
 Le tableau~\ref{tab:pieces} montre le résultat des trois ensembles de pièces.
 \begin{table}
   \centering
 \begin{tabular}{cc}
 
-Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
+Thème \lstinline+cburnett+&Thème \lstinline+mpchess+\\
 \begin{mplibcode}
   input mpchess
   beginfig(0);
@@ -486,7 +486,7 @@ Thème \lstinline+cburnett+&Thème \lstinline+staunty+\\
   beginfig(0);
   init_chessboard;
   set_backboard_width(4cm);
-  set_pieces_theme("staunty");
+  set_pieces_theme("mpchess");
   unset_whos_to_move;
   init_backboard;
   draw backboard;
@@ -509,6 +509,7 @@ Thème \lstinline+skak+&\\
 \end{tabular}
 \caption{Les différents thèmes de pièces fournits par \mpchess.}\label{tab:pieces}
 \end{table}
+
 
 
 \subsection{Trait}
@@ -691,7 +692,6 @@ draw chessboard;
 endfig;
 \end{ExempleMP}
 
-  
 
   
 \subsection{Lecture de données au format \textsc{pgn}}
@@ -754,6 +754,8 @@ draw backboard;
 draw chessboard_step(4); % Nc6
 endfig;
 \end{ExempleMP}
+
+
 
 \subsubsection{Montrer le dernier coup}
 
@@ -864,6 +866,7 @@ draw_arrows(red)("f8--b4","g1|-f3");
 endfig;
 \end{ExempleMP}
 
+
 \subsection{Coloration de cases}
 \mpchess permet aussi de colorer des cases grâce à la commande suivante.
 
@@ -968,12 +971,59 @@ draw_comment("?!","f3");
 endfig;
 \end{ExempleMP}
 
+
+
+
 La couleur des annotation de commentaires peut être changé grâce à la commande
 suivante.
 \commande|set_comment_color(«color»)|\index{set_comment_color@\lstinline+set_comment_color+}\smallskip
 
+\subsection{Lignes principales}
 
+\mpchess fournit une commande permettant d’afficher les fléches des coups des
+lignes principales d’analyses. Il y a les commandes pour les deux couleurs. 
 
+\commande|draw_white_main_lines(«move1»,«move2»,etc.)|\index{draw_white_main_lines@\lstinline+draw_white_main_lines+}\smallskip
+
+\commande|draw_black_main_lines(«move1»,«move2»,etc.)|\index{draw_black_main_lines@\lstinline+draw_black_main_lines+}\smallskip
+
+\begin{description}
+\item[\meta{move1}, \meta{move2}, etc.:] sont les coups à illustrer par une
+flêche, en suivant la notation de type \textsc{pgn}.
+\end{description}
+Lorsqu’on utilise la lecture de format \textsc{pgn} pour la construction des
+positions à afficher, on pourra alors utiliser les commandes suivantes
+permettant de spécifier quelle étape de la partie on commente. 
+
+\commande|draw_white_main_lines_step(«step»)(«move1»,«move2»,etc.)|\index{draw_white_main_lines_step@\lstinline+draw_white_main_lines_step+}\smallskip
+
+\commande|draw_black_main_lines_step(«step»)(«move1»,«move2»,etc.)|\index{draw_black_main_lines_step@\lstinline+draw_black_main_lines_step+}\smallskip
+
+\begin{description}
+  \item[\meta{step}:] est l’étape de la partie qu’on souhaite annonter; 
+\item[\meta{move1}, \meta{move2}, etc.:] sont les coups à illustrer par une
+flêche, en suivant la notation de type \textsc{pgn}.
+\end{description}
+
+L’exemple suivant permet d’illuster l’utilisation de cette commande. 
+
+\begin{ExempleMP}
+input mpchess
+string pgnstr;
+pgnstr:="1. e4 d5";
+build_chessboards_from_pgn(pgnstr);
+beginfig(0);
+init_backboard;
+draw backboard;
+draw chessboard_step(2);
+draw_white_main_lines_step(2)("exd5","e5","Nc3");
+endfig;
+\end{ExempleMP}
+
+Pour changer la couleur (par défaut \lstinline+0.3[_blackColorSquare,black]+),
+on utilisera la commande suivante. 
+
+\commande|set_main_lines_color(«color»)|\index{set_main_lines_color@\lstinline+set_main_lines_color+}\smallskip
 \section{Divers}
 
 \subsection{Réinitialisation du \lstinline+chessboard+}
@@ -1021,6 +1071,8 @@ draw_comment("?!","f3");
 clip_chessboard("e1-g4");
 endfig;
 \end{ExempleMP}
+
+
 
 
 \section{Utilisation avec \LaTeX{}}
@@ -1152,8 +1204,6 @@ De nombreuses choses sont à ajouter à \mpchess. Parmi celles-ci, on peut pense
 \item montrer les cases accessibles pour une pièces choisie (les points de
 Lichess) ;
 \item ajouter les coordonnées en extérieur lorsque le plateau est découpé ;
-\item afficher les $n$ flèches indiquant les $n$ coups des premières lignes
-d’une position (avec une épaisseur des flèches qui décroit) ;
 \item ajouter des thèmes de pièces.
 \end{itemize}
 
@@ -1180,8 +1230,16 @@ draw_arrows(0.3[red,black])("c4--f7");
 endfig;
 \end{ExempleMP}
 
+\section{Historique}
 
-\printbibliography
+\begin{description}
+\item[v0.2, 28 mars 2023 :] Ajout des commandes de lecture de fichiers
+\textsc{pgn} et \textsc{fen}; ajout des commandes d’affichage des lignes
+principales d’analyse; suppression du thème \lstinline+staunty+ (pour cause de
+licence) et création du thème de pièces \lstinline+mpchess+.
+\item[v0.1, 23 mars 2023 :] Première publication sur le \ctan.
+\end{description}
+  \printbibliography
 \printindex
 \end{document}
 
