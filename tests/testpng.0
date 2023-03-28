@@ -2,7 +2,7 @@
 %%BoundingBox: -2 -6 154 144 
 %%HiResBoundingBox: -1.77176 -5.56502 153.49821 143.50406 
 %%Creator: MetaPost 2.02
-%%CreationDate: 2023.03.27:2120
+%%CreationDate: 2023.03.28:2305
 %%Pages: 1
 %*Font: cmr10 3.54353 9.96265 31:ff0000000000ff
 %%BeginProlog
@@ -1011,7 +1011,6 @@ newpath 39.32155 127.63126 moveto
  closepath fill
 newpath 39.32155 127.63126 moveto
  closepath fill
- 1 setlinejoin
 newpath 39.32155 127.63126 moveto
 40.56975 127.98788 43.04312 127.47212 44.29135 128.36752 curveto
 45.53957 127.47212 48.01292 127.98788 49.26115 127.63126 curveto
@@ -1056,7 +1055,7 @@ newpath 45.21169 137.939 moveto
 43.37102 139.1661 45.21169 139.1661 45.21169 137.939 curveto
  closepath stroke
 newpath 45.21169 137.939 moveto 0 0 rlineto stroke
- 0.92549 0.92549 0.92549 setrgbcolor 1 setlinecap 0 setlinejoin
+ 0.92549 0.92549 0.92549 setrgbcolor 1 setlinecap
 newpath 42.45068 131.31259 moveto
 46.13202 131.31259 lineto stroke
 newpath 41.53035 129.84006 moveto
@@ -1657,7 +1656,6 @@ newpath 92.47116 127.63126 moveto
  closepath fill
 newpath 92.47116 127.63126 moveto
  closepath fill
- 1 setlinejoin
 newpath 92.47116 127.63126 moveto
 93.71936 127.98788 96.19273 127.47212 97.44096 128.36752 curveto
 98.68918 127.47212 101.16254 127.98788 102.41077 127.63126 curveto
@@ -1702,7 +1700,7 @@ newpath 98.3613 137.939 moveto
 96.52063 139.1661 98.3613 139.1661 98.3613 137.939 curveto
  closepath stroke
 newpath 98.3613 137.939 moveto 0 0 rlineto stroke
- 0.92549 0.92549 0.92549 setrgbcolor 1 setlinecap 0 setlinejoin
+ 0.92549 0.92549 0.92549 setrgbcolor 1 setlinecap
 newpath 95.6003 131.31259 moveto
 99.28163 131.31259 lineto stroke
 newpath 94.67996 129.84006 moveto

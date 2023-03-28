@@ -220,9 +220,9 @@ def _str_to_int(expr i)=
     fi
 enddef;
 
+numeric _chess_extract_move_tab[];
 
-
-vardef _extract_move(expr _step,s,wb)=
+vardef _extract_single_move(expr s,wb)=
     % function to convert a PGN move (ie Nc6)
     % to a array of numerics (type, wb,letter, nbr, capture,promotion,ambiguity)
     % no castle moves !!!
@@ -304,13 +304,24 @@ vardef _extract_move(expr _step,s,wb)=
             fi
         fi
     fi
-    _chess_moves_table_numeric[_step][0]:=_piecetype;
-    _chess_moves_table_numeric[_step][1]:=_pm;
-    _chess_moves_table_numeric[_step][2]:=_letter;
-    _chess_moves_table_numeric[_step][3]:=_nbr;
-    _chess_moves_table_numeric[_step][4]:=_capture;
-    _chess_moves_table_numeric[_step][5]:=_promotion;
-    _chess_moves_table_numeric[_step][6]:=_ambiguity;
+    _chess_extract_move_tab[0]:=_piecetype;
+    _chess_extract_move_tab[1]:=_pm;
+    _chess_extract_move_tab[2]:=_letter;
+    _chess_extract_move_tab[3]:=_nbr;
+    _chess_extract_move_tab[4]:=_capture;
+    _chess_extract_move_tab[5]:=_promotion;
+    _chess_extract_move_tab[6]:=_ambiguity;
+enddef;
+
+vardef _extract_move(expr _step,s,wb)=
+    _extract_single_move(s,wb);
+    _chess_moves_table_numeric[_step][0]:=_chess_extract_move_tab[0];
+    _chess_moves_table_numeric[_step][1]:=_chess_extract_move_tab[1];
+    _chess_moves_table_numeric[_step][2]:=_chess_extract_move_tab[2];
+    _chess_moves_table_numeric[_step][3]:=_chess_extract_move_tab[3];
+    _chess_moves_table_numeric[_step][4]:=_chess_extract_move_tab[4];
+    _chess_moves_table_numeric[_step][5]:=_chess_extract_move_tab[5];
+    _chess_moves_table_numeric[_step][6]:=_chess_extract_move_tab[6];
 enddef;
 
 def build_chessboards_from_pgn(expr s)=

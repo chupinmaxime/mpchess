@@ -21,4 +21,11 @@ init_backboard;
 endfig;
 endfor
 
+beginfig(10);
+    init_backboard; 
+    draw backboard;
+    show_last_move(4);
+    draw chessboard_step(4);
+    draw_white_main_lines_step(4)("Bc4");
+endfig;
 end.

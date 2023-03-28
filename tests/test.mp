@@ -45,7 +45,7 @@ beginfig(4);
     set_coords_outside;
     show _intBKing;
     set_backboard_width(8cm);
-    set_pieces_theme("staunty");
+    set_pieces_theme("mpchess");
     
     set_black_view;
     set_white_player("Roxane {\bf Spillane Chupin}");
@@ -103,6 +103,8 @@ beginfig(6);
     draw backboard;
     draw chessboard_step(0);
     draw_comment("?!","c7");
+    draw_white_main_lines("e4","d4","Nf3","Nc3");
+    draw_black_main_lines("a5","Nc6","d5");
 endfig;
 
 end.

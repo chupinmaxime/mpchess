@@ -16,7 +16,6 @@
 input hatching;
 input mpchess-pieces; % piece of mpchess package
 input mpchess-cburnett; % piece of lichess cburnett
-input mpchess-staunty; % piece of lichess staunty
 input mpchess-skak; % piece of skak package
 input mpchess-chessboard;
 input mpchess-pgn;
@@ -184,9 +183,11 @@ _blackColorSquare:=(0.549,0.6353,0.6784);
 _whiteColorSquare:=(0.8706,0.8912,0.902);
 
 color _chess_main_lines_color;
-_chess_main_lines_color:=0.6[_blackColorSquare,black];
+_chess_main_lines_color:=0.3[_blackColorSquare,black];
 
-
+def set_main_lines_color(expr c)=
+    _chess_main_lines_color:=c;
+enddef;
 
 
 picture _blackSquarePic, _whiteSquarePic;
@@ -282,22 +283,7 @@ def set_pieces_theme(expr t)=
         _chess_wN:=_chess_cburnett_wN;
         _chess_wP:=_chess_cburnett_wP;
         _chess_wQ:=_chess_cburnett_wQ;
-        _chess_wR:=_chess_cburnett_wR;    
-    elseif(t="staunty"):
-        _chess_bB:=_chess_staunty_bB;
-        _chess_bK:=_chess_staunty_bK;
-        _chess_bN:=_chess_staunty_bN;
-        _chess_bP:=_chess_staunty_bP;
-        _chess_bQ:=_chess_staunty_bQ;
-        _chess_bR:=_chess_staunty_bR;
-
-
-        _chess_wB:=_chess_staunty_wB;
-        _chess_wK:=_chess_staunty_wK;
-        _chess_wN:=_chess_staunty_wN;
-        _chess_wP:=_chess_staunty_wP;
-        _chess_wQ:=_chess_staunty_wQ;
-        _chess_wR:=_chess_staunty_wR;    
+        _chess_wR:=_chess_cburnett_wR;     
     elseif(t="skak"):
         _chess_bB:=_chess_skak_bB;
         _chess_bK:=_chess_skak_bK;
@@ -977,6 +963,9 @@ def reset_mpchess=
     set_pieces_theme("cburnett");
     _chess_white_player:="";
     _chess_black_player:="";
+    _chess_arrow_width:=0.08*_chessSquareU;
+    _chess_arrow_head:=0.4*_chessSquareU;
+    _chess_main_lines_color:=0.3[_blackColorSquare,black];
 enddef;
 
 color _commentColor;

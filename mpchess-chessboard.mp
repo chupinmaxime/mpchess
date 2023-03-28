@@ -447,3 +447,51 @@ def add_black_pieces(text plists) =
 enddef;
 
 
+
+
+def _draw_main_lines(expr _k)(expr wb)(text slist)=
+    save _str;
+    _chess_arrow_width_save:=_chess_arrow_width;
+    _step:=1.4;
+    for _str = slist:
+        _chess_arrow_width:=(0.1*_step)*_chessSquareU;
+        _extract_single_move(_str,wb);
+        _piecetype:=_chess_extract_move_tab[0];
+        _pm:=_chess_extract_move_tab[1];
+        _iend:=_chess_extract_move_tab[2];
+        _jend:=_chess_extract_move_tab[3];
+        _capture:=_chess_extract_move_tab[4];
+        _promotion:=_chess_extract_move_tab[5];
+        _ambiguity:=_chess_extract_move_tab[6];
+        for i:=1 upto _chessSize:
+            for j:=1 upto _chessSize:   
+                if(chessboard_table[_k][i][j]=_piecetype): 
+                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,wb,_capture)=true):  
+                        draw_arrows(_chess_main_lines_color)(_int_to_letter_w(i)&_int_to_str_w(j)&"--"&_int_to_letter_w(_iend)&_int_to_str_w(_jend));
+                    fi
+                fi
+            endfor;
+        endfor;
+        _step:=max(_step-0.3,0.7);
+    endfor;
+enddef;
+
+
+def draw_white_main_lines(text slist)=
+    _draw_main_lines(0)("white")(slist);
+enddef;
+
+
+def draw_black_main_lines(text slist)=
+    _draw_main_lines(0)("black")(slist);
+enddef;
+
+
+def draw_white_main_lines_step(expr k)(text slist)=
+    _draw_main_lines(k)("white")(slist);
+enddef;
+
+
+def draw_black_main_lines_step(expr k)(text slist)=
+    _draw_main_lines(k)("black")(slist);
+enddef;
