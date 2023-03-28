@@ -30,7 +30,7 @@ MPchess consists of 7 files METAPOST :
 * `mpchess-pgn.mp`;
 * `mpchess-fen.mp`;
 * `mpchess-cburnett.mp`;
-* `mpchess-staunty.mp`;
+* `mpchess-mpchess.mp`;
 * `mpchess-skak.mp`.
 
 Once this is done, MPchess will be loaded with the classic
@@ -53,3 +53,8 @@ used with LuaLaTeX and luamplib, `latexmp`.
 
 * [English documentation](doc/mpchess-doc-en.pdf)
 * [Documentation en français](doc/mpchess-doc-fr.pdf)
+
+## Licenses
+
+This projet is under LATEX Project Public License 1.3c but the file
+`mpchess-cburnett` is under GPLv2+ as asked by the author. 

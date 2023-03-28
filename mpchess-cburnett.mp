@@ -1,3 +1,6 @@
+%% File under license GPLv2+:
+%% https://github.com/lichess-org/lila/blob/master/COPYING.md
+
 picture _chess_cburnett_bB;
 
 
