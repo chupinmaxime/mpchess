@@ -96,7 +96,7 @@ endfig;
 
 reset_mpchess;
 beginfig(6);
-    set_pieces_theme("skak");
+    set_pieces_theme("mpchess");
     %set_black_view;
     init_backboard;
     init_chessboard;

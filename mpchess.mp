@@ -14,6 +14,7 @@
 
 %input format;
 input hatching;
+input mpchess-pieces; % piece of mpchess package
 input mpchess-cburnett; % piece of lichess cburnett
 input mpchess-staunty; % piece of lichess staunty
 input mpchess-skak; % piece of skak package
@@ -182,7 +183,8 @@ color _blackColorSquare,_whiteColorSquare;
 _blackColorSquare:=(0.549,0.6353,0.6784);
 _whiteColorSquare:=(0.8706,0.8912,0.902);
 
-
+color _chess_main_lines_color;
+_chess_main_lines_color:=0.6[_blackColorSquare,black];
 
 
 
@@ -251,7 +253,22 @@ _chess_wQ:=_chess_cburnett_wQ;
 _chess_wR:=_chess_cburnett_wR;
 
 def set_pieces_theme(expr t)=
-    if(t="cburnett"):
+    if(t="mpchess"):
+        _chess_bB:=_chess_mpchess_bB;
+        _chess_bK:=_chess_mpchess_bK;
+        _chess_bN:=_chess_mpchess_bN;
+        _chess_bP:=_chess_mpchess_bP;
+        _chess_bQ:=_chess_mpchess_bQ;
+        _chess_bR:=_chess_mpchess_bR;
+
+
+        _chess_wB:=_chess_mpchess_wB;
+        _chess_wK:=_chess_mpchess_wK;
+        _chess_wN:=_chess_mpchess_wN;
+        _chess_wP:=_chess_mpchess_wP;
+        _chess_wQ:=_chess_mpchess_wQ;
+        _chess_wR:=_chess_mpchess_wR;
+    elseif(t="cburnett"):
         _chess_bB:=_chess_cburnett_bB;
         _chess_bK:=_chess_cburnett_bK;
         _chess_bN:=_chess_cburnett_bN;
