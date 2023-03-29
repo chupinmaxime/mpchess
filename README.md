@@ -30,7 +30,7 @@ MPchess consists of 7 files METAPOST :
 * `mpchess-pgn.mp`;
 * `mpchess-fen.mp`;
 * `mpchess-cburnett.mp`;
-* `mpchess-mpchess.mp`;
+* `mpchess-pieces.mp`;
 * `mpchess-skak.mp`.
 
 Once this is done, MPchess will be loaded with the classic
