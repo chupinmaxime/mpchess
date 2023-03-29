@@ -474,6 +474,7 @@ def _draw_main_lines(expr _k)(expr wb)(text slist)=
         endfor;
         _step:=max(_step-0.3,0.7);
     endfor;
+    _chess_arrow_width:=_chess_arrow_width_save;
 enddef;
 
 
