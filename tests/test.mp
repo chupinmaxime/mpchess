@@ -47,12 +47,18 @@ beginfig(4);
     set_backboard_width(8cm);
     set_pieces_theme("mpchess");
     
-    set_black_view;
+    %set_black_view;
     set_white_player("Roxane {\bf Spillane Chupin}");
     set_black_player("Eliott");
     init_backboard;
+    add_white_pieces("f6");
+    add_black_pieces("c3");
     draw backboard;
     draw chessboard_step(0);
+    
+    %show_possible_moves("e7");
+    show_possible_moves("d2");
+    
     %clip_chessboard("b2-h8");
 endfig;
 
