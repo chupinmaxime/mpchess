@@ -500,15 +500,20 @@ enddef;
 color _circle_move_c;
 _circle_move_c:=0.4[green,black];
 
+def set_color_possible_moves(expr c)=
+    _circle_move_c:=c;    
+enddef;
+
 def _circle_move(expr i,j)=
     path ss;
     ss:=(fullcircle scaled (0.25*_chessSquareU)) shifted ((i-0.5)*_chessSquareU,(j-0.5)*_chessSquareU);
-    transparence(ss,_circle_move_c,0.41);
+    fill ss withcolor _circle_move_c;
 enddef;
 
 def show_possible_moves(expr s)=
     string _first_letter,_first_nbr;
     pair _shiftPiece;
+    boolean _meet_piece;
     _first_letter:=substring (0,1) of s;
     _first_nbr:=substring (1,2) of s;
     _fl:=_lettre_to_int(_first_letter);
@@ -539,7 +544,8 @@ def show_possible_moves(expr s)=
                 _circle_move(_fl+1,_fn-1);
             fi
         fi
-    elseif(_piecetype=_intWPawn): %         
+    fi
+    if(_piecetype=_intWPawn): %         
         if(_fn=2): % 2 steps allowed
             if(chessboard_table[0][_fl][_fn+2]=0): % two step
                 _circle_move(_fl,_fn+2);
@@ -556,5 +562,181 @@ def show_possible_moves(expr s)=
                 _circle_move(_fl+1,_fn+1);
             fi
         fi
+    fi
+    if((_piecetype=_intBKnight) or (_piecetype=_intWKnight)): % night
+        if(_fl-2>=1):
+            if(_fn+1<=8):
+                if((_piecetype*chessboard_table[0][_fl-2][_fn+1])<=0):
+                    _circle_move(_fl-2,_fn+1);
+                fi
+            fi
+            if(_fn-1>=1):
+                if((_piecetype*chessboard_table[0][_fl-2][_fn-1])<=0):
+                _circle_move(_fl-2,_fn-1);
+                fi
+            fi
+        fi
+        if(_fl+2<=8):
+            if(_fn+1<=8):
+                if((_piecetype*chessboard_table[0][_fl+2][_fn+1])<=0):
+                _circle_move(_fl+2,_fn+1);
+                fi
+            fi
+            if(_fn-1>=1):
+                if((_piecetype*chessboard_table[0][_fl+2][_fn-1])<=0):
+                _circle_move(_fl+2,_fn-1);
+                fi
+            fi
+        fi
+        if(_fn-2>=1):
+            if(_fl+1<=8):
+                if((_piecetype*chessboard_table[0][_fl+1][_fn-2])<=0):
+                _circle_move(_fl+1,_fn-2);
+                fi
+            fi
+            if(_fl-1>=1):
+                if((_piecetype*chessboard_table[0][_fl-1][_fn-2])<=0):
+                _circle_move(_fl-1,_fn-2);
+                fi
+            fi
+        fi
+        if(_fn+2<=8):
+            if(_fl+1<=8):
+                if((_piecetype*chessboard_table[0][_fl+1][_fn+2])<=0):
+                _circle_move(_fl+1,_fn+2);
+                fi
+            fi
+            if(_fl-1>=1):
+                if((_piecetype*chessboard_table[0][_fl-1][_fn+2])<=0):
+                _circle_move(_fl-1,_fn+2);
+                fi
+            fi
+        fi
+    fi
+    if((_piecetype=_intBBishop) or (_piecetype=_intWBishop)or (_piecetype=_intBQueen) or (_piecetype=_intWQueen)): % bishop
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _ii:=_ii+1;
+            _jj:=_jj+1;
+            exitif((_ii>8) or (_jj>8));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                    _meet_piece:=true;
+            fi
+        endfor;
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _ii:=_ii-1;
+            _jj:=_jj-1;
+            exitif((_ii<1) or (_jj<1));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                _meet_piece:=true;
+            fi
+        endfor;
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _ii:=_ii-1;
+            _jj:=_jj+1;
+            exitif((_ii<1) or (_jj>8));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                _meet_piece:=true;
+            fi
+        endfor;
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _ii:=_ii+1;
+            _jj:=_jj-1;
+            exitif((_ii>8) or (_jj<1));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                _meet_piece:=true;
+            fi
+        endfor;
+    fi
+    if((_piecetype=_intBRook) or (_piecetype=_intWRook)or (_piecetype=_intBQueen) or (_piecetype=_intWQueen)): % rook
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _ii:=_ii+1;
+            exitif((_ii>8));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                    _meet_piece:=true;
+            fi
+        endfor;
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _ii:=_ii-1;
+            exitif((_ii<1));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                _meet_piece:=true;
+            fi
+        endfor;
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _jj:=_jj+1;
+            exitif((_jj>8));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                _meet_piece:=true;
+            fi
+        endfor;
+        _ii:=_fl;
+        _jj:=_fn;
+        _meet_piece:=false;
+        forever:
+            _jj:=_jj-1;
+            exitif((_jj<1));
+            if(((_piecetype*chessboard_table[0][_ii][_jj])<=0) and (_meet_piece=false)):
+                _circle_move(_ii,_jj);
+            fi
+            if(chessboard_table[0][_ii][_jj]<>0):
+                _meet_piece:=true;
+            fi
+        endfor;    
+    fi
+    if((_piecetype=_intBKing) or (_piecetype=_intWKing)): % king
+        for _ii:=-1  upto 1:
+            for _jj:=-1  upto 1:
+                if((_fl+_ii>0) and (_fl+_ii<9) and (_fn+_jj>0) and (_fn+_jj<9)): 
+                show "king";
+                show _ii;
+                show _jj;
+                    if((_piecetype*chessboard_table[0][_fl+_ii][_fn+_jj])<=0):
+                        _circle_move(_fl+_ii,_fn+_jj);
+                    fi
+                fi
+            endfor;
+        endfor;
     fi
 enddef;

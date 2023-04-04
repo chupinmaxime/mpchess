@@ -53,12 +53,16 @@ beginfig(4);
     init_backboard;
     add_white_pieces("f6");
     add_black_pieces("c3");
+    add_white_pieces("Ka6");
+    
     draw backboard;
+    
     draw chessboard_step(0);
-    
+    set_color_possible_moves(0.4[red,black]);
     %show_possible_moves("e7");
-    show_possible_moves("d2");
-    
+    %show_possible_moves("d2");
+    %show_possible_moves("g8");
+    show_possible_moves("a6");
     %clip_chessboard("b2-h8");
 endfig;
 
