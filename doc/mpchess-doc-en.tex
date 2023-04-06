@@ -1058,7 +1058,7 @@ To change the color (by default \lstinline+0.3[_blackColorSquare,black]+),
 \mpchess allows, by imitating \href{Lichess.org}{https://lichess.org},
 to show possible moves for a piece. To do that, use the following command:
 
-\commande|show_possible_moves(«square»)|\index{show_possible_moves@\lstinline+set_possible_moves+}\smallskip
+\commande|show_possible_moves(«square»)|\index{show_possible_moves@\lstinline+show_possible_moves+}\smallskip
 
 \begin{description}
 \item[\meta{square}:] is a string (between double quotes) consisting
@@ -1073,6 +1073,7 @@ This command must be used after having drawn the  \lstinline+chessboard+.
   fenstr:="7r/2p1kp1p/p1B2p2/1pb5/8/2PP4/PP1N1PPP/R5K1 b - - 2 19";
   build_chessboard_from_fen(fenstr);
   beginfig(0);
+  set_black_view;
   init_backboard;
   draw backboard;
   draw chessboard;
@@ -1083,7 +1084,7 @@ This command must be used after having drawn the  \lstinline+chessboard+.
 In the case where several positions have been constructed with \textsc{pgn}
 format, the following command should be used to access the chosen position. 
 
-\commande|show_possible_moves_step(«step»)(«square»)|\index{show_possible_moves_step@\lstinline+set_possible_moves_step+}\smallskip
+\commande|show_possible_moves_step(«step»)(«square»)|\index{show_possible_moves_step@\lstinline+show_possible_moves_step+}\smallskip
 
 \begin{description}
   \item[\meta{step}:] is the step of the game you want to annote;

@@ -1031,7 +1031,7 @@ on utilisera la commande suivante.
 de montrer les mouvements possibles pour une pièce. Pour cela, on utilisera la
 commande suivante.
 
-\commande|show_possible_moves(«square»)|\index{show_possible_moves@\lstinline+set_possible_moves+}\smallskip
+\commande|show_possible_moves(«square»)|\index{show_possible_moves@\lstinline+show_possible_moves+}\smallskip
 
 \begin{description}
 \item[\meta{square}:] est une chaîne de caractères indiquant au format classique
@@ -1046,6 +1046,7 @@ Cette commande doit être utilisée après avoir tracé le \lstinline+chessboard
   fenstr:="7r/2p1kp1p/p1B2p2/1pb5/8/2PP4/PP1N1PPP/R5K1 b - - 2 19";
   build_chessboard_from_fen(fenstr);
   beginfig(0);
+  set_black_view;
   init_backboard;
   draw backboard;
   draw chessboard;
@@ -1057,7 +1058,7 @@ Dans le cas où plusieurs positions ont été construites avec le format
 \textsc{pgn}, on utilisera la commande suivante pour acceder à la position
 choisie. 
 
-\commande|show_possible_moves_step(«step»)(«square»)|\index{show_possible_moves_step@\lstinline+set_possible_moves_step+}\smallskip
+\commande|show_possible_moves_step(«step»)(«square»)|\index{show_possible_moves_step@\lstinline+show_possible_moves_step+}\smallskip
 
 \begin{description}
   \item[\meta{step}:] est l’étape de la partie qu’on souhaite annonter; 

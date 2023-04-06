@@ -506,7 +506,14 @@ enddef;
 
 def _circle_move(expr i,j)=
     path ss;
-    ss:=(fullcircle scaled (0.25*_chessSquareU)) shifted ((i-0.5)*_chessSquareU,(j-0.5)*_chessSquareU);
+    if( _chess_view_wb): %white view
+    ss:=(fullcircle scaled (0.25*_chessSquareU)) shifted
+    ((i-0.5)*_chessSquareU,(j-0.5)*_chessSquareU);
+    else: % black view
+    ss:=(fullcircle scaled (0.25*_chessSquareU)) shifted
+    ((_chessSize-i+0.5)*_chessSquareU,(_chessSize-j+0.5)*_chessSquareU);
+    ;
+    fi
     fill ss withcolor _circle_move_c;
 enddef;
 

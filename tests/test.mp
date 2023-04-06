@@ -47,7 +47,7 @@ beginfig(4);
     set_backboard_width(8cm);
     set_pieces_theme("mpchess");
     
-    %set_black_view;
+    set_black_view;
     set_white_player("Roxane {\bf Spillane Chupin}");
     set_black_player("Eliott");
     init_backboard;
