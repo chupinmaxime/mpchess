@@ -68,7 +68,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.2, 2023, March, 28th \\
+  Version 0.3, 2023, April, 6th \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -1052,6 +1052,49 @@ To change the color (by default \lstinline+0.3[_blackColorSquare,black]+),
 
 \commande|set_main_lines_color(«color»)|\index{set_main_lines_color@\lstinline+set_main_lines_color+}\smallskip
 
+
+\subsection{Possible Moves}\label{sec:possiblemoves}
+
+\mpchess allows, by imitating \href{Lichess.org}{https://lichess.org},
+to show possible moves for a piece. To do that, use the following command:
+
+\commande|show_possible_moves(«square»)|\index{show_possible_moves@\lstinline+set_possible_moves+}\smallskip
+
+\begin{description}
+\item[\meta{square}:] is a string (between double quotes) consisting
+of a coordinate (a letter and a number). 
+\end{description}
+
+This command must be used after having drawn the  \lstinline+chessboard+.
+
+\begin{ExempleMP}
+  input mpchess
+  string fenstr;
+  fenstr:="7r/2p1kp1p/p1B2p2/1pb5/8/2PP4/PP1N1PPP/R5K1 b - - 2 19";
+  build_chessboard_from_fen(fenstr);
+  beginfig(0);
+  init_backboard;
+  draw backboard;
+  draw chessboard;
+  show_possible_moves("c5");
+  endfig;
+\end{ExempleMP}  
+
+In the case where several positions have been constructed with \textsc{pgn}
+format, the following command should be used to access the chosen position. 
+
+\commande|show_possible_moves_step(«step»)(«square»)|\index{show_possible_moves_step@\lstinline+set_possible_moves_step+}\smallskip
+
+\begin{description}
+  \item[\meta{step}:] is the step of the game you want to annote;
+  \item[\meta{square}:] is a string (between double quotes) consisting
+of a coordinate (a letter and a number).
+\end{description}
+
+By default, the color is set to \lstinline+0.4[green,black]+, but this can be changed with the can be changed with the following command:
+
+\commande|set_possible_moves_color(«color»)|\index{set_possible_moves_color@\lstinline+set_possible_moves_color+}\smallskip
+
 \section{Miscellaneous}
 
 \subsection{Reset the \lstinline+chessboard+}
@@ -1226,11 +1269,8 @@ endfig;
 Many things can be added to \mpchess. Among these, we can think of:
 \begin{itemize}
 \item display the captured pieces, or the differential of the captured pieces;
-\item afficher le temps restant pour chaque joueur ; %English translation needed
-\item show the accessible squares for a chosen piece (the
-Lichess points);
-\item display the $n$ arrows indicating the $n$ moves of the first lines of a
-position (with a decreasing thickness of the arrows); 
+\item display the remaining time for each player; 
+\item parsing the complete \textsc{pgn} format with the optional tags ;
 \item adding the coordinates outside the board when it is clipped;
 \item add piece themes.
 \end{itemize}
@@ -1261,12 +1301,21 @@ endfig;
 \section{History}
 
 \begin{description}
+\item[v0.3, April 6, 2023:] Corrections in the documentation, especially the
+English version; added commands to visualize the possible movements for a
+ piece (section~\ref{sec:possiblemoves}).
 \item [v0.2, March 28, 2023:] Added commands for \textsc{pgn} and \textsc{fen}
 file reading; added commands for displaying the main lines of
 analysis; removal of the \lstinline+staunty+ theme (because of
 license) and creation of the \lstinline+mpchess+ parts theme.
 \item[v0.1, March 23, 2023:] First publication on the \ctan.
 \end{description}
+
+\section{Acknowledgements}
+
+The author would like to thank Quark67 for his feedback and corrections, and
+Douglas Johnson for correcting the English version of the documentation. This
+feedback and encouragement is extremely appreciated!
 
 
 \printbibliography
