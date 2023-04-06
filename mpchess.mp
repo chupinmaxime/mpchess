@@ -2,7 +2,7 @@
 %%                        mpchess.mp                          %%
 %%              draw chessboards with metapost                %%
 %%                chupin@ceremade.dauphine.fr                 %%
-%%                Version 0.3 (mars 2023)                  %%
+%%                Version 0.4 (avril   2023)                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This work may be distributed and/or modified under the conditions of
