@@ -58,7 +58,7 @@ beginfig(4);
     draw backboard;
     
     draw chessboard_step(0);
-    set_color_possible_moves(0.4[red,black]);
+    set_possible_moves_color(0.4[red,black]);
     %show_possible_moves("e7");
     %show_possible_moves("d2");
     %show_possible_moves("g8");
