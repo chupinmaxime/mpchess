@@ -242,7 +242,7 @@ vardef _queen_candidate(expr istart, jstart,iend,jend,wb)=
     boolean output;
     output = false;
     if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
-        if((iend-istart) or (jend-jstart) or (abs(iend-istart)=abs(jend-jstart))):
+        if((iend=istart) or (jend=jstart) or (abs(iend-istart)=abs(jend-jstart))):
             output:=true;
         fi
     fi
