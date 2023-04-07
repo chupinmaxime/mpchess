@@ -8,6 +8,12 @@ allows more graphic flexibility than the excellent LaTeX packages.
 _This package is in beta version, do not hesitate to report bugs, as well as
 requests for improvement_.
 
+## Github
+
+To allow for easier feedback and bug reporting, this repository has a mirror
+repository on github:
+[https://github.com/chupinmaxime/mpchess](https://github.com/chupinmaxime/mpchess) 
+
 ## Installation
 
 MPchess is on the [ctan](ctan.org) and can be installed via the package manager of your
