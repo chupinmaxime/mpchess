@@ -119,7 +119,7 @@ de votre distribution.
 \end{center}
 
 
-\subsection{Avec la \TeX live sous Linux ou MacOS}
+\subsection{Avec la \TeX live sous Linux ou macOS}
 
 Pour installer \mpchess avec \TeX live, il vous faudra créer le répertoire
 \lstinline+texmf+ dans votre \lstinline+home+.
@@ -398,7 +398,7 @@ autour de l’échiquier. Ceci se fait avec les commandes suivantes.
 \commande|set_black_player(«string»)|\index{set_black_player@\lstinline+set_black_player+}\smallskip
 
 \begin{description}
-  \item[\meta{string} :] est la chaîne de caractères interprétée par \LaTeX à afficher.
+  \item[\meta{string} :] est la chaîne de caractères interprétée par \LaTeX{} à afficher.
 \end{description}
 
 \begin{ExempleMP}
@@ -443,7 +443,8 @@ macros permettent de générer une \lstinline+picture+ à dessiner \emph{par
 
 \subsection{Réglage du thème des pièces}
 
-\mpchess fournit pour l’instant trois thèmes de pièces, deux emprunté à Lichess,
+\mpchess fournit pour l’instant trois thèmes de pièces, deux empruntés à
+Lichess, 
 et l’autre emprunté au package~\package{skak}~\cite{ctan-skak}\footnote{Qui
   fournit le code \MF{} pour la fonte de pièces d’échec, code qui a été
   facilement adapté en \MP{} pour \mpchess.}.
@@ -515,7 +516,7 @@ Thème \lstinline+skak+&\\
 \subsection{Trait}
 
 \mpchess indique qui a le trait entre les blancs et les noirs. Ceci ce fait par
-un petit triangle coloré (blanc ou noir) à l’extrérieur du plateau (que vous
+un petit triangle coloré (blanc ou noir) à l’extérieur du plateau (que vous
 pourrez observer dans les nombreux exemples suivants).
 
 Pour spécifier qui a le trait on utilisera les commandes suivantes.
@@ -808,16 +809,16 @@ Cette commande retourne un \lstinline+numeric+.
 
 \section{Annotation}
 
-De nombreuses commandes permettent d’annonter l’échiquier (flêche, couleur, cercle, croix, etc.).
+De nombreuses commandes permettent d’annoter l’échiquier (flèche, couleur, cercle, croix, etc.).
 
 \subsection{Flèches}
 
-La commande pour tracer des flêches sur l’échiquier est la suivante.
+La commande pour tracer des flèches sur l’échiquier est la suivante.
 
 \commande|draw_arrows(«color»)(«string1»,«string2», etc.)|\index{draw_arrows@\lstinline+draw_arrows+}\smallskip
 \begin{description}
 \item[\meta{color}:] est une \lstinline+color+ \MP.
-\item[\meta{string1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre) séparés par deux caractères qui peuvent être
+\item[\meta{string1}:] est une chaîne de caractères (entre double-quotes) constituée de deux coordonnées (lettre et chiffre) séparés par deux caractères qui peuvent être
 \begin{description}
 \vitem+--+ pour relier les deux cases en ligne droite ;
 \vitem+-|+ pour relier les deux cases en ligne brisée, d’abord horizontalement puis verticalement ;
@@ -840,12 +841,12 @@ draw_arrows(red)("f8--b4","g1|-f3");
 endfig;
 \end{ExempleMP}
 
-On pourra modifier l’épaisseur des flêches grâce à la commande suivante.
+On pourra modifier l’épaisseur des flèches grâce à la commande suivante.
 \commande|set_arrow_width(«coeff»)|\index{set_arrow_width@\lstinline+set_arrow_width+}\smallskip
 
 \begin{description}
   \item[\meta{coeff}:] est un coefficient (\lstinline+numeric+) qui permet de
-  régler la largeur des flêches proportionnellement à la largeur d’une case de
+  régler la largeur des flèches proportionnellement à la largeur d’une case de
   l’échiquier. Par défaut, ce coefficient vaut \lstinline+0.08+.
 \end{description}
 
@@ -874,7 +875,7 @@ endfig;
 
 \begin{description}
 \item[\meta{color}:] est une \lstinline+color+ \MP.
-\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) constituée de deux coordonnées (lettre et chiffre).
 \end{description}
 
 L’exemple suivant permet d’illustrer l’utilisation de cette commande.
@@ -900,7 +901,7 @@ suivante.
 
 \begin{description}
 \item[\meta{color}:] est une \lstinline+color+ \MP.
-\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+\item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) constituée de deux coordonnées (lettre et chiffre).
 \end{description}
 
 L’exemple suivant permet d’illustrer l’utilisation de cette commande.
@@ -927,7 +928,7 @@ suivante.
 
 \begin{description}
   \item[\meta{color}:] est une \lstinline+color+ \MP.
-  \item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) consituée de deux coordonnées (lettre et chiffre).
+  \item[\meta{coord1}:] est une chaîne de caractères (entre double-quotes) constituée de deux coordonnées (lettre et chiffre).
   \end{description}
 
 L’exemple suivant permet d’illustrer l’utilisation de cette commande.
@@ -953,7 +954,7 @@ endfig;
 \begin{description}
 \item[\meta{str}:] est une chaîne de caractères (entre double-quotes) à
 afficher. 
-\item[\meta{pos}:] est une chaîne de caractères (entre double-quotes) consituée
+\item[\meta{pos}:] est une chaîne de caractères (entre double-quotes) constituée
 d’une coordonnée (lettre et chiffre). 
 \end{description}
 
@@ -980,7 +981,7 @@ suivante.
 
 \subsection{Lignes principales}
 
-\mpchess fournit une commande permettant d’afficher les fléches des coups des
+\mpchess fournit une commande permettant d’afficher les flèches des coups des
 lignes principales d’analyses. Il y a les commandes pour les deux couleurs. 
 
 \commande|draw_white_main_lines(«move1»,«move2»,etc.)|\index{draw_white_main_lines@\lstinline+draw_white_main_lines+}\smallskip
@@ -989,7 +990,7 @@ lignes principales d’analyses. Il y a les commandes pour les deux couleurs.
 
 \begin{description}
 \item[\meta{move1}, \meta{move2}, etc.:] sont les coups à illustrer par une
-flêche, en suivant la notation de type \textsc{pgn}.
+flèche, en suivant la notation de type \textsc{pgn}.
 \end{description}
 Lorsqu’on utilise la lecture de format \textsc{pgn} pour la construction des
 positions à afficher, on pourra alors utiliser les commandes suivantes
@@ -1000,12 +1001,12 @@ permettant de spécifier quelle étape de la partie on commente.
 \commande|draw_black_main_lines_step(«step»)(«move1»,«move2»,etc.)|\index{draw_black_main_lines_step@\lstinline+draw_black_main_lines_step+}\smallskip
 
 \begin{description}
-  \item[\meta{step}:] est l’étape de la partie qu’on souhaite annonter; 
+  \item[\meta{step}:] est l’étape de la partie qu’on souhaite annoter; 
 \item[\meta{move1}, \meta{move2}, etc.:] sont les coups à illustrer par une
-flêche, en suivant la notation de type \textsc{pgn}.
+flèche, en suivant la notation de type \textsc{pgn}.
 \end{description}
 
-L’exemple suivant permet d’illuster l’utilisation de cette commande. 
+L’exemple suivant permet d’illustrer l’utilisation de cette commande. 
 
 \begin{ExempleMP}
 input mpchess
@@ -1061,7 +1062,7 @@ choisie.
 \commande|show_possible_moves_step(«step»)(«square»)|\index{show_possible_moves_step@\lstinline+show_possible_moves_step+}\smallskip
 
 \begin{description}
-  \item[\meta{step}:] est l’étape de la partie qu’on souhaite annonter; 
+  \item[\meta{step}:] est l’étape de la partie qu’on souhaite annoter; 
 \item[\meta{square}:] est une chaîne de caractères indiquant au format classique
 les coordonnées de la case où la pièce se situe. 
 \end{description}
@@ -1099,7 +1100,7 @@ On pourra faire une découpe dans l’image de l’échiquier grâce à la comma
 
 \begin{description}
 \item[\meta{string}:] est une chaîne de caractères (entre double-quotes)
-composée de deux coordonnées (lettre et chiffre) séparé par un tiret, par
+composée de deux coordonnées (lettre et chiffre) séparées par un tiret, par
 exemple \lstinline+"a1-c6"+.
 \end{description}
 
@@ -1167,7 +1168,7 @@ draw_arrows(red)("e7--e5","g1|-f3");
 \subsubsection{Avec \package{gmp}}
 
 L’utilisation de \package{gmp}~\cite{ctan-gmp} est assez similaire à celle de
-\package{mpgraphics}. Quelques commandes sont toute fois différentes, mais comme
+\package{mpgraphics}. Quelques commandes sont toutefois différentes, mais comme
 avec \package{mpgraphics}, on n’aura pas recours à \lstinline+beginfig+ et
 \lstinline+endfig+. Le chargement de \mpchess peut se faire au chargement du
 package, et le code \MP{} se trouve dans l’environnement \lstinline+mpost+. Là
@@ -1198,7 +1199,8 @@ Il est tout à fait possible d’utiliser \mpchess directement dans un fichier
 intégrante de \hologo{LuaTeX}.} et le package \package{luamplib}. C’est
 d’ailleurs ce qui est fait pour écrire cette documentation.
 
-Il suffira alors de mettre le code \MP{} dans l’environnement \lstinline+mplibcode+.
+Il suffira alors de mettre le code \MP{} dans l’environnement
+\lstinline+mplibcode+ comme illustré plus bas.
   
 
 \mpchess utilise, pour certaines fonctionnalités, l’opérateur
