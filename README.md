@@ -54,6 +54,10 @@ used with LuaLaTeX and luamplib, `latexmp`.
 * [English documentation](doc/mpchess-doc-en.pdf)
 * [Documentation en français](doc/mpchess-doc-fr.pdf)
 
+## Contact
+
+Maxime Chupin, `notezik(at)gmail.com`
+
 ## Licenses
 
 This projet is under LATEX Project Public License 1.3c but the file
