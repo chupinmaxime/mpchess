@@ -68,7 +68,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.4, 2023, April, 6th \\
+  Version 0.5, 2023, April, 20th \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -87,6 +87,7 @@
 
 \begin{center}
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
+  \url{https://github.com/chupinmaxime/mpchess}
 \end{center}
 
 \tableofcontents
@@ -1272,6 +1273,44 @@ endfig;
 \end{document}
 \end{latexcode}
 
+\subsection{TrueType Font}
+
+The \mpchess{} package provides a very simple font composed of only the 12
+glyphs corresponding to the black and white pieces in the Unicode table. To
+access it you just have to use \hologo{LuaLaTeX} or \hologo{XeLaTeX} and the
+package \package{fontspec}.  To facilitate its use, we propose
+some definitions.
+
+\begin{latexcode}
+  \documentclass{article}
+  \usepackage{fontspec}
+  \newfontfamily{\chessfont}{mpchess font}
+  \newcommand\bP{{\chessfont \char"265F}} % black Pawn
+  \newcommand\bN{{\chessfont \char"265E}} % black Knight
+  \newcommand\bB{{\chessfont \char"265D}} % black Bishop
+  \newcommand\bR{{\chessfont \char"265C}} % black Rook
+  \newcommand\bQ{{\chessfont \char"265B}} % black Queen
+  \newcommand\bK{{\chessfont \char"265A}} % black King
+  \newcommand\wP{{\chessfont \char"2659}} % white Pawn
+  \newcommand\wN{{\chessfont \char"2658}} % white Knight
+  \newcommand\wB{{\chessfont \char"2657}} % white Bishop
+  \newcommand\wR{{\chessfont \char"2656}} % white Rook
+  \newcommand\wQ{{\chessfont \char"2655}} % white Queen
+  \newcommand\wK{{\chessfont \char"2654}} % white King
+  
+  \begin{document}
+  
+ 1. e4 e5 2. \wB c4 d6 3. \wN f3 \bB g4 4. \wN
+  c3 g6 5. \wN xe5 \bB xd1.
+  
+  \end{document}
+  \end{latexcode}
+  
+  This code will produce:
+  
+  "1. e4 e5 2. \wB c4 d6 3. \wN f3 \bB g4
+  4. \wN c3 g6 5. \wN xe5 \bB xd1."
+
 \section{To Do}
 
 Many things can be added to \mpchess. Among these, we can think of:
@@ -1309,6 +1348,8 @@ endfig;
 \section{History}
 
 \begin{description}
+\item[v0.5, April 20, 2023:]  Bug fixed, \textbf{changing the
+default piece set} for the \lstinline+mpchess+ set (which has been added to Lichess), added TrueType font, and updated documentation.
 \item[v0.4, April 6, 2023:] Corrections in the documentation, especially the
 English version; added commands to visualize the possible movements for a
  piece (section~\ref{sec:possiblemoves}).

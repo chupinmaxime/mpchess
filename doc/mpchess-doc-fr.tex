@@ -71,7 +71,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.4, 6 avril 2023 \\
+  Version 0.5, 20 avril 2023 \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -90,6 +90,7 @@ excellent packages \LaTeX{}.
 
 \begin{center}
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
+  \url{https://github.com/chupinmaxime/mpchess}
 \end{center}
 
 \tableofcontents
@@ -1245,6 +1246,47 @@ endfig;
 \end{mplibcode}
 \end{document}
 \end{latexcode}
+
+\subsection{Font TrueType}
+
+Le package \mpchess{} fournit une fonte très simple composé d’uniquement les 12
+glyphes correspondant aux pièces noires et blanches dans la table Unicode. Pour
+y avoir accès il suffit d’utiliser \hologo{LuaLaTeX} ou \hologo{XeLaTeX} et le
+package \package{fontspec}.  Pour faciliter son utilisation, nous proposons
+quelques définitions.
+
+\begin{latexcode}
+\documentclass{article}
+\usepackage{fontspec}
+\newfontfamily{\chessfont}{mpchess font}
+\newcommand\bP{{\chessfont \char"265F}} % black Pawn
+\newcommand\bN{{\chessfont \char"265E}} % black Knight
+\newcommand\bB{{\chessfont \char"265D}} % black Bishop
+\newcommand\bR{{\chessfont \char"265C}} % black Rook
+\newcommand\bQ{{\chessfont \char"265B}} % black Queen
+\newcommand\bK{{\chessfont \char"265A}} % black King
+\newcommand\wP{{\chessfont \char"2659}} % white Pawn
+\newcommand\wN{{\chessfont \char"2658}} % white Knight
+\newcommand\wB{{\chessfont \char"2657}} % white Bishop
+\newcommand\wR{{\chessfont \char"2656}} % white Rook
+\newcommand\wQ{{\chessfont \char"2655}} % white Queen
+\newcommand\wK{{\chessfont \char"2654}} % white King
+
+\begin{document}
+
+Voici l'enchainement de coups : 1. e4 e5 2. \wB c4 d6 3. \wN f3 \bB g4 4. \wN
+c3 g6 5. \wN xe5 \bB xd1.
+
+\end{document}
+\end{latexcode}
+
+Qui produira :
+
+\og{}Voici l’enchainement de coups : 1. e4 e5 2. \wB c4 d6 3. \wN f3 \bB g4
+4. \wN c3 g6 5. \wN xe5 \bB xd1.\fg{}
+
+
+
 \section{To do}
 
 De nombreuses choses sont à ajouter à \mpchess. Parmi celles-ci, on peut penser
@@ -1284,6 +1326,9 @@ endfig;
 \section{Historique}
 
 \begin{description}
+\item[v0.5, 20 avril 2023:] Correction d’un bug, \textbf{changement de
+l’ensemble de pièce par défaut} pour l’ensemble \lstinline+mpchess+ (qui a été
+ajouté à Lichess), ajout de la fonte TrueType, et mise à jour de la documentation.
 \item[v0.4, 6 avril 2023:] Corrections dans la documentation, notamment la
 version anglaise; ajout des commandes pour visualiser les mouvements possible
 pour une pièce (section~\ref{sec:possiblemoves}). 

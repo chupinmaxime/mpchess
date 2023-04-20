@@ -63,6 +63,17 @@ used with LuaLaTeX and luamplib, `latexmp`.
 * [English documentation](doc/mpchess-doc-en.pdf)
 * [Documentation en français](doc/mpchess-doc-fr.pdf)
 
+### Piece Set
+
+A piece set has been designed for this package. It has also be added to
+[lichess.org](https://lichess.org) under the name of `mpchess`.
+
+A dedicated git repository is available:
+[https://plmlab.math.cnrs.fr/mchupin/mpchess-pieces](https://plmlab.math.cnrs.fr/mchupin/mpchess-pieces)
+and
+[https://github.com/chupinmaxime/mpchess](https://github.com/chupinmaxime/mpchess).
+
+A TrueType font is available.  
 ## Contact
 
 Maxime Chupin, `notezik(at)gmail.com`

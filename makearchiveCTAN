@@ -3,6 +3,8 @@
 
 mkdir -p mpchess/metapost
 mkdir -p mpchess/doc
+mkdir -p mpchess/fonts
+
 cp mpchess.mp mpchess/metapost
 cp mpchess-cburnett.mp mpchess/metapost
 cp mpchess-chessboard.mp mpchess/metapost
@@ -21,12 +23,14 @@ cp doc/mpchess-preamble.tex mpchess/doc/
 cp doc/test.fen mpchess/doc/
 cp doc/test.pgn mpchess/doc/
 
+cp fonts/mpchessfont.ttf mpchess/fonts/
+
 
 cp README.md mpchess/
 cp LICENSE mpchess/
 
 
 
-zip -r archives/mpchess-v0.4-CTAN.zip mpchess/
+zip -r archives/mpchess-v0.5-CTAN.zip mpchess/
 
 rm -r mpchess
