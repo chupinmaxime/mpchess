@@ -39,6 +39,9 @@ MPchess consists of 7 files METAPOST :
 * `mpchess-pieces.mp`;
 * `mpchess-skak.mp`.
 
+MPchess comes with a very basic chess font `mpchess font.ttf` that includes only
+13 glyphs.   
+
 Once this is done, MPchess will be loaded with the classic
 ```metapost
 input mpchess
