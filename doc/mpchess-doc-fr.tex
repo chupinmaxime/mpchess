@@ -443,9 +443,13 @@ macros permettent de générer une \lstinline+picture+ à dessiner \emph{par
 
 \subsection{Réglage du thème des pièces}
 
-\mpchess fournit pour l’instant trois thèmes de pièces, deux empruntés à
-Lichess, 
-et l’autre emprunté au package~\package{skak}~\cite{ctan-skak}\footnote{Qui
+\mpchess fournit pour l’instant trois thèmes de pièces. Le thème par défaut est
+appelé \lstinline+mpchess+. Il a été designé pour ce package \hologo{METAPOST}.
+Il a été proposé au projet Lichess, et a été accepté. Ainsi, vous aurez aussi
+accès à l’ensemble de pièces \lstinline+mpchess+ avec Lichess\footnote{Les
+projets libres se nourrissent mutuellement ! Même si évidemment, ce package a
+bien plus emprunté à Lichess que le contraire.} ! Un autre thème est emprunté à
+Lichess (\lstinline+cburnett+) et  l’autre est emprunté au package~\package{skak}~\cite{ctan-skak}\footnote{Qui
   fournit le code \MF{} pour la fonte de pièces d’échec, code qui a été
   facilement adapté en \MP{} pour \mpchess.}.
 
@@ -456,10 +460,9 @@ Pour choisir le thème on utilisera la commande suivante.
 \begin{description}
   \item[\meta{string}:] peut valoir:
 \begin{itemize}
-\item \lstinline+"cburnett"+ (valeur par défaut), pour obtenir l’ensemble de pièces nommé \emph{cburnett} de Lichess;
-
-\item \lstinline+"mpchess"+, pour obtenir l’ensemble de pièces spécialement
-conçu pour ce package ;
+  \item \lstinline+"mpchess"+ (valeur par défaut), pour obtenir l’ensemble de pièces spécialement
+  conçu pour ce package ;
+  \item \lstinline+"cburnett"+, pour obtenir l’ensemble de pièces nommé \emph{cburnett} de Lichess;
 \item \lstinline+"skak"+, pour obtenir l’ensemble de pièces du package~\package{skak}.
 \end{itemize}
 \end{description}

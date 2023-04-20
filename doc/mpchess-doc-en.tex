@@ -453,8 +453,15 @@ macros allow to generate a \lstinline+picture+ to be drawn \emph{over} the board
 
 \subsection{Setting the Theme of the Pieces}
 
-\mpchess provides for the moment three themes of pieces: two borrowed from
-Lichess, and one borrowed from the
+\mpchess provides for the moment three themes of pieces. The default theme is
+called \lstinline+mpchess+. It has been designed for this package \hologo{METAPOST}.
+It has been proposed to the Lichess project, and has been accepted. Thus, you
+will also have access to the \lstinline+mpchess+ piece set with
+Lichess\footnote{The open-source projects feed each other! Even if obviously,
+this package has borrowed much more from Lichess than the other way around.}
+
+Another theme is borrowed from
+Lichess (\lstinline+cburnett+) and the last one is borrowed from the
 package~\package{skak}~cite{ctan-skak}\footnote{Which provides the \MF{} code
 for a chess font, which has been easily adapted to \MP{} for \mpchess.}.
 
@@ -465,10 +472,10 @@ To choose the theme, use the following command:
 \begin{description}
   \item[\meta{string}:] can be:
 \begin{itemize}
-\item \lstinline+"cburnett"+ (default), to use the Lichess \emph{cburnett}
-pieces set;
-\item \lstinline+"mpchess"+, to use the set specially designed for this
+\item \lstinline+"mpchess"+  (default), to use the set specially designed for this
 package;
+\item \lstinline+"cburnett"+, to use the Lichess \emph{cburnett}
+pieces set;
 \item \lstinline+"skak"+, to use the \package{skak}
 pieces set.
 \end{itemize}
