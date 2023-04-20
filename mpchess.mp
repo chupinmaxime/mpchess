@@ -238,20 +238,20 @@ def set_black_color(expr c)=
     _blackColorSquare:=c;
 enddef;
 
-_chess_bB:=_chess_cburnett_bB;
-_chess_bK:=_chess_cburnett_bK;
-_chess_bN:=_chess_cburnett_bN;
-_chess_bP:=_chess_cburnett_bP;
-_chess_bQ:=_chess_cburnett_bQ;
-_chess_bR:=_chess_cburnett_bR;
+_chess_bB:=_chess_mpchess_bB;
+_chess_bK:=_chess_mpchess_bK;
+_chess_bN:=_chess_mpchess_bN;
+_chess_bP:=_chess_mpchess_bP;
+_chess_bQ:=_chess_mpchess_bQ;
+_chess_bR:=_chess_mpchess_bR;
 
 
-_chess_wB:=_chess_cburnett_wB;
-_chess_wK:=_chess_cburnett_wK;
-_chess_wN:=_chess_cburnett_wN;
-_chess_wP:=_chess_cburnett_wP;
-_chess_wQ:=_chess_cburnett_wQ;
-_chess_wR:=_chess_cburnett_wR;
+_chess_wB:=_chess_mpchess_wB;
+_chess_wK:=_chess_mpchess_wK;
+_chess_wN:=_chess_mpchess_wN;
+_chess_wP:=_chess_mpchess_wP;
+_chess_wQ:=_chess_mpchess_wQ;
+_chess_wR:=_chess_mpchess_wR;
 
 def set_pieces_theme(expr t)=
     if(t="mpchess"):
