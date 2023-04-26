@@ -2,7 +2,7 @@
 %%                        mpchess.mp                          %%
 %%              draw chessboards with metapost                %%
 %%                chupin@ceremade.dauphine.fr                 %%
-%%                Version 0.5 (avril   2023)                  %%
+%%                Version 0.6 (avril   2023)                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This work may be distributed and/or modified under the conditions of
@@ -11,6 +11,7 @@
 % license is in http://www.latex-project.org/lppl.txt
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %input format;
 input hatching;
