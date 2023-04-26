@@ -794,9 +794,6 @@ def show_possible_moves_step(expr k)(expr s)=
         for _ii:=-1  upto 1:
             for _jj:=-1  upto 1:
                 if((_fl+_ii>0) and (_fl+_ii<9) and (_fn+_jj>0) and (_fn+_jj<9)): 
-                show "king";
-                show _ii;
-                show _jj;
                     if((_piecetype*chessboard_table[k][_fl+_ii][_fn+_jj])<=0):
                         _circle_move(_fl+_ii,_fn+_jj);
                     fi

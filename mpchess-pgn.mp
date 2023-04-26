@@ -245,7 +245,6 @@ vardef _extract_single_move(expr s,wb)=
     string _str;
     numeric output[];
     _str := s;
-    show _str;
     _length:= length(_str);
     if(_str="O-O"):
         _piecetype:=100;
