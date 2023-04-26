@@ -68,7 +68,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.5, 2023, April, 20th \\
+  Version 0.6, 2023, April, 26th \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -292,7 +292,7 @@ command:
 \begin{description}
   \item[\meta{string}] can be:
 \begin{itemize}
-\item \lstinline+"BlueLichess"+ (thème par défaut);
+\item \lstinline+"BlueLichess"+ (default);
 \item \lstinline+"BrownLichess"+ ;
 \item or \lstinline+"Classical"+.
 \end{itemize}
@@ -322,18 +322,21 @@ The two color themes provided borrow the colors of the Lichess themes.
 \subsubsection{Configuring a Personal Color Theme}
 
 A color theme is really just the definition of two colors.
-These can be defined with the following commands:
+These can be defined with the following commands\footnote{Attention,
+in version 0.6, \lstinline+set_white_color+ became
+\lstinline+set_white_squares_color+ and \lstinline+set_black_color+ became
+\lstinline+set_black_squares_color+.}:
 
-\commande|set_white_color(«color»)|\index{set_white_color@\lstinline+set_white_color+}\par
-\commande|set_black_color(«color»)|\index{set_black_color@\lstinline+set_black_color+}\smallskip
+\commande|set_white_squares_color(«color»)|\index{set_white_squares_color@\lstinline+set_white_squares_color+}\par
+\commande|set_black_squares_color(«color»)|\index{set_black_squares_color@\lstinline+set_black_squares_color+}\smallskip
 
 \meta{color} is a \MP{} \lstinline+color+.
 
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
-set_white_color((0.9,0.8,0.8));
-set_black_color((0.7,0.6,0.6));
+set_white_squares_color((0.9,0.8,0.8));
+set_black_squares_color((0.7,0.6,0.6));
 init_backboard;
 draw backboard;
 endfig;
@@ -342,10 +345,21 @@ endfig;
 
 You may have noticed in the various examples that by default, the coordinates are, as on the Lichess site, written in small letters inside the boxes.
 
-\mpchess allows you to position these coordinates outside the board with the
-following command:
+\mpchess allows you to choose the coordinates position inside  or outside the board with the
+following command\footnote{Attention,
+in version 0.6, \lstinline+set_coords_inside+ and \lstinline+set_coords_outside+ became
+\lstinline+set_coordinates_position+.}:
 
-\commande|set_coords_outside|\index{set_coords_outside@\lstinline+set_coords_outside+}\smallskip
+\commande|set_coordinates_position(«string»)|\index{set_coordinates_position@\lstinline+set_coordinates_position+}\smallskip
+
+
+\begin{description}
+  \item[\meta{string}] can be:
+\begin{itemize}
+\item \lstinline+"inside"+ (default);
+\item \lstinline+"outside"+.
+\end{itemize}
+\end{description}
 
 The result is as follows.
 
@@ -354,15 +368,12 @@ The result is as follows.
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
-set_coords_outside;
+set_coordinates_position("outside");
 init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
 
-There is also a command to position the coordinates inside the board:
-
-\commande|set_coords_inside|\index{set_coords_inside@\lstinline+set_coords_inside+}\smallskip
 
 You can see in the previous examples that with \package{luamplib} and
 \LaTeX, the font used for the coordinates is the font of the current document. To draw these letters and
@@ -370,22 +381,27 @@ these numbers, \mpchess uses the \MP{} operator  \lstinline+infont+ and the font
 is set to \lstinline+defaultfont+ by default\footnote{With \package{luamplib}
 the \lstinline+infont+ operator is redefined and its argument is simply
 ignored}, so it is not possible to modify the composition font of the
-coordinates. This font can be changed with the following command.
+coordinates. This font can be changed with the following command\footnote{Attention,
+in version 0.6, \lstinline+set_coords_font+ became 
+\lstinline+set_coordinates_font+.}.
 
-\commande|set_coords_font(«font»)|\index{set_coords_font@\lstinline+set_coords_font+}\smallskip
+\commande|set_coordinates_font(«font»)|\index{set_coordinates_font@\lstinline+set_coordinates_font+}\smallskip
 
 It will then be necessary to use the naming conventions specific to the \MP{}
 operator
 \lstinline+infont+, and we refer to the
 \MP documentation~\cite{ctan-metapost} for more details.
 
-You can also delete the coordinates with the following command:
+You can also delete the coordinates with the following command\footnote{Attention,
+in version 0.6, \lstinline+set_no_coords+ became
+\lstinline+hide_coordinates+ and \lstinline+set_coords+ became
+\lstinline+show_coordinates+.}:
 
-\commande|set_no_coords|\index{set_no_coords@\lstinline+set_no_coords+}\smallskip
+\commande|hide_coordinates|\index{hide_coordinates@\lstinline+hide_coordinates+}\smallskip
 
 And the reverse command also exists:
 
-\commande|set_coords|\index{set_coords@\lstinline+set_coords+}\smallskip
+\commande|show_coordinates|\index{show_coordinates@\lstinline+show_coordinates+}\smallskip
 
 
 \subsection{White or Black Side}
@@ -409,7 +425,7 @@ chessboard. This is done with the following commands:
 \commande|set_black_player(«string»)|\index{set_black_player@\lstinline+set_black_player+}\smallskip
 
 \begin{description}
-  \item[\meta{string} :] is the string interpreted by \LaTeX to display.
+  \item[\meta{string} :] is the string interpreted by \LaTeX{} to display.
 \end{description}
 
 \begin{ExempleMP}
@@ -495,7 +511,7 @@ The table~\ref{tab:pieces} shows the result of the three sets of pieces.
   init_chessboard;
   set_backboard_width(4cm);
   set_pieces_theme("cburnett");
-  unset_whos_to_move;
+  hide_whos_to_move;
   init_backboard;
   draw backboard;
   draw chessboard_step(0);
@@ -507,7 +523,7 @@ The table~\ref{tab:pieces} shows the result of the three sets of pieces.
   init_chessboard;
   set_backboard_width(4cm);
   set_pieces_theme("mpchess");
-  unset_whos_to_move;
+  hide_whos_to_move;
   init_backboard;
   draw backboard;
   draw chessboard_step(0);
@@ -520,7 +536,7 @@ The table~\ref{tab:pieces} shows the result of the three sets of pieces.
   init_chessboard;
   set_backboard_width(4cm);
   set_pieces_theme("skak");
-  unset_whos_to_move;
+  hide_whos_to_move;
   init_backboard;
   draw backboard;
   draw chessboard_step(0);
@@ -534,7 +550,7 @@ The table~\ref{tab:pieces} shows the result of the three sets of pieces.
 \subsection{Specifying to Move}
 
 \mpchess indicates which player has the current move. This is done by
-a small colored triangle (white or black) at the end of the board (which you can
+a small colored triangle (white or black) at the end of the board (which
 you can see in the following examples).
 
 To specify which side is to move, use the following commands:
@@ -547,12 +563,15 @@ To specify which side is to move, use the following commands:
 By default, white is to move, and this information is displayed.
 
 To activate or deactivate this display, use one of the following two
-commands:
+commands\footnote{Attention,
+in version 0.6, \lstinline+set_whos_to_move+ and
+\lstinline+unset_whos_to_move+ became \lstinline+show_whos_to_move+ and
+\lstinline+hide_whos_to_move+.}:
 
-\commande|set_whos_to_move|\index{set_whos_to_move@\lstinline+set_whos_to_move+}\smallskip
+\commande|show_whos_to_move|\index{show_whos_to_move@\lstinline+show_whos_to_move+}\smallskip
 
 
-\commande|unset_whos_to_move|\index{unset_whos_to_move@\lstinline+unset_whos_to_move+}\smallskip
+\commande|hide_whos_to_move|\index{hide_whos_to_move@\lstinline+hide_whos_to_move+}\smallskip
 
 \subsection{Draw a Position}
 
@@ -1348,6 +1367,19 @@ endfig;
 \section{History}
 
 \begin{description}
+\item[v0.6, April 26, 2023:] Fixed bugs concerning castling management, and
+ moves ambiguities in \textsc{pgn} format.
+Changed \lstinline+set_white_color+ to
+\lstinline+set_white_squares_color+ and \lstinline+set_black_color+ to
+\lstinline+set_black_squares_color+. Change \lstinline+set_no_coords+ to
+\lstinline+hide_coordinates+ and \lstinline+set_coords+ to
+\lstinline+show_coordinates+. Change \lstinline+set_whos_to_move+ to
+\lstinline+show_whos_to_move+ and \lstinline+unset_whos_to_move+ to
+\lstinline+hide_whos_to_move+. Change \lstinline+set_coords_inside+ and
+\lstinline+set_coords_outside+ to \lstinline+set_coordinates_position+.
+Change \lstinline+set_coords_font+ to \lstinline+set_coordinates_font+. 
+
+Translated with www.DeepL.com/Translator (free version)
 \item[v0.5, April 20, 2023:]  Bug fixed, \textbf{changing the
 default piece set} for the \lstinline+mpchess+ set (which has been added to Lichess), added TrueType font, and updated documentation.
 \item[v0.4, April 6, 2023:] Corrections in the documentation, especially the
@@ -1363,8 +1395,10 @@ license) and creation of the \lstinline+mpchess+ parts theme.
 
 \section{Acknowledgements}
 
-The author would like to thank Quark67 for his feedback and corrections, and
-Douglas Johnson for correcting the English version of the documentation. This
+The author would like to thank Quark67 for his feedback and corrections, 
+Douglas Johnson for correcting the English version of the documentation and Hans
+Nieuwenhuis for his advices. 
+This
 feedback and encouragement is extremely appreciated!
 
 

@@ -71,7 +71,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.5, 20 avril 2023 \\
+  Version 0.6, 26 avril 2023 \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -316,18 +316,21 @@ Les deux thèmes colorés fournis empruntent les couleurs des thèmes de Lichess
 \subsubsection{Configuration d’un thème personnel}
 
 Un thème de couleur est en réalité simplement la définition de deux couleurs.
-Celles-ci peuvent se définir avec les commandes suivantes.
+Celles-ci peuvent se définir avec les commandes suivantes \footnote{Attention,
+lors du passage à la version 0.6, \lstinline+set_white_color+ est devenu
+\lstinline+set_white_squares_color+ et \lstinline+set_black_color+ est devenu
+\lstinline+set_black_squares_color+.}.
 
-\commande|set_white_color(«color»)|\index{set_white_color@\lstinline+set_white_color+}\par
-\commande|set_black_color(«color»)|\index{set_black_color@\lstinline+set_black_color+}\smallskip
+\commande|set_white_squares_color(«color»)|\index{set_white_squares_color@\lstinline+set_white_squares_color+}\par
+\commande|set_black_squares_color(«color»)|\index{set_black_squares_color@\lstinline+set_black_squares_color+}\smallskip
 
 \meta{color} est une \lstinline+color+ \MP.
 
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
-set_white_color((0.9,0.8,0.8));
-set_black_color((0.7,0.6,0.6));
+set_white_squares_color((0.9,0.8,0.8));
+set_black_squares_color((0.7,0.6,0.6));
 init_backboard;
 draw backboard;
 endfig;
@@ -338,24 +341,33 @@ Vous avez pu constater dans les divers exemples que par défaut, les coordonnée
 sont, comme le fait le site Lichess, inscrites en petit à l’intérieur des
 cases.
 
-\mpchess permet de positionner ces coordonnées à l’extérieur du plateau avec la commande suivante.
+\mpchess permet de choisir le positionnement de ces coordonnées à l’extérieur ou
+à l’intérieur du plateau avec la commande suivante\footnote{Attention,
+en version 0.6, \lstinline+set_coords_inside+ et \lstinline+set_coords_outside+
+ont été remplacés par 
+\lstinline+set_coordinates_position+.}.
 
-\commande|set_coords_outside|\index{set_coords_outside@\lstinline+set_coords_outside+}\smallskip
+\commande|set_coordinates_position(«string»)|\index{set_coordinates_position@\lstinline+set_coordinates_position+}\smallskip
+
+\begin{description}
+  \item[\meta{string}] peut valoir :
+\begin{itemize}
+\item \lstinline+"inside"+ (par défaut);
+\item \lstinline+"outside"+.
+\end{itemize}
+\end{description}
+
 
 Le résultat est alors le suivant.
 
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
-set_coords_outside;
+set_coordinates_position("outside");
 init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
-
-Il existe aussi la commande permettant de positionner les coordonnées à l’intérieur du plateau.
-
-\commande|set_coords_inside|\index{set_coords_inside@\lstinline+set_coords_inside+}\smallskip
 
 Vous pouvez constater dans cette documentation qu’avec \package{luamplib} et
 \LaTeX, la fonte est la fonte du document courant. Pour tracer ces lettres et
@@ -363,21 +375,26 @@ ces chiffres, \mpchess utilise l’opérateur \MP{} \lstinline+infont+ et la fon
 est réglée à \lstinline+defaultfont+ par défaut\footnote{Avec \package{luamplib}
 l’opérateur \lstinline+infont+ est redéfini et son argument est simplement
 ignoré, ainsi, il n’est pas possible de modifier la fonte de composition des
-coordonnées.}. On peut modifier cette fonte avec la commande suivante.
+coordonnées.}. On peut modifier cette fonte avec la commande suivante\footnote{Attention,
+en version 0.6, \lstinline+set_coords_font+ est devenue 
+\lstinline+set_coordinates_font+.}.
 
-\commande|set_coords_font(«font»)|\index{set_coords_font@\lstinline+set_coords_font+}\smallskip
+\commande|set_coordinates_font(«font»)|\index{set_coordinates_font@\lstinline+set_coordinates_font+}\smallskip
 
 Il faudra alors utiliser les conventions de nommage propres à l’opérateur
 \lstinline+infont+ de \MP{} et nous renvoyons à la
 documentation~\cite{ctan-metapost} pour plus de détails.
 
-On pourra aussi supprimer les coordonnées avec la commande suivante.
+On pourra aussi supprimer les coordonnées avec la commande suivante\footnote{Attention,
+dans la version 0.6, \lstinline+set_no_coords+ est devenu
+\lstinline+hide_coordinates+ et \lstinline+set_coords+ est devenu
+\lstinline+show_coordinates+}.
 
-\commande|set_no_coords|\index{set_no_coords@\lstinline+set_no_coords+}\smallskip
+\commande|hide_coordinates|\index{hide_coordinates@\lstinline+hide_coordinates+}\smallskip
 
 Et la commande inverse aussi existe.
 
-\commande|set_coords|\index{set_coords@\lstinline+set_coords+}\smallskip
+\commande|show_coordinates|\index{show_coordinates@\lstinline+show_coordinates+}\smallskip
 
 
 \subsection{Vue blanche ou noire}
@@ -480,7 +497,7 @@ Thème \lstinline+cburnett+&Thème \lstinline+mpchess+\\
   init_chessboard;
   set_backboard_width(4cm);
   set_pieces_theme("cburnett");
-  unset_whos_to_move;
+  hide_whos_to_move;
   init_backboard;
   draw backboard;
   draw chessboard_step(0);
@@ -492,7 +509,7 @@ Thème \lstinline+cburnett+&Thème \lstinline+mpchess+\\
   init_chessboard;
   set_backboard_width(4cm);
   set_pieces_theme("mpchess");
-  unset_whos_to_move;
+  hide_whos_to_move;
   init_backboard;
   draw backboard;
   draw chessboard_step(0);
@@ -505,7 +522,7 @@ Thème \lstinline+skak+&\\
   init_chessboard;
   set_backboard_width(4cm);
   set_pieces_theme("skak");
-  unset_whos_to_move;
+  hide_whos_to_move;
   init_backboard;
   draw backboard;
   draw chessboard_step(0);
@@ -532,12 +549,15 @@ Pour spécifier qui a le trait on utilisera les commandes suivantes.
 
 Par défaut, c’est aux blancs de jouer, et cette information est affichée.
 
-Pour activer ou désactiver l’affichage du trait, on utilisera une des deux commandes suivantes.
+Pour activer ou désactiver l’affichage du trait, on utilisera une des deux commandes suivantes\footnote{Attention,
+lors du passage à la version 0.6, \lstinline+set_whos_to_move+ et
+\lstinline+unset_whos_to_move+ sont devenus \lstinline+show_whos_to_move+ et
+\lstinline+hide_whos_to_move+.}.
 
-\commande|set_whos_to_move|\index{set_whos_to_move@\lstinline+set_whos_to_move+}\smallskip
+\commande|show_whos_to_move|\index{show_whos_to_move@\lstinline+show_whos_to_move+}\smallskip
 
 
-\commande|unset_whos_to_move|\index{unset_whos_to_move@\lstinline+unset_whos_to_move+}\smallskip
+\commande|hide_whos_to_move|\index{hide_whos_to_move@\lstinline+hide_whos_to_move+}\smallskip
 
 \subsection{Dessiner une position}
 
@@ -1326,6 +1346,17 @@ endfig;
 \section{Historique}
 
 \begin{description}
+\item[v0.6, avril 2023:] Corrections de bugs concernant la gestion des roques, et
+des ambiguïtés de pièces pour les déplacements sous format \textsc{pgn}.
+Changement de \lstinline+set_white_color+ en
+\lstinline+set_white_squares_color+ et \lstinline+set_black_color+ en
+\lstinline+set_black_squares_color+. Changement de \lstinline+set_no_coords+ en
+\lstinline+hide_coordinates+ et \lstinline+set_coords+ en
+\lstinline+show_coordinates+. Changement de \lstinline+set_whos_to_move+ en
+\lstinline+show_whos_to_move+ et \lstinline+unset_whos_to_move+ en
+\lstinline+hide_whos_to_move+. Changement de \lstinline+set_coords_inside+ et
+\lstinline+set_coords_outside+ en \lstinline+set_coordinates_position+.
+Changement de \lstinline+set_coords_font+ en \lstinline+set_coordinates_font+. 
 \item[v0.5, 20 avril 2023:] Correction d’un bug, \textbf{changement de
 l’ensemble de pièce par défaut} pour l’ensemble \lstinline+mpchess+ (qui a été
 ajouté à Lichess), ajout de la fonte TrueType, et mise à jour de la documentation.
@@ -1342,8 +1373,9 @@ licence) et création du thème de pièces \lstinline+mpchess+.
 
 
 \section{Remerciements}
-Nous souhaitons remercier Quark67 pour ses retours et ses corrections, ainsi
-que Douglas Johnson pour avoir corrigé la version anglaise de la documentation.
+Nous souhaitons remercier Quark67 pour ses retours et ses corrections, Douglas
+Johnson pour avoir corrigé la version anglaise de la documentation et Hans
+Nieuwenhuis pour ses conseils. 
 Ces retours et encouragements font extrêmement plaisir !
 
 
