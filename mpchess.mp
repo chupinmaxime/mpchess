@@ -85,13 +85,16 @@ def show_coordinates=
     _chess_print_coords:=true;
 enddef;
 
-def set_coords_inside=
-    _chess_coords_inout:=true;
+def set_coordinates_position(expr s)=
+    if(s="inside"):
+        _chess_coords_inout:=true;
+    elseif(s="outside"):
+        _chess_coords_inout:=false;
+    fi
 enddef;
 
-def set_coords_outside=
-    _chess_coords_inout:=false;
-enddef;
+
+
 
 % boolean for white or black to move
 boolean _white_to_move;
