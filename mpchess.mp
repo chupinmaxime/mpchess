@@ -77,11 +77,11 @@ enddef;
 boolean _chess_print_coords,_chess_coords_inout;
 _chess_print_coords:=true;
 _chess_coords_inout:=true; %true for inside
-def set_no_coords=
+def hide_coordinates=
     _chess_print_coords:=false;
 enddef;
 
-def set_coords=
+def show_coordinates=
     _chess_print_coords:=true;
 enddef;
 
@@ -231,11 +231,11 @@ def set_color_theme(expr t)=
     fi
 enddef;
 
-def set_white_color(expr c)=
+def set_white_squares_color(expr c)=
     _whiteColorSquare:=c;
 enddef;
 
-def set_black_color(expr c)=
+def set_black_squares_color(expr c)=
     _blackColorSquare:=c;
 enddef;
 
