@@ -109,15 +109,15 @@ def set_white_to_move=
 enddef;    
 
 % boolean to show a mark to indicate whos to move
-boolean show_whos_to_move;
-show_whos_to_move:=true;
+boolean _show_whos_to_move;
+_show_whos_to_move:=true;
 
-def set_whos_to_move=
-    show_whos_to_move:=true;
+def show_whos_to_move=
+    _show_whos_to_move:=true;
 enddef;
 
-def unset_whos_to_move=
-    show_whos_to_move:=false;
+def hide_whos_to_move=
+    _show_whos_to_move:=false;
 enddef;
 
 
@@ -687,7 +687,7 @@ vardef _chess_build_chessboard_pic(expr k)=
             fi
         endfor;
     endfor;
-    if(show_whos_to_move):
+    if(_show_whos_to_move):
         if(_chess_view_wb): %white side 
             if(not _white_to_move):
                 fill _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
