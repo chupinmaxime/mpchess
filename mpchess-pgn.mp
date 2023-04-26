@@ -245,12 +245,13 @@ vardef _extract_single_move(expr s,wb)=
     string _str;
     numeric output[];
     _str := s;
+    show _str;
     _length:= length(_str);
-    if(str="O-O"):
+    if(_str="O-O"):
         _piecetype:=100;
         _letter:=100;
         _nbr:=100;
-    elseif(str="O-O-O"):
+    elseif(_str="O-O-O"):
         _piecetype:=1000;
         _letter:=1000;
         _nbr:=1000;

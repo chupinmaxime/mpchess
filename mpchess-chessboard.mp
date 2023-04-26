@@ -149,7 +149,7 @@ def _draw_step_chessboard(expr k) =
 enddef; 
 
 
-vardef _pawn_candidate(expr istart, jstart,iend,jend,wb,capture)=
+vardef _pawn_candidate(expr istart, jstart,iend,jend,wb,capture,ambiguity)=
     % i int from letter, column
     % j int for line
     % return true if (istart,jstart) to (iend,jend)
@@ -163,33 +163,49 @@ vardef _pawn_candidate(expr istart, jstart,iend,jend,wb,capture)=
         if(wb="white"):        
             if(jend=4): % on the line that allow 2 square move
                 if(((jstart=3) or (jstart=2)) and (iend=istart)):
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
                 if(((jstart=3) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): %capture
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
             else:
                 if((jstart=jend-1) and (istart=iend)): % straight move
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
                 if(((jstart=jend-1) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): % capture
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
             fi
         else:
             if(jend=5): % on the line that allow 2 square move
                 if(((jstart=6) or (jstart=7)) and (iend=istart)):
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
                 if(((jstart=6) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): %capture
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
             else:
                 if((jstart=jend+1) and (istart=iend)): % straight move
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
                 if(((jstart=jend+1) and ((istart=iend+1) or (istart=iend-1))) and (capture=1)): % capture
-                    output:=true;
+                    if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                        output:=true;
+                    fi
                 fi
             fi
         fi
@@ -197,7 +213,7 @@ vardef _pawn_candidate(expr istart, jstart,iend,jend,wb,capture)=
     output
 enddef;
 
-vardef _bishop_candidate(expr istart, jstart,iend,jend,wb)=
+vardef _bishop_candidate(expr istart, jstart,iend,jend,wb,ambiguity)=
     % i int from letter, column
     % j int for line
     % return true if (istart,jstart) to (iend,jend)
@@ -208,13 +224,15 @@ vardef _bishop_candidate(expr istart, jstart,iend,jend,wb)=
     output = false;
     if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
         if(abs(iend-istart)=abs(jend-jstart)):
-            output:=true;
+            if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                output:=true;
+            fi
         fi
     fi
     output
 enddef;
 
-vardef _rook_candidate(expr istart, jstart,iend,jend,wb)=
+vardef _rook_candidate(expr istart, jstart,iend,jend,wb,ambiguity)=
     % i int from letter, column
     % j int for line
     % return true if (istart,jstart) to (iend,jend)
@@ -225,7 +243,9 @@ vardef _rook_candidate(expr istart, jstart,iend,jend,wb)=
     output = false;
     if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
         if((iend=istart) or (jend=jstart)):
-            output:=true;
+            if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                output:=true;
+            fi
         fi
     fi
     output
@@ -266,7 +286,7 @@ vardef _king_candidate(expr istart, jstart,iend,jend,wb)=
     output
 enddef;
 
-vardef _knight_candidate(expr istart, jstart,iend,jend,wb)=
+vardef _knight_candidate(expr istart, jstart,iend,jend,wb,ambiguity)=
     % i int from letter, column
     % j int for line
     % return true if (istart,jstart) to (iend,jend)
@@ -276,31 +296,34 @@ vardef _knight_candidate(expr istart, jstart,iend,jend,wb)=
     boolean output;
     output = false;
     if((iend<=_chessSize) and (iend>=1) and (iend<=_chessSize) and (iend>=1)):
-        if(((abs(iend-istart)=2) and (abs(jend-jstart)=1)) or ((abs(iend-istart)=1) and (abs(jend-jstart)=2))):
-            output:=true;
+        if(((abs(iend-istart)=2) and (abs(jend-jstart)=1)) or
+        ((abs(iend-istart)=1) and (abs(jend-jstart)=2))):
+            if((ambiguity=0) or ((ambiguity<>0) and (ambiguity=istart))):
+                output:=true;
+            fi
         fi
     fi
     output
 enddef;
 
-vardef _chess_candidate(expr type, istart, jstart, iend, jend,wb,capture)=
+vardef _chess_candidate(expr type, istart, jstart, iend, jend,wb,capture,ambiguity)=
     numeric _pm;
     _pm:=1;
     if(wb="black"):
         _pm:=-1;
     fi
     if(type=(_pm*_intWPawn)):
-         _pawn_candidate(istart,jstart,iend,jend,wb,capture)
+         _pawn_candidate(istart,jstart,iend,jend,wb,capture,ambiguity)
     elseif(type=_pm*_intWBishop):
-        _bishop_candidate(istart,jstart,iend,jend,wb)
+        _bishop_candidate(istart,jstart,iend,jend,wb,ambiguity)
     elseif(type=_pm*_intWKing):
         _king_candidate(istart,jstart,iend,jend,wb)
     elseif(type=_pm*_intWKnight):
-        _knight_candidate(istart,jstart,iend,jend,wb)
+        _knight_candidate(istart,jstart,iend,jend,wb,ambiguity)
     elseif(type=_pm*_intWQueen):
         _queen_candidate(istart,jstart,iend,jend,wb)
     elseif(type=_pm*_intWRook):
-        _rook_candidate(istart,jstart,iend,jend,wb)
+        _rook_candidate(istart,jstart,iend,jend,wb,ambiguity)
     fi
 enddef;
 
@@ -352,11 +375,42 @@ def _build_all_chessboards=
             _wb:="white";
         else:
             _wb:="black";
-        fi        
+        fi
+        %  castling
+        if(_piecetype=100): % short castling
+            if(_pm=1):
+                _tmp_line:=1;    
+            else:
+                _tmp_line:=8;
+            fi
+            if((chessboard_table[k][5][_tmp_line]=_pm*_intWKing) and
+            (chessboard_table[k][8][_tmp_line]=_pm*_intWRook)): %  if king and
+            % in the right places
+                chessboard_table[k][5][_tmp_line]:=0;
+                chessboard_table[k][8][_tmp_line]:=0;
+                chessboard_table[k][6][_tmp_line]:=_pm*_intWRook;
+                chessboard_table[k][7][_tmp_line]:=_pm*_intWKing;
+            fi
+        fi
+        if(_piecetype=1000): % long castling
+            if(_pm=1):
+                _tmp_line:=1;    
+            else:
+                _tmp_line:=8;
+            fi
+            if((chessboard_table[k][5][_tmp_line]=_pm*_intWKing) and
+            (chessboard_table[k][1][_tmp_line]=_pm*_intWRook)): %  if king and
+            % in the right places
+                chessboard_table[k][5][_tmp_line]:=0;
+                chessboard_table[k][1][_tmp_line]:=0;
+                chessboard_table[k][4][_tmp_line]:=_pm*_intWRook;
+                chessboard_table[k][3][_tmp_line]:=_pm*_intWKing;
+            fi
+        fi       
         for i:=1 upto _chessSize:
             for j:=1 upto _chessSize:   
                 if(chessboard_table[k][i][j]=_piecetype): 
-                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,_wb,_capture)=true):  
+                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,_wb,_capture,_ambiguity)=true):  
                         if(_capture<>0):
                             if(_pm=1):
                                 _chess_white_captures[k][_chess_wcaptures_nbr[k-1]]:=chessboard_table[k][i][j];
@@ -466,7 +520,7 @@ def _draw_main_lines(expr _k)(expr wb)(text slist)=
         for i:=1 upto _chessSize:
             for j:=1 upto _chessSize:   
                 if(chessboard_table[_k][i][j]=_piecetype): 
-                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,wb,_capture)=true):  
+                    if(_chess_candidate(_piecetype, i, j, _iend, _jend,wb,_capture,_ambiguity)=true):  
                         draw_arrows(_chess_main_lines_color)(_int_to_letter_w(i)&_int_to_str_w(j)&"--"&_int_to_letter_w(_iend)&_int_to_str_w(_jend));
                     fi
                 fi
