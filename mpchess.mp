@@ -37,7 +37,7 @@ string _coords_font;
 _coords_font:=defaultfont;
 
 % chose the font to write coordinates on board
-def set_coords_font(expr f)=
+def set_coordinates_font(expr f)=
     _coords_font:=f ;
 enddef;
 
