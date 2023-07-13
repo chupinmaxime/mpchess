@@ -199,12 +199,29 @@ picture _blackSquareColoredPic, _whiteSquareColoredPic;
 picture _blackSquareClassicalPic, _whiteSquareClassicalPic;
 
 def _buildColoredSquare(expr _SquareUnit,_BlackColor,_WhiteColor)=
-    _blackSquarePic:=image(
-        fill unitsquare scaled _SquareUnit withcolor _BlackColor;
-    );
-    _whiteSquarePic:=image(
-        fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
-    );
+    if(_chess_board_style="flat"):
+        _blackSquarePic:=image(
+            fill unitsquare scaled _SquareUnit withcolor _BlackColor;
+        );
+        _whiteSquarePic:=image(
+            fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
+        );
+    else:
+        _blackSquarePic:=image(
+            fill unitsquare scaled _SquareUnit withcolor _BlackColor;
+            fill (1,0)--(1,1)--(0.5,0.5)--cycle scaled _SquareUnit withcolor
+            0.97[black,_BlackColor];
+            fill (0,1)--(0,0)--(0.5,0.5)--cycle scaled _SquareUnit withcolor
+            0.97[white,_BlackColor];
+        );
+        _whiteSquarePic:=image(
+            fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
+            fill (1,0)--(1,1)--(0.5,0.5)--cycle scaled _SquareUnit withcolor
+            0.97[black,_WhiteColor];
+            fill (0,1)--(0,0)--(0.5,0.5)--cycle scaled _SquareUnit withcolor
+            0.97[white,_WhiteColor];
+        );
+    fi
 enddef;
 
 def _buildClassicalSquare(expr _SquareUnit)=
@@ -223,11 +240,17 @@ _whiteSquarePic:=_whiteSquareColoredPic;
 def set_color_theme(expr t)=
     _chessTheme := t; 
     if(t="BlueLichess"):
+        _chess_board_style:="flat";
         _blackColorSquare:=(0.549,0.6353,0.6784);
         _whiteColorSquare:=(0.8706,0.8912,0.902);
     elseif(t="BrownLichess"):
+        _chess_board_style:="flat";
         _blackColorSquare:=(0.709803922,0.5333,0.3882);
         _whiteColorSquare:=(0.941176471,0.850980392,0.709803922);
+    elseif(t="PinkPyramidalLichess"):
+        _chess_board_style:="pyramidal";
+        _blackColorSquare:=(0.949,0.451,0.451);
+        _whiteColorSquare:=(0.9294,0.9333,0.73333);
     elseif(t="Classical"):
         _blackColorSquare:=black;
         _whiteColorSquare:=black;
@@ -489,6 +512,16 @@ vardef _chess_build_playername(expr str)=
 enddef;
 
 picture backboard;
+
+string _chess_board_style; % define flat color or "pyramidal" like lichess
+
+% default value flat
+_chess_board_style:="flat";
+
+vardef set_board_style(expr s) =
+    _chess_board_style:=s;
+enddef;
+
 
 def init_backboard =
 _chessSquareU:=_chessWidth/_chessSize;

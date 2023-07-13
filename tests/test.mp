@@ -15,6 +15,7 @@ beginfig(1);
     show _intBKing;
     set_backboard_width(8cm);
     set_coordinates_position("outside");
+    set_board_style("pyramidal");
     %set_black_view;
     set_white_player("Roxane \textbf{Spillane Chupin}");
     set_black_player("Eliott");
@@ -42,7 +43,7 @@ endfig;
 
 beginfig(4);
     init_chessboard;
-    set_color_theme("BrownLichess");
+    set_color_theme("PinkPyramidalLichess");
     set_coordinates_position("outside");
     show _intBKing;
     set_backboard_width(8cm);
