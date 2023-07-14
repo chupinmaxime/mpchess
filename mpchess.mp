@@ -206,7 +206,7 @@ def _buildColoredSquare(expr _SquareUnit,_BlackColor,_WhiteColor)=
         _whiteSquarePic:=image(
             fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
         );
-    else:
+    elseif(_chess_board_style="pyramidal"):
         _blackSquarePic:=image(
             fill unitsquare scaled _SquareUnit withcolor _BlackColor;
             fill (1,0)--(1,1)--(0.5,0.5)--cycle scaled _SquareUnit withcolor
@@ -220,6 +220,16 @@ def _buildColoredSquare(expr _SquareUnit,_BlackColor,_WhiteColor)=
             0.97[black,_WhiteColor];
             fill (0,1)--(0,0)--(0.5,0.5)--cycle scaled _SquareUnit withcolor
             0.97[white,_WhiteColor];
+        );
+    elseif(_chess_board_style="wood"):
+        _blackSquarePic:=image(
+            fill unitsquare scaled _SquareUnit withcolor _BlackColor;
+            for i=0 upto 10:
+                draw (rando)
+            endfor;
+        );
+        _whiteSquarePic:=image(
+            fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
         );
     fi
 enddef;
