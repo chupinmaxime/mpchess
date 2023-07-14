@@ -222,14 +222,29 @@ def _buildColoredSquare(expr _SquareUnit,_BlackColor,_WhiteColor)=
             0.97[white,_WhiteColor];
         );
     elseif(_chess_board_style="wood"):
+    _N_wood:=20;
+    _deviate_wood:=0.02;
         _blackSquarePic:=image(
             fill unitsquare scaled _SquareUnit withcolor _BlackColor;
-            for i=0 upto 10:
-                draw (rando)
+            for i=1 upto _N_wood-1:
+                draw
+                (i/_N_wood+uniformdeviate(_deviate_wood),0.0)*_SquareUnit--(i/_N_wood+uniformdeviate(_deviate_wood),0.6+uniformdeviate(.4))*_SquareUnit  withcolor ((0.9+uniformdeviate
+                .25)[white,_BlackColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
+                draw
+                ((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,1.0)*_SquareUnit--((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,0.+uniformdeviate(.2))*_SquareUnit  withcolor ((0.9+uniformdeviate
+                .25)[white,_BlackColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
             endfor;
         );
         _whiteSquarePic:=image(
             fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
+             for i=1 upto _N_wood-1:
+                draw
+                (i/_N_wood+uniformdeviate(_deviate_wood),0.0)*_SquareUnit--(i/_N_wood+uniformdeviate(_deviate_wood),0.6+uniformdeviate(.4))*_SquareUnit  withcolor ((0.9+uniformdeviate
+                .25)[white,_WhiteColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
+                draw
+                ((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,1.0)*_SquareUnit--((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,0.+uniformdeviate(.2))*_SquareUnit  withcolor ((0.9+uniformdeviate
+                .25)[white,_WhiteColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
+            endfor;
         );
     fi
 enddef;
@@ -261,6 +276,10 @@ def set_color_theme(expr t)=
         _chess_board_style:="pyramidal";
         _blackColorSquare:=(0.949,0.451,0.451);
         _whiteColorSquare:=(0.9294,0.9333,0.73333);
+    elseif(t="Wood"):
+        _chess_board_style:="wood";
+        _blackColorSquare:=(0.4902,0.3569,0.2118);
+        _whiteColorSquare:=(0.8039,0.7843,0.7725);
     elseif(t="Classical"):
         _blackColorSquare:=black;
         _whiteColorSquare:=black;

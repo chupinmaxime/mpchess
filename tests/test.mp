@@ -43,7 +43,7 @@ endfig;
 
 beginfig(4);
     init_chessboard;
-    set_color_theme("PinkPyramidalLichess");
+    set_color_theme("Wood");
     set_coordinates_position("outside");
     show _intBKing;
     set_backboard_width(8cm);
