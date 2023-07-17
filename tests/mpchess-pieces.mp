@@ -1,0 +1,1 @@
+../mpchess-pieces.mp

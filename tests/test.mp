@@ -15,6 +15,7 @@ beginfig(1);
     show _intBKing;
     set_backboard_width(8cm);
     set_coordinates_position("outside");
+    set_color_theme("GreenLichess");
     set_board_style("pyramidal");
     %set_black_view;
     set_white_player("Roxane \textbf{Spillane Chupin}");

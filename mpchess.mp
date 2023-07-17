@@ -21,6 +21,7 @@ input mpchess-skak; % piece of skak package
 input mpchess-chessboard;
 input mpchess-pgn;
 input mpchess-fen;
+input fiziko;
 
 if not known mplib: input latexmp fi;
 
@@ -198,6 +199,20 @@ picture _blackSquarePic, _whiteSquarePic;
 picture _blackSquareColoredPic, _whiteSquareColoredPic;
 picture _blackSquareClassicalPic, _whiteSquareClassicalPic;
 
+def _wood_draw(expr N,d,p,c,_SquareUnit)=
+    save _up_wood,_down_wood;
+    path _up_wood,_down_wood;  
+    fill unitsquare scaled _SquareUnit withcolor c;
+    for i=1 upto N-1:
+        _up_wood:=(i/N+uniformdeviate(d),0.0+0.5p/_SquareUnit)*_SquareUnit--(i/N,0.0+0.5p/_SquareUnit)*_SquareUnit--(i/N,0.5)*_SquareUnit--(i/N+uniformdeviate(d),0.7+uniformdeviate(.3)-p/_SquareUnit)*_SquareUnit--cycle;
+        fill _up_wood  withcolor ((0.9+uniformdeviate
+        .25)[white,c]);
+        _down_wood:=((i-1)/N+uniformdeviate(d)+0.5/N,1.0-0.5p/_SquareUnit)*_SquareUnit--((i-1)/N+0.5/N,1.0-0.5p/_SquareUnit)*_SquareUnit--((i-1)/N+0.5/N,0.5)*_SquareUnit--((i-1)/N+uniformdeviate(d)+0.5/N,0.3-uniformdeviate(.3)+p/_SquareUnit)*_SquareUnit--cycle;
+        fill _down_wood withcolor ((0.9+uniformdeviate
+        .25)[white,c]);
+    endfor;
+enddef;
+
 def _buildColoredSquare(expr _SquareUnit,_BlackColor,_WhiteColor)=
     if(_chess_board_style="flat"):
         _blackSquarePic:=image(
@@ -224,27 +239,12 @@ def _buildColoredSquare(expr _SquareUnit,_BlackColor,_WhiteColor)=
     elseif(_chess_board_style="wood"):
     _N_wood:=20;
     _deviate_wood:=0.02;
+    _pencile_wood:=0.7pt;
+    path _up_wood,_down_wood,_q,_p;
         _blackSquarePic:=image(
-            fill unitsquare scaled _SquareUnit withcolor _BlackColor;
-            for i=1 upto _N_wood-1:
-                draw
-                (i/_N_wood+uniformdeviate(_deviate_wood),0.0)*_SquareUnit--(i/_N_wood+uniformdeviate(_deviate_wood),0.6+uniformdeviate(.4))*_SquareUnit  withcolor ((0.9+uniformdeviate
-                .25)[white,_BlackColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
-                draw
-                ((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,1.0)*_SquareUnit--((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,0.+uniformdeviate(.2))*_SquareUnit  withcolor ((0.9+uniformdeviate
-                .25)[white,_BlackColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
-            endfor;
+            _wood_draw(_N_wood,_deviate_wood,_pencile_wood,_BlackColor,_SquareUnit);
         );
-        _whiteSquarePic:=image(
-            fill unitsquare scaled _SquareUnit withcolor _WhiteColor;
-             for i=1 upto _N_wood-1:
-                draw
-                (i/_N_wood+uniformdeviate(_deviate_wood),0.0)*_SquareUnit--(i/_N_wood+uniformdeviate(_deviate_wood),0.6+uniformdeviate(.4))*_SquareUnit  withcolor ((0.9+uniformdeviate
-                .25)[white,_WhiteColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
-                draw
-                ((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,1.0)*_SquareUnit--((i-1)/_N_wood+uniformdeviate(_deviate_wood)+0.5/_N_wood,0.+uniformdeviate(.2))*_SquareUnit  withcolor ((0.9+uniformdeviate
-                .25)[white,_WhiteColor]) withpen pencircle scaled (uniformdeviate(1.0)*0.7pt); 
-            endfor;
+        _whiteSquarePic:=image(_wood_draw(_N_wood,_deviate_wood,_pencile_wood,_WhiteColor,_SquareUnit);
         );
     fi
 enddef;
@@ -272,6 +272,10 @@ def set_color_theme(expr t)=
         _chess_board_style:="flat";
         _blackColorSquare:=(0.709803922,0.5333,0.3882);
         _whiteColorSquare:=(0.941176471,0.850980392,0.709803922);
+    elseif(t="GreenLichess"):
+        _chess_board_style:="flat";
+        _blackColorSquare:=(0.5255,0.651,0.4);
+        _whiteColorSquare:=(1.0,1.0,0.8666);
     elseif(t="PinkPyramidalLichess"):
         _chess_board_style:="pyramidal";
         _blackColorSquare:=(0.949,0.451,0.451);
