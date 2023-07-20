@@ -293,12 +293,15 @@ command:
   \item[\meta{string}] can be:
 \begin{itemize}
 \item \lstinline+"BlueLichess"+ (default);
-\item \lstinline+"BrownLichess"+ ;
+\item \lstinline+"BrownLichess"+;
+\item \lstinline+"GreenLichess"+;
+\item \lstinline+"PinkPyramidalLichess"+;
+\item \lstinline+"Wood"+;
 \item or \lstinline+"Classical"+.
 \end{itemize}
 \end{description}
 
-The following examples show the results obtained from each theme:
+The following example shows the results obtained from \lstinline+"BrownLichess"+:
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
@@ -307,21 +310,65 @@ init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
-\begin{ExempleMP}
-input mpchess
-beginfig(0);
-set_color_theme("Classical");
-init_backboard;
-draw backboard;
-endfig;
-\end{ExempleMP}
 
-The two color themes provided borrow the colors of the Lichess themes.
+The table~\ref{tab:color} shows the different results of the different themes. 
+
+\begin{table}
+  \centering
+\begin{tabular}{cc}
+
+\lstinline+"GreenLichess"+ theme&\lstinline+"Classical"+ theme\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("GreenLichess");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}
+&\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("Classical");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}\\
+\lstinline+"PinkPyramidalLichess"+ theme& \lstinline+"Wood"+ theme\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("PinkPyramidalLichess");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}&
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("Wood");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}\\
+\end{tabular}
+\caption{The different color themes provided by \mpchess.}\label{tab:color}
+\end{table}
+
 
 
 \subsubsection{Configuring a Personal Color Theme}
 
-A color theme is really just the definition of two colors.
+\paragraph{Colors.}
+A color theme is  the definition of two colors.
 These can be defined with the following commands\footnote{Attention,
 in version 0.6, \lstinline+set_white_color+ became
 \lstinline+set_white_squares_color+ and \lstinline+set_black_color+ became
@@ -341,6 +388,40 @@ init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
+
+\paragraph{Color Types.}
+
+To choose a type, you can use the following command:
+
+\commande|set_board_type(«string»)|\index{set_board_type@\lstinline+set_board_type+}\smallskip
+
+
+Three types of coloring are available:
+
+\begin{description}
+  \item[\meta{string}] can be:
+\begin{itemize}
+\item \lstinline+"flat"+,  simple flat coloring (default);
+\item \lstinline+"pyramidal"+, Lichess \emph{pyramidal} coloring; 
+\item \lstinline+"wood"+, wood imitation.
+\end{itemize}
+\end{description}
+
+Here is an example coupling color and type definitions. 
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_white_squares_color((0.9,0.8,0.8));
+set_black_squares_color((0.7,0.6,0.6));
+set_board_type("wood");
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+  
+
+
 \subsection{Display Coordinates}
 
 You may have noticed in the various examples that by default, the coordinates are, as on the Lichess site, written in small letters inside the boxes.
