@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                        mpchess.mp                          %%
 %%              draw chessboards with metapost                %%
-%%                chupin@ceremade.dauphine.fr                 %%
-%%                Version 0.6 (avril   2023)                  %%
+%%                    notezik@gmail.com                       %%
+%%                Version 0.7 (juillet   2023)                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This work may be distributed and/or modified under the conditions of
