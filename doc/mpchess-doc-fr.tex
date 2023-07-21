@@ -71,7 +71,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.6, 26 avril 2023 \\
+  Version 0.7, 20 juillet 2023 \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -289,6 +289,9 @@ Plusieurs thèmes de couleurs sont accessibles. Pour choisir un thème de couleu
 \begin{itemize}
 \item \lstinline+"BlueLichess"+ (thème par défaut);
 \item \lstinline+"BrownLichess"+ ;
+\item \lstinline+"GreenLichess"+;
+\item \lstinline+"PinkPyramidalLichess"+;
+\item \lstinline+"Wood"+;
 \item ou \lstinline+"Classical"+.
 \end{itemize}
 \end{description}
@@ -302,20 +305,64 @@ init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
-\begin{ExempleMP}
-input mpchess
-beginfig(0);
-set_color_theme("Classical");
-init_backboard;
-draw backboard;
-endfig;
-\end{ExempleMP}
 
-Les deux thèmes colorés fournis empruntent les couleurs des thèmes de Lichess.
+Le tableau~\ref{tab:color} montre les résultats des différents thèmes fournis
+par \mpchess. 
+
+\begin{table}
+  \centering
+\begin{tabular}{cc}
+
+Thème \lstinline+"GreenLichess"+&Thème \lstinline+"Classical"+\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("GreenLichess");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}
+&\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("Classical");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}\\
+Thème \lstinline+"PinkPyramidalLichess"+&Thème  \lstinline+"Wood"+\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("PinkPyramidalLichess");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}&
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("Wood");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}\\
+\end{tabular}
+\caption{Les différents thèmes de couleur fournis par \mpchess.}\label{tab:color}
+\end{table}
 
 \subsubsection{Configuration d’un thème personnel}
 
-Un thème de couleur est en réalité simplement la définition de deux couleurs.
+\paragraph{Couleurs.}
+Un thème de couleur conciste en la définition de deux couleurs.
 Celles-ci peuvent se définir avec les commandes suivantes \footnote{Attention,
 lors du passage à la version 0.6, \lstinline+set_white_color+ est devenu
 \lstinline+set_white_squares_color+ et \lstinline+set_black_color+ est devenu
@@ -335,6 +382,37 @@ init_backboard;
 draw backboard;
 endfig;
 \end{ExempleMP}
+
+\paragraph{Type de coloriage.}
+
+
+On peut choisir un type de coloriage avec la commande suivante:
+
+\commande|set_board_type(«string»)|\index{set_board_type@\lstinline+set_board_type+}\smallskip
+
+Les trois types de coloriage fournis par \mpchess{} se choisissent avec 
+\begin{description}
+  \item[\meta{string}] qui peut valoir:
+\begin{itemize}
+\item \lstinline+"flat"+,  coloriage à plat (défaut);
+\item \lstinline+"pyramidal"+, coloriage \emph{pyramidal} à la Lichess; 
+\item \lstinline+"wood"+, imitation bois.
+\end{itemize}
+\end{description}
+
+Voici un exemple de paramétrage de couleur et de type de coloriage. 
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_white_squares_color((0.9,0.8,0.8));
+set_black_squares_color((0.7,0.6,0.6));
+set_board_type("wood");
+init_backboard;
+draw backboard;
+endfig;
+\end{ExempleMP}
+
 \subsection{Affichage des coordonnées}
 
 Vous avez pu constater dans les divers exemples que par défaut, les coordonnées
@@ -1346,6 +1424,9 @@ endfig;
 \section{Historique}
 
 \begin{description}
+\item[v0.7, juillet 2023:] Ajustement du cavalier noir, ajout de thèmes
+d'échiquier (\lstinline+GreenLichess+, \lstinline+PinkPyramidalLichess+,
+\lstinline+Wood+ avec des types de coloriage (\lstinline+set_board_type+). 
 \item[v0.6, avril 2023:] Corrections de bugs concernant la gestion des roques, et
 des ambiguïtés de pièces pour les déplacements sous format \textsc{pgn}.
 Changement de \lstinline+set_white_color+ en
