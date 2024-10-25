@@ -264,7 +264,7 @@ def _buildDottedSquare(expr _SquareUnit)=
     _blackSquarePic:=image(
         fill (unitsquare scaled _SquareUnit) withcolor white;
         save N;
-        N:= 13;
+        N:= 11;
         for i:=0 upto N+1:
             for j:=0 upto N+1:
                 fill (fullcircle shifted (1/N*i*_SquareUnit if odd(j): +1/(2*N)*_SquareUnit fi,1/N*j*_SquareUnit))

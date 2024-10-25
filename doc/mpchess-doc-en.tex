@@ -297,7 +297,8 @@ command:
 \item \lstinline+"GreenLichess"+;
 \item \lstinline+"PinkPyramidalLichess"+;
 \item \lstinline+"Wood"+;
-\item or \lstinline+"Classical"+.
+\item \lstinline+"Classical"+;
+\item or \lstinline+"Dotted"+;
 \end{itemize}
 \end{description}
 
@@ -359,6 +360,17 @@ The table~\ref{tab:color} shows the different results of the different themes.
   draw backboard;
   endfig;
 \end{mplibcode}\\
+\lstinline+"Dotted"+ theme& \\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("Dotted");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}&\\
 \end{tabular}
 \caption{The different color themes provided by \mpchess.}\label{tab:color}
 \end{table}
@@ -1448,8 +1460,9 @@ endfig;
 \section{History}
 
 \begin{description}
-\item[v0.7, juillet 2023:] Black knight adjustment, adding color board themes (\lstinline+GreenLichess+, \lstinline+PinkPyramidalLichess+,
-\lstinline+Wood+ with color type (\lstinline+set_board_type+).
+\item[v0.8, October 25, 2024:] Adding \lstinline+"Dotted"+ board theme. 
+\item[v0.7, July, 2023:] Black knight adjustment, adding color board themes (\lstinline+GreenLichess+, \lstinline+PinkPyramidalLichess+,
+\lstinline+Wood+ with color type (\lstinline+set_board_type+)).
 \item[v0.6, April 26, 2023:] Fixed bugs concerning castling management, and
  moves ambiguities in \textsc{pgn} format.
 Changed \lstinline+set_white_color+ to
@@ -1461,8 +1474,6 @@ Changed \lstinline+set_white_color+ to
 \lstinline+hide_whos_to_move+. Change \lstinline+set_coords_inside+ and
 \lstinline+set_coords_outside+ to \lstinline+set_coordinates_position+.
 Change \lstinline+set_coords_font+ to \lstinline+set_coordinates_font+. 
-
-Translated with www.DeepL.com/Translator (free version)
 \item[v0.5, April 20, 2023:]  Bug fixed, \textbf{changing the
 default piece set} for the \lstinline+mpchess+ set (which has been added to Lichess), added TrueType font, and updated documentation.
 \item[v0.4, April 6, 2023:] Corrections in the documentation, especially the

@@ -292,7 +292,8 @@ Plusieurs thèmes de couleurs sont accessibles. Pour choisir un thème de couleu
 \item \lstinline+"GreenLichess"+;
 \item \lstinline+"PinkPyramidalLichess"+;
 \item \lstinline+"Wood"+;
-\item ou \lstinline+"Classical"+.
+\item \lstinline+"Classical"+;
+\item ou \lstinline+"Dotted"+.
 \end{itemize}
 \end{description}
 
@@ -355,6 +356,17 @@ Thème \lstinline+"PinkPyramidalLichess"+&Thème  \lstinline+"Wood"+\\
   draw backboard;
   endfig;
 \end{mplibcode}\\
+Thème \lstinline+"Dotted"+&\\
+\begin{mplibcode}
+  input mpchess
+  beginfig(0);
+  init_chessboard;
+  set_backboard_width(4cm);
+  set_color_theme("Dotted");
+  init_backboard;
+  draw backboard;
+  endfig;
+\end{mplibcode}&\\
 \end{tabular}
 \caption{Les différents thèmes de couleur fournis par \mpchess.}\label{tab:color}
 \end{table}
@@ -1424,6 +1436,7 @@ endfig;
 \section{Historique}
 
 \begin{description}
+  \item[v0.8, 25 octobre 2024:] Ajout du thème d’échiquier \lstinline+"Dotted"+.
 \item[v0.7, juillet 2023:] Ajustement du cavalier noir, ajout de thèmes
 d'échiquier (\lstinline+GreenLichess+, \lstinline+PinkPyramidalLichess+,
 \lstinline+Wood+ avec des types de coloriage (\lstinline+set_board_type+). 
