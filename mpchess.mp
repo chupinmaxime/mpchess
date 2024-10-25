@@ -15,6 +15,8 @@
 
 %input format;
 input hatching;
+%input minim-mp;
+%input minim-hatching;
 input mpchess-pieces; % piece of mpchess package
 input mpchess-cburnett; % piece of lichess cburnett
 input mpchess-skak; % piece of skak package
@@ -258,6 +260,27 @@ def _buildClassicalSquare(expr _SquareUnit)=
     );
 enddef;
 
+def _buildDottedSquare(expr _SquareUnit)=
+    _blackSquarePic:=image(
+        fill (unitsquare scaled _SquareUnit) withcolor white;
+        save N;
+        N:= 13;
+        for i:=0 upto N+1:
+            for j:=0 upto N+1:
+                fill (fullcircle shifted (1/N*i*_SquareUnit if odd(j): +1/(2*N)*_SquareUnit fi,1/N*j*_SquareUnit))
+                ;
+            endfor;
+        endfor;
+        draw (unitsquare  scaled _SquareUnit);
+        clip currentpicture to (unitsquare  scaled _SquareUnit);
+    );
+    _whiteSquarePic:=image(
+        fill unitsquare scaled _SquareUnit withcolor white;
+        draw (unitsquare  scaled _SquareUnit);
+        clip currentpicture to (unitsquare  scaled _SquareUnit);
+    );
+enddef;
+
 % default theme lichess blue
 _blackSquarePic:=_blackSquareColoredPic;
 _whiteSquarePic:=_whiteSquareColoredPic;
@@ -285,6 +308,9 @@ def set_color_theme(expr t)=
         _blackColorSquare:=(0.4902,0.3569,0.2118);
         _whiteColorSquare:=(0.8039,0.7843,0.7725);
     elseif(t="Classical"):
+        _blackColorSquare:=black;
+        _whiteColorSquare:=black;
+    elseif(t="Dotted"):
         _blackColorSquare:=black;
         _whiteColorSquare:=black;
     fi
@@ -561,6 +587,8 @@ _chessSquareU:=_chessWidth/_chessSize;
 _init_piece(_chessSquareU);
 if(_chessTheme="Classical"):
     _buildClassicalSquare(_chessSquareU);
+elseif(_chessTheme="Dotted"):
+    _buildDottedSquare(_chessSquareU);
 else: % colored themes
     _buildColoredSquare(_chessSquareU,_blackColorSquare,_whiteColorSquare);
 fi
