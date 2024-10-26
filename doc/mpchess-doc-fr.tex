@@ -71,7 +71,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.7, 20 juillet 2023 \\
+  Version 0.8, 26 octobre 2024 \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -293,11 +293,12 @@ Plusieurs thèmes de couleurs sont accessibles. Pour choisir un thème de couleu
 \item \lstinline+"PinkPyramidalLichess"+;
 \item \lstinline+"Wood"+;
 \item \lstinline+"Classical"+;
-\item ou \lstinline+"Dotted"+.
+\item \lstinline+"Dotted"+;
+\item ou \lstinline+"User"+.
 \end{itemize}
 \end{description}
 
-Les exemples suivants montrent les résultats obtenus.
+Les exemples suivants montrent les résultats obtenus pour les thèmes prédéfinis.
 \begin{ExempleMP}
 input mpchess
 beginfig(0);
@@ -370,6 +371,25 @@ Thème \lstinline+"Dotted"+&\\
 \end{tabular}
 \caption{Les différents thèmes de couleur fournis par \mpchess.}\label{tab:color}
 \end{table}
+
+L’utilisation de \lstinline+"User"+ est un cas particulier, car il permet de
+définir soit même les casses noires et blanches. Pour que cela fonctionne, il
+faut définir en plus une macro \lstinline+buildUserSquare+\index{buildUserSquare@\lstinline+buildUserSquare+} qui construit les
+images (\lstinline+picture+) internes \lstinline+_blackSquarePic+\index{_blackSquarePic@\lstinline+_blackSquarePic+} et
+\lstinline+_whiteSquarePic+\index{_whiteSquarePic@\lstinline+_whiteSquarePic+} dont voici un prototype :
+\begin{mpcode}
+def buildUserSquare(expr _SquareUnit)=
+  _blackSquarePic:=image(
+      fill (unitsquare scaled _SquareUnit) withcolor red;
+  );
+  _whiteSquarePic:=image(
+      fill unitsquare scaled _SquareUnit withcolor green;
+  );
+enddef;
+\end{mpcode}
+La macro prend en argument une unité, et doit construire deux carrés de côté
+cette unité. 
+
 
 \subsubsection{Configuration d’un thème personnel}
 
@@ -1436,7 +1456,9 @@ endfig;
 \section{Historique}
 
 \begin{description}
-  \item[v0.8, 25 octobre 2024:] Ajout du thème d’échiquier \lstinline+"Dotted"+.
+  \item[v0.8, 26 octobre 2024:] Ajout du thème d’échiquier \lstinline+"Dotted"+
+  et ajout du thème d’échiquier \lstinline+"User"+ qui permet à l’utilisateur ou
+  l’utilisatrice de définir les casses blanches et noires. 
 \item[v0.7, juillet 2023:] Ajustement du cavalier noir, ajout de thèmes
 d'échiquier (\lstinline+GreenLichess+, \lstinline+PinkPyramidalLichess+,
 \lstinline+Wood+ avec des types de coloriage (\lstinline+set_board_type+). 

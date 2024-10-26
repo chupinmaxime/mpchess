@@ -68,7 +68,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.7, 2023, July, 20th \\
+  Version 0.8, 2024, October, 26th \\
   \url{https://plmlab.math.cnrs.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -298,7 +298,8 @@ command:
 \item \lstinline+"PinkPyramidalLichess"+;
 \item \lstinline+"Wood"+;
 \item \lstinline+"Classical"+;
-\item or \lstinline+"Dotted"+;
+\item \lstinline+"Dotted"+;
+\item or \lstinline+"User"+;
 \end{itemize}
 \end{description}
 
@@ -375,7 +376,26 @@ The table~\ref{tab:color} shows the different results of the different themes.
 \caption{The different color themes provided by \mpchess.}\label{tab:color}
 \end{table}
 
-
+The use of \lstinline+"User"+ is a special case, as it allows you to
+define black and white squares. For this to work
+a another macro
+\lstinline+buildUserSquare+\index{buildUserSquare@\lstinline+buildUserSquare+}
+should be difined. It must build the
+images (\lstinline+picture+) \lstinline+_blackSquarePic+\index{_blackSquarePic@\lstinline+_blackSquarePic+} and
+\lstinline+_whiteSquarePic+\index{_whiteSquarePic@\lstinline+_whiteSquarePic+}. 
+Here is a prototype of such a command.
+\begin{mpcode}
+  def buildUserSquare(expr _SquareUnit)=
+    _blackSquarePic:=image(
+        fill (unitsquare scaled _SquareUnit) withcolor red;
+    );
+    _whiteSquarePic:=image(
+        fill unitsquare scaled _SquareUnit withcolor green;
+    );
+  enddef;
+\end{mpcode}
+The macro takes a unit as argument, and must construct two squares with length
+equal to this unit.
 
 \subsubsection{Configuring a Personal Color Theme}
 
@@ -1460,7 +1480,9 @@ endfig;
 \section{History}
 
 \begin{description}
-\item[v0.8, October 25, 2024:] Adding \lstinline+"Dotted"+ board theme. 
+\item[v0.8, October 26, 2024:] Adding \lstinline+"Dotted"+ board theme, and
+\lstinline+"User"+ board theme that allows user to define black and white
+squares.  
 \item[v0.7, July, 2023:] Black knight adjustment, adding color board themes (\lstinline+GreenLichess+, \lstinline+PinkPyramidalLichess+,
 \lstinline+Wood+ with color type (\lstinline+set_board_type+)).
 \item[v0.6, April 26, 2023:] Fixed bugs concerning castling management, and

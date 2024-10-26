@@ -2,7 +2,7 @@
 %%                        mpchess.mp                          %%
 %%              draw chessboards with metapost                %%
 %%                    notezik@gmail.com                       %%
-%%                Version 0.7 (juillet   2023)                %%
+%%                Version 0.8 (octobre   2024)                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This work may be distributed and/or modified under the conditions of
@@ -589,6 +589,8 @@ if(_chessTheme="Classical"):
     _buildClassicalSquare(_chessSquareU);
 elseif(_chessTheme="Dotted"):
     _buildDottedSquare(_chessSquareU);
+elseif(_chessTheme="User"):
+    buildUserSquare(_chessSquareU);
 else: % colored themes
     _buildColoredSquare(_chessSquareU,_blackColorSquare,_whiteColorSquare);
 fi

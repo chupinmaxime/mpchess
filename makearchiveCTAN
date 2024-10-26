@@ -31,6 +31,6 @@ cp LICENSE mpchess/
 
 
 
-zip -r archives/mpchess-v0.7-CTAN.zip mpchess/
+zip -r archives/mpchess-v0.8-CTAN.zip mpchess/
 
 rm -r mpchess
