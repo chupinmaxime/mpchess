@@ -71,7 +71,7 @@ A piece set has been designed for this package. It has also be added to
 A dedicated git repository is available:
 [https://plmlab.math.cnrs.fr/mchupin/mpchess-pieces](https://plmlab.math.cnrs.fr/mchupin/mpchess-pieces)
 and
-[https://github.com/chupinmaxime/mpchess](https://github.com/chupinmaxime/mpchess).
+[https://github.com/chupinmaxime/mpchess-pieces](https://github.com/chupinmaxime/mpchess).
 
 A TrueType font is available.  
 ## Contact
