@@ -734,8 +734,8 @@ def _int_to_piece(expr i)=
     fi
 enddef;
 
-def _triangle(expr s)=
-    ((0,0)--(1,0)--(0.5,0.5)--cycle) scaled (s*_chessSquareU)
+def _triangle(expr s, r)=
+    ((0,0)--(1,0)--(0.5,0.5)--cycle) if r: rotatedaround((0.5, 0.5/3), 180) fi scaled (s*_chessSquareU)
 enddef;
 
 color _chess_last_move_color;
@@ -786,15 +786,17 @@ vardef _chess_build_chessboard_pic(expr k)=
     if(_show_whos_to_move):
         if(_chess_view_wb): %white side 
             if(not _white_to_move):
-                fill _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
+                draw _triangle(0.35,true) shifted (_chessSquareU*(_chessSize+0.3),_chessSquareU*(_chessSize)+0.3*_chessSquareU) ;
+                fill _triangle(0.35,true) shifted (_chessSquareU*(_chessSize+0.3),_chessSquareU*(_chessSize)+0.3*_chessSquareU) ;
             else:
-                draw _triangle(0.35)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+                draw _triangle(0.35,false)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
             fi
         else: % black side
             if(_white_to_move):
-                draw _triangle(0.3) rotated 180  shifted (_chessSquareU*(_chessSize+0.35),_chessSquareU*(_chessSize)+0.3*_chessSquareU)
+                draw _triangle(0.35,true) shifted (_chessSquareU*(_chessSize+0.3),_chessSquareU*(_chessSize)+0.3*_chessSquareU) ;
             else:
-                fill _triangle(0.35)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+                draw _triangle(0.35,false)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+                fill _triangle(0.35,false)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
             fi
         fi
     fi
