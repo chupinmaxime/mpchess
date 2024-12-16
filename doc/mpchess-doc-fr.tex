@@ -71,7 +71,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.8, 26 octobre 2024 \\
+  Version 0.9, 16 décembre 2024 \\
   \url{https://gitlab.gutenberg-asso.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -668,6 +668,67 @@ lors du passage à la version 0.6, \lstinline+set_whos_to_move+ et
 
 
 \commande|hide_whos_to_move|\index{hide_whos_to_move@\lstinline+hide_whos_to_move+}\smallskip
+
+Il est désormais possible de changer l’apparence du marqueur de trait (depuis la
+version 0.9\footnote{Merci à Udi Fogiel d’avoir corrigé un bug de placement et
+d’avoir proposé des améliorations.}). Pour cela, \mpchess fournit trois styles:
+\lstinline+"triangle"+ (par défaut), \lstinline+"square"+ et \lstinline+"disk"+.
+Pour choisir le type de marquer, on utilisera la commande suivante:
+
+
+\commande|set_marker_type(«string»)|\index{set_marker_type@\lstinline+set_marker_type+}\smallskip
+
+\begin{description}
+  \item[\meta{string}:] peut valoir:
+\begin{itemize}
+  \item \lstinline+"triangle"+ (valeur par défaut) ;
+  \item \lstinline+"square"+;
+\item \lstinline+"disk"+;
+\item \lstinline+"custom"+.
+\end{itemize}
+\end{description}
+
+Vous pouvez ajuster la taille (par un facteur de la dimension d’unité) avec la
+commande suivante:
+
+\commande|set_marker_scale(«numeric»)|\index{set_marker_scale@\lstinline+set_marker_scale+}\smallskip
+
+\begin{description}
+  \item[\meta{numeric}:] est un facteur de la dimension d’unité pour agrandir ou
+  rétrécir le marquer (la valeur par défaut est \num{0.35}).
+\end{description}
+
+La valeur \lstinline+"custom"+ du type de marqueur permet de définir soi même
+l’apparence du marqueur. Lorsque cette option est appelée, il faut définir une
+macro \MP{} \lstinline+custom_maker(expr s,r)+. Le paramètre \lstinline+s+ est
+le réglage du facteur d’échelle : pour les marqueurs fournis par \mpchess, ce
+sont des dessins contenus dans un carré de côté 1 (unité \MP) est mis à
+l’échelle par \lstinline+s*_chessSquareU+. Le paramètre \lstinline+r+ est un
+booléen qui permet de traiter le cas où le marqueur est tourné de 180 degrés
+lorsqu’il est placé en haut de l’échiquier. 
+
+Par exemple, une macro \lstinline+custom_marker+ reproduisant le symbole en
+triangle pourrait être la suivante:
+\begin{mpcode}
+def custom_marker(expr s, r)=
+  ((0,0)--(1,0)--(0.5,0.5)--cycle) if r: rotatedaround((0.5, 0.5/3), 180) fi scaled (s*_chessSquareU)
+enddef;
+\end{mpcode}
+
+On ne définit que le contour qui sera, suivant le cas, colorié en blanc ou en
+noir. 
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_marker_type("disk");
+set_marker_scale(0.5);
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard;
+endfig;
+\end{ExempleMP}
 
 \subsection{Dessiner une position}
 
@@ -1456,6 +1517,10 @@ endfig;
 \section{Historique}
 
 \begin{description}
+  \item[v0.9, 16 décembre 2024:] Correction d’un bug de placement de la marque
+  de trait (par Udi Fogiel), ajout de différents marqueur de traits (\lstinline"triangle",
+  \lstinline"square",\lstinline"disk" and \lstinline"custom"). Colloriage du
+  marqueur blanc.
   \item[v0.8, 26 octobre 2024:] Ajout du thème d’échiquier \lstinline+"Dotted"+
   et ajout du thème d’échiquier \lstinline+"User"+ qui permet à l’utilisateur ou
   l’utilisatrice de définir les casses blanches et noires. 

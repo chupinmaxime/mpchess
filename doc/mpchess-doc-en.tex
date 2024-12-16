@@ -68,7 +68,7 @@
 }
 \vfill
 \begin{center}
-  Version 0.8, 2024, October, 26th \\
+  Version 0.9, 2024, Decembre, 16th \\
   \url{https://gitlab.gutenberg-asso.fr/mchupin/mpchess}
 \end{center}
 %% == Page de garde ====================================================
@@ -686,6 +686,64 @@ in version 0.6, \lstinline+set_whos_to_move+ and
 
 \commande|hide_whos_to_move|\index{hide_whos_to_move@\lstinline+hide_whos_to_move+}\smallskip
 
+It is now possible to change the appearance of the marker (since
+version 0.9\footnote{Thanks to Udi Fogiel for fixing a placement bug and
+for suggesting improvements.}. For this purpose, \mpchess provides three styles:
+\lstinline+"triangle"+ (default), \lstinline+"square"+ and \lstinline+"disk"+.
+To select the marker type, use the following command:
+
+\commande|set_marker_type(«string»)|\index{set_marker_type@\lstinline+set_marker_type+}\smallskip
+
+\begin{description}
+  \item[\meta{string}] may be
+\begin{itemize}
+  \item \lstinline+"triangle"+ (default value);
+  \item \lstinline+"square"+;
+\item \lstinline+"disk"+;
+\item \lstinline+"custom"+.
+\end{itemize}
+\end{description}
+
+You can adjust the size (by a factor of the unit dimension) with the following
+command: 
+
+\commande|set_marker_scale(«numeric»)|\index{set_marker_scale@\lstinline+set_marker_scale+}\smallskip
+
+\begin{description}
+  \item[\meta{numeric}:] is a unit dimension factor for enlarging or
+  shrink the mark (default value is \num{0.35}).
+\end{description}
+
+The \lstinline+"custom"+ marker type value lets you define the marker's
+appearance. When this option is called, a
+macro \MP{} \lstinline+custom_maker(expr s,r)+ must be defined. The
+\lstinline+s+ parameter is the scale factor setting: the markers supplied by
+\mpchess are drawings contained in a square of side 1 (\MP{} unit) and scaled
+by \lstinline+s*_chessSquareU+. The \lstinline+r+ parameter is a boolean that
+handles the case where the marker is rotated 180 degrees 
+when placed at the top of the chessboard. 
+
+For example, a \lstinline+custom_marker+ macro reproducing the triangle symbol might be as follows:
+\begin{mpcode}
+def custom_marker(expr s, r)=
+  ((0,0)--(1,0)--(0.5,0.5)--cycle) if r: rotatedaround((0.5, 0.5/3), 180) fi scaled (s*_chessSquareU)
+enddef;
+\end{mpcode}
+
+Only the outline is defined, which will be filled by either white or black.
+
+
+\begin{ExempleMP}
+input mpchess
+beginfig(0);
+set_marker_type("disk");
+set_marker_scale(0.5);
+init_backboard;
+draw backboard;
+init_chessboard;
+draw chessboard;
+endfig;
+\end{ExempleMP}
 \subsection{Draw a Position}
 
 The commands described below allow you to build a position in several ways
@@ -1480,6 +1538,9 @@ endfig;
 \section{History}
 
 \begin{description}
+\item[v0.9, December 16, 2024:] Correction of a bug in the placement of the
+trait marker (by Udi Fogiel), added different marker features (\lstinline
++"triangle"+, \lstinline+"square"+,\lstinline+"disk"+ and \lstinline+"custom"+). Filling of the white marker. 
 \item[v0.8, October 26, 2024:] Adding \lstinline+"Dotted"+ board theme, and
 \lstinline+"User"+ board theme that allows user to define black and white
 squares.  

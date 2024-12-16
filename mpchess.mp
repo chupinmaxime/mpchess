@@ -2,7 +2,7 @@
 %%                        mpchess.mp                          %%
 %%              draw chessboards with metapost                %%
 %%                    notezik@gmail.com                       %%
-%%                Version 0.8 (octobre   2024)                %%
+%%                Version 0.9 (decembre  2024)                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % This work may be distributed and/or modified under the conditions of
@@ -11,6 +11,16 @@
 % license is in http://www.latex-project.org/lppl.txt
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't load this package twice:
+if known mpchess_version: expandafter endinput; fi;
+
+numeric mpchess_version;string mpchess_date;
+mpchess_version=0.9;
+mpchess_date="2024/12/16";
+% The banner:
+message "******* mpchess " & decimal (mpchess_version) &
+        " (c) Maxime Chupin (" & mpchess_date & ") *******";message "";
 
 
 %input format;
@@ -734,9 +744,7 @@ def _int_to_piece(expr i)=
     fi
 enddef;
 
-def _triangle(expr s, r)=
-    ((0,0)--(1,0)--(0.5,0.5)--cycle) if r: rotatedaround((0.5, 0.5/3), 180) fi scaled (s*_chessSquareU)
-enddef;
+
 
 color _chess_last_move_color;
 
@@ -764,6 +772,72 @@ def show_last_move(expr k)=
 enddef;
 
 
+%% markers 
+
+numeric _marker_size;
+
+_marker_size := 0.35;
+
+def set_marker_scale(expr s)=
+    _marker_size:=s;
+enddef;
+
+def _triangle_marker(expr s, r)=
+    ((0,0)--(1,0)--(0.5,0.5)--cycle) if r: rotatedaround((0.5, 0.5/3), 180) fi scaled (s*_chessSquareU)
+enddef;
+
+def _square_marker(expr s, r)=
+    ((0,0)--(1,0)--(1,1)--(0,1)--cycle) scaled (s*_chessSquareU)
+enddef;
+
+
+def _disk_marker(expr s, r)=
+    (fullcircle shifted (0.5,0.5)) scaled (s*_chessSquareU)
+enddef;
+
+string _marker_type;
+
+_marker_type := "triangle";
+
+def _marker(expr s,r)=
+    if(_marker_type="square"):
+        _square_marker(s,r)
+    elseif(_marker_type="disk"):
+        _disk_marker(s,r)
+    elseif(_marker_type="custom"):
+        custom_marker(s,r)
+    else:
+        _triangle_marker(s,r)
+    fi
+enddef;
+
+def set_marker_type(expr s)=
+    _marker_type:=s;
+enddef;
+
+
+vardef _draw_marker(expr c,b)=
+    % c : black or white (color)
+    % b : true or false for placing top (with rotation) or bottom
+    save _height,_width,_pic,_shifted,_margin;
+    picture _pic;
+    pair _shifted;
+    _pic := image(draw _marker(_marker_size,false););
+    _height := abs(ulcorner _pic - llcorner _pic);
+    _width := abs(urcorner _pic-ulcorner _pic);
+    _margin:=0.01*_chessSquareU;
+    if(b): % top rotating
+        _shifted:= (_chessSquareU*_chessSize+_width/2.0+_margin,_chessSquareU*_chessSize);
+    else:
+        _shifted:= (_chessSquareU*_chessSize+_width/2.0+_margin,-_height);
+    fi
+    draw _marker(_marker_size,b) shifted _shifted ;
+    fill _marker(_marker_size,b) shifted _shifted withcolor c;
+enddef;
+
+%%%% end markers
+
+
 vardef _chess_build_chessboard_pic(expr k)=
     save chessboard_pic;
     save shiftPiece;
@@ -786,17 +860,15 @@ vardef _chess_build_chessboard_pic(expr k)=
     if(_show_whos_to_move):
         if(_chess_view_wb): %white side 
             if(not _white_to_move):
-                draw _triangle(0.35,true) shifted (_chessSquareU*(_chessSize+0.3),_chessSquareU*(_chessSize)+0.3*_chessSquareU) ;
-                fill _triangle(0.35,true) shifted (_chessSquareU*(_chessSize+0.3),_chessSquareU*(_chessSize)+0.3*_chessSquareU) ;
+                _draw_marker(black,true);
             else:
-                draw _triangle(0.35,false)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+                _draw_marker(white,false);
             fi
         else: % black side
             if(_white_to_move):
-                draw _triangle(0.35,true) shifted (_chessSquareU*(_chessSize+0.3),_chessSquareU*(_chessSize)+0.3*_chessSquareU) ;
+                _draw_marker(white,true);
             else:
-                draw _triangle(0.35,false)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
-                fill _triangle(0.35,false)  shifted (_chessSquareU*(_chessSize+0.3),-0.3*_chessSquareU) ;
+                _draw_marker(black,false);
             fi
         fi
     fi
